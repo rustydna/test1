@@ -1,0 +1,6911 @@
+{
+ "pieces": [
+  {
+   "name": "M0W_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    2.486,
+    8.2
+   ],
+   "center": [
+    -3.38,
+    -10.557,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 328,
+    "MEDIUM": 24,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.31,
+   "lod_weight": [
+    0.0099,
+    0.1478,
+    0.4729,
+    0.3695
+   ],
+   "li_download_est": 0.454,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M1W_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    4.361,
+    8.2
+   ],
+   "center": [
+    -3.38,
+    -5.745,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 548,
+    "MEDIUM": 38,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 38
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.67,
+   "lod_weight": [
+    0.0116,
+    0.1733,
+    0.5545,
+    0.2607
+   ],
+   "li_download_est": 0.918,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M2W_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    4.361,
+    8.2
+   ],
+   "center": [
+    -3.38,
+    0.005,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 548,
+    "MEDIUM": 38,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 38
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.67,
+   "lod_weight": [
+    0.0116,
+    0.1733,
+    0.5545,
+    0.2607
+   ],
+   "li_download_est": 0.918,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M3W_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    4.361,
+    8.2
+   ],
+   "center": [
+    -3.38,
+    5.755,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 548,
+    "MEDIUM": 38,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 38
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.67,
+   "lod_weight": [
+    0.0116,
+    0.1733,
+    0.5545,
+    0.2607
+   ],
+   "li_download_est": 0.918,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M4W_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    2.475,
+    8.2
+   ],
+   "center": [
+    -3.38,
+    10.562,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 292,
+    "MEDIUM": 24,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.31,
+   "lod_weight": [
+    0.0098,
+    0.1477,
+    0.4726,
+    0.3699
+   ],
+   "li_download_est": 0.42,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C01_Arch",
+   "kind": "structure",
+   "role": "The Press-Gang",
+   "fire": false,
+   "size_m": [
+    0.98,
+    5.72,
+    4.78
+   ],
+   "center": [
+    -3.38,
+    -8.625,
+    5.41
+   ],
+   "triangles": {
+    "HIGH": 764,
+    "MEDIUM": 62,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.76,
+   "lod_weight": [
+    0.0075,
+    0.1123,
+    0.3594,
+    0.5208
+   ],
+   "li_download_est": 0.873,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C01_Door",
+   "kind": "door",
+   "role": "The Press-Gang",
+   "fire": false,
+   "size_m": [
+    0.218,
+    1.415,
+    2.55
+   ],
+   "center": [
+    -3.45,
+    -8.648,
+    1.705
+   ],
+   "triangles": {
+    "HIGH": 923,
+    "MEDIUM": 226,
+    "LOW": 80,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.46,
+   "lod_weight": [
+    0.0011,
+    0.017,
+    0.0544,
+    0.9275
+   ],
+   "li_download_est": 0.751,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C02_Arch",
+   "kind": "structure",
+   "role": "The Rack",
+   "fire": false,
+   "size_m": [
+    0.98,
+    5.72,
+    4.78
+   ],
+   "center": [
+    -3.38,
+    -2.875,
+    5.41
+   ],
+   "triangles": {
+    "HIGH": 764,
+    "MEDIUM": 62,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.76,
+   "lod_weight": [
+    0.0075,
+    0.1123,
+    0.3594,
+    0.5208
+   ],
+   "li_download_est": 0.873,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C02_Door",
+   "kind": "door",
+   "role": "The Rack",
+   "fire": false,
+   "size_m": [
+    0.218,
+    1.415,
+    2.55
+   ],
+   "center": [
+    -3.45,
+    -2.898,
+    1.705
+   ],
+   "triangles": {
+    "HIGH": 923,
+    "MEDIUM": 226,
+    "LOW": 80,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.46,
+   "lod_weight": [
+    0.0011,
+    0.017,
+    0.0544,
+    0.9275
+   ],
+   "li_download_est": 0.751,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C03_Arch",
+   "kind": "structure",
+   "role": "The Stocks",
+   "fire": false,
+   "size_m": [
+    0.98,
+    5.72,
+    4.78
+   ],
+   "center": [
+    -3.38,
+    2.875,
+    5.41
+   ],
+   "triangles": {
+    "HIGH": 764,
+    "MEDIUM": 62,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.76,
+   "lod_weight": [
+    0.0075,
+    0.1123,
+    0.3594,
+    0.5208
+   ],
+   "li_download_est": 0.873,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C03_Door",
+   "kind": "door",
+   "role": "The Stocks",
+   "fire": false,
+   "size_m": [
+    0.218,
+    1.415,
+    2.55
+   ],
+   "center": [
+    -3.45,
+    2.852,
+    1.705
+   ],
+   "triangles": {
+    "HIGH": 923,
+    "MEDIUM": 226,
+    "LOW": 80,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.46,
+   "lod_weight": [
+    0.0011,
+    0.017,
+    0.0544,
+    0.9275
+   ],
+   "li_download_est": 0.751,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Arch",
+   "kind": "structure",
+   "role": "The Cistern",
+   "fire": false,
+   "size_m": [
+    0.98,
+    5.72,
+    4.78
+   ],
+   "center": [
+    -3.38,
+    8.625,
+    5.41
+   ],
+   "triangles": {
+    "HIGH": 764,
+    "MEDIUM": 62,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.76,
+   "lod_weight": [
+    0.0075,
+    0.1123,
+    0.3594,
+    0.5208
+   ],
+   "li_download_est": 0.873,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Door",
+   "kind": "door",
+   "role": "The Cistern",
+   "fire": false,
+   "size_m": [
+    0.218,
+    1.415,
+    2.55
+   ],
+   "center": [
+    -3.45,
+    8.602,
+    1.705
+   ],
+   "triangles": {
+    "HIGH": 923,
+    "MEDIUM": 226,
+    "LOW": 80,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.46,
+   "lod_weight": [
+    0.0011,
+    0.017,
+    0.0544,
+    0.9275
+   ],
+   "li_download_est": 0.751,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M0E_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    2.486,
+    8.2
+   ],
+   "center": [
+    3.38,
+    -10.557,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 328,
+    "MEDIUM": 24,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.31,
+   "lod_weight": [
+    0.0099,
+    0.1478,
+    0.4729,
+    0.3695
+   ],
+   "li_download_est": 0.454,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M1E_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    4.361,
+    8.2
+   ],
+   "center": [
+    3.38,
+    -5.745,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 548,
+    "MEDIUM": 38,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 38
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.67,
+   "lod_weight": [
+    0.0116,
+    0.1733,
+    0.5545,
+    0.2607
+   ],
+   "li_download_est": 0.918,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M2E_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    4.361,
+    8.2
+   ],
+   "center": [
+    3.38,
+    0.005,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 548,
+    "MEDIUM": 38,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 38
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.67,
+   "lod_weight": [
+    0.0116,
+    0.1733,
+    0.5545,
+    0.2607
+   ],
+   "li_download_est": 0.918,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M3E_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    4.361,
+    8.2
+   ],
+   "center": [
+    3.38,
+    5.755,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 548,
+    "MEDIUM": 38,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 38
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.67,
+   "lod_weight": [
+    0.0116,
+    0.1733,
+    0.5545,
+    0.2607
+   ],
+   "li_download_est": 0.918,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "M4E_Pier",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.98,
+    2.475,
+    8.2
+   ],
+   "center": [
+    3.38,
+    10.562,
+    3.7
+   ],
+   "triangles": {
+    "HIGH": 292,
+    "MEDIUM": 24,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.31,
+   "lod_weight": [
+    0.0098,
+    0.1477,
+    0.4726,
+    0.3699
+   ],
+   "li_download_est": 0.42,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Arch",
+   "kind": "structure",
+   "role": "The Kennel",
+   "fire": false,
+   "size_m": [
+    0.98,
+    5.72,
+    4.78
+   ],
+   "center": [
+    3.38,
+    -8.625,
+    5.41
+   ],
+   "triangles": {
+    "HIGH": 764,
+    "MEDIUM": 62,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.76,
+   "lod_weight": [
+    0.0075,
+    0.1123,
+    0.3594,
+    0.5208
+   ],
+   "li_download_est": 0.873,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Door",
+   "kind": "door",
+   "role": "The Kennel",
+   "fire": false,
+   "size_m": [
+    0.218,
+    1.415,
+    2.55
+   ],
+   "center": [
+    3.45,
+    -8.648,
+    1.705
+   ],
+   "triangles": {
+    "HIGH": 923,
+    "MEDIUM": 226,
+    "LOW": 80,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.46,
+   "lod_weight": [
+    0.0011,
+    0.017,
+    0.0544,
+    0.9275
+   ],
+   "li_download_est": 0.751,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C06_Arch",
+   "kind": "structure",
+   "role": "The Kennel",
+   "fire": false,
+   "size_m": [
+    0.98,
+    5.72,
+    4.78
+   ],
+   "center": [
+    3.38,
+    -2.875,
+    5.41
+   ],
+   "triangles": {
+    "HIGH": 764,
+    "MEDIUM": 62,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.76,
+   "lod_weight": [
+    0.0075,
+    0.1123,
+    0.3594,
+    0.5208
+   ],
+   "li_download_est": 0.873,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C06_Door",
+   "kind": "door",
+   "role": "The Kennel",
+   "fire": false,
+   "size_m": [
+    0.218,
+    1.415,
+    2.55
+   ],
+   "center": [
+    3.45,
+    -2.898,
+    1.705
+   ],
+   "triangles": {
+    "HIGH": 923,
+    "MEDIUM": 226,
+    "LOW": 80,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.46,
+   "lod_weight": [
+    0.0011,
+    0.017,
+    0.0544,
+    0.9275
+   ],
+   "li_download_est": 0.751,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C07_Arch",
+   "kind": "structure",
+   "role": "The Cages",
+   "fire": false,
+   "size_m": [
+    0.98,
+    5.72,
+    4.78
+   ],
+   "center": [
+    3.38,
+    2.875,
+    5.41
+   ],
+   "triangles": {
+    "HIGH": 764,
+    "MEDIUM": 62,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.76,
+   "lod_weight": [
+    0.0075,
+    0.1123,
+    0.3594,
+    0.5208
+   ],
+   "li_download_est": 0.873,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C07_Door",
+   "kind": "door",
+   "role": "The Cages",
+   "fire": false,
+   "size_m": [
+    0.218,
+    1.415,
+    2.55
+   ],
+   "center": [
+    3.45,
+    2.852,
+    1.705
+   ],
+   "triangles": {
+    "HIGH": 923,
+    "MEDIUM": 226,
+    "LOW": 80,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.46,
+   "lod_weight": [
+    0.0011,
+    0.017,
+    0.0544,
+    0.9275
+   ],
+   "li_download_est": 0.751,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C08_Arch",
+   "kind": "structure",
+   "role": "The Mast",
+   "fire": false,
+   "size_m": [
+    0.98,
+    5.72,
+    4.78
+   ],
+   "center": [
+    3.38,
+    8.625,
+    5.41
+   ],
+   "triangles": {
+    "HIGH": 764,
+    "MEDIUM": 62,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.76,
+   "lod_weight": [
+    0.0075,
+    0.1123,
+    0.3594,
+    0.5208
+   ],
+   "li_download_est": 0.873,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C08_Door",
+   "kind": "door",
+   "role": "The Mast",
+   "fire": false,
+   "size_m": [
+    0.218,
+    1.415,
+    2.55
+   ],
+   "center": [
+    3.45,
+    8.602,
+    1.705
+   ],
+   "triangles": {
+    "HIGH": 923,
+    "MEDIUM": 226,
+    "LOW": 80,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.46,
+   "lod_weight": [
+    0.0011,
+    0.017,
+    0.0544,
+    0.9275
+   ],
+   "li_download_est": 0.751,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C01_Floor",
+   "kind": "structure",
+   "role": "The Press-Gang",
+   "fire": false,
+   "size_m": [
+    8.6,
+    5.15,
+    0.855
+   ],
+   "center": [
+    -7.3,
+    -8.625,
+    0.028
+   ],
+   "triangles": {
+    "HIGH": 539,
+    "MEDIUM": 14,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.03,
+   "lod_weight": [
+    0.0134,
+    0.2011,
+    0.6435,
+    0.142
+   ],
+   "li_download_est": 0.48,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C01_Partition",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    0.6,
+    5.0
+   ],
+   "center": [
+    -7.7,
+    -5.75,
+    2.1
+   ],
+   "triangles": {
+    "HIGH": 11,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.64,
+   "lod_weight": [
+    0.0114,
+    0.1713,
+    0.548,
+    0.2693
+   ],
+   "li_download_est": 0.07,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C01_Wall",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.45,
+    6.2,
+    8.18
+   ],
+   "center": [
+    -12.275,
+    -8.4,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 224,
+    "MEDIUM": 18,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.18,
+   "lod_weight": [
+    0.0142,
+    0.2135,
+    0.6832,
+    0.0891
+   ],
+   "li_download_est": 0.39,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C01_Vault",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    5.75,
+    3.255
+   ],
+   "center": [
+    -7.7,
+    -8.625,
+    5.847
+   ],
+   "triangles": {
+    "HIGH": 734,
+    "MEDIUM": 18,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.11,
+   "lod_weight": [
+    0.0138,
+    0.2076,
+    0.6644,
+    0.1142
+   ],
+   "li_download_est": 0.765,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C02_Floor",
+   "kind": "structure",
+   "role": "The Rack",
+   "fire": false,
+   "size_m": [
+    8.6,
+    5.15,
+    0.853
+   ],
+   "center": [
+    -7.3,
+    -2.875,
+    0.027
+   ],
+   "triangles": {
+    "HIGH": 539,
+    "MEDIUM": 14,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.03,
+   "lod_weight": [
+    0.0134,
+    0.2011,
+    0.6435,
+    0.142
+   ],
+   "li_download_est": 0.493,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C02_Partition",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    0.6,
+    5.0
+   ],
+   "center": [
+    -7.7,
+    0.0,
+    2.1
+   ],
+   "triangles": {
+    "HIGH": 11,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.64,
+   "lod_weight": [
+    0.0114,
+    0.1713,
+    0.548,
+    0.2693
+   ],
+   "li_download_est": 0.07,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C02_Wall",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.45,
+    6.2,
+    8.18
+   ],
+   "center": [
+    -12.275,
+    -2.65,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 218,
+    "MEDIUM": 16,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.18,
+   "lod_weight": [
+    0.0142,
+    0.2135,
+    0.6832,
+    0.0891
+   ],
+   "li_download_est": 0.346,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C02_Vault",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    5.75,
+    3.255
+   ],
+   "center": [
+    -7.7,
+    -2.875,
+    5.847
+   ],
+   "triangles": {
+    "HIGH": 734,
+    "MEDIUM": 18,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.11,
+   "lod_weight": [
+    0.0138,
+    0.2076,
+    0.6644,
+    0.1142
+   ],
+   "li_download_est": 0.765,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C03_Floor",
+   "kind": "structure",
+   "role": "The Stocks",
+   "fire": false,
+   "size_m": [
+    8.6,
+    5.15,
+    0.858
+   ],
+   "center": [
+    -7.3,
+    2.875,
+    0.029
+   ],
+   "triangles": {
+    "HIGH": 539,
+    "MEDIUM": 14,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.03,
+   "lod_weight": [
+    0.0134,
+    0.2011,
+    0.6435,
+    0.142
+   ],
+   "li_download_est": 0.489,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C03_Partition",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    0.6,
+    5.0
+   ],
+   "center": [
+    -7.7,
+    5.75,
+    2.1
+   ],
+   "triangles": {
+    "HIGH": 11,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.64,
+   "lod_weight": [
+    0.0114,
+    0.1713,
+    0.548,
+    0.2693
+   ],
+   "li_download_est": 0.07,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C03_Wall",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.45,
+    6.2,
+    8.18
+   ],
+   "center": [
+    -12.275,
+    3.1,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 218,
+    "MEDIUM": 16,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.18,
+   "lod_weight": [
+    0.0142,
+    0.2135,
+    0.6832,
+    0.0891
+   ],
+   "li_download_est": 0.346,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C03_Vault",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    5.75,
+    3.255
+   ],
+   "center": [
+    -7.7,
+    2.875,
+    5.847
+   ],
+   "triangles": {
+    "HIGH": 734,
+    "MEDIUM": 18,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.11,
+   "lod_weight": [
+    0.0138,
+    0.2076,
+    0.6644,
+    0.1142
+   ],
+   "li_download_est": 0.768,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Floor",
+   "kind": "structure",
+   "role": "The Cistern",
+   "fire": false,
+   "size_m": [
+    8.6,
+    5.15,
+    0.857
+   ],
+   "center": [
+    -7.3,
+    8.625,
+    0.029
+   ],
+   "triangles": {
+    "HIGH": 539,
+    "MEDIUM": 14,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.03,
+   "lod_weight": [
+    0.0134,
+    0.2011,
+    0.6435,
+    0.142
+   ],
+   "li_download_est": 0.48,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Partition",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.9,
+    0.72,
+    8.18
+   ],
+   "center": [
+    -7.7,
+    11.5,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 57,
+    "MEDIUM": 18,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.7,
+   "lod_weight": [
+    0.0172,
+    0.258,
+    0.7248,
+    0.0
+   ],
+   "li_download_est": 0.197,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Wall",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.45,
+    6.2,
+    8.18
+   ],
+   "center": [
+    -12.275,
+    8.85,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 224,
+    "MEDIUM": 18,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.18,
+   "lod_weight": [
+    0.0142,
+    0.2135,
+    0.6832,
+    0.0891
+   ],
+   "li_download_est": 0.39,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Vault",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    5.75,
+    3.255
+   ],
+   "center": [
+    -7.7,
+    8.625,
+    5.847
+   ],
+   "triangles": {
+    "HIGH": 734,
+    "MEDIUM": 18,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.11,
+   "lod_weight": [
+    0.0138,
+    0.2076,
+    0.6644,
+    0.1142
+   ],
+   "li_download_est": 0.768,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Floor",
+   "kind": "structure",
+   "role": "The Kennel",
+   "fire": false,
+   "size_m": [
+    8.6,
+    10.9,
+    0.86
+   ],
+   "center": [
+    7.3,
+    -5.75,
+    0.03
+   ],
+   "triangles": {
+    "HIGH": 829,
+    "MEDIUM": 18,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 6.96,
+   "lod_weight": [
+    0.0256,
+    0.3845,
+    0.5899,
+    0.0
+   ],
+   "li_download_est": 1.186,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Partition",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    0.6,
+    5.0
+   ],
+   "center": [
+    7.7,
+    0.0,
+    2.1
+   ],
+   "triangles": {
+    "HIGH": 11,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.64,
+   "lod_weight": [
+    0.0114,
+    0.1713,
+    0.548,
+    0.2693
+   ],
+   "li_download_est": 0.07,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Wall",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.45,
+    11.95,
+    8.18
+   ],
+   "center": [
+    12.275,
+    -5.525,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 382,
+    "MEDIUM": 26,
+    "LOW": 18,
+    "LOWEST": 18,
+    "PHYS": 38
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 7.28,
+   "lod_weight": [
+    0.0281,
+    0.4208,
+    0.5511,
+    0.0
+   ],
+   "li_download_est": 1.519,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Roof",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    10.94,
+    0.663
+   ],
+   "center": [
+    7.7,
+    -5.75,
+    5.75
+   ],
+   "triangles": {
+    "HIGH": 930,
+    "MEDIUM": 6,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 6.73,
+   "lod_weight": [
+    0.024,
+    0.3595,
+    0.6165,
+    0.0
+   ],
+   "li_download_est": 2.067,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C07_Floor",
+   "kind": "structure",
+   "role": "The Cages",
+   "fire": false,
+   "size_m": [
+    8.6,
+    5.15,
+    0.859
+   ],
+   "center": [
+    7.3,
+    2.875,
+    0.03
+   ],
+   "triangles": {
+    "HIGH": 539,
+    "MEDIUM": 14,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.03,
+   "lod_weight": [
+    0.0134,
+    0.2011,
+    0.6435,
+    0.1419
+   ],
+   "li_download_est": 0.486,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C07_Partition",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    0.6,
+    5.0
+   ],
+   "center": [
+    7.7,
+    5.75,
+    2.1
+   ],
+   "triangles": {
+    "HIGH": 11,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.64,
+   "lod_weight": [
+    0.0114,
+    0.1713,
+    0.548,
+    0.2693
+   ],
+   "li_download_est": 0.07,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C07_Wall",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.45,
+    6.2,
+    8.18
+   ],
+   "center": [
+    12.275,
+    3.1,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 218,
+    "MEDIUM": 16,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.18,
+   "lod_weight": [
+    0.0142,
+    0.2135,
+    0.6832,
+    0.0891
+   ],
+   "li_download_est": 0.346,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C07_Vault",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    5.75,
+    3.255
+   ],
+   "center": [
+    7.7,
+    2.875,
+    5.847
+   ],
+   "triangles": {
+    "HIGH": 734,
+    "MEDIUM": 18,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.11,
+   "lod_weight": [
+    0.0138,
+    0.2076,
+    0.6644,
+    0.1142
+   ],
+   "li_download_est": 0.768,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C08_Floor",
+   "kind": "structure",
+   "role": "The Mast",
+   "fire": false,
+   "size_m": [
+    8.6,
+    5.15,
+    0.86
+   ],
+   "center": [
+    7.3,
+    8.625,
+    0.03
+   ],
+   "triangles": {
+    "HIGH": 539,
+    "MEDIUM": 14,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.03,
+   "lod_weight": [
+    0.0134,
+    0.2011,
+    0.6435,
+    0.1419
+   ],
+   "li_download_est": 0.487,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C08_Partition",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.9,
+    0.72,
+    8.18
+   ],
+   "center": [
+    7.7,
+    11.5,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 57,
+    "MEDIUM": 18,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.7,
+   "lod_weight": [
+    0.0172,
+    0.258,
+    0.7248,
+    0.0
+   ],
+   "li_download_est": 0.197,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C08_Wall",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.45,
+    6.2,
+    8.18
+   ],
+   "center": [
+    12.275,
+    8.85,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 224,
+    "MEDIUM": 18,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.18,
+   "lod_weight": [
+    0.0142,
+    0.2135,
+    0.6832,
+    0.0891
+   ],
+   "li_download_est": 0.39,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C08_Vault",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.8,
+    5.75,
+    3.255
+   ],
+   "center": [
+    7.7,
+    8.625,
+    5.847
+   ],
+   "triangles": {
+    "HIGH": 734,
+    "MEDIUM": 18,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.11,
+   "lod_weight": [
+    0.0138,
+    0.2076,
+    0.6644,
+    0.1142
+   ],
+   "li_download_est": 0.768,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C01_Desk",
+   "kind": "furniture",
+   "role": "scribe",
+   "fire": false,
+   "size_m": [
+    1.5,
+    1.379,
+    1.51
+   ],
+   "center": [
+    -7.6,
+    -8.298,
+    1.147
+   ],
+   "triangles": {
+    "HIGH": 499,
+    "MEDIUM": 127,
+    "LOW": 44,
+    "LOWEST": 15,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.27,
+   "lod_weight": [
+    0.0009,
+    0.0128,
+    0.0409,
+    0.9455
+   ],
+   "li_download_est": 0.821,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.0,
+     -0.477,
+     0.253
+    ],
+    "yaw": 90,
+    "anim": "pit_scribe",
+    "fallback": "sit"
+   }
+  },
+  {
+   "name": "C01_Branding_Brazier",
+   "kind": "light",
+   "role": "branding",
+   "fire": true,
+   "size_m": [
+    1.771,
+    1.173,
+    1.169
+   ],
+   "center": [
+    -9.618,
+    -10.336,
+    0.985
+   ],
+   "triangles": {
+    "HIGH": 1272,
+    "MEDIUM": 302,
+    "LOW": 94,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.21,
+   "lod_weight": [
+    0.0008,
+    0.0117,
+    0.0374,
+    0.9502
+   ],
+   "li_download_est": 0.79,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C01_Props",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    0.845,
+    4.41,
+    2.5
+   ],
+   "center": [
+    -11.2,
+    -8.72,
+    1.65
+   ],
+   "triangles": {
+    "HIGH": 2147,
+    "MEDIUM": 182,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.57,
+   "lod_weight": [
+    0.0035,
+    0.0525,
+    0.1679,
+    0.7761
+   ],
+   "li_download_est": 1.374,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C02_Rack",
+   "kind": "furniture",
+   "role": "rack",
+   "fire": false,
+   "size_m": [
+    3.075,
+    1.2,
+    1.564
+   ],
+   "center": [
+    -7.315,
+    -2.795,
+    1.182
+   ],
+   "triangles": {
+    "HIGH": 1417,
+    "MEDIUM": 354,
+    "LOW": 72,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.83,
+   "lod_weight": [
+    0.0018,
+    0.0265,
+    0.0848,
+    0.8869
+   ],
+   "li_download_est": 1.671,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     -0.285,
+     -0.08,
+     0.368
+    ],
+    "yaw": 0,
+    "anim": "pit_rack",
+    "fallback": "dead"
+   }
+  },
+  {
+   "name": "C02_Props",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.093,
+    1.176,
+    2.337
+   ],
+   "center": [
+    -8.047,
+    -0.888,
+    1.531
+   ],
+   "triangles": {
+    "HIGH": 1864,
+    "MEDIUM": 161,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.32,
+   "lod_weight": [
+    0.0058,
+    0.0874,
+    0.2796,
+    0.6272
+   ],
+   "li_download_est": 1.905,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C02_Torch",
+   "kind": "light",
+   "role": "The Rack",
+   "fire": true,
+   "size_m": [
+    0.763,
+    0.182,
+    1.737
+   ],
+   "center": [
+    -11.218,
+    -1.059,
+    3.399
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 46,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.345,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C03_Pillory",
+   "kind": "furniture",
+   "role": "pillory",
+   "fire": false,
+   "size_m": [
+    2.22,
+    2.8,
+    2.335
+   ],
+   "center": [
+    -7.4,
+    2.575,
+    1.567
+   ],
+   "triangles": {
+    "HIGH": 542,
+    "MEDIUM": 138,
+    "LOW": 86,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.13,
+   "lod_weight": [
+    0.0024,
+    0.0362,
+    0.1158,
+    0.8455
+   ],
+   "li_download_est": 1.112,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.0,
+     0.15,
+     0.183
+    ],
+    "yaw": 90,
+    "anim": "pit_pillory",
+    "fallback": "stand"
+   }
+  },
+  {
+   "name": "C03_Stocks",
+   "kind": "furniture",
+   "role": "stocks",
+   "fire": false,
+   "size_m": [
+    1.8,
+    0.97,
+    0.46
+   ],
+   "center": [
+    -9.9,
+    4.04,
+    0.63
+   ],
+   "triangles": {
+    "HIGH": 305,
+    "MEDIUM": 300,
+    "LOW": 42,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.05,
+   "lod_weight": [
+    0.0006,
+    0.0087,
+    0.0279,
+    0.9628
+   ],
+   "li_download_est": 0.369,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.0,
+     0.335,
+     0.67
+    ],
+    "yaw": -90,
+    "anim": "pit_stocks",
+    "fallback": "sit"
+   }
+  },
+  {
+   "name": "C03_Props",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.285,
+    2.461,
+    3.174
+   ],
+   "center": [
+    -10.958,
+    1.359,
+    2.007
+   ],
+   "triangles": {
+    "HIGH": 980,
+    "MEDIUM": 142,
+    "LOW": 50,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.11,
+   "lod_weight": [
+    0.0024,
+    0.0353,
+    0.1131,
+    0.8492
+   ],
+   "li_download_est": 0.995,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C03_Torch",
+   "kind": "light",
+   "role": "The Stocks",
+   "fire": true,
+   "size_m": [
+    0.765,
+    0.188,
+    1.737
+   ],
+   "center": [
+    -11.217,
+    3.49,
+    3.399
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 46,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.344,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Cistern",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    4.857,
+    3.0,
+    2.213
+   ],
+   "center": [
+    -9.072,
+    8.625,
+    1.106
+   ],
+   "triangles": {
+    "HIGH": 323,
+    "MEDIUM": 128,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 26
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 3.06,
+   "lod_weight": [
+    0.005,
+    0.0745,
+    0.2383,
+    0.6822
+   ],
+   "li_download_est": 0.861,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Water",
+   "kind": "water",
+   "role": "water",
+   "fire": false,
+   "size_m": [
+    2.74,
+    2.44,
+    1.06
+   ],
+   "center": [
+    -9.85,
+    8.625,
+    0.64
+   ],
+   "triangles": {
+    "HIGH": 4,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.91,
+   "lod_weight": [
+    0.0019,
+    0.029,
+    0.0927,
+    0.8764
+   ],
+   "li_download_est": 0.06,
+   "sl_faces": [
+    "Water"
+   ]
+  },
+  {
+   "name": "C04_Chair",
+   "kind": "furniture",
+   "role": "chair",
+   "fire": false,
+   "size_m": [
+    4.75,
+    0.664,
+    0.9
+   ],
+   "center": [
+    -7.825,
+    8.625,
+    2.05
+   ],
+   "triangles": {
+    "HIGH": 1688,
+    "MEDIUM": 162,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.44,
+   "lod_weight": [
+    0.0032,
+    0.0473,
+    0.1514,
+    0.7981
+   ],
+   "li_download_est": 1.048,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     -2.075,
+     0.0,
+     0.0
+    ],
+    "yaw": 0,
+    "anim": "pit_chair",
+    "fallback": "sit"
+   },
+   "pivot_rel": [
+    0.525,
+    0.0,
+    0.1
+   ]
+  },
+  {
+   "name": "C04_Torch",
+   "kind": "light",
+   "role": "The Cistern",
+   "fire": true,
+   "size_m": [
+    0.181,
+    0.763,
+    1.737
+   ],
+   "center": [
+    -4.984,
+    10.818,
+    3.399
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 46,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.351,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C04_Props",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    2.08,
+    1.116,
+    1.04
+   ],
+   "center": [
+    -5.37,
+    6.578,
+    0.94
+   ],
+   "triangles": {
+    "HIGH": 2850,
+    "MEDIUM": 639,
+    "LOW": 128,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.29,
+   "lod_weight": [
+    0.0009,
+    0.0132,
+    0.0423,
+    0.9436
+   ],
+   "li_download_est": 1.153,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Kennel_1",
+   "kind": "furniture",
+   "role": "kennel",
+   "fire": false,
+   "size_m": [
+    1.11,
+    1.771,
+    1.1
+   ],
+   "center": [
+    10.595,
+    -9.885,
+    0.95
+   ],
+   "triangles": {
+    "HIGH": 890,
+    "MEDIUM": 302,
+    "LOW": 39,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.18,
+   "lod_weight": [
+    0.0007,
+    0.0111,
+    0.0355,
+    0.9527
+   ],
+   "li_download_est": 0.538,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.005,
+     0.085,
+     -0.15
+    ],
+    "yaw": 180,
+    "anim": "pit_dog",
+    "fallback": "sleep"
+   }
+  },
+  {
+   "name": "C05_Kennel_2",
+   "kind": "furniture",
+   "role": "kennel",
+   "fire": false,
+   "size_m": [
+    1.11,
+    1.771,
+    1.1
+   ],
+   "center": [
+    10.595,
+    -5.835,
+    0.95
+   ],
+   "triangles": {
+    "HIGH": 890,
+    "MEDIUM": 302,
+    "LOW": 40,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.18,
+   "lod_weight": [
+    0.0007,
+    0.0111,
+    0.0355,
+    0.9527
+   ],
+   "li_download_est": 0.544,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.005,
+     0.085,
+     -0.15
+    ],
+    "yaw": 180,
+    "anim": "pit_dog",
+    "fallback": "sleep"
+   }
+  },
+  {
+   "name": "C05_Kennel_3",
+   "kind": "furniture",
+   "role": "kennel",
+   "fire": false,
+   "size_m": [
+    1.11,
+    1.771,
+    1.1
+   ],
+   "center": [
+    10.595,
+    -1.785,
+    0.95
+   ],
+   "triangles": {
+    "HIGH": 890,
+    "MEDIUM": 302,
+    "LOW": 40,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.18,
+   "lod_weight": [
+    0.0007,
+    0.0111,
+    0.0355,
+    0.9527
+   ],
+   "li_download_est": 0.549,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.005,
+     0.085,
+     -0.15
+    ],
+    "yaw": 180,
+    "anim": "pit_dog",
+    "fallback": "sleep"
+   }
+  },
+  {
+   "name": "C05_Bowls",
+   "kind": "deco",
+   "role": "bowls",
+   "fire": false,
+   "size_m": [
+    5.54,
+    1.216,
+    1.082
+   ],
+   "center": [
+    6.97,
+    -0.908,
+    0.921
+   ],
+   "triangles": {
+    "HIGH": 5537,
+    "MEDIUM": 178,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.89,
+   "lod_weight": [
+    0.0044,
+    0.0662,
+    0.212,
+    0.7174
+   ],
+   "li_download_est": 2.702,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Clothes",
+   "kind": "deco",
+   "role": "clothes",
+   "fire": false,
+   "size_m": [
+    5.683,
+    1.685,
+    0.313
+   ],
+   "center": [
+    7.119,
+    -10.578,
+    0.519
+   ],
+   "triangles": {
+    "HIGH": 2771,
+    "MEDIUM": 128,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.97,
+   "lod_weight": [
+    0.0047,
+    0.07,
+    0.224,
+    0.7013
+   ],
+   "li_download_est": 1.286,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C05_Lantern",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.44,
+    0.441,
+    2.503
+   ],
+   "center": [
+    7.6,
+    -5.75,
+    4.534
+   ],
+   "triangles": {
+    "HIGH": 1123,
+    "MEDIUM": 300,
+    "LOW": 62,
+    "LOWEST": 17,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.29,
+   "lod_weight": [
+    0.0009,
+    0.0132,
+    0.0423,
+    0.9436
+   ],
+   "li_download_est": 1.239,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C07_Cage_1",
+   "kind": "furniture",
+   "role": "cage",
+   "fire": false,
+   "size_m": [
+    0.867,
+    0.88,
+    5.861
+   ],
+   "center": [
+    7.0,
+    1.775,
+    4.213
+   ],
+   "triangles": {
+    "HIGH": 3175,
+    "MEDIUM": 162,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.99,
+   "lod_weight": [
+    0.0048,
+    0.0713,
+    0.2281,
+    0.6959
+   ],
+   "li_download_est": 2.057,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     -1.863
+    ],
+    "yaw": 0,
+    "anim": "pit_cage",
+    "fallback": "stand"
+   }
+  },
+  {
+   "name": "C07_Cage_2",
+   "kind": "furniture",
+   "role": "cage",
+   "fire": false,
+   "size_m": [
+    0.867,
+    0.88,
+    5.861
+   ],
+   "center": [
+    9.0,
+    3.875,
+    4.213
+   ],
+   "triangles": {
+    "HIGH": 4153,
+    "MEDIUM": 234,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.99,
+   "lod_weight": [
+    0.0048,
+    0.0713,
+    0.2281,
+    0.6959
+   ],
+   "li_download_est": 2.96,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     -1.863
+    ],
+    "yaw": 0,
+    "anim": "pit_cage",
+    "fallback": "stand"
+   }
+  },
+  {
+   "name": "C07_Winch",
+   "kind": "deco",
+   "role": "cage_winch",
+   "fire": false,
+   "size_m": [
+    3.173,
+    0.813,
+    1.562
+   ],
+   "center": [
+    6.267,
+    0.65,
+    1.181
+   ],
+   "triangles": {
+    "HIGH": 2295,
+    "MEDIUM": 574,
+    "LOW": 116,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.81,
+   "lod_weight": [
+    0.0017,
+    0.0262,
+    0.0837,
+    0.8884
+   ],
+   "li_download_est": 2.077,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C07_Torch",
+   "kind": "light",
+   "role": "The Cages",
+   "fire": true,
+   "size_m": [
+    0.761,
+    0.192,
+    1.737
+   ],
+   "center": [
+    11.22,
+    2.659,
+    3.399
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.34,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C08_Mast",
+   "kind": "furniture",
+   "role": "mast",
+   "fire": false,
+   "size_m": [
+    1.5,
+    0.924,
+    4.247
+   ],
+   "center": [
+    7.25,
+    8.613,
+    2.123
+   ],
+   "triangles": {
+    "HIGH": 1782,
+    "MEDIUM": 162,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.3,
+   "lod_weight": [
+    0.0028,
+    0.042,
+    0.1344,
+    0.8208
+   ],
+   "li_download_est": 0.998,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.15,
+     -0.538,
+     -0.723
+    ],
+    "yaw": 90,
+    "anim": "pit_mast",
+    "fallback": "stand"
+   }
+  },
+  {
+   "name": "C08_Props",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    5.93,
+    1.15,
+    2.2
+   ],
+   "center": [
+    7.965,
+    10.625,
+    1.5
+   ],
+   "triangles": {
+    "HIGH": 1014,
+    "MEDIUM": 162,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.21,
+   "lod_weight": [
+    0.0055,
+    0.0821,
+    0.2627,
+    0.6497
+   ],
+   "li_download_est": 1.339,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "C08_Torch",
+   "kind": "light",
+   "role": "The Mast",
+   "fire": true,
+   "size_m": [
+    0.762,
+    0.182,
+    1.737
+   ],
+   "center": [
+    11.219,
+    7.009,
+    3.399
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.343,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "P1_Floor",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.0,
+    5.75,
+    0.841
+   ],
+   "center": [
+    0.0,
+    -8.625,
+    0.02
+   ],
+   "triangles": {
+    "HIGH": 959,
+    "MEDIUM": 14,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.18,
+   "lod_weight": [
+    0.0092,
+    0.1386,
+    0.4436,
+    0.4086
+   ],
+   "li_download_est": 0.85,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "P2_Floor",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.0,
+    5.75,
+    0.842
+   ],
+   "center": [
+    0.0,
+    -2.875,
+    0.021
+   ],
+   "triangles": {
+    "HIGH": 941,
+    "MEDIUM": 14,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.18,
+   "lod_weight": [
+    0.0092,
+    0.1386,
+    0.4436,
+    0.4085
+   ],
+   "li_download_est": 0.836,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "P3_Floor",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.0,
+    5.75,
+    0.837
+   ],
+   "center": [
+    0.0,
+    2.875,
+    0.018
+   ],
+   "triangles": {
+    "HIGH": 941,
+    "MEDIUM": 14,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.18,
+   "lod_weight": [
+    0.0092,
+    0.1386,
+    0.4435,
+    0.4086
+   ],
+   "li_download_est": 0.837,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "P4_Floor",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.0,
+    5.75,
+    0.84
+   ],
+   "center": [
+    0.0,
+    8.625,
+    0.02
+   ],
+   "triangles": {
+    "HIGH": 977,
+    "MEDIUM": 14,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.18,
+   "lod_weight": [
+    0.0092,
+    0.1386,
+    0.4436,
+    0.4086
+   ],
+   "li_download_est": 0.865,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "P_Water",
+   "kind": "water",
+   "role": "tide",
+   "fire": false,
+   "size_m": [
+    0.42,
+    23.0,
+    0.0
+   ],
+   "center": [
+    0.0,
+    0.0,
+    0.33
+   ],
+   "triangles": {
+    "HIGH": 2,
+    "MEDIUM": 2,
+    "LOW": 2,
+    "LOWEST": 2,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "radius_m": 11.5,
+   "lod_weight": [
+    0.0701,
+    0.9299,
+    0.0,
+    0.0
+   ],
+   "li_download_est": 0.06,
+   "sl_faces": [
+    "Water"
+   ]
+  },
+  {
+   "name": "T0_Beam",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.5,
+    0.46,
+    1.05
+   ],
+   "center": [
+    0.0,
+    -11.5,
+    6.225
+   ],
+   "triangles": {
+    "HIGH": 121,
+    "MEDIUM": 38,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.3,
+   "lod_weight": [
+    0.0058,
+    0.0866,
+    0.277,
+    0.6307
+   ],
+   "li_download_est": 0.304,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "T1_Beam",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.5,
+    0.46,
+    1.05
+   ],
+   "center": [
+    0.0,
+    -5.75,
+    6.225
+   ],
+   "triangles": {
+    "HIGH": 121,
+    "MEDIUM": 38,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.3,
+   "lod_weight": [
+    0.0058,
+    0.0866,
+    0.277,
+    0.6307
+   ],
+   "li_download_est": 0.304,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "T2_Beam",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.5,
+    0.46,
+    1.05
+   ],
+   "center": [
+    0.0,
+    0.0,
+    6.225
+   ],
+   "triangles": {
+    "HIGH": 121,
+    "MEDIUM": 38,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.3,
+   "lod_weight": [
+    0.0058,
+    0.0866,
+    0.277,
+    0.6307
+   ],
+   "li_download_est": 0.304,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "T3_Beam",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.5,
+    0.46,
+    1.05
+   ],
+   "center": [
+    0.0,
+    5.75,
+    6.225
+   ],
+   "triangles": {
+    "HIGH": 121,
+    "MEDIUM": 38,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.3,
+   "lod_weight": [
+    0.0058,
+    0.0866,
+    0.277,
+    0.6307
+   ],
+   "li_download_est": 0.304,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "T4_Beam",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.5,
+    0.46,
+    1.05
+   ],
+   "center": [
+    0.0,
+    11.5,
+    6.225
+   ],
+   "triangles": {
+    "HIGH": 121,
+    "MEDIUM": 38,
+    "LOW": 8,
+    "LOWEST": 8,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.3,
+   "lod_weight": [
+    0.0058,
+    0.0866,
+    0.277,
+    0.6307
+   ],
+   "li_download_est": 0.304,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "P_Gibbet",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    2.546,
+    0.331,
+    2.903
+   ],
+   "center": [
+    0.836,
+    -5.674,
+    4.903
+   ],
+   "triangles": {
+    "HIGH": 3729,
+    "MEDIUM": 751,
+    "LOW": 122,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.94,
+   "lod_weight": [
+    0.002,
+    0.0298,
+    0.0955,
+    0.8727
+   ],
+   "li_download_est": 3.149,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "T1_Lantern",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.441,
+    0.441,
+    2.503
+   ],
+   "center": [
+    -1.301,
+    -5.75,
+    5.073
+   ],
+   "triangles": {
+    "HIGH": 1123,
+    "MEDIUM": 300,
+    "LOW": 59,
+    "LOWEST": 17,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.29,
+   "lod_weight": [
+    0.0009,
+    0.0132,
+    0.0423,
+    0.9436
+   ],
+   "li_download_est": 1.247,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "T2_Lantern",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.44,
+    0.44,
+    2.503
+   ],
+   "center": [
+    -0.2,
+    -0.0,
+    5.073
+   ],
+   "triangles": {
+    "HIGH": 1123,
+    "MEDIUM": 300,
+    "LOW": 62,
+    "LOWEST": 17,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.29,
+   "lod_weight": [
+    0.0009,
+    0.0132,
+    0.0423,
+    0.9436
+   ],
+   "li_download_est": 1.252,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "T3_Lantern",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.441,
+    0.44,
+    2.503
+   ],
+   "center": [
+    -0.2,
+    5.75,
+    5.073
+   ],
+   "triangles": {
+    "HIGH": 1123,
+    "MEDIUM": 300,
+    "LOW": 60,
+    "LOWEST": 17,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.29,
+   "lod_weight": [
+    0.0009,
+    0.0132,
+    0.0423,
+    0.9436
+   ],
+   "li_download_est": 1.258,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A0W_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.761,
+    0.183,
+    1.737
+   ],
+   "center": [
+    -2.62,
+    -11.484,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.341,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A0E_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.764,
+    0.182,
+    1.737
+   ],
+   "center": [
+    2.618,
+    -11.516,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.341,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A1W_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.763,
+    0.181,
+    1.737
+   ],
+   "center": [
+    -2.618,
+    -5.734,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.343,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A1E_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.762,
+    0.195,
+    1.737
+   ],
+   "center": [
+    2.619,
+    -5.765,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.34,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A2W_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.763,
+    0.198,
+    1.737
+   ],
+   "center": [
+    -2.619,
+    0.015,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.342,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A2E_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.764,
+    0.192,
+    1.737
+   ],
+   "center": [
+    2.618,
+    -0.015,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.342,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A3W_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.761,
+    0.183,
+    1.737
+   ],
+   "center": [
+    -2.619,
+    5.766,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.341,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A3E_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.763,
+    0.181,
+    1.737
+   ],
+   "center": [
+    2.618,
+    5.735,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.34,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A4W_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.762,
+    0.182,
+    1.737
+   ],
+   "center": [
+    -2.619,
+    11.516,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.341,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A4E_Torch",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.762,
+    0.182,
+    1.737
+   ],
+   "center": [
+    2.619,
+    11.484,
+    3.349
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 48,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.34,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Wall_W",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.0,
+    1.5,
+    8.18
+   ],
+   "center": [
+    -9.5,
+    -15.85,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 159,
+    "MEDIUM": 32,
+    "LOW": 26,
+    "LOWEST": 26,
+    "PHYS": 36
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 5.44,
+   "lod_weight": [
+    0.0157,
+    0.2348,
+    0.7496,
+    0.0
+   ],
+   "li_download_est": 1.304,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "V_Wall_W",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.4,
+    4.15,
+    8.18
+   ],
+   "center": [
+    -12.3,
+    -13.125,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 21,
+    "MEDIUM": 14,
+    "LOW": 14,
+    "LOWEST": 14,
+    "PHYS": 24
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.64,
+   "lod_weight": [
+    0.0114,
+    0.1711,
+    0.5474,
+    0.2702
+   ],
+   "li_download_est": 0.08,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "V_Partition_W",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.85,
+    0.72,
+    8.18
+   ],
+   "center": [
+    -7.675,
+    -11.5,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 57,
+    "MEDIUM": 18,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.68,
+   "lod_weight": [
+    0.0171,
+    0.2564,
+    0.7265,
+    0.0
+   ],
+   "li_download_est": 0.196,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Tower_W",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    4.65,
+    4.07,
+    11.0
+   ],
+   "center": [
+    -4.025,
+    -16.315,
+    5.1
+   ],
+   "triangles": {
+    "HIGH": 891,
+    "MEDIUM": 46,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 62
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 6.31,
+   "lod_weight": [
+    0.0211,
+    0.3163,
+    0.6626,
+    0.0
+   ],
+   "li_download_est": 2.314,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Wall_E",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.0,
+    1.5,
+    8.18
+   ],
+   "center": [
+    9.5,
+    -15.85,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 159,
+    "MEDIUM": 32,
+    "LOW": 26,
+    "LOWEST": 26,
+    "PHYS": 36
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 5.44,
+   "lod_weight": [
+    0.0157,
+    0.2348,
+    0.7496,
+    0.0
+   ],
+   "li_download_est": 1.304,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "V_Wall_E",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.4,
+    4.15,
+    8.18
+   ],
+   "center": [
+    12.3,
+    -13.125,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 21,
+    "MEDIUM": 14,
+    "LOW": 14,
+    "LOWEST": 14,
+    "PHYS": 24
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.64,
+   "lod_weight": [
+    0.0114,
+    0.1711,
+    0.5474,
+    0.2702
+   ],
+   "li_download_est": 0.08,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "V_Partition_E",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.85,
+    0.72,
+    8.18
+   ],
+   "center": [
+    7.675,
+    -11.5,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 57,
+    "MEDIUM": 18,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.68,
+   "lod_weight": [
+    0.0171,
+    0.2564,
+    0.7265,
+    0.0
+   ],
+   "li_download_est": 0.196,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Tower_E",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    4.65,
+    4.07,
+    11.0
+   ],
+   "center": [
+    4.025,
+    -16.315,
+    5.1
+   ],
+   "triangles": {
+    "HIGH": 891,
+    "MEDIUM": 46,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 62
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 6.31,
+   "lod_weight": [
+    0.0211,
+    0.3163,
+    0.6626,
+    0.0
+   ],
+   "li_download_est": 2.314,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A0W_Torch_Hall",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.181,
+    0.762,
+    1.737
+   ],
+   "center": [
+    -7.684,
+    -12.181,
+    3.399
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 46,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9692
+   ],
+   "li_download_est": 0.346,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "A0E_Torch_Hall",
+   "kind": "light",
+   "role": "",
+   "fire": true,
+   "size_m": [
+    0.198,
+    0.764,
+    1.737
+   ],
+   "center": [
+    7.716,
+    -12.182,
+    3.399
+   ],
+   "triangles": {
+    "HIGH": 388,
+    "MEDIUM": 302,
+    "LOW": 46,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 0.95,
+   "lod_weight": [
+    0.0005,
+    0.0072,
+    0.0231,
+    0.9691
+   ],
+   "li_download_est": 0.346,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "V_Floor_1",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.6,
+    3.7,
+    0.8
+   ],
+   "center": [
+    -7.8,
+    -13.35,
+    -0.0
+   ],
+   "triangles": {
+    "HIGH": 791,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.25,
+   "lod_weight": [
+    0.0095,
+    0.1432,
+    0.4583,
+    0.3889
+   ],
+   "li_download_est": 0.705,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "V_Floor_2",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    8.0,
+    3.7,
+    0.8
+   ],
+   "center": [
+    0.0,
+    -13.35,
+    -0.0
+   ],
+   "triangles": {
+    "HIGH": 881,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.43,
+   "lod_weight": [
+    0.0104,
+    0.1556,
+    0.498,
+    0.336
+   ],
+   "li_download_est": 0.841,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "V_Floor_3",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.6,
+    3.7,
+    0.8
+   ],
+   "center": [
+    7.8,
+    -13.35,
+    -0.0
+   ],
+   "triangles": {
+    "HIGH": 773,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.25,
+   "lod_weight": [
+    0.0095,
+    0.1432,
+    0.4583,
+    0.3889
+   ],
+   "li_download_est": 0.691,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Stairs",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    6.0,
+    4.0,
+    0.8
+   ],
+   "center": [
+    0.0,
+    -17.2,
+    0.0
+   ],
+   "triangles": {
+    "HIGH": 330,
+    "MEDIUM": 18,
+    "LOW": 18,
+    "LOWEST": 18,
+    "PHYS": 36
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "radius_m": 3.63,
+   "lod_weight": [
+    0.007,
+    0.1046,
+    0.3347,
+    0.5538
+   ],
+   "li_download_est": 0.525,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Arch",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    5.46,
+    4.0,
+    7.41
+   ],
+   "center": [
+    0.0,
+    -16.3,
+    6.845
+   ],
+   "triangles": {
+    "HIGH": 1245,
+    "MEDIUM": 174,
+    "LOW": 24,
+    "LOWEST": 24,
+    "PHYS": 38
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.02,
+   "lod_weight": [
+    0.0133,
+    0.2001,
+    0.6404,
+    0.1462
+   ],
+   "li_download_est": 3.704,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Portcullis",
+   "kind": "door",
+   "role": "portcullis",
+   "fire": false,
+   "size_m": [
+    3.54,
+    0.16,
+    5.6
+   ],
+   "center": [
+    0.0,
+    -17.62,
+    3.2
+   ],
+   "triangles": {
+    "HIGH": 1096,
+    "MEDIUM": 168,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.31,
+   "lod_weight": [
+    0.0058,
+    0.0873,
+    0.2792,
+    0.6277
+   ],
+   "li_download_est": 1.916,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Leaf_W",
+   "kind": "door",
+   "role": "gate",
+   "fire": false,
+   "size_m": [
+    1.826,
+    0.258,
+    3.05
+   ],
+   "center": [
+    -0.922,
+    -14.329,
+    1.955
+   ],
+   "triangles": {
+    "HIGH": 1458,
+    "MEDIUM": 158,
+    "LOW": 14,
+    "LOWEST": 6,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.78,
+   "lod_weight": [
+    0.0017,
+    0.0252,
+    0.0808,
+    0.8923
+   ],
+   "li_download_est": 0.574,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Leaf_E",
+   "kind": "door",
+   "role": "gate",
+   "fire": false,
+   "size_m": [
+    1.826,
+    0.258,
+    3.05
+   ],
+   "center": [
+    0.922,
+    -14.329,
+    1.955
+   ],
+   "triangles": {
+    "HIGH": 1458,
+    "MEDIUM": 158,
+    "LOW": 14,
+    "LOWEST": 6,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.78,
+   "lod_weight": [
+    0.0017,
+    0.0252,
+    0.0808,
+    0.8923
+   ],
+   "li_download_est": 0.574,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "G_Winch",
+   "kind": "furniture",
+   "role": "winch",
+   "fire": false,
+   "size_m": [
+    4.509,
+    1.001,
+    3.83
+   ],
+   "center": [
+    -3.425,
+    -13.909,
+    2.315
+   ],
+   "triangles": {
+    "HIGH": 4849,
+    "MEDIUM": 215,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 3.0,
+   "lod_weight": [
+    0.0048,
+    0.0715,
+    0.2289,
+    0.6948
+   ],
+   "li_download_est": 3.313,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     -0.775,
+     -0.491,
+     -0.915
+    ],
+    "yaw": 90,
+    "anim": "pit_winch",
+    "fallback": "stand"
+   }
+  },
+  {
+   "name": "V_Table",
+   "kind": "furniture",
+   "role": "table",
+   "fire": false,
+   "size_m": [
+    2.0,
+    1.9,
+    1.14
+   ],
+   "center": [
+    6.6,
+    -13.4,
+    0.97
+   ],
+   "triangles": {
+    "HIGH": 676,
+    "MEDIUM": 167,
+    "LOW": 34,
+    "LOWEST": 15,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.49,
+   "lod_weight": [
+    0.0012,
+    0.0177,
+    0.0566,
+    0.9245
+   ],
+   "li_download_est": 0.869,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.0,
+     -0.8,
+     0.33
+    ],
+    "yaw": 90,
+    "anim": "pit_guard",
+    "fallback": "sit"
+   }
+  },
+  {
+   "name": "V_Props_W",
+   "kind": "deco",
+   "role": "board",
+   "fire": false,
+   "size_m": [
+    4.926,
+    0.634,
+    2.8
+   ],
+   "center": [
+    -8.537,
+    -15.167,
+    1.8
+   ],
+   "triangles": {
+    "HIGH": 974,
+    "MEDIUM": 242,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.85,
+   "lod_weight": [
+    0.0043,
+    0.0646,
+    0.2067,
+    0.7244
+   ],
+   "li_download_est": 2.006,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "V_Basket",
+   "kind": "deco",
+   "role": "basket",
+   "fire": false,
+   "size_m": [
+    1.374,
+    1.762,
+    0.7
+   ],
+   "center": [
+    9.699,
+    -13.178,
+    0.75
+   ],
+   "triangles": {
+    "HIGH": 934,
+    "MEDIUM": 301,
+    "LOW": 58,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 1.17,
+   "lod_weight": [
+    0.0007,
+    0.0109,
+    0.0349,
+    0.9535
+   ],
+   "li_download_est": 0.503,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Wall_W",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.4,
+    4.5,
+    8.18
+   ],
+   "center": [
+    -12.3,
+    13.75,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 23,
+    "MEDIUM": 16,
+    "LOW": 16,
+    "LOWEST": 16,
+    "PHYS": 24
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.72,
+   "lod_weight": [
+    0.0118,
+    0.1771,
+    0.5666,
+    0.2445
+   ],
+   "li_download_est": 0.097,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Back_W",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.1,
+    1.06,
+    8.18
+   ],
+   "center": [
+    -8.05,
+    15.54,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 335,
+    "MEDIUM": 76,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.44,
+   "lod_weight": [
+    0.0157,
+    0.2353,
+    0.749,
+    0.0
+   ],
+   "li_download_est": 1.351,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Wall_E",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    1.4,
+    4.5,
+    8.18
+   ],
+   "center": [
+    12.3,
+    13.75,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 23,
+    "MEDIUM": 16,
+    "LOW": 16,
+    "LOWEST": 16,
+    "PHYS": 24
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 4.72,
+   "lod_weight": [
+    0.0118,
+    0.1771,
+    0.5666,
+    0.2445
+   ],
+   "li_download_est": 0.126,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Back_E",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.1,
+    1.06,
+    8.18
+   ],
+   "center": [
+    8.05,
+    15.54,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 335,
+    "MEDIUM": 76,
+    "LOW": 6,
+    "LOWEST": 6,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 5.44,
+   "lod_weight": [
+    0.0157,
+    0.2353,
+    0.749,
+    0.0
+   ],
+   "li_download_est": 1.351,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Back_C",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    9.0,
+    0.99,
+    8.18
+   ],
+   "center": [
+    0.0,
+    15.575,
+    3.69
+   ],
+   "triangles": {
+    "HIGH": 971,
+    "MEDIUM": 50,
+    "LOW": 20,
+    "LOWEST": 20,
+    "PHYS": 62
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 6.1,
+   "lod_weight": [
+    0.0197,
+    0.2958,
+    0.6844,
+    0.0
+   ],
+   "li_download_est": 2.109,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Floor_1",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.6,
+    3.7,
+    0.8
+   ],
+   "center": [
+    -7.8,
+    13.35,
+    -0.0
+   ],
+   "triangles": {
+    "HIGH": 701,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.25,
+   "lod_weight": [
+    0.0095,
+    0.1432,
+    0.4583,
+    0.3889
+   ],
+   "li_download_est": 0.632,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Floor_2",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    8.0,
+    3.7,
+    0.8
+   ],
+   "center": [
+    0.0,
+    13.35,
+    -0.0
+   ],
+   "triangles": {
+    "HIGH": 755,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.43,
+   "lod_weight": [
+    0.0104,
+    0.1556,
+    0.498,
+    0.336
+   ],
+   "li_download_est": 0.729,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Floor_3",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    7.6,
+    3.7,
+    0.8
+   ],
+   "center": [
+    7.8,
+    13.35,
+    -0.0
+   ],
+   "triangles": {
+    "HIGH": 629,
+    "MEDIUM": 4,
+    "LOW": 4,
+    "LOWEST": 4,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.25,
+   "lod_weight": [
+    0.0095,
+    0.1432,
+    0.4583,
+    0.3889
+   ],
+   "li_download_est": 0.573,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Dais",
+   "kind": "structure",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    8.58,
+    3.89,
+    1.0
+   ],
+   "center": [
+    0.0,
+    13.255,
+    0.8
+   ],
+   "triangles": {
+    "HIGH": 167,
+    "MEDIUM": 32,
+    "LOW": 10,
+    "LOWEST": 10,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 4.74,
+   "lod_weight": [
+    0.0119,
+    0.1783,
+    0.5706,
+    0.2392
+   ],
+   "li_download_est": 0.49,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Throne",
+   "kind": "furniture",
+   "role": "throne",
+   "fire": false,
+   "size_m": [
+    1.95,
+    1.387,
+    3.413
+   ],
+   "center": [
+    0.0,
+    14.406,
+    2.993
+   ],
+   "triangles": {
+    "HIGH": 2337,
+    "MEDIUM": 569,
+    "LOW": 120,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.08,
+   "lod_weight": [
+    0.0023,
+    0.0345,
+    0.1105,
+    0.8527
+   ],
+   "li_download_est": 2.87,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     0.0,
+     0.094,
+     -0.643
+    ],
+    "yaw": -90,
+    "anim": "pit_lord",
+    "fallback": "sit"
+   }
+  },
+  {
+   "name": "N_Kneeling_Stone",
+   "kind": "furniture",
+   "role": "kneeling_stone",
+   "fire": false,
+   "size_m": [
+    1.026,
+    1.3,
+    0.312
+   ],
+   "center": [
+    0.063,
+    12.8,
+    1.437
+   ],
+   "triangles": {
+    "HIGH": 854,
+    "MEDIUM": 302,
+    "LOW": 46,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 0.84,
+   "lod_weight": [
+    0.0004,
+    0.0056,
+    0.0181,
+    0.9759
+   ],
+   "li_download_est": 0.289,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ],
+   "seat": {
+    "offset": [
+     -0.063,
+     -0.2,
+     0.313
+    ],
+    "yaw": 90,
+    "anim": "pit_kneel",
+    "fallback": "sit_ground_constrained"
+   }
+  },
+  {
+   "name": "N_Brazier_W",
+   "kind": "light",
+   "role": "brazier",
+   "fire": true,
+   "size_m": [
+    1.579,
+    1.506,
+    2.06
+   ],
+   "center": [
+    -2.332,
+    13.981,
+    2.33
+   ],
+   "triangles": {
+    "HIGH": 1075,
+    "MEDIUM": 269,
+    "LOW": 54,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.5,
+   "lod_weight": [
+    0.0012,
+    0.0179,
+    0.0573,
+    0.9237
+   ],
+   "li_download_est": 0.627,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Brazier_E",
+   "kind": "light",
+   "role": "brazier",
+   "fire": true,
+   "size_m": [
+    1.579,
+    1.506,
+    2.06
+   ],
+   "center": [
+    2.268,
+    13.981,
+    2.33
+   ],
+   "triangles": {
+    "HIGH": 1075,
+    "MEDIUM": 269,
+    "LOW": 54,
+    "LOWEST": 11,
+    "PHYS": 14
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "radius_m": 1.5,
+   "lod_weight": [
+    0.0012,
+    0.0179,
+    0.0573,
+    0.9237
+   ],
+   "li_download_est": 0.623,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Props_W",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    4.217,
+    2.333,
+    2.4
+   ],
+   "center": [
+    -8.971,
+    13.814,
+    1.6
+   ],
+   "triangles": {
+    "HIGH": 165,
+    "MEDIUM": 85,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.69,
+   "lod_weight": [
+    0.0038,
+    0.0576,
+    0.1843,
+    0.7543
+   ],
+   "li_download_est": 0.456,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  },
+  {
+   "name": "N_Props_E",
+   "kind": "deco",
+   "role": "",
+   "fire": false,
+   "size_m": [
+    3.594,
+    1.617,
+    2.4
+   ],
+   "center": [
+    9.283,
+    14.337,
+    1.6
+   ],
+   "triangles": {
+    "HIGH": 445,
+    "MEDIUM": 161,
+    "LOW": 12,
+    "LOWEST": 12,
+    "PHYS": 12
+   },
+   "bbox_markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "radius_m": 2.31,
+   "lod_weight": [
+    0.0028,
+    0.0423,
+    0.1354,
+    0.8195
+   ],
+   "li_download_est": 0.614,
+   "sl_faces": [
+    "Stone",
+    "Floor",
+    "Wood",
+    "Iron",
+    "Cloth",
+    "Bone",
+    "Straw",
+    "Flame"
+   ]
+  }
+ ],
+ "levels": {
+  "HIGH": {
+   "objects": 143,
+   "triangles": 113439
+  },
+  "MEDIUM": {
+   "objects": 143,
+   "triangles": 19272
+  },
+  "LOW": {
+   "objects": 143,
+   "triangles": 3814
+  },
+  "LOWEST": {
+   "objects": 143,
+   "triangles": 1376
+  },
+  "PHYS": {
+   "objects": 143,
+   "triangles": 2590
+  }
+ },
+ "warnings": [],
+ "li_estimate": {
+  "download_total": 118.6,
+  "server_total": 71.5,
+  "estimate": 118.6,
+  "note": "Estimate using the viewer's streaming cost formula and an approximate compressed size. Physics is not estimated: with Prim/None assigned correctly it should not dominate. The real value is the one the viewer shows on upload (Calculate weights & fee button)."
+ },
+ "footprint": {
+  "x_m": 26.0,
+  "y_m": 35.27,
+  "height_m": 11.0,
+  "area_m2": 917.0,
+  "limit_m2": 1011.5,
+  "parcel_percent": 45.3
+ },
+ "files": [
+  "ThePit_HIGH.dae",
+  "ThePit_MEDIUM.dae",
+  "ThePit_LOW.dae",
+  "ThePit_LOWEST.dae",
+  "ThePit_PHYS.dae"
+ ],
+ "seconds": 12.3
+}

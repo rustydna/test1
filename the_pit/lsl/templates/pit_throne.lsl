@@ -1,0 +1,242 @@
+// =====================================================================
+//  THE PIT - THE LORD'S THRONE AND THE MUSTER BOOK (root prim)
+//
+//  Whoever sits on the throne is the LORD OF THE PIT (text over the throne).
+//  Touching the throne (the Lord or the owner):
+//    Open all · Close all · Mood (WATCH / GLOOM / JUDGEMENT / DARKNESS)
+//    Judgement (pick someone nearby and a room: they are locked in for
+//    30 min with the Lord's key) · Bell · Book
+//    Settings (owner only): every on/off switch of The Pit
+//  The scribe's desk (Press-Gang room): Enlist (writes whoever you pick
+//  into the book with a recruit number and date), Read book, Oath.
+//  Branding brazier: Brand (counts each recruit's brands).
+//  While on the throne the Lord holds the key to every gate.
+//  Switches (/7 settings > Throne): throne, lord_keys, judgement,
+//  muster_book, branding; plus moods, bell, doors, narration, hovertext.
+// =====================================================================
+
+integer CH; integer LH; key USER; string MODE; key CHOSEN;
+list NEAR;
+string OPTS;
+
+integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
+
+integer link_of(string name)
+{
+    integer n = llGetObjectPrimCount(llGetKey());
+    integer i;
+    for (i = 1; i <= n; ++i) if (llGetLinkName(i) == name) return i;
+    return -1;
+}
+string who(key k) { return llGetDisplayName(k); }
+narrate(key k, string s)
+{
+    if (opt("narration")) llSay(0, s);
+    else llRegionSayTo(k, 0, s);
+}
+dialog(key k, string t, list b)
+{
+    llListenRemove(LH);
+    LH = llListen(CH, "", k, "");
+    llSetTimerEvent(60.0);
+    llDialog(k, t, b, CH);
+}
+
+signs()
+{
+    key lord = (key)llLinksetDataRead("lord");
+    integer l = link_of("N_Throne");
+    if (l > 0)
+    {
+        if (!opt("throne") || !opt("hovertext")) llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "", ZERO_VECTOR, 0.0]);
+        else if (lord == NULL_KEY) llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "THE EMPTY THRONE", <0.6, 0.35, 0.2>, 0.6]);
+        else llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "LORD OF THE PIT\n" + who(lord), <0.95, 0.6, 0.25>, 0.9]);
+    }
+    l = link_of("C01_Desk");
+    if (l > 0)
+    {
+        if (!opt("muster_book") || !opt("hovertext")) llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "", ZERO_VECTOR, 0.0]);
+        else llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "THE MUSTER BOOK\n" + (string)((integer)llLinksetDataRead("recruits"))
+                                                + " souls enlisted", <0.8, 0.6, 0.35>, 0.7]);
+    }
+}
+
+string book()
+{
+    integer n = (integer)llLinksetDataRead("recruits");
+    string t = "THE MUSTER BOOK (" + (string)n + ")\n";
+    integer i;
+    for (i = n; i > 0 && i > n - 9; --i)
+    {
+        list e = llParseString2List(llLinksetDataRead("muster:" + (string)i), ["|"], []);
+        key k = (key)llList2String(e, 0);
+        t += "No. " + (string)i + " " + llList2String(e, 1) + " - " + llList2String(e, 2)
+             + " - brands: " + (string)((integer)llLinksetDataRead("brands:" + (string)k)) + "\n";
+    }
+    return t;
+}
+
+enlist(key k)
+{
+    if (llLinksetDataRead("recruit:" + (string)k) != "")
+    {
+        narrate(USER, who(k) + " is already in the Muster Book as number " + llLinksetDataRead("recruit:" + (string)k) + ".");
+        return;
+    }
+    integer n = (integer)llLinksetDataRead("recruits") + 1;
+    string date = llGetSubString(llGetTimestamp(), 0, 9);
+    llLinksetDataWrite("recruits", (string)n);
+    llLinksetDataWrite("muster:" + (string)n, (string)k + "|" + llGetSubString(who(k), 0, 20) + "|" + date);
+    llLinksetDataWrite("recruit:" + (string)k, (string)n);
+    narrate(USER, "The scribe dips the quill: \"" + who(k) + ", recruit number " + (string)n
+          + ". From this day your life belongs to the Lord of the Pit.\"");
+    signs();
+}
+
+brand(key k)
+{
+    integer m = (integer)llLinksetDataRead("brands:" + (string)k) + 1;
+    llLinksetDataWrite("brands:" + (string)k, (string)m);
+    llMessageLinked(LINK_SET, 9300, "brand", USER);
+    narrate(USER, "The smell of burnt flesh: " + who(USER) + " presses the red-hot iron to " + who(k)
+          + ". Brand number " + (string)m + ".");
+    signs();
+}
+
+lord_menu(key k)
+{
+    MODE = "throne";
+    list b = [];
+    if (opt("throne"))
+    {
+        if (opt("doors")) b += ["Open all", "Close all"];
+        if (opt("moods")) b += ["Mood"];
+        if (opt("judgement") && opt("doors")) b += ["Judgement"];
+        if (opt("bell")) b += ["Bell"];
+        if (opt("muster_book")) b += ["Book"];
+    }
+    if (k == llGetOwner()) b += ["Settings"];
+    if (b == []) return;
+    dialog(k, "LORD OF THE PIT", b);
+}
+
+list ROOM_BUTTONS = ["Press-Gang", "Rack", "Stocks", "Cistern", "Kennel", "Cages", "Mast"];
+list ROOM_TAGS = ["C01", "C02", "C03", "C04", "C05", "C07", "C08"];
+
+default
+{
+    state_entry()
+    {
+        CH = -1 - (integer)llFrand(1000000.0);
+        OPTS = llLinksetDataRead("opts");
+        signs();
+    }
+    on_rez(integer p) { llResetScript(); }
+    linkset_data(integer action, string name, string value)
+    {
+        if (name == "opts" || action == LINKSETDATA_RESET) { OPTS = llLinksetDataRead("opts"); signs(); }
+    }
+
+    link_message(integer s, integer n, string str, key id)
+    {
+        if (n == 9600 && str == "in|N_Throne")
+        {
+            llLinksetDataWrite("lord", (string)id);
+            if (opt("throne")) narrate(id, who(id) + " takes the throne. Every gate in the Pit obeys.");
+            signs();
+        }
+        else if (n == 9600 && str == "out|N_Throne")
+        {
+            llLinksetDataDelete("lord");
+            signs();
+        }
+        else if (n == 9001) signs();
+    }
+
+    touch_start(integer t)
+    {
+        USER = llDetectedKey(0);
+        string p = llGetLinkName(llDetectedLinkNumber(0));
+        if (p == "N_Throne")
+        {
+            if (USER != llGetOwner() && (!opt("throne") || USER != (key)llLinksetDataRead("lord")))
+            {
+                llRegionSayTo(USER, 0, "Only whoever sits on the throne can give orders.");
+                return;
+            }
+            lord_menu(USER);
+        }
+        else if (p == "C01_Desk" && opt("muster_book"))
+        {
+            MODE = "book";
+            dialog(USER, "THE MUSTER BOOK", ["Enlist", "Read book", "Oath"]);
+        }
+        else if (p == "C01_Branding_Brazier" && opt("branding")) { MODE = "brand"; llSensor("", NULL_KEY, AGENT, 8.0, PI); }
+    }
+
+    listen(integer c, string n, key id, string m)
+    {
+        if (id != USER) return;
+        if (MODE == "choose" || MODE == "enlist" || MODE == "brand_choose")
+        {
+            integer i = llListFindList(NEAR, [m]);
+            if (i == -1) return;
+            CHOSEN = llList2Key(NEAR, i + 1);
+            if (MODE == "enlist") enlist(CHOSEN);
+            else if (MODE == "brand_choose") brand(CHOSEN);
+            else
+            {
+                MODE = "room";
+                dialog(id, "To which room do you sentence " + who(CHOSEN) + "?", ROOM_BUTTONS);
+            }
+            return;
+        }
+        if (MODE == "room")
+        {
+            integer i = llListFindList(ROOM_BUTTONS, [m]);
+            if (i == -1) return;
+            llMessageLinked(LINK_SET, 9400, "judge|" + llList2String(ROOM_TAGS, i) + "|" + (string)id + "|" + who(id), id);
+            if (opt("moods")) llMessageLinked(LINK_SET, 9200, "JUDGEMENT", id);
+            narrate(id, "By order of the Lord of the Pit, " + who(CHOSEN) + " is sentenced to THE " + llToUpper(m)
+                  + ". The guard drags the prisoner away and turns the key.");
+            return;
+        }
+        if (m == "Settings" && id == llGetOwner()) llMessageLinked(LINK_SET, 9700, "menu", id);
+        else if (m == "Open all") { llMessageLinked(LINK_SET, 9400, "all|open", id); narrate(id, who(id) + " orders every gate of the Pit opened."); }
+        else if (m == "Close all") { llMessageLinked(LINK_SET, 9400, "all|close", id); narrate(id, who(id) + " orders every gate shut."); }
+        else if (m == "Mood") { MODE = "mood"; dialog(id, "The mood of the Pit", ["WATCH", "GLOOM", "JUDGEMENT", "DARKNESS"]); }
+        else if (llListFindList(["WATCH", "GLOOM", "JUDGEMENT", "DARKNESS"], [m]) != -1)
+        {
+            llMessageLinked(LINK_SET, 9200, m, id);
+            if (m == "DARKNESS") narrate(id, "The torches die one by one. Only the braziers by the throne still burn.");
+            else if (m == "JUDGEMENT") narrate(id, "The braziers roar and the whole Pit turns red.");
+            else if (m == "GLOOM") narrate(id, "The flames sink low. Shadows creep along the walls.");
+            else narrate(id, "The torches burn steady again. The watch goes on.");
+        }
+        else if (m == "Judgement") { MODE = "choose"; llSensor("", NULL_KEY, AGENT, 30.0, PI); }
+        else if (m == "Bell")
+        {
+            llMessageLinked(LINK_SET, 9300, "bell", id);
+            narrate(id, "DONG... The Lord orders the press-gang bell rung.");
+        }
+        else if (m == "Book" || m == "Read book") llDialog(id, book(), ["Close"], CH);
+        else if (m == "Enlist") { MODE = "enlist"; llSensor("", NULL_KEY, AGENT, 8.0, PI); }
+        else if (m == "Oath")
+            narrate(id, who(id) + " lays a hand on the book and swears: \"My back to the lash, my blood to the sea, my life to the Lord of the Pit.\"");
+    }
+
+    sensor(integer num)
+    {
+        NEAR = []; list b = [];
+        integer i;
+        for (i = 0; i < num && i < 12; ++i)
+        {
+            string nm = llGetSubString(llDetectedName(i), 0, 23);
+            NEAR += [nm, llDetectedKey(i)]; b += nm;
+        }
+        if (MODE == "brand") MODE = "brand_choose";
+        dialog(USER, "Choose who:", b);
+    }
+    no_sensor() { llRegionSayTo(USER, 0, "Nobody is near."); }
+    timer() { llListenRemove(LH); llSetTimerEvent(0.0); }
+}

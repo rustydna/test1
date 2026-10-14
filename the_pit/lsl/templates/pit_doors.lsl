@@ -1,0 +1,558 @@
+// =====================================================================
+//  THE PIT - DOORS AND ROLEPLAY LOCKS (root prim)
+//
+//  Touch a cell door, a gate leaf or the winch/portcullis:
+//    Open / Close            while it is not locked
+//    Lock                    closes it and ONLY whoever locked it can open
+//                            it (plus anyone given a copy of the key, the
+//                            owner, and the Lord while on the throne)
+//    Unlock · Give key · Sentence (5-120 min, unlocks itself when served)
+//    Pick lock (d20 against the difficulty) · Beg mercy (tells the
+//    keyholder) · Rattle bars
+//  Everything is announced in local chat and listed on the "Sentence
+//  Board" (floating text over the key board in the guardroom).
+//  Locks are stored in the object's linkset data: they survive resets.
+//
+//  The closed position of every door is taken from the model itself, so
+//  doors that were left open, or people sitting down, never confuse it.
+//
+//  Switches (/7 settings > Doors): doors, locks, sentences, escape, pleas,
+//  door_sounds, bell, board (and lord_keys under Throne).
+//  Owner chat: /7 doors (find the doors again), /7 doors reset.
+// =====================================================================
+
+float   SWING = 100.0;            // cell door opening angle (degrees)
+float   GATE_SWING = 95.0;        // gate leaves
+float   PORTCULLIS_RISE = 3.2;    // metres
+integer STEPS = 14;
+float   STEP_PAUSE = 0.035;
+integer PICK_DIFFICULTY = 17;     // pick lock succeeds on d20 >= this
+integer PICK_COOLDOWN = 120;      // seconds between attempts per avatar
+// Sounds: paste a UUID, or drop a sound with the name in [brackets] in the root's Contents
+string  SOUND_DOOR = "";          // [door_creak]
+string  SOUND_LOCK = "";          // [lock_clank]
+string  SOUND_PORTCULLIS = "";    // [portcullis_chain]
+string  SOUND_BELL = "";          // [press_gang_bell]
+
+//@@CONSTANTS@@
+
+float INSET = 0.03;
+integer PRIMS;                    // prim count at the last scan (seated avatars don't count)
+list D_LINK; list D_NAME; list D_TAG; list D_TYPE; list D_POS; list D_ROT; list D_HINGE; list D_ANG;
+list OPEN;                        // per tag: [tag, 0/1, ...]
+list TRIES;                       // [avatar, unix time]
+integer CH; integer LH;
+key USER; string MENU_TAG; string MODE;
+list NEAR;
+string OPTS;
+
+integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
+
+string room(string t)
+{
+    if (t == "C01") return "THE PRESS-GANG";
+    if (t == "C02") return "THE RACK";
+    if (t == "C03") return "THE STOCKS";
+    if (t == "C04") return "THE CISTERN";
+    if (t == "C05" || t == "C06") return "THE KENNEL";
+    if (t == "C07") return "THE CAGES";
+    if (t == "C08") return "THE MAST";
+    if (t == "G") return "THE GATE";
+    if (t == "R") return "THE PORTCULLIS";
+    return t;
+}
+
+string who(key k) { return llGetDisplayName(k); }
+
+string snd(string uuid, string name)
+{
+    if (!opt("door_sounds")) return "";
+    if (uuid != "") return uuid;
+    if (llGetInventoryType(name) == INVENTORY_SOUND) return name;
+    return "";
+}
+
+narrate(key k, string s)
+{
+    if (opt("narration")) llSay(0, s);
+    else if (k != NULL_KEY) llRegionSayTo(k, 0, s);
+}
+
+// [locked, holder key, holder name, sentence ends (unix), extra key holders]
+list lock_state(string t)
+{
+    string s = llLinksetDataRead("lock:" + t);
+    if (s == "") return [0, NULL_KEY, "", 0, ""];
+    list l = llParseStringKeepNulls(s, ["|"], []);
+    return [(integer)llList2String(l, 0), (key)llList2String(l, 1), llList2String(l, 2),
+            (integer)llList2String(l, 3), llList2String(l, 4)];
+}
+
+save(string t, integer lk, key holder, string name, integer until, string holders)
+{
+    if (!lk) llLinksetDataDelete("lock:" + t);
+    else llLinksetDataWrite("lock:" + t, llDumpList2String([lk, holder, name, until, holders], "|"));
+    board();
+}
+
+integer locked(string t) { return opt("locks") && llList2Integer(lock_state(t), 0); }
+
+integer is_open(string t)
+{
+    integer i = llListFindList(OPEN, [t]);
+    if (i == -1) return FALSE;
+    return llList2Integer(OPEN, i + 1);
+}
+
+integer has_key(string t, key k)
+{
+    if (k == llGetOwner()) return TRUE;
+    if (opt("throne") && opt("lord_keys") && k == (key)llLinksetDataRead("lord")) return TRUE;
+    list e = lock_state(t);
+    if (llList2Key(e, 1) == k) return TRUE;
+    if (llSubStringIndex(llList2String(e, 4), (string)k) != -1) return TRUE;
+    return FALSE;
+}
+
+// Name of the moving piece at this link: by its name or, if SL did not keep
+// it, by its size and position relative to the throne (and it gets renamed).
+string identify(integer link, integer throne, vector base, rotation trot)
+{
+    string nm = llGetLinkName(link);
+    if (llListFindList(MOVERS, [nm]) != -1) return nm;
+    vector sz = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_SIZE]), 0);
+    vector p = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_POS_LOCAL]), 0);
+    integer i; float best = 999.0; string found = "";
+    for (i = 0; i < llGetListLength(MOVERS); i += 3)
+    {
+        if (llVecDist(llList2Vector(MOVERS, i + 1), sz) < 0.05)
+        {
+            float d = 0.0;
+            if (throne > 0) d = llVecDist(llList2Vector(MOVERS, i + 2), (p - base) / trot);
+            if (d < best) { best = d; found = llList2String(MOVERS, i); }
+        }
+    }
+    if (found != "" && best < 0.5)
+    {
+        llSetLinkPrimitiveParamsFast(link, [PRIM_NAME, found]);
+        return found;
+    }
+    return "";
+}
+
+scan()
+{
+    D_LINK = []; D_NAME = []; D_TAG = []; D_TYPE = []; D_POS = []; D_ROT = []; D_HINGE = []; D_ANG = []; OPEN = [];
+    integer n = llGetObjectPrimCount(llGetKey());
+    PRIMS = n;
+    integer i;
+    // the throne is the reference to recognise pieces and their closed position
+    integer throne = -1; vector base = ZERO_VECTOR; rotation trot = ZERO_ROTATION;
+    for (i = 1; i <= n && throne == -1; ++i)
+        if (llGetLinkName(i) == "N_Throne" ||
+            llVecDist(llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_SIZE]), 0), THRONE_SIZE) < 0.03)
+            throne = i;
+    if (throne > 1)
+    {
+        list t = llGetLinkPrimitiveParams(throne, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL]);
+        base = llList2Vector(t, 0); trot = llList2Rot(t, 1);
+    }
+    float sum = 0.0; integer cnt = 0;
+    integer cells = 0; integer leaves = 0; integer portcullis = 0;
+    for (i = 2; i <= n; ++i)
+    {
+        string nm = identify(i, throne, base, trot);
+        integer type = -1; string tag = "";
+        if (llSubStringIndex(nm, "_Door") != -1) { type = 0; tag = llGetSubString(nm, 0, 2); ++cells; }
+        else if (llSubStringIndex(nm, "G_Leaf") == 0) { type = 1; tag = "G"; ++leaves; }
+        else if (nm == "G_Portcullis") { type = 2; tag = "R"; ++portcullis; }
+        if (type >= 0)
+        {
+            list p = llGetLinkPrimitiveParams(i, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL, PRIM_SIZE]);
+            vector pos = llList2Vector(p, 0); rotation rot = llList2Rot(p, 1); vector sz = llList2Vector(p, 2);
+            // closed pose: from the model table (all pieces share the throne's orientation);
+            // without a throne, the pose stored the first time it was seen
+            vector cpos = pos; rotation crot = rot; integer known = FALSE;
+            integer m = llListFindList(MOVERS, [nm]);
+            if (throne > 0 && m != -1) { cpos = base + llList2Vector(MOVERS, m + 2) * trot; crot = trot; known = TRUE; }
+            else
+            {
+                string saved = llLinksetDataRead("closed:" + nm);
+                if (saved == "") llLinksetDataWrite("closed:" + nm, (string)pos + "|" + (string)rot);
+                else
+                {
+                    list g = llParseString2List(saved, ["|"], []);
+                    cpos = (vector)llList2String(g, 0); crot = (rotation)llList2String(g, 1); known = TRUE;
+                }
+            }
+            integer open_now = known && llVecDist(cpos, pos) > 0.05;
+            if (!open_now) { cpos = pos; crot = rot; }    // closed: trust the exact current pose
+            if (type == 0) { sum += cpos.x; ++cnt; }
+            D_LINK += i; D_NAME += nm; D_TAG += tag; D_TYPE += type; D_POS += cpos; D_ROT += crot;
+            D_HINGE += sz; D_ANG += 0.0;
+            integer k = llListFindList(OPEN, [tag]);
+            if (k == -1) OPEN += [tag, open_now];
+            else if (open_now) OPEN = llListReplaceList(OPEN, [TRUE], k + 1, k + 1);
+        }
+    }
+    // hinges: cell doors swing into the yard, away from the room; gate leaves swing inwards
+    float centre = 0.0; if (cnt) centre = sum / cnt;
+    for (i = 0; i < llGetListLength(D_LINK); ++i)
+    {
+        integer type = llList2Integer(D_TYPE, i);
+        vector pos = llList2Vector(D_POS, i); rotation rot = llList2Rot(D_ROT, i);
+        vector sz = llList2Vector(D_HINGE, i);
+        vector off = ZERO_VECTOR; float ang = 0.0;
+        if (type == 0)
+        {
+            off = <0.0, -(sz.y * 0.5 - INSET), 0.0>;
+            if (pos.x < centre) ang = -SWING; else ang = SWING;
+        }
+        else if (type == 1)
+        {
+            if (llList2String(D_NAME, i) == "G_Leaf_W") { off = <-(sz.x * 0.5 - INSET), 0.0, 0.0>; ang = GATE_SWING; }
+            else { off = <sz.x * 0.5 - INSET, 0.0, 0.0>; ang = -GATE_SWING; }
+        }
+        D_HINGE = llListReplaceList(D_HINGE, [pos + off * rot], i, i);
+        D_ANG = llListReplaceList(D_ANG, [ang], i, i);
+    }
+    string report = "Doors ready: " + (string)cells + " cell doors (expected 8), " + (string)leaves
+        + " gate leaves (2), portcullis: " + (string)portcullis + " (1).";
+    if (cells < 8 || leaves < 2 || portcullis < 1)
+        report += " MISSING PIECES: check the model was uploaded at scale 1.0, then type /7 doors to retry.";
+    llOwnerSay(report);
+    board();
+}
+
+move(string tag, integer open)
+{
+    if (is_open(tag) == open) return;
+    integer n = llGetListLength(D_LINK);
+    list mine = [];
+    integer i;
+    for (i = 0; i < n; ++i) if (llList2String(D_TAG, i) == tag) mine += i;
+    if (mine == []) return;
+    integer first = llList2Integer(mine, 0);
+    integer type = llList2Integer(D_TYPE, first);
+    string s = snd(SOUND_DOOR, "door_creak");
+    if (type == 2) s = snd(SOUND_PORTCULLIS, "portcullis_chain");
+    if (s != "") llLinkPlaySound(llList2Integer(D_LINK, first), s, 1.0, SOUND_PLAY);
+    integer steps = STEPS;
+    if (type == 2) steps = STEPS * 3;
+    integer k;
+    for (k = 1; k <= steps; ++k)
+    {
+        float t = (float)k / steps;
+        t = t * t * (3.0 - 2.0 * t);
+        if (!open) t = 1.0 - t;
+        integer m;
+        for (m = 0; m < llGetListLength(mine); ++m)
+        {
+            integer j = llList2Integer(mine, m);
+            integer link = llList2Integer(D_LINK, j);
+            vector pos = llList2Vector(D_POS, j);
+            if (llList2Integer(D_TYPE, j) == 2)
+                llSetLinkPrimitiveParamsFast(link, [PRIM_POS_LOCAL, pos + <0.0, 0.0, PORTCULLIS_RISE * t>]);
+            else
+            {
+                vector hinge = llList2Vector(D_HINGE, j);
+                rotation z = llEuler2Rot(<0.0, 0.0, llList2Float(D_ANG, j) * t * DEG_TO_RAD>);
+                llSetLinkPrimitiveParamsFast(link, [PRIM_POS_LOCAL, hinge + (pos - hinge) * z,
+                                                    PRIM_ROT_LOCAL, llList2Rot(D_ROT, j) * z]);
+            }
+        }
+        llSleep(STEP_PAUSE);
+    }
+    integer ia = llListFindList(OPEN, [tag]);
+    OPEN = llListReplaceList(OPEN, [open], ia + 1, ia + 1);
+    llMessageLinked(LINK_SET, 9100, "door|" + tag + "|" + (string)open, NULL_KEY);   // draught: nearby torches gutter
+}
+
+board()
+{
+    integer l = -1;
+    integer i;
+    for (i = 1; i <= llGetObjectPrimCount(llGetKey()) && l == -1; ++i)
+        if (llGetLinkName(i) == "V_Props_W") l = i;
+    if (l == -1) return;
+    if (!opt("board") || !opt("hovertext") || !opt("locks"))
+    {
+        llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "", ZERO_VECTOR, 0.0]);
+        return;
+    }
+    string txt = "SENTENCE BOARD\n";
+    list tags = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "G"];
+    integer any = FALSE;
+    for (i = 0; i < llGetListLength(tags); ++i)
+    {
+        string t = llList2String(tags, i);
+        list e = lock_state(t);
+        if (llList2Integer(e, 0))
+        {
+            string line = room(t) + " - key: " + llList2String(e, 2);
+            integer until = llList2Integer(e, 3);
+            if (until > 0) line += " (" + (string)((until - llGetUnixTime()) / 60 + 1) + " min)";
+            txt += line + "\n"; any = TRUE;
+        }
+    }
+    if (!any) txt += "(no gate is locked)";
+    llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, txt, <0.85, 0.65, 0.4>, 0.85]);
+}
+
+dialog(key k, string txt, list buttons)
+{
+    llListenRemove(LH);
+    LH = llListen(CH, "", k, "");
+    llSetTimerEvent(30.0);
+    llDialog(k, txt, buttons, CH);
+}
+
+menu(key k, string tag)
+{
+    if (!opt("doors")) { llRegionSayTo(k, 0, "These doors are not in use right now."); return; }
+    USER = k; MENU_TAG = tag; MODE = "main";
+    list e = lock_state(tag);
+    integer lk = locked(tag);
+    string txt = room(tag) + "\n";
+    if (lk) txt += "Locked. Key: " + llList2String(e, 2) + ".";
+    else if (is_open(tag)) txt += "Open.";
+    else txt += "Closed, not locked.";
+    if (lk && llList2Integer(e, 3) > 0)
+        txt += "\nSentence: " + (string)((llList2Integer(e, 3) - llGetUnixTime()) / 60 + 1) + " min left.";
+    list b = [];
+    if (tag == "R")
+    {
+        b = ["Raise", "Lower"];
+        if (opt("bell")) b += ["Ring bell"];
+    }
+    else if (!lk)
+    {
+        if (is_open(tag)) b = ["Close"]; else b = ["Open"];
+        if (opt("locks")) b += ["Lock"];
+    }
+    else if (has_key(tag, k))
+    {
+        b = ["Unlock", "Give key"];
+        if (opt("sentences")) b += ["Sentence"];
+    }
+    else
+    {
+        if (opt("escape")) b += ["Pick lock"];
+        if (opt("pleas")) b += ["Beg mercy", "Rattle bars"];
+        if (b == []) b = ["OK"];
+    }
+    dialog(k, txt, b);
+}
+
+act(key k, string b)
+{
+    string t = MENU_TAG; string q = who(k);
+    list e = lock_state(t);
+    if (b == "Open" && !locked(t)) { move(t, TRUE); narrate(k, q + " opens " + room(t) + "."); }
+    else if (b == "Close") { move(t, FALSE); narrate(k, q + " closes " + room(t) + "."); }
+    else if (b == "Raise") { move("R", TRUE); narrate(k, q + " heaves on the winch: the portcullis creaks upwards."); }
+    else if (b == "Lower") { move("R", FALSE); narrate(k, "The portcullis crashes down. " + q + " lets go of the winch."); }
+    else if (b == "Ring bell" && opt("bell"))
+    {
+        string s = snd(SOUND_BELL, "press_gang_bell");
+        if (s != "") llPlaySound(s, 1.0);
+        llMessageLinked(LINK_SET, 9300, "bell", k);
+        narrate(k, "DONG... DONG... DONG... " + q + " rings the press-gang bell: fresh meat for the Pit.");
+    }
+    else if (b == "Lock" && opt("locks"))
+    {
+        move(t, FALSE);
+        string s = snd(SOUND_LOCK, "lock_clank");
+        if (s != "") llPlaySound(s, 1.0);
+        save(t, 1, k, q, 0, "");
+        narrate(k, q + " turns the key in " + room(t) + ". Only " + q + " can open it now.");
+    }
+    else if (b == "Unlock" && has_key(t, k))
+    {
+        save(t, 0, NULL_KEY, "", 0, "");
+        narrate(k, q + " unlocks " + room(t) + ".");
+    }
+    else if (b == "Give key" && has_key(t, k)) { MODE = "give"; llSensor("", NULL_KEY, AGENT, 12.0, PI); }
+    else if (b == "Sentence" && has_key(t, k))
+    {
+        MODE = "sentence";
+        dialog(k, "How long locked in " + room(t) + "?", ["5 min", "15 min", "30 min", "60 min", "120 min"]);
+    }
+    else if (MODE == "sentence" && llSubStringIndex(b, " min") != -1)
+    {
+        integer m = (integer)b;
+        save(t, 1, llList2Key(e, 1), llList2String(e, 2), llGetUnixTime() + m * 60, llList2String(e, 4));
+        narrate(k, q + " imposes a sentence of " + (string)m + " minutes in " + room(t) + ".");
+    }
+    else if (b == "Pick lock" && opt("escape"))
+    {
+        integer i = llListFindList(TRIES, [k]);
+        if (i != -1 && llGetUnixTime() - llList2Integer(TRIES, i + 1) < PICK_COOLDOWN)
+        {
+            llRegionSayTo(k, 0, "Your hands are still shaking. Wait before you try again.");
+            return;
+        }
+        if (i != -1) TRIES = llDeleteSubList(TRIES, i, i + 1);
+        TRIES += [k, llGetUnixTime()];
+        integer d = 1 + (integer)llFrand(20.0);
+        if (d >= PICK_DIFFICULTY)
+        {
+            save(t, 0, NULL_KEY, "", 0, "");
+            move(t, TRUE);
+            narrate(k, q + " bursts the lock of " + room(t) + "! (d20 = " + (string)d + ")");
+            llInstantMessage(llList2Key(e, 1), q + " has picked the lock of " + room(t) + " and is loose.");
+        }
+        else
+        {
+            narrate(k, q + " wrestles with the lock of " + room(t) + "... and it holds. (d20 = " + (string)d + ")");
+            llInstantMessage(llList2Key(e, 1), q + " tried to pick the lock of " + room(t) + ".");
+        }
+    }
+    else if (b == "Beg mercy" && opt("pleas"))
+    {
+        narrate(k, q + " clings to the bars of " + room(t) + " and begs for mercy.");
+        llInstantMessage(llList2Key(e, 1), q + " begs for mercy from " + room(t) + ".");
+    }
+    else if (b == "Rattle bars" && opt("pleas"))
+    {
+        narrate(k, q + " rattles the bars of " + room(t) + ". The iron booms through the whole Pit.");
+        llMessageLinked(LINK_SET, 9100, "rattle|" + t + "|0", NULL_KEY);
+    }
+}
+
+check_sentences()
+{
+    list tags = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "G"];
+    integer i;
+    for (i = 0; i < 9; ++i)
+    {
+        string t = llList2String(tags, i);
+        list e = lock_state(t);
+        integer until = llList2Integer(e, 3);
+        if (llList2Integer(e, 0) && until > 0 && llGetUnixTime() >= until)
+        {
+            save(t, 0, NULL_KEY, "", 0, "");
+            narrate(llList2Key(e, 1), "The sentence in " + room(t) + " is served: the lock is free.");
+        }
+    }
+    board();
+}
+
+default
+{
+    state_entry()
+    {
+        CH = -1 - (integer)llFrand(1000000.0);
+        OPTS = llLinksetDataRead("opts");
+        llListen(7, "", llGetOwner(), "doors");
+        llListen(7, "", llGetOwner(), "doors reset");
+        scan();
+        llSetTimerEvent(30.0);
+    }
+    on_rez(integer p) { llResetScript(); }
+    changed(integer c)
+    {
+        // sitting down or standing up also raises CHANGED_LINK: rescan only if the prims changed
+        if ((c & CHANGED_LINK) && llGetObjectPrimCount(llGetKey()) != PRIMS) scan();
+        if (c & CHANGED_OWNER) llResetScript();
+    }
+    linkset_data(integer action, string name, string value)
+    {
+        if (name == "opts" || action == LINKSETDATA_RESET) { OPTS = llLinksetDataRead("opts"); board(); }
+    }
+
+    link_message(integer s, integer n, string str, key id)
+    {
+        if (n == 9001) scan();
+        else if (n == 9400 && opt("doors"))
+        {
+            // throne orders: "all|open", "all|close", "judge|C04|<lord key>|<lord name>"
+            list p = llParseString2List(str, ["|"], []);
+            string o = llList2String(p, 0);
+            if (o == "all")
+            {
+                integer open = llList2String(p, 1) == "open";
+                list tags = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08"];
+                integer i;
+                for (i = 0; i < 8; ++i)
+                {
+                    string t = llList2String(tags, i);
+                    if (open) save(t, 0, NULL_KEY, "", 0, "");
+                    move(t, open);
+                }
+            }
+            else if (o == "judge")
+            {
+                string t = llList2String(p, 1);
+                move(t, FALSE);
+                if (opt("locks"))
+                {
+                    integer until = 0;
+                    if (opt("sentences")) until = llGetUnixTime() + 30 * 60;
+                    save(t, 1, (key)llList2String(p, 2), llList2String(p, 3), until, "");
+                }
+            }
+        }
+    }
+
+    touch_start(integer total)
+    {
+        string nm = llGetLinkName(llDetectedLinkNumber(0));
+        string tag = "";
+        if (llSubStringIndex(nm, "_Door") != -1) tag = llGetSubString(nm, 0, 2);
+        else if (llSubStringIndex(nm, "G_Leaf") == 0) tag = "G";
+        else if (nm == "G_Portcullis" || nm == "G_Winch") tag = "R";
+        if (tag != "") menu(llDetectedKey(0), tag);
+    }
+
+    listen(integer c, string n, key id, string m)
+    {
+        if (c == 7)
+        {
+            if (m == "doors reset")
+            {
+                list ks = llLinksetDataFindKeys("^closed:", 0, 0);
+                integer i;
+                for (i = 0; i < llGetListLength(ks); ++i) llLinksetDataDelete(llList2String(ks, i));
+            }
+            scan();
+            return;
+        }
+        if (id != USER) return;
+        if (MODE == "give")
+        {
+            integer i = llListFindList(NEAR, [m]);
+            if (i == -1) return;
+            key k2 = llList2Key(NEAR, i + 1);
+            list e = lock_state(MENU_TAG);
+            save(MENU_TAG, 1, llList2Key(e, 1), llList2String(e, 2), llList2Integer(e, 3),
+                 llList2String(e, 4) + "," + (string)k2);
+            narrate(id, who(id) + " hands a copy of the key to " + room(MENU_TAG) + " to " + who(k2) + ".");
+            MODE = "";
+            return;
+        }
+        act(id, m);
+    }
+
+    sensor(integer num)
+    {
+        NEAR = [];
+        list b = [];
+        integer i;
+        for (i = 0; i < num && i < 12; ++i)
+        {
+            string nm = llGetSubString(llDetectedName(i), 0, 23);
+            NEAR += [nm, llDetectedKey(i)];
+            b += nm;
+        }
+        dialog(USER, "Who gets the key to " + room(MENU_TAG) + "?", b);
+    }
+    no_sensor() { llRegionSayTo(USER, 0, "Nobody is near."); }
+
+    timer()
+    {
+        llListenRemove(LH);
+        llSetTimerEvent(30.0);
+        check_sentences();
+    }
+}
