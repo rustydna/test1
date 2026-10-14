@@ -13,16 +13,21 @@ import bpy  # noqa: F401  (necesario antes de bmesh con el módulo de PyPI)
 import bmesh
 from mathutils import Matrix, Vector
 
-# Orden fijo de materiales: en Second Life el número de cara sigue este orden
-# (solo los presentes en la pieza). "Llama" va primero para que, en las piezas
-# con fuego, la cara 0 sea siempre la llama (la usan los scripts LSL).
-MATS = ["Llama", "Piedra", "Suelo", "Madera", "Hierro", "Paja"]
+# Distribución FIJA de caras para Second Life: todas las piezas tienen las mismas
+# 8 caras en el mismo orden (las que no usan se rellenan con un triángulo oculto),
+# así un material PBR se aplica de golpe a "toda la piedra", "todo el hierro"...
+#   cara 0 Piedra · 1 Suelo · 2 Madera · 3 Hierro · 4 Tela (y cuero) · 5 Hueso · 6 Paja · 7 Llama
+# "Agua" va sola en sus propias piezas (canal, cisterna).
+MATS = ["Piedra", "Suelo", "Madera", "Hierro", "Tela", "Hueso", "Paja", "Llama", "Agua"]
+FACE_MATS = MATS[:8]
 
 # Metros por repetición de textura en el mapeado de caja en coordenadas de mundo.
-UV_TILE = {"Llama": 0.4, "Piedra": 2.0, "Suelo": 2.0, "Madera": 1.0, "Hierro": 0.5, "Paja": 1.0}
+UV_TILE = {"Llama": 0.4, "Piedra": 2.0, "Suelo": 2.0, "Madera": 1.0, "Hierro": 0.5, "Paja": 1.0,
+           "Tela": 0.6, "Hueso": 0.3, "Agua": 3.0}
 
 # Ángulo a partir del cual una arista se considera dura, por material.
-SMOOTH_ANGLE = {"Llama": 89, "Piedra": 32, "Suelo": 32, "Madera": 32, "Hierro": 70, "Paja": 80}
+SMOOTH_ANGLE = {"Llama": 89, "Piedra": 32, "Suelo": 32, "Madera": 32, "Hierro": 70, "Paja": 80,
+                "Tela": 80, "Hueso": 60, "Agua": 89}
 
 V = Vector
 
@@ -75,6 +80,14 @@ class Geo:
         self.verts.extend(other.verts)
         self.faces.extend(tuple(i + off for i in f) for f in other.faces)
         self.mats.extend(other.mats)
+
+    def transform(self, m):
+        """Aplica una matriz 4x4 (rotación/traslación) a toda la geometría."""
+        self.verts = [m @ v for v in self.verts]
+        return self
+
+    def ngon(self, pts, mat, out):
+        self.face(pts, mat, out)
 
     def tri_count(self):
         return sum(len(f) - 2 for f in self.faces)
@@ -256,7 +269,7 @@ class Geo:
                 axis_mid = (rings[i][0][0] + rings[i2][0][0]) / 2
                 self.face_c(quad, mat, axis_mid)
 
-    def blob(self, center, rx, ry, rz, nu, nv, mat, rnd, jitter=0.15, flat_bottom=True, zmin=None):
+    def blob(self, center, rx, ry, rz, nu, nv, mat, rnd, jitter=0.15, flat_bottom=True, zmin=None, rot=None):
         """Montón irregular (paja, carbón): elipsoide perturbado con base plana."""
         center = V(center)
         rows = []
@@ -269,7 +282,10 @@ class Geo:
                 x = math.cos(th) * math.cos(ph) * rx * k
                 y = math.cos(th) * math.sin(ph) * ry * k
                 z = math.sin(th) * rz * (1 + (rnd.uniform(-jitter, jitter) * 0.6 if 0 < i < nv else 0))
-                p = center + V((x, y, z))
+                off = V((x, y, z))
+                if rot is not None:
+                    off = rot @ off
+                p = center + off
                 if zmin is not None:
                     p.z = max(p.z, zmin)
                 row.append(p)

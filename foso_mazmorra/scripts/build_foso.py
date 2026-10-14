@@ -1,4 +1,4 @@
-"""Construye el Foso V2 completo: Blender, DAE por nivel, auditoría y estimación de LI.
+"""Construye el Foso V3 completo: Blender, DAE por nivel, auditoría y estimación de LI.
 
 Uso (desde cualquier carpeta):
     python foso_mazmorra/scripts/build_foso.py            # con el módulo bpy de PyPI
@@ -21,9 +21,10 @@ import bpy  # noqa: E402  (antes que bmesh con el módulo de PyPI)
 import bmesh  # noqa: E402
 from mathutils import Vector  # noqa: E402
 
-import pieces as P  # noqa: E402
+import pieces_v3 as P  # noqa: E402
 from collada_static import write_dae  # noqa: E402
-from geo import MATS, SMOOTH_ANGLE, UV_TILE, Geo  # noqa: E402
+from geo import FACE_MATS, MATS, SMOOTH_ANGLE, UV_TILE, Geo  # noqa: E402
+from mathutils import Matrix  # noqa: E402,F401
 
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(ROOT, "salida")
@@ -31,7 +32,8 @@ LEVELS = ["HIGH", "MEDIUM", "LOW", "LOWEST"]
 SUFFIX = {"HIGH": "", "MEDIUM": "_LOD2", "LOW": "_LOD1", "LOWEST": "_LOD0", "PHYS": "_PHYS"}
 COLL = {"HIGH": "MALLA | HIGH", "MEDIUM": "LOD | MEDIUM", "LOW": "LOD | LOW", "LOWEST": "LOD | LOWEST",
         "PHYS": "FISICA"}
-COLORS = {"Llama": (1.0, 0.45, 0.1), "Piedra": (0.5, 0.48, 0.45), "Suelo": (0.36, 0.32, 0.27),
+COLORS = {"Llama": (1.0, 0.45, 0.1), "Piedra": (0.42, 0.40, 0.37), "Suelo": (0.25, 0.22, 0.19),
+          "Tela": (0.38, 0.34, 0.28), "Hueso": (0.72, 0.66, 0.55), "Agua": (0.05, 0.09, 0.1),
           "Madera": (0.36, 0.24, 0.14), "Hierro": (0.12, 0.12, 0.13), "Paja": (0.66, 0.55, 0.3),
           "Fisica": (0.2, 0.6, 1.0)}
 MARK = 0.004
@@ -64,9 +66,56 @@ def _copy(g):
     return c
 
 
+def hull_geo(g, pts):
+    bm = bmesh.new()
+    for p in pts:
+        bm.verts.new(p)
+    res = bmesh.ops.convex_hull(bm, input=bm.verts)
+    for f in bm.faces:
+        if f.is_valid:
+            g.face([v.co.copy() for v in f.verts], "Fisica", f.normal.copy())
+    bm.free()
+
+
+def decimate(g, target):
+    """Reduce una geometría a ~target triángulos con el Decimate de Blender (para MEDIUM/LOW automáticos)."""
+    if g.tri_count() <= target or not g.faces:
+        return _copy(g)
+    mats = sorted(set(g.mats), key=MATS.index)
+    me = bpy.data.meshes.new("_dec")
+    me.from_pydata([tuple(v) for v in g.verts], [], g.faces)
+    for p, m in zip(me.polygons, g.mats):
+        p.material_index = mats.index(m)
+    bm = bmesh.new()
+    bm.from_mesh(me)
+    bmesh.ops.remove_doubles(bm, verts=bm.verts, dist=1.5e-4)
+    bmesh.ops.triangulate(bm, faces=bm.faces)
+    bm.to_mesh(me)
+    bm.free()
+    ob = bpy.data.objects.new("_dec", me)
+    bpy.context.scene.collection.objects.link(ob)
+    mod = ob.modifiers.new("d", "DECIMATE")
+    mod.ratio = max(0.005, target / max(len(me.polygons), 1))
+    mod.use_collapse_triangulate = True
+    dg = bpy.context.evaluated_depsgraph_get()
+    ev = ob.evaluated_get(dg)
+    m2 = ev.to_mesh()
+    out = Geo()
+    out.verts = [v.co.copy() for v in m2.vertices]
+    out.faces = [tuple(p.vertices) for p in m2.polygons]
+    out.mats = [mats[min(p.material_index, len(mats) - 1)] for p in m2.polygons]
+    ev.to_mesh_clear()
+    bpy.data.objects.remove(ob)
+    bpy.data.meshes.remove(me)
+    return out
+
+
 def phys_geo(boxes):
     g = Geo()
     for b in boxes:
+        if b[0] == "CASCO":
+            hull_geo(g, b[1])
+            continue
         if b[0] == "RAMPA":
             _, mn, mx = b
             x0, y0, z0 = mn
@@ -99,7 +148,7 @@ def material(name):
             bsdf.inputs["Metallic"].default_value = 0.85 if name == "Hierro" else 0.0
             if name == "Llama":
                 bsdf.inputs["Emission Color"].default_value = (1.0, 0.42, 0.08, 1.0)
-                bsdf.inputs["Emission Strength"].default_value = 18.0
+                bsdf.inputs["Emission Strength"].default_value = 7.0
             if name == "Fisica":
                 bsdf.inputs["Alpha"].default_value = 0.35
     return m
@@ -227,13 +276,47 @@ def streaming_cost(radius, lod_bytes):
     return weighted / 250000.0 * 15000.0, w
 
 
+# ------------------------------------------------------------------ tabla para los scripts LSL
+KIND_CODE = {"estructura": 0, "puerta": 1, "deco": 2, "luz": 3, "mueble": 4, "agua": 5}
+LSL_DIR = os.path.join(ROOT, "lsl")
+
+
+def _v(v):
+    return "<" + ",".join(f"{c:.3f}" for c in v) + ">"
+
+
+def write_lsl_table(report):
+    """Inserta en los scripts LSL la tabla de piezas (nombre, tipo, tamaño, posición respecto al trono).
+    Con ella el script reconoce cada primitiva aunque SL haya perdido los nombres al subir."""
+    ref = next(p for p in report["piezas"] if p["nombre"] == "N_Trono")
+    rc = Vector(ref["centro"])
+    rows = []
+    for p in report["piezas"]:
+        off = Vector(p["centro"]) - rc
+        rows.append(f'"{p["nombre"]}", {KIND_CODE[p["tipo"]]}, {_v(p["tamano_m"])}, {_v(off)}')
+    table = "list TABLA = [\n    " + ",\n    ".join(rows) + "];"
+    silla = next(p for p in report["piezas"] if p["nombre"] == "C04_Silla")
+    consts = f"vector PIVOTE_SILLA = {_v(silla['pivote_rel'])};"
+    seats = []
+    for p in report["piezas"]:
+        if "asiento" in p:
+            a = p["asiento"]
+            seats.append(f'"{p["nombre"]}", {_v(a["offset"])}, {a["giro"]}, "{a["anim"]}", "{a["reserva"]}"')
+    consts += "\nlist ASIENTOS = [\n    " + ",\n    ".join(seats) + "];"
+    for fn in os.listdir(os.path.join(LSL_DIR, "plantillas")):
+        src = open(os.path.join(LSL_DIR, "plantillas", fn), encoding="utf-8").read()
+        src = src.replace("//@@TABLA@@", table).replace("//@@CONSTANTES@@", consts)
+        with open(os.path.join(LSL_DIR, fn), "w", encoding="utf-8") as f:
+            f.write("// GENERADO por scripts/build_foso.py a partir de lsl/plantillas/" + fn + " (no editar a mano)\n" + src)
+
+
 # ------------------------------------------------------------------ principal
 def build(save=True, export=True):
     t0 = time.time()
     os.makedirs(OUT, exist_ok=True)
     bpy.ops.wm.read_factory_settings(use_empty=True)
     scene = bpy.context.scene
-    scene.name = "Foso V2"
+    scene.name = "Foso V3"
     scene.unit_settings.system = "METRIC"
     colls = {lv: get_coll(COLL[lv]) for lv in LEVELS + ["PHYS"]}
     for lv in ("MEDIUM", "LOW", "LOWEST", "PHYS"):
@@ -246,14 +329,47 @@ def build(save=True, export=True):
     li_total = 0.0
     for pc in pieces:
         cache = {}
+        if pc.kind in ("deco", "mueble", "luz"):
+            # LOD según el radio: en SL, a radio pequeño pesa el LOWEST; a radio medio, LOW y MEDIUM
+            g0 = pc.build(0)
+            a0, b0 = g0.bounds()
+            rad = (b0 - a0).length / 2
+            pc.lod_map = (0, 0, 1, 3) if rad < 1.2 else ((0, 1, 2, 3) if rad < 2.2 else (0, 1, 3, 3))
+            cache[0] = g0
         for m in pc.lod_map:
             if m not in cache:
                 cache[m] = pc.build(m)
         geos = [cache[pc.lod_map[0]]] + [_copy(cache[m]) for m in pc.lod_map[1:]]
+        if pc.kind in ("deco", "mueble", "luz", "puerta") and pc.lod_map == (0, 0, 1, 3):
+            geos[1] = decimate(geos[1], 300)
+            geos[2] = decimate(geos[2], 40)
+        if pc.kind in ("deco", "mueble", "luz") and pc.lod_map != (0, 0, 1, 3):
+            # presupuesto de triángulos por radio (los niveles que más pesan en el coste de SL)
+            hi = cache[0]
+            if pc.lod_map == (0, 1, 2, 3):
+                geos[1] = decimate(geos[1], min(800, max(60, hi.tri_count() // 4)))
+                geos[2] = decimate(geos[2], min(120, max(16, hi.tri_count() // 20)))
+            else:
+                geos[1] = decimate(geos[1], 160)
         if not geos[0].verts:
             report["avisos"].append(f"{pc.name}: HIGH vacío")
             continue
         mn, mx = geos[0].bounds()
+        if getattr(pc, "fire", False):
+            # el centro de la pieza queda en la base de la llama: SL emite luz y partículas desde ahí
+            lz = [geos[0].verts[i] for f, m in zip(geos[0].faces, geos[0].mats) if m == "Llama" for i in f]
+            c = sum(lz, Vector()) / len(lz)
+            c.z = min(v.z for v in lz) + 0.04
+            h = Vector([max(mx[i] - c[i], c[i] - mn[i]) for i in range(3)])
+            mn, mx = c - h, c + h
+            ensure_bounds(geos[0], mn, mx, geos[0].mats[0])
+        if "Agua" not in geos[0].mats:
+            # caras fijas: cada pieza lleva las 8 caras en el mismo orden (relleno diminuto en la esquina)
+            for k, m in enumerate(FACE_MATS):
+                if m not in geos[0].mats:
+                    e = MARK
+                    o = mn + Vector((e * (1 + 3 * k), e, 0))   # cada relleno en su sitio: al soldar no se fusionan
+                    geos[0].face([o, o + Vector((e, 0, 0)), o + Vector((0, e, 0))], m, (0, 0, -1))
         origin = (mn + mx) / 2
         hmats = [m for m in MATS if m in set(geos[0].mats)]
         markers = {}
@@ -264,7 +380,8 @@ def build(save=True, export=True):
                 report["avisos"].append(f"{pc.name} {LEVELS[i]}: materiales fuera del HIGH {extra}")
         pg = phys_geo(pc.phys())
         markers["PHYS"] = ensure_bounds(pg, mn, mx, "Fisica")
-        entry = {"nombre": pc.name, "tipo": pc.kind, "tamano_m": [round(c, 3) for c in (mx - mn)],
+        entry = {"nombre": pc.name, "tipo": pc.kind, "rol": getattr(pc, "role", ""), "fuego": getattr(pc, "fire", False),
+                 "tamano_m": [round(c, 3) for c in (mx - mn)],
                  "centro": [round(c, 3) for c in origin], "triangulos": {}, "marcadores_caja": markers}
         lod_bytes = []
         for i, lv in enumerate(LEVELS):
@@ -284,6 +401,11 @@ def build(save=True, export=True):
         entry["caras_sl"] = hmats
         li_total += cost
         dims_ok = min(mx - mn) >= 0.5
+        if pc.name in P.SITS:
+            pt, yaw, anim, fb = P.SITS[pc.name]
+            entry["asiento"] = {"offset": [round(c, 3) for c in (pt - origin)], "giro": yaw, "anim": anim, "reserva": fb}
+        if hasattr(pc, "pivot"):
+            entry["pivote_rel"] = [round(c, 3) for c in (pc.pivot - origin)]
         if pc.kind == "estructura" and not dims_ok:
             report["avisos"].append(f"{pc.name}: alguna dimensión < 0,5 m; SL usará casco convexo")
         report["piezas"].append(entry)
@@ -315,18 +437,19 @@ def build(save=True, export=True):
 
     if export:
         bpy.context.view_layer.update()
-        names = {"HIGH": "Foso_V2_HIGH.dae", "MEDIUM": "Foso_V2_MEDIUM.dae", "LOW": "Foso_V2_LOW.dae",
-                 "LOWEST": "Foso_V2_LOWEST.dae", "PHYS": "Foso_V2_PHYS.dae"}
+        names = {"HIGH": "Foso_V3_HIGH.dae", "MEDIUM": "Foso_V3_MEDIUM.dae", "LOW": "Foso_V3_LOW.dae",
+                 "LOWEST": "Foso_V3_LOWEST.dae", "PHYS": "Foso_V3_PHYS.dae"}
         for lv, fn in names.items():
             write_dae(os.path.join(OUT, fn), objs[lv])
         report["archivos"] = list(names.values())
 
+    write_lsl_table(report)
     report["segundos"] = round(time.time() - t0, 1)
-    with open(os.path.join(OUT, "Informe_V2.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(OUT, "Informe_V3.json"), "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=1)
     if save:
         bpy.context.preferences.filepaths.save_version = 0
-        bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT, "Foso_V2.blend"), compress=True)
+        bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT, "Foso_V3.blend"), compress=True)
     return report, objs
 
 

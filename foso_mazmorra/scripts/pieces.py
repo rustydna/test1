@@ -268,7 +268,7 @@ def chain(g, path, a_c, b_c, r, lod, rnd, z_floor):
         else:
             n0 = t.cross(w0)
             w = w0 * math.cos(roll) + n0 * math.sin(roll)
-        g.link(c, t, w, a_c, b_c, r, 12, 6, "Hierro")
+        g.link(c, t, w, a_c, b_c, r, 8, 4, "Hierro")
     return [c for c, _ in centers]
 
 
