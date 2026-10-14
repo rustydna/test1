@@ -1,0 +1,14 @@
+schema_version = "1.0.0"
+
+id = "sl_rigger"
+version = "0.1.0"
+name = "SL Rigger"
+tagline = "Convierte mallas en avatares, ropa rigged y objetos para Second Life"
+maintainer = "SL Rigger contributors"
+type = "add-on"
+blender_version_min = "4.2.0"
+license = ["SPDX:GPL-3.0-or-later"]
+tags = ["Import-Export", "Rigging"]
+
+[permissions]
+files = "Escribe los archivos .dae exportados"
