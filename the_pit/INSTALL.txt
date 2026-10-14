@@ -1,6 +1,7 @@
 THE PIT - INSTALL IN SECOND LIFE (fewest clicks)
 ================================================
-Unzip ThePit_SecondLife.zip. It has three folders: 1_model, 2_bulk_upload, 3_scripts.
+Unzip ThePit_SL_A_model_and_scripts.zip and ThePit_SL_B_bulk_upload.zip into the same
+folder. You get three folders: 1_model, 2_bulk_upload, 3_scripts.
 
 1. MODEL - one upload
    Build > Upload > Model... > pick 1_model/ThePit.dae

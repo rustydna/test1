@@ -51,8 +51,8 @@ the PBR materials now), `/7 diagnose` (check that every doorway is clear).
 
 ## Installing in Second Life (fewest clicks)
 
-Run `python the_pit/scripts/package_sl.py` (or take the delivered `ThePit_SecondLife.zip`) and
-follow `INSTALL.txt`:
+Run `python the_pit/scripts/package_sl.py` (or take the delivered `ThePit_SL_A_model_and_scripts.zip`
+and `ThePit_SL_B_bulk_upload.zip`, unzipped into one folder) and follow `INSTALL.txt`:
 
 1. **Model, one upload**: Build → Upload → Model → `1_model/ThePit.dae`. The LOD and physics
    files (`ThePit_LOD2/_LOD1/_LOD0/_PHYS.dae`) load by themselves because of their names. Scale
