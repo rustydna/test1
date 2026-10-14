@@ -6901,11 +6901,11 @@
   "parcel_percent": 45.3
  },
  "files": [
-  "ThePit_HIGH.dae",
-  "ThePit_MEDIUM.dae",
-  "ThePit_LOW.dae",
-  "ThePit_LOWEST.dae",
+  "ThePit.dae",
+  "ThePit_LOD2.dae",
+  "ThePit_LOD1.dae",
+  "ThePit_LOD0.dae",
   "ThePit_PHYS.dae"
  ],
- "seconds": 12.3
+ "seconds": 13.0
 }

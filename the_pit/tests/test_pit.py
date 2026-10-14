@@ -36,7 +36,7 @@ def case(fn):
 
 
 def load(level):
-    root = ET.parse(os.path.join(OUT, f"ThePit_{level}.dae")).getroot()
+    root = ET.parse(os.path.join(OUT, "ThePit" + LEVELS[level] + ".dae")).getroot()
     geoms = {}
     for g in root.iterfind(".//c:geometry", NS):
         name = g.get("name")
@@ -217,13 +217,13 @@ def lsl_scripts_consistent_with_model():
 def every_feature_can_be_switched_off():
     import re
     lsl_dir = os.path.join(ROOT, "lsl")
-    settings = open(os.path.join(lsl_dir, "pit_settings.lsl"), encoding="utf-8").read()
+    settings = open(os.path.join(lsl_dir, "pit_control.lsl"), encoding="utf-8").read()
     block = settings[settings.index("list FEATURES"):settings.index("list CATEGORIES")]
     features = re.findall(r'^\s+"([a-z_]+)",\s+\d,', block, re.M)
     assert len(features) == len(set(features)) >= 40, features
     used = set()
     for fn in os.listdir(lsl_dir):
-        if fn.endswith(".lsl") and fn != "pit_settings.lsl":
+        if fn.endswith(".lsl"):
             src = open(os.path.join(lsl_dir, fn), encoding="utf-8").read()
             used |= set(re.findall(r'\bopt\("([a-z_]+)"\)', src))
             if "string feature(string nm)" in src:      # pit_rooms: one switch per room, looked up by piece

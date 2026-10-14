@@ -23,7 +23,7 @@ flipbook, lit only by the fire and the fog.)*
 | **Estimated land impact** | **≈ 119** (target 150; the viewer shows the real figure at upload) |
 | Footprint | 26 × 35.3 m = 917 m² (45 % of the parcel; limit 1,011.5 m²) |
 | Triangles | HIGH 113,439 · MEDIUM 19,272 · LOW 3,814 · LOWEST 1,376 · physics 2,590 |
-| Automated tests | 13 of 13 pass |
+| Automated tests | 15 of 15 pass (including every switch wired and every script compiling with lslint) |
 
 ## Everything can be switched off
 
@@ -49,30 +49,29 @@ build (linkset data): they apply at once in every script, survive resets and tra
 Other owner commands: `/7 doors` (find the doors again), `/7 doors reset`, `/7 materials` (apply
 the PBR materials now), `/7 diagnose` (check that every doorway is clear).
 
-## Installing in Second Life
+## Installing in Second Life (fewest clicks)
 
-1. **Build → Upload → Model** → `output/ThePit_HIGH.dae`.
-2. *Level of Detail* tab: Medium, Low and Lowest → **Load from file** → `ThePit_MEDIUM.dae`,
-   `ThePit_LOW.dae`, `ThePit_LOWEST.dae`.
-3. *Physics* tab → **From file** → `ThePit_PHYS.dae`. **Do not press Analyze.**
-4. Scale **1.0**. *Calculate weights & fee* shows the real land impact. Upload.
-5. Rez it, open the root prim's **Contents** tab and, for each file in `lsl/`, click
-   **New Script**, open it, replace its text with the file's text, save, and rename it like the
-   file. In this order:
-   1. `pit_settings` and `pit_core` (core: names the pieces, sets the physics, tests the doorways);
-   2. `pit_doors`, `pit_fire`, `pit_seats`, `pit_rooms`, `pit_throne`;
-   3. `pit_pose`, **6 or 8 copies** (SL numbers the copies; each one animates one avatar);
-   4. optional: `pit_ambience` (tide and voices) and `pit_materials` (PBR).
-6. Animations (optional) go in the root with these names: `pit_lord`, `pit_kneel`, `pit_rack`,
-   `pit_pillory`, `pit_stocks`, `pit_chair`, `pit_dog`, `pit_cage`, `pit_mast`, `pit_scribe`,
-   `pit_guard`, `pit_winch`. A missing one falls back to a built-in SL animation.
-7. Sounds (optional): drop sounds named `door_creak`, `lock_clank`, `portcullis_chain`,
-   `press_gang_bell` into the root's Contents (or paste UUIDs into the `SOUND_*` lines of
-   `pit_doors`); ambient sounds whose names start with `ambient` are played by `pit_ambience`.
+Run `python the_pit/scripts/package_sl.py` (or take the delivered `ThePit_SecondLife.zip`) and
+follow `INSTALL.txt`:
 
-**Already uploaded the first (Spanish) release?** Don't upload again. Delete the old scripts
-from the root and add the new ones: `pit_core` renames every piece to its English name by its
-size and position, and keeps your locks and the muster book.
+1. **Model, one upload**: Build → Upload → Model → `1_model/ThePit.dae`. The LOD and physics
+   files (`ThePit_LOD2/_LOD1/_LOD0/_PHYS.dae`) load by themselves because of their names. Scale
+   1.0 → *Calculate weights & fee* → *Upload*.
+2. **Materials and effects, one upload**: Build → Upload → **Bulk** → `2_bulk_upload/`, Ctrl+A →
+   Upload (8 PBR materials + 7 effect textures).
+3. Rez the build, Edit → **Contents**, and drag in the 8 materials and 7 textures at once.
+4. Six scripts, any order: *New Script*, paste, save — `pit_core`, `pit_control`, `pit_doors`,
+   `pit_fire`, `pit_rooms`, `pit_throne`. No pose copies, no notecard, no UUIDs to paste.
+
+Everything starts by itself. Optional: animations (`pit_lord`, `pit_kneel`, `pit_rack`,
+`pit_pillory`, `pit_stocks`, `pit_chair`, `pit_dog`, `pit_cage`, `pit_mast`, `pit_scribe`,
+`pit_guard`, `pit_winch`; a missing one falls back to a built-in SL animation) and sounds
+(`door_creak`, `lock_clank`, `portcullis_chain`, `press_gang_bell`, `ambient…`) dropped into the
+same Contents.
+
+**Already uploaded the first (Spanish) release?** Don't upload the model again. Delete the old
+scripts from the root and do steps 2–4: `pit_core` renames every piece to its English name by
+its size and position, and keeps your locks and the muster book.
 
 ## PBR materials by block
 
@@ -84,12 +83,12 @@ Every piece has **the same 8 faces in the same order**:
 
 The water has its own pieces, `P_Water` and `C04_Water`.
 
-1. **Build → Upload → Material** and pick `output/pbr_materials/Stone.glb`. Repeat for the eight
-   (Stone, Floor, Wood, Iron, Cloth, Bone, Straw, Water). Each uploads base colour, normal and ORM
-   (occlusion, roughness, metal) in one go.
-2. Drop the eight materials into the root's Contents next to `pit_materials`. **They are applied
-   at once** to every piece: each material goes to the block whose name it contains. No notecard
-   needed. If your materials have other names, add a notecard called `materials` (a ready-made
+1. **Build → Upload → Bulk** with the eight `.glb` files of `output/pbr_materials/` (Stone, Floor,
+   Wood, Iron, Cloth, Bone, Straw, Water). Each uploads base colour, normal and ORM (occlusion,
+   roughness, metal).
+2. Drop the eight materials into the root's Contents (`pit_control` handles them). **They are
+   applied at once** to every piece: each material goes to the block whose name it contains. No
+   notecard needed. If your materials have other names, add a notecard called `materials` (a ready-made
    one is `lsl/materials_notecard.txt`): `Stone = <material name or UUID>`, one line per block.
 3. `/7 materials` applies them again. The textures tile seamlessly and their scale already matches
    the UVs (1 repeat = 2 m of stone, 0.5 m of iron...): don't change *Repeats per meter*.
@@ -100,8 +99,8 @@ Face 7 (flame) belongs to the fire script: don't put PBR on it.
 ## Effect textures (7 PNGs)
 
 Optional: without them The Pit works the same, with plain flames and the default fire particle.
-Upload each PNG from `output/effects/` with **Build → Upload → Image** and drop the textures into
-the root's Contents **keeping their names**. `pit_fire` finds them by name; nothing to paste.
+Upload the PNGs from `output/effects/` (in the same **Bulk** upload as the materials) and drop
+the textures into the root's Contents **keeping their names**. `pit_fire` finds them by name; nothing to paste.
 
 | PNG | Effect |
 |---|---|
@@ -198,18 +197,19 @@ left open or an avatar sitting down can no longer confuse them.
 
 There is no SL viewer here. Everything above is checked with local tests on the same files you
 upload: geometry, LODs, faces, physics in two scenarios and name consistency between model and
-scripts. The LSL scripts have not been compiled in a viewer: if one shows an error when you save
-it, copy the error as it is and send it to me.
+scripts. Every script compiles with lslint (the old door and core scripts did not: that is why
+the doors never worked). Script memory can only be measured in-world: if one says
+"Stack-Heap Collision" or shows an error when you save it, copy it as it is and send it to me.
 
 ## Files
 
 * `output/ThePit.blend`: editable source.
-* `output/ThePit_*.dae`: HIGH, MEDIUM, LOW, LOWEST and PHYS.
+* `output/ThePit.dae` (HIGH) and `ThePit_LOD2.dae`, `_LOD1`, `_LOD0`, `_PHYS`: named so the uploader loads them all from one pick.
 * `output/Report.json`: per piece, kind, size, triangles, radius, LOD weights, estimated land impact and seat.
 * `output/QA_physics.json`, `output/QA_physics_configured.png`, `output/QA_physics_no_scripts.png`: the walkability test.
 * `output/textures/`, `output/pbr_materials/`, `output/effects/`: PBR textures, materials and effect sprites.
 * `lsl/`: scripts ready to paste (generated from `lsl/templates/` with the piece table) and `materials_notecard.txt`.
-* `scripts/pieces_v3.py`: the whole design. `scripts/build_pit.py`: builds and exports it. `tests/test_pit.py`: the 13 tests.
+* `scripts/pieces_v3.py`: the whole design. `scripts/build_pit.py`: builds and exports it. `scripts/package_sl.py`: the Second Life zip. `tests/test_pit.py`: the 15 tests.
 * `docs/HANDOFF.md`: the original brief.
 
 ```

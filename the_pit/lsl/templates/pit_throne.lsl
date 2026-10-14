@@ -1,5 +1,5 @@
 // =====================================================================
-//  THE PIT - THE LORD'S THRONE AND THE MUSTER BOOK (root prim)
+//  THE PIT - THE LORD'S THRONE, THE MUSTER BOOK AND THE SEATS (root prim)
 //
 //  Whoever sits on the throne is the LORD OF THE PIT (text over the throne).
 //  Touching the throne (the Lord or the owner):
@@ -11,9 +11,82 @@
 //  into the book with a recruit number and date), Read book, Oath.
 //  Branding brazier: Brand (counts each recruit's brands).
 //  While on the throne the Lord holds the key to every gate.
-//  Switches (/7 settings > Throne): throne, lord_keys, judgement,
-//  muster_book, branding; plus moods, bell, doors, narration, hovertext.
+//
+//  SEATS: places the sit point of every piece of furniture (throne, rack,
+//  pillory, stocks, ducking chair, kennels, cages, mast, table, winch,
+//  kneeling stone) and animates whoever sits. If the root holds an
+//  animation with the listed name (pit_rack, pit_dog...) it is used;
+//  otherwise a built-in SL one. No extra pose scripts are needed.
+//
+//  Switches (/7 settings): throne, lord_keys, judgement, muster_book,
+//  branding, seats; plus moods, bell, doors, narration, hovertext.
 // =====================================================================
+
+//@@CONSTANTS@@
+
+list SITTERS;   // [link, avatar, animation]
+
+place()
+{
+    integer on = opt("seats");
+    integer i;
+    for (i = 0; i < llGetListLength(SEATS); i += 5)
+    {
+        integer l = link_of(llList2String(SEATS, i));
+        if (l > 0)
+        {
+            if (on)
+                llLinkSitTarget(l, llList2Vector(SEATS, i + 1),
+                                llEuler2Rot(<0.0, 0.0, llList2Float(SEATS, i + 2) * DEG_TO_RAD>));
+            else llLinkSitTarget(l, ZERO_VECTOR, ZERO_ROTATION);
+        }
+    }
+}
+
+// one avatar at a time gets the animation permission (granted at once to
+// a seated avatar); the queue covers several people sitting together
+list QUEUE;     // [avatar, animation]
+animate_next()
+{
+    if (QUEUE != []) llRequestPermissions(llList2Key(QUEUE, 0), PERMISSION_TRIGGER_ANIMATION);
+}
+
+check()
+{
+    // who stood up
+    integer i;
+    for (i = llGetListLength(SITTERS) - 3; i >= 0; i -= 3)
+    {
+        integer l = llList2Integer(SITTERS, i);
+        key av = llList2Key(SITTERS, i + 1);
+        if (llAvatarOnLinkSitTarget(l) != av)
+        {
+            llLinksetDataDelete("sit:" + llGetLinkName(l));
+            llMessageLinked(LINK_SET, 9600, "out|" + llGetLinkName(l), av);
+            SITTERS = llDeleteSubList(SITTERS, i, i + 2);
+        }
+    }
+    // who sat down
+    for (i = 0; i < llGetListLength(SEATS); i += 5)
+    {
+        string nm = llList2String(SEATS, i);
+        integer l = link_of(nm);
+        if (l > 0)
+        {
+            key av = llAvatarOnLinkSitTarget(l);
+            if (av != NULL_KEY && llListFindList(SITTERS, [l]) == -1)
+            {
+                string anim = llList2String(SEATS, i + 3);
+                if (llGetInventoryType(anim) != INVENTORY_ANIMATION) anim = llList2String(SEATS, i + 4);
+                QUEUE += [av, anim];
+                if (llGetListLength(QUEUE) == 2) animate_next();
+                SITTERS += [l, av, anim];
+                llLinksetDataWrite("sit:" + nm, (string)av);
+                llMessageLinked(LINK_SET, 9600, "in|" + nm, av);
+            }
+        }
+    }
+}
 
 integer CH; integer LH; key USER; string MODE; key CHOSEN;
 list NEAR;
@@ -129,12 +202,29 @@ default
     {
         CH = -1 - (integer)llFrand(1000000.0);
         OPTS = llLinksetDataRead("opts");
+        place(); check();
         signs();
     }
     on_rez(integer p) { llResetScript(); }
     linkset_data(integer action, string name, string value)
     {
-        if (name == "opts" || action == LINKSETDATA_RESET) { OPTS = llLinksetDataRead("opts"); signs(); }
+        if (name == "opts" || action == LINKSETDATA_RESET) { OPTS = llLinksetDataRead("opts"); place(); signs(); }
+    }
+    changed(integer c) { if (c & CHANGED_LINK) check(); }
+    run_time_permissions(integer p)
+    {
+        key av = llGetPermissionsKey();
+        integer i = llListFindList(QUEUE, [av]);
+        if (i != -1)
+        {
+            if ((p & PERMISSION_TRIGGER_ANIMATION) && llListFindList(SITTERS, [av]) != -1)
+            {
+                llStopAnimation("sit");
+                llStartAnimation(llList2String(QUEUE, i + 1));
+            }
+            QUEUE = llDeleteSubList(QUEUE, i, i + 1);
+        }
+        animate_next();
     }
 
     link_message(integer s, integer n, string str, key id)
@@ -150,7 +240,7 @@ default
             llLinksetDataDelete("lord");
             signs();
         }
-        else if (n == 9001) signs();
+        else if (n == 9001) { place(); signs(); }
     }
 
     touch_start(integer t)

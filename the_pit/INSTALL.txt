@@ -1,0 +1,43 @@
+THE PIT - INSTALL IN SECOND LIFE (fewest clicks)
+================================================
+Unzip ThePit_SecondLife.zip. It has three folders: 1_model, 2_bulk_upload, 3_scripts.
+
+1. MODEL - one upload
+   Build > Upload > Model... > pick 1_model/ThePit.dae
+   The LOD and physics files (ThePit_LOD2/_LOD1/_LOD0/_PHYS.dae) load by
+   themselves: keep the five files together. Leave scale at 1.0.
+   Click "Calculate weights & fee", then "Upload".
+
+2. MATERIALS AND EFFECTS - one upload
+   Build > Upload > Bulk... > open 2_bulk_upload > Ctrl+A > Open > Upload.
+   That is the 8 PBR materials (Stone, Floor, Wood, Iron, Cloth, Bone, Straw,
+   Water) and the 7 effect textures. Keep "Scale textures to 1024px" ticked.
+
+3. REZ AND FILL
+   Drag "The Pit" from your inventory onto the ground.
+   Right-click it > Edit > Contents tab.
+   Drag in the 8 materials and the 7 textures you just uploaded (newest items
+   in your Materials and Textures folders; Ctrl+click selects several, then
+   drag them all at once).
+
+4. SCRIPTS - six of them, any order
+   In the same Contents tab, for each file in 3_scripts:
+   "New Script" > double-click it > Ctrl+A > paste the file > Save.
+       pit_core   pit_control   pit_doors   pit_fire   pit_rooms   pit_throne
+
+Done. Everything starts by itself: the pieces get their names and physics,
+the materials are applied, the doors, fire and roleplay menus work.
+
+Owner chat commands (channel 7):
+   /7 settings   switch any feature on or off (also "Settings" on the throne)
+   /7 help       every command
+   /7 lowlag     keep the roleplay, drop the heavy effects
+
+Already rezzed the first release? Skip step 1: delete its old scripts from the
+root's Contents and do steps 2 to 4. The pieces are renamed automatically.
+
+Optional extras (drop into the same Contents):
+   animations named pit_lord, pit_kneel, pit_rack, pit_pillory, pit_stocks,
+   pit_chair, pit_dog, pit_cage, pit_mast, pit_scribe, pit_guard, pit_winch;
+   sounds named door_creak, lock_clank, portcullis_chain, press_gang_bell,
+   and any sound whose name starts with "ambient".

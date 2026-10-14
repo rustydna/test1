@@ -35,23 +35,6 @@ string  SOUND_LOCK = "";          // [lock_clank]
 string  SOUND_PORTCULLIS = "";    // [portcullis_chain]
 string  SOUND_BELL = "";          // [press_gang_bell]
 
-vector CHAIR_PIVOT = <0.525,0.000,0.100>;
-list SEATS = [
-    "C01_Desk", <0.000,-0.477,0.253>, 90, "pit_scribe", "sit",
-    "C02_Rack", <-0.285,-0.080,0.368>, 0, "pit_rack", "dead",
-    "C03_Pillory", <0.000,0.150,0.183>, 90, "pit_pillory", "stand",
-    "C03_Stocks", <0.000,0.335,0.670>, -90, "pit_stocks", "sit",
-    "C04_Chair", <-2.075,0.000,0.000>, 0, "pit_chair", "sit",
-    "C05_Kennel_1", <0.005,0.085,-0.150>, 180, "pit_dog", "sleep",
-    "C05_Kennel_2", <0.005,0.085,-0.150>, 180, "pit_dog", "sleep",
-    "C05_Kennel_3", <0.005,0.085,-0.150>, 180, "pit_dog", "sleep",
-    "C07_Cage_1", <0.000,0.000,-1.863>, 0, "pit_cage", "stand",
-    "C07_Cage_2", <0.000,0.000,-1.863>, 0, "pit_cage", "stand",
-    "C08_Mast", <0.150,-0.538,-0.723>, 90, "pit_mast", "stand",
-    "G_Winch", <-0.775,-0.491,-0.915>, 90, "pit_winch", "stand",
-    "V_Table", <0.000,-0.800,0.330>, 90, "pit_guard", "sit",
-    "N_Throne", <0.000,0.094,-0.643>, -90, "pit_lord", "sit",
-    "N_Kneeling_Stone", <-0.063,-0.200,0.313>, 90, "pit_kneel", "sit_ground_constrained"];
 vector THRONE_SIZE = <1.950,1.387,3.413>;
 list MOVERS = [
     "C01_Door", <0.218,1.415,2.550>, <-3.450,-23.054,-1.288>,
