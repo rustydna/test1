@@ -136,6 +136,7 @@ help()
         + "/7 all on | /7 all off | /7 lowlag - presets\n"
         + "/7 doors - find the doors again | /7 doors reset - forget stored door poses\n"
         + "/7 materials - apply the PBR materials now\n"
+        + "/7 seat up | down | forward | back | reset - while you sit, move that seat 5 cm (saved)\n"
         + "/7 diagnose - check that every doorway is clear\n"
         + "Feature names: " + llDumpList2String(llList2ListStrided(FEATURES, 0, -1, 3), ", "));
 }

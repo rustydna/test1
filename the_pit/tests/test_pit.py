@@ -252,6 +252,20 @@ def lsl_scripts_compile_and_are_english():
         text = out.stdout + out.stderr
         assert "Errors: 0" in text, (fn, text)
 
+
+@case
+def pose_animations_are_looping_sl_anims():
+    import struct
+    names = {a for p in P.PIECES if p.name in P.SITS for a in [P.SITS[p.name][2]]}
+    anim_dir = os.path.join(OUT, "animations")
+    for n in names:
+        data = open(os.path.join(anim_dir, n + ".anim"), "rb").read()
+        version, sub, priority, duration = struct.unpack_from("<HHif", data, 0)
+        end = data.index(b"\0", 12)
+        loop_in, loop_out, loop, ease_in, ease_out, hand, joints = struct.unpack_from("<ffiffII", data, end + 1)
+        assert (version, sub) == (1, 0) and priority == 4 and loop == 1 and joints == 19, (n, version, priority, loop, joints)
+        assert 0 < duration and loop_out == duration, n
+
 fails = [r for r in RESULTS if not r[1]]
 for name, ok, err in RESULTS:
     print(("OK  " if ok else "FAIL"), name)

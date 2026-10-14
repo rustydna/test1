@@ -13,5 +13,6 @@
  "circulation_with_and_without_scripts": true,
  "lsl_scripts_consistent_with_model": true,
  "every_feature_can_be_switched_off": true,
- "lsl_scripts_compile_and_are_english": true
+ "lsl_scripts_compile_and_are_english": true,
+ "pose_animations_are_looping_sl_anims": true
 }

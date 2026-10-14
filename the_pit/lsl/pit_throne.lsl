@@ -42,6 +42,22 @@ list SEATS = [
 
 list SITTERS;   // [link, avatar, animation]
 
+// SL puts a seated avatar about 0.35 m above its sit target; the poses then need their own
+// height over the seat (floor poses are lowered like SL's sit_ground, sleep and dead).
+// Any seat can be nudged in-world by the owner with /7 seat up|down|forward|back|reset.
+list SEAT_DZ = ["N_Throne", -0.65, "C04_Chair", -0.65, "C01_Desk", -0.65, "V_Table", -0.65,
+                "N_Kneeling_Stone", 0.55, "C05_Kennel_1", 0.32, "C05_Kennel_2", 0.32, "C05_Kennel_3", 0.32,
+                "C02_Rack", 0.41, "C03_Stocks", -0.18];
+
+vector seat_offset(integer i)
+{
+    string nm = llList2String(SEATS, i);
+    float dz = -0.35;
+    integer j = llListFindList(SEAT_DZ, [nm]);
+    if (j != -1) dz = llList2Float(SEAT_DZ, j + 1);
+    return llList2Vector(SEATS, i + 1) + <0.0, 0.0, dz> + (vector)llLinksetDataRead("seatfix:" + nm);
+}
+
 place()
 {
     integer on = opt("seats");
@@ -52,11 +68,42 @@ place()
         if (l > 0)
         {
             if (on)
-                llLinkSitTarget(l, llList2Vector(SEATS, i + 1),
+                llLinkSitTarget(l, seat_offset(i),
                                 llEuler2Rot(<0.0, 0.0, llList2Float(SEATS, i + 2) * DEG_TO_RAD>));
             else llLinkSitTarget(l, ZERO_VECTOR, ZERO_ROTATION);
         }
     }
+}
+
+// owner sitting on a seat: /7 seat up|down|forward|back|reset moves it 5 cm and keeps it
+nudge(string how)
+{
+    key me = llGetOwner();
+    integer s = llListFindList(SITTERS, [me]);
+    if (s == -1) { llOwnerSay("Sit on the seat you want to adjust first."); return; }
+    integer l = llList2Integer(SITTERS, s - 1);
+    string nm = llGetLinkName(l);
+    integer i = llListFindList(SEATS, [nm]);
+    if (i == -1) return;
+    rotation yaw = llEuler2Rot(<0.0, 0.0, llList2Float(SEATS, i + 2) * DEG_TO_RAD>);
+    vector d = ZERO_VECTOR;
+    if (how == "up") d = <0.0, 0.0, 0.05>;
+    else if (how == "down") d = <0.0, 0.0, -0.05>;
+    else if (how == "forward") d = <0.05, 0.0, 0.0> * yaw;
+    else if (how == "back") d = <-0.05, 0.0, 0.0> * yaw;
+    vector fix = (vector)llLinksetDataRead("seatfix:" + nm);
+    if (how == "reset") { d = -fix; llLinksetDataDelete("seatfix:" + nm); }
+    else llLinksetDataWrite("seatfix:" + nm, (string)(fix + d));
+    llLinkSitTarget(l, seat_offset(i), yaw);
+    // move the seated avatar now (the avatar is a link after the prims)
+    integer a;
+    for (a = llGetObjectPrimCount(llGetKey()) + 1; a <= llGetNumberOfPrims(); ++a)
+        if (llGetLinkKey(a) == me)
+        {
+            vector p = llList2Vector(llGetLinkPrimitiveParams(a, [PRIM_POS_LOCAL]), 0);
+            llSetLinkPrimitiveParamsFast(a, [PRIM_POS_LOCAL, p + d * llList2Rot(llGetLinkPrimitiveParams(l, [PRIM_ROT_LOCAL]), 0)]);
+        }
+    llOwnerSay(nm + " seat adjusted: " + (string)((vector)llLinksetDataRead("seatfix:" + nm)) + " (saved).");
 }
 
 // one avatar at a time gets the animation permission (granted at once to
@@ -274,6 +321,7 @@ default
     {
         CH = -1 - (integer)llFrand(1000000.0);
         llListen(CH, "", NULL_KEY, "");
+        llListen(7, "", llGetOwner(), "");
         llSetTimerEvent(30.0);
         OPTS = llLinksetDataRead("opts");
         place(); check();
@@ -345,6 +393,11 @@ default
 
     listen(integer c, string n, key id, string m)
     {
+        if (c == 7)
+        {
+            if (llSubStringIndex(m, "seat ") == 0) nudge(llGetSubString(m, 5, -1));
+            return;
+        }
         integer si = llListFindList(SESS, [id]);
         if (si == -1 || llList2Integer(SESS, si + 3) < llGetUnixTime()) return;
         USER = id;

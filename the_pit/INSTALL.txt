@@ -3,12 +3,11 @@ THE PIT - INSTALL IN SECOND LIFE (fewest clicks)
 Unzip ThePit_SL_A_model_and_scripts.zip and ThePit_SL_B_bulk_upload.zip into the same
 folder. You get three folders: 1_model, 2_bulk_upload, 3_scripts.
 
-ALREADY UPLOADED "EL FOSO V3"? Do NOT upload or pay again: the model is the same,
-byte for byte. Skip steps 1 and 2, delete the old scripts from the root and do
-step 4 only. pit_core renames every piece to English by itself. If your
-materials still have the Spanish names, add a notecard "materials" with:
-   Stone = Piedra / Floor = Suelo / Wood = Madera / Iron = Hierro
-   Cloth = Tela / Bone = Hueso / Straw = Paja / Water = Agua   (one per line)
+ALREADY UPLOADED "EL FOSO V3"? Do NOT upload the model again: it is the same,
+byte for byte. Skip step 1. Your materials with the old names (Piedra, Suelo...)
+are recognised too, so in step 2 you only need the 12 pose animations (*.anim).
+In step 4 pit_core removes the old foso_ scripts by itself and renames every
+piece to English.
 
 1. MODEL - one upload
    Build > Upload > Model... > pick 1_model/ThePit.dae
@@ -19,15 +18,16 @@ materials still have the Spanish names, add a notecard "materials" with:
 2. MATERIALS AND EFFECTS - one upload
    Build > Upload > Bulk... > open 2_bulk_upload > Ctrl+A > Open > Upload.
    That is the 8 PBR materials (Stone, Floor, Wood, Iron, Cloth, Bone, Straw,
-   Water) and the 7 effect textures (all 1024 px or smaller: the 2K option
-   in that window makes no difference).
+   Water), the 7 effect textures and the 12 pose animations (pit_lord,
+   pit_rack, pit_dog...: looped, priority 4). The window shows the total price
+   before you confirm.
 
 3. REZ AND FILL
    Drag "The Pit" from your inventory onto the ground.
    Right-click it > Edit > Contents tab.
-   Drag in the 8 materials and the 7 textures you just uploaded (newest items
-   in your Materials and Textures folders; Ctrl+click selects several, then
-   drag them all at once).
+   Drag in everything you just uploaded: 8 materials, 7 textures and 12
+   animations (newest items in your Materials, Textures and Animations
+   folders; Ctrl+click selects several, then drag them all at once).
 
 4. SCRIPTS - six of them, any order
    In the same Contents tab, for each file in 3_scripts:
@@ -41,9 +41,10 @@ Owner chat commands (channel 7):
    /7 settings   switch any feature on or off (also "Settings" on the throne)
    /7 help       every command
    /7 lowlag     keep the roleplay, drop the heavy effects
+   /7 report     what every script found (send it if something fails)
+   /7 seat down  while sitting: lower that seat 5 cm (also up, forward,
+                 back, reset) - saved for everyone
 
-Optional extras (drop into the same Contents):
-   animations named pit_lord, pit_kneel, pit_rack, pit_pillory, pit_stocks,
-   pit_chair, pit_dog, pit_cage, pit_mast, pit_scribe, pit_guard, pit_winch;
-   sounds named door_creak, lock_clank, portcullis_chain, press_gang_bell,
-   and any sound whose name starts with "ambient".
+Optional extras (drop into the same Contents): sounds named door_creak,
+lock_clank, portcullis_chain, press_gang_bell, and any sound whose name starts
+with "ambient". Without the animations, built-in SL poses are used.
