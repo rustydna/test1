@@ -41,9 +41,8 @@ integer PRIMS;                    // prim count at the last scan (seated avatars
 list D_LINK; list D_NAME; list D_TAG; list D_TYPE; list D_POS; list D_ROT; list D_HINGE; list D_ANG;
 list OPEN;                        // per tag: [tag, 0/1, ...]
 list TRIES;                       // [avatar, unix time]
-integer CH; integer LH; integer LISTEN_UNTIL;
-key USER; string MENU_TAG; string MODE;
-list NEAR;
+integer CH;
+list SESS;                        // open menus, one per avatar: [avatar, tag, mode, expires]
 string OPTS;
 
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
@@ -74,10 +73,51 @@ string snd(string uuid, string name)
     return "";
 }
 
-narrate(key k, string s)
+integer door_link(string t)
 {
-    if (opt("narration")) llSay(0, s);
-    else if (k != NULL_KEY) llRegionSayTo(k, 0, s);
+    integer i = llListFindList(D_TAG, [t]);
+    if (i == -1) return LINK_ROOT;
+    return llList2Integer(D_LINK, i);
+}
+
+// avatars within r metres of a piece (not of the root, which can be 25 m away): [name, key, ...]
+list near(integer link, float r)
+{
+    vector c = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_POSITION]), 0);
+    list ag = llGetAgentList(AGENT_LIST_REGION, []);
+    list out = [];
+    integer i;
+    for (i = 0; i < llGetListLength(ag) && llGetListLength(out) < 24; ++i)
+    {
+        key a = llList2Key(ag, i);
+        if (llVecDist(llList2Vector(llGetObjectDetails(a, [OBJECT_POS]), 0), c) <= r)
+            out += [llGetSubString(llKey2Name(a), 0, 23), a];
+    }
+    return out;
+}
+
+// RP line for everyone within 20 m of the piece (or only for k with narration off)
+narrate(integer link, key k, string s)
+{
+    if (!opt("narration")) { if (k) llRegionSayTo(k, 0, s); return; }
+    list n = near(link, 20.0);
+    integer i;
+    for (i = 1; i < llGetListLength(n); i += 2) llRegionSayTo(llList2Key(n, i), 0, s);
+}
+
+// private note; an instant message only if the avatar is away (it costs the script 2 s)
+tell(key k, string s)
+{
+    if (k == NULL_KEY || (string)k == "") return;
+    if (llGetAgentSize(k) != ZERO_VECTOR) llRegionSayTo(k, 0, s);
+    else llInstantMessage(k, s);
+}
+
+session(key k, string t, string mode)
+{
+    integer i = llListFindList(SESS, [k]);
+    if (i != -1) SESS = llDeleteSubList(SESS, i, i + 3);
+    SESS += [k, t, mode, llGetUnixTime() + 60];
 }
 
 // [locked, holder key, holder name, sentence ends (unix), extra key holders]
@@ -302,18 +342,15 @@ board()
     llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, txt, <0.85, 0.65, 0.4>, 0.85]);
 }
 
-dialog(key k, string txt, list buttons)
+dialog(key k, string t, string mode, string txt, list buttons)
 {
-    llListenRemove(LH);
-    LH = llListen(CH, "", k, "");
-    LISTEN_UNTIL = llGetUnixTime() + 60;
+    session(k, t, mode);
     llDialog(k, txt, buttons, CH);
 }
 
 menu(key k, string tag)
 {
     if (!opt("doors")) { llRegionSayTo(k, 0, "These doors are not in use right now."); return; }
-    USER = k; MENU_TAG = tag; MODE = "main";
     list e = lock_state(tag);
     integer lk = locked(tag);
     string txt = room(tag) + "\n";
@@ -344,48 +381,51 @@ menu(key k, string tag)
         if (opt("pleas")) b += ["Beg mercy", "Rattle bars"];
         if (b == []) b = ["OK"];
     }
-    dialog(k, txt, b);
+    dialog(k, tag, "main", txt, b);
 }
 
-act(key k, string b)
+act(key k, string t, string mode, string b)
 {
-    string t = MENU_TAG; string q = who(k);
+    string q = who(k);
+    integer dl = door_link(t);
     list e = lock_state(t);
-    if (b == "Open" && !locked(t)) { move(t, TRUE); narrate(k, q + " opens " + room(t) + "."); }
-    else if (b == "Close") { move(t, FALSE); narrate(k, q + " closes " + room(t) + "."); }
-    else if (b == "Raise") { move("R", TRUE); narrate(k, q + " heaves on the winch: the portcullis creaks upwards."); }
-    else if (b == "Lower") { move("R", FALSE); narrate(k, "The portcullis crashes down. " + q + " lets go of the winch."); }
+    if (b == "Open" && !locked(t)) { move(t, TRUE); narrate(dl, k, q + " opens " + room(t) + "."); }
+    else if (b == "Close") { move(t, FALSE); narrate(dl, k, q + " closes " + room(t) + "."); }
+    else if (b == "Raise") { move("R", TRUE); narrate(dl, k, q + " heaves on the winch: the portcullis creaks upwards."); }
+    else if (b == "Lower") { move("R", FALSE); narrate(dl, k, "The portcullis crashes down. " + q + " lets go of the winch."); }
     else if (b == "Ring bell" && opt("bell"))
     {
         string s = snd(SOUND_BELL, "press_gang_bell");
-        if (s != "") llPlaySound(s, 1.0);
+        if (s != "") llLinkPlaySound(dl, s, 1.0, SOUND_PLAY);
         llMessageLinked(LINK_SET, 9300, "bell", k);
-        narrate(k, "DONG... DONG... DONG... " + q + " rings the press-gang bell: fresh meat for the Pit.");
+        narrate(dl, k, "DONG... DONG... DONG... " + q + " rings the press-gang bell: fresh meat for the Pit.");
     }
     else if (b == "Lock" && opt("locks"))
     {
         move(t, FALSE);
         string s = snd(SOUND_LOCK, "lock_clank");
-        if (s != "") llPlaySound(s, 1.0);
+        if (s != "") llLinkPlaySound(dl, s, 1.0, SOUND_PLAY);
         save(t, 1, k, q, 0, "");
-        narrate(k, q + " turns the key in " + room(t) + ". Only " + q + " can open it now.");
+        narrate(dl, k, q + " turns the key in " + room(t) + ". Only " + q + " can open it now.");
     }
     else if (b == "Unlock" && has_key(t, k))
     {
         save(t, 0, NULL_KEY, "", 0, "");
-        narrate(k, q + " unlocks " + room(t) + ".");
+        narrate(dl, k, q + " unlocks " + room(t) + ".");
     }
-    else if (b == "Give key" && has_key(t, k)) { MODE = "give"; llSensor("", NULL_KEY, AGENT, 12.0, PI); }
-    else if (b == "Sentence" && has_key(t, k))
+    else if (b == "Give key" && has_key(t, k))
     {
-        MODE = "sentence";
-        dialog(k, "How long locked in " + room(t) + "?", ["5 min", "15 min", "30 min", "60 min", "120 min"]);
+        list n = near(dl, 12.0);
+        if (n == []) llRegionSayTo(k, 0, "Nobody is near.");
+        else dialog(k, t, "give", "Who gets the key to " + room(t) + "?", llList2ListStrided(n, 0, -1, 2));
     }
-    else if (MODE == "sentence" && llSubStringIndex(b, " min") != -1)
+    else if (b == "Sentence" && has_key(t, k))
+        dialog(k, t, "sentence", "How long locked in " + room(t) + "?", ["5 min", "15 min", "30 min", "60 min", "120 min"]);
+    else if (mode == "sentence" && llSubStringIndex(b, " min") != -1 && has_key(t, k))
     {
         integer m = (integer)b;
         save(t, 1, llList2Key(e, 1), llList2String(e, 2), llGetUnixTime() + m * 60, llList2String(e, 4));
-        narrate(k, q + " imposes a sentence of " + (string)m + " minutes in " + room(t) + ".");
+        narrate(dl, k, q + " imposes a sentence of " + (string)m + " minutes in " + room(t) + ".");
     }
     else if (b == "Pick lock" && opt("escape"))
     {
@@ -403,23 +443,23 @@ act(key k, string b)
         {
             save(t, 0, NULL_KEY, "", 0, "");
             move(t, TRUE);
-            narrate(k, q + " bursts the lock of " + room(t) + "! (d20 = " + (string)d + ")");
-            llInstantMessage(llList2Key(e, 1), q + " has picked the lock of " + room(t) + " and is loose.");
+            narrate(dl, k, q + " bursts the lock of " + room(t) + "! (d20 = " + (string)d + ")");
+            tell(llList2Key(e, 1), q + " has picked the lock of " + room(t) + " and is loose.");
         }
         else
         {
-            narrate(k, q + " wrestles with the lock of " + room(t) + "... and it holds. (d20 = " + (string)d + ")");
-            llInstantMessage(llList2Key(e, 1), q + " tried to pick the lock of " + room(t) + ".");
+            narrate(dl, k, q + " wrestles with the lock of " + room(t) + "... and it holds. (d20 = " + (string)d + ")");
+            tell(llList2Key(e, 1), q + " tried to pick the lock of " + room(t) + ".");
         }
     }
     else if (b == "Beg mercy" && opt("pleas"))
     {
-        narrate(k, q + " clings to the bars of " + room(t) + " and begs for mercy.");
-        llInstantMessage(llList2Key(e, 1), q + " begs for mercy from " + room(t) + ".");
+        narrate(dl, k, q + " clings to the bars of " + room(t) + " and begs for mercy.");
+        tell(llList2Key(e, 1), q + " begs for mercy from " + room(t) + ".");
     }
     else if (b == "Rattle bars" && opt("pleas"))
     {
-        narrate(k, q + " rattles the bars of " + room(t) + ". The iron booms through the whole Pit.");
+        narrate(dl, k, q + " rattles the bars of " + room(t) + ". The iron booms through the whole Pit.");
         llMessageLinked(LINK_SET, 9100, "rattle|" + t + "|0", NULL_KEY);
     }
 }
@@ -436,7 +476,7 @@ check_sentences()
         if (llList2Integer(e, 0) && until > 0 && llGetUnixTime() >= until)
         {
             save(t, 0, NULL_KEY, "", 0, "");
-            narrate(llList2Key(e, 1), "The sentence in " + room(t) + " is served: the lock is free.");
+            narrate(door_link(t), llList2Key(e, 1), "The sentence in " + room(t) + " is served: the lock is free.");
         }
     }
     board();
@@ -450,6 +490,7 @@ default
         OPTS = llLinksetDataRead("opts");
         llListen(7, "", llGetOwner(), "doors");
         llListen(7, "", llGetOwner(), "doors reset");
+        llListen(CH, "", NULL_KEY, "");
         scan();
         llSetTimerEvent(10.0);
     }
@@ -487,13 +528,19 @@ default
             }
             else if (o == "judge")
             {
-                string t = llList2String(p, 1);
-                move(t, FALSE);
-                if (opt("locks"))
+                list ts = [llList2String(p, 1)];
+                if (llList2String(p, 1) == "C05") ts += "C06";      // the kennel has two doors
+                integer j;
+                for (j = 0; j < llGetListLength(ts); ++j)
                 {
-                    integer until = 0;
-                    if (opt("sentences")) until = llGetUnixTime() + 30 * 60;
-                    save(t, 1, (key)llList2String(p, 2), llList2String(p, 3), until, "");
+                    string t = llList2String(ts, j);
+                    move(t, FALSE);
+                    if (opt("locks"))
+                    {
+                        integer until = 0;
+                        if (opt("sentences")) until = llGetUnixTime() + 30 * 60;
+                        save(t, 1, (key)llList2String(p, 2), llList2String(p, 3), until, "");
+                    }
                 }
             }
         }
@@ -522,42 +569,32 @@ default
             scan();
             return;
         }
-        if (id != USER) return;
-        if (MODE == "give")
+        integer si = llListFindList(SESS, [id]);
+        if (si == -1 || llList2Integer(SESS, si + 3) < llGetUnixTime()) return;
+        string t = llList2String(SESS, si + 1);
+        string mode = llList2String(SESS, si + 2);
+        SESS = llDeleteSubList(SESS, si, si + 3);
+        if (mode == "give")
         {
-            integer i = llListFindList(NEAR, [m]);
-            if (i == -1) return;
-            key k2 = llList2Key(NEAR, i + 1);
-            list e = lock_state(MENU_TAG);
-            save(MENU_TAG, 1, llList2Key(e, 1), llList2String(e, 2), llList2Integer(e, 3),
+            list nb = near(door_link(t), 12.0);
+            integer i = llListFindList(nb, [m]);
+            if (i == -1 || !has_key(t, id)) return;
+            key k2 = llList2Key(nb, i + 1);
+            list e = lock_state(t);
+            save(t, 1, llList2Key(e, 1), llList2String(e, 2), llList2Integer(e, 3),
                  llList2String(e, 4) + "," + (string)k2);
-            narrate(id, who(id) + " hands a copy of the key to " + room(MENU_TAG) + " to " + who(k2) + ".");
-            MODE = "";
+            narrate(door_link(t), id, who(id) + " hands a copy of the key to " + room(t) + " to " + who(k2) + ".");
             return;
         }
-        act(id, m);
+        act(id, t, mode, m);
     }
-
-    sensor(integer num)
-    {
-        NEAR = [];
-        list b = [];
-        integer i;
-        for (i = 0; i < num && i < 12; ++i)
-        {
-            string nm = llGetSubString(llDetectedName(i), 0, 23);
-            NEAR += [nm, llDetectedKey(i)];
-            b += nm;
-        }
-        dialog(USER, "Who gets the key to " + room(MENU_TAG) + "?", b);
-    }
-    no_sensor() { llRegionSayTo(USER, 0, "Nobody is near."); }
 
     timer()
     {
         integer now = llGetUnixTime();
-        if (LH && now >= LISTEN_UNTIL) { llListenRemove(LH); LH = 0; }
         integer i;
+        for (i = llGetListLength(SESS) - 4; i >= 0; i -= 4)
+            if (llList2Integer(SESS, i + 3) < now) SESS = llDeleteSubList(SESS, i, i + 3);
         for (i = llGetListLength(TRIES) - 2; i >= 0; i -= 2)
             if (now - llList2Integer(TRIES, i + 1) >= PICK_COOLDOWN) TRIES = llDeleteSubList(TRIES, i, i + 1);
         check_sentences();

@@ -139,7 +139,8 @@ diagnose()
         {
             vector a = rp + (p + <-dir * 2.0, 0.3, z>) * rr;
             vector b = rp + (p + < dir * 2.0, 0.3, z>) * rr;
-            list opts = [RC_REJECT_TYPES, RC_REJECT_AGENTS | RC_REJECT_LAND, RC_DATA_FLAGS, RC_GET_LINK_NUM, RC_MAX_HITS, 4];
+            list opts = [RC_REJECT_TYPES, RC_REJECT_AGENTS | RC_REJECT_LAND, RC_DATA_FLAGS, RC_GET_LINK_NUM | RC_GET_ROOT_KEY,
+                         RC_MAX_HITS, 4];
             list hits = llCastRay(a, b, opts);
             integer h = llList2Integer(hits, -1);
             if (h < 0) { llSleep(0.3); hits = llCastRay(a, b, opts); h = llList2Integer(hits, -1); }
@@ -148,7 +149,9 @@ diagnose()
             integer j;
             for (j = 0; j < h; ++j)
             {
-                integer hl = llList2Integer(hits, j * 3 + 2);
+                // each hit is [root key, link number, position]; read the link number wherever it sits
+                integer hl = llList2Integer(hits, j * 3 + 1);
+                if (llGetListEntryType(hits, j * 3 + 1) != TYPE_INTEGER) hl = llList2Integer(hits, j * 3 + 2);
                 if (llList2Key(hits, j * 3) == llGetKey() && hl != l)
                 {
                     llOwnerSay("WARNING: the doorway of " + llGetLinkName(l) + " hits " + llGetLinkName(hl)
@@ -164,29 +167,60 @@ diagnose()
 }
 
 // One-time upgrade of the data stored by the first release (same values, English key names).
+// Small batches: a long list of keys at once could run the script out of memory.
 upgrade()
 {
     if (llLinksetDataRead("pit_version") == "4") return;
+    string count = llLinksetDataRead("reclutas");
+    if (count != "") llLinksetDataWrite("recruits", count);
     list ren = ["^p:", "lock:", "^leva:", "muster:", "^num:", "recruit:", "^marcas:", "brands:"];
     integer r;
     for (r = 0; r < llGetListLength(ren); r += 2)
     {
-        list ks = llLinksetDataFindKeys(llList2String(ren, r), 0, 0);
-        integer i;
-        for (i = 0; i < llGetListLength(ks); ++i)
+        list ks;
+        while ((ks = llLinksetDataFindKeys(llList2String(ren, r), 0, 16)) != [])
         {
-            string k = llList2String(ks, i);
-            llLinksetDataWrite(llList2String(ren, r + 1) + llGetSubString(k, llSubStringIndex(k, ":") + 1, -1),
-                               llLinksetDataRead(k));
-            llLinksetDataDelete(k);
+            integer i;
+            for (i = 0; i < llGetListLength(ks); ++i)
+            {
+                string k = llList2String(ks, i);
+                llLinksetDataWrite(llList2String(ren, r + 1) + llGetSubString(k, llSubStringIndex(k, ":") + 1, -1),
+                                   llLinksetDataRead(k));
+                llLinksetDataDelete(k);
+            }
         }
     }
-    string count = llLinksetDataRead("reclutas");
-    if (count != "") llLinksetDataWrite("recruits", count);
-    list junk = llLinksetDataFindKeys("^(cerr:|sit:|senor$|potro$|azotes$|silla|reclutas$|C0[57]_)", 0, 0);
-    integer j;
-    for (j = 0; j < llGetListLength(junk); ++j) llLinksetDataDelete(llList2String(junk, j));
+    list junk;
+    while ((junk = llLinksetDataFindKeys("^(cerr:|sit:|senor$|potro$|azotes$|silla|reclutas$|C0[57]_)", 0, 16)) != [])
+    {
+        integer j;
+        for (j = 0; j < llGetListLength(junk); ++j) llLinksetDataDelete(llList2String(junk, j));
+    }
     llLinksetDataWrite("pit_version", "4");
+}
+
+// The scripts of the first release rename the pieces back to their old names and
+// answer the same messages: they must go. Anything else unknown is reported.
+remove_old_scripts()
+{
+    integer i = llGetInventoryNumber(INVENTORY_SCRIPT);
+    list others = [];
+    while (i--)
+    {
+        string s = llGetInventoryName(INVENTORY_SCRIPT, i);
+        if (llSubStringIndex(llToLower(s), "foso_") == 0)
+        {
+            llOwnerSay("pit_core: removing the old script " + s + " (first release).");
+            llRemoveInventory(s);
+        }
+        else if (llSubStringIndex(s, "pit_") != 0) others += s;
+    }
+    if (others != [])
+        llOwnerSay("pit_core: other scripts in the root (remove them if they belong to an old version): "
+            + llDumpList2String(others, ", "));
+    if (llGetLinkNumber() > 1)
+        llOwnerSay("pit_core WARNING: the scripts are in a CHILD prim (link " + (string)llGetLinkNumber()
+            + "). Put them, and the materials, in the ROOT prim's Contents.");
 }
 
 default
@@ -195,17 +229,27 @@ default
     {
         OPTS = llLinksetDataRead("opts");
         llOwnerSay("The Pit: getting ready...");
+        remove_old_scripts();
         upgrade();
         if (opt("rename")) recognise();
+        llSleep(1.5);    // let the new names settle before reading them back
         if (opt("physics")) physics();
-        llSleep(1.5);
+        string root = llGetLinkName(1);
+        if (llSubStringIndex(root, "_Door") != -1 || llSubStringIndex(root, "G_Leaf") == 0 || root == "G_Portcullis"
+            || root == "C04_Chair" || llSubStringIndex(root, "C07_Cage") == 0)
+            llOwnerSay("pit_core WARNING: the root prim is " + root + ", a moving piece: it cannot move without moving "
+                + "the whole build. Relink with a fixed piece (a floor or a wall) selected last, so it becomes the root.");
         if (opt("diagnose")) diagnose();
         llMessageLinked(LINK_SET, 9001, "ready", NULL_KEY);
         llListen(7, "", llGetOwner(), "diagnose");
         llOwnerSay("pit_core ready" + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB." + " Type /7 report for every script's status, /7 help for all commands.");
     }
     on_rez(integer p) { llResetScript(); }
-    changed(integer c) { if (c & CHANGED_OWNER) llResetScript(); }
+    changed(integer c)
+    {
+        if (c & CHANGED_OWNER) llResetScript();
+        if (c & CHANGED_INVENTORY) remove_old_scripts();
+    }
     linkset_data(integer action, string name, string value)
     {
         if (name == "opts" || action == LINKSETDATA_RESET) OPTS = llLinksetDataRead("opts");

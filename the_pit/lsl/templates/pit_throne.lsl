@@ -98,8 +98,8 @@ check()
     }
 }
 
-integer CH; integer LH; key USER; string MODE; key CHOSEN;
-list NEAR;
+integer CH; key USER; integer LINK; key CHOSEN;
+list SESS;      // open menus, one per avatar: [avatar, link, mode, expires, chosen]
 string OPTS;
 
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
@@ -113,17 +113,46 @@ integer link_of(string name)
 }
 string who(key k) { return llGetDisplayName(k); }
 integer utf8(string s) { return (llStringLength(llStringToBase64(s)) * 3) >> 2; }   // byte length
+// avatars within r metres of the touched piece (not of the root, which can be 25 m away)
+list near(integer link, float r)
+{
+    vector c = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_POSITION]), 0);
+    list ag = llGetAgentList(AGENT_LIST_REGION, []);
+    list out = [];
+    integer i;
+    for (i = 0; i < llGetListLength(ag) && llGetListLength(out) < 24; ++i)
+    {
+        key a = llList2Key(ag, i);
+        if (llVecDist(llList2Vector(llGetObjectDetails(a, [OBJECT_POS]), 0), c) <= r)
+            out += [llGetSubString(llKey2Name(a), 0, 23), a];
+    }
+    return out;
+}
+// RP line for everyone within 20 m of the piece in use (or only k with narration off)
 narrate(key k, string s)
 {
-    if (opt("narration")) llSay(0, s);
-    else llRegionSayTo(k, 0, s);
+    if (!opt("narration")) { llRegionSayTo(k, 0, s); return; }
+    list n = near(LINK, 20.0);
+    integer i;
+    for (i = 1; i < llGetListLength(n); i += 2) llRegionSayTo(llList2Key(n, i), 0, s);
 }
-dialog(key k, string t, list b)
+dialog(key k, string mode, string t, list b)
 {
-    llListenRemove(LH);
-    LH = llListen(CH, "", k, "");
-    llSetTimerEvent(60.0);
+    integer i = llListFindList(SESS, [k]);
+    if (i != -1) SESS = llDeleteSubList(SESS, i, i + 4);
+    SESS += [k, LINK, mode, llGetUnixTime() + 60, CHOSEN];
     llDialog(k, t, b, CH);
+}
+choose(key k, string mode, float r)
+{
+    list n = near(LINK, r);
+    if (n == []) llRegionSayTo(k, 0, "Nobody is near.");
+    else dialog(k, mode, "Choose who:", llList2ListStrided(n, 0, -1, 2));
+}
+float radius(string mode)
+{
+    if (mode == "choose") return 30.0;
+    return 8.0;
 }
 
 signs()
@@ -133,7 +162,7 @@ signs()
     if (l > 0)
     {
         if (!opt("throne") || !opt("hovertext")) llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "", ZERO_VECTOR, 0.0]);
-        else if (lord == NULL_KEY) llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "THE EMPTY THRONE", <0.6, 0.35, 0.2>, 0.6]);
+        else if (lord == NULL_KEY || (string)lord == "") llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "THE EMPTY THRONE", <0.6, 0.35, 0.2>, 0.6]);
         else llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "LORD OF THE PIT\n" + who(lord), <0.95, 0.6, 0.25>, 0.9]);
     }
     l = link_of("C01_Desk");
@@ -191,7 +220,6 @@ brand(key k)
 
 lord_menu(key k)
 {
-    MODE = "throne";
     list b = [];
     if (opt("throne"))
     {
@@ -201,9 +229,9 @@ lord_menu(key k)
         if (opt("bell")) b += ["Bell"];
         if (opt("muster_book")) b += ["Book"];
     }
-    if (k == llGetOwner()) b += ["Settings"];
+    if (k == llGetOwner()) b += ["Settings", "Report"];
     if (b == []) return;
-    dialog(k, "LORD OF THE PIT", b);
+    dialog(k, "throne", "LORD OF THE PIT", b);
 }
 
 report()
@@ -229,6 +257,8 @@ default
     state_entry()
     {
         CH = -1 - (integer)llFrand(1000000.0);
+        llListen(CH, "", NULL_KEY, "");
+        llSetTimerEvent(30.0);
         OPTS = llLinksetDataRead("opts");
         place(); check();
         signs();
@@ -260,6 +290,7 @@ default
     {
         if (n == 9600 && str == "in|N_Throne")
         {
+            LINK = link_of("N_Throne");
             llLinksetDataWrite("lord", (string)id);
             if (opt("throne")) narrate(id, who(id) + " takes the throne. Every gate in the Pit obeys.");
             signs();
@@ -275,43 +306,48 @@ default
 
     touch_start(integer t)
     {
-        USER = llDetectedKey(0);
-        string p = llGetLinkName(llDetectedLinkNumber(0));
+        key k = llDetectedKey(0);
+        integer l = llDetectedLinkNumber(0);
+        string p = llGetLinkName(l);
         if (p == "N_Throne")
         {
-            if (USER != llGetOwner() && (!opt("throne") || USER != (key)llLinksetDataRead("lord")))
+            if (k != llGetOwner() && (!opt("throne") || k != (key)llLinksetDataRead("lord")))
             {
-                llRegionSayTo(USER, 0, "Only whoever sits on the throne can give orders.");
+                llRegionSayTo(k, 0, "Only whoever sits on the throne can give orders.");
                 return;
             }
-            lord_menu(USER);
+            LINK = l; CHOSEN = NULL_KEY;
+            lord_menu(k);
         }
         else if (p == "C01_Desk" && opt("muster_book"))
         {
-            MODE = "book";
-            dialog(USER, "THE MUSTER BOOK", ["Enlist", "Read book", "Oath"]);
+            LINK = l; CHOSEN = NULL_KEY;
+            dialog(k, "book", "THE MUSTER BOOK", ["Enlist", "Read book", "Oath"]);
         }
-        else if (p == "C01_Branding_Brazier" && opt("branding")) { MODE = "brand"; llSensor("", NULL_KEY, AGENT, 8.0, PI); }
+        else if (p == "C01_Branding_Brazier" && opt("branding")) { LINK = l; CHOSEN = NULL_KEY; choose(k, "brand", 8.0); }
     }
 
     listen(integer c, string n, key id, string m)
     {
-        if (id != USER) return;
-        if (MODE == "choose" || MODE == "enlist" || MODE == "brand_choose")
+        integer si = llListFindList(SESS, [id]);
+        if (si == -1 || llList2Integer(SESS, si + 3) < llGetUnixTime()) return;
+        USER = id;
+        LINK = llList2Integer(SESS, si + 1);
+        string mode = llList2String(SESS, si + 2);
+        CHOSEN = llList2Key(SESS, si + 4);
+        SESS = llDeleteSubList(SESS, si, si + 4);
+        if (mode == "choose" || mode == "enlist" || mode == "brand")
         {
-            integer i = llListFindList(NEAR, [m]);
+            list near_list = near(LINK, radius(mode));
+            integer i = llListFindList(near_list, [m]);
             if (i == -1) return;
-            CHOSEN = llList2Key(NEAR, i + 1);
-            if (MODE == "enlist") enlist(CHOSEN);
-            else if (MODE == "brand_choose") brand(CHOSEN);
-            else
-            {
-                MODE = "room";
-                dialog(id, "To which room do you sentence " + who(CHOSEN) + "?", ROOM_BUTTONS);
-            }
+            CHOSEN = llList2Key(near_list, i + 1);
+            if (mode == "enlist") enlist(CHOSEN);
+            else if (mode == "brand") brand(CHOSEN);
+            else dialog(id, "room", "To which room do you sentence " + who(CHOSEN) + "?", ROOM_BUTTONS);
             return;
         }
-        if (MODE == "room")
+        if (mode == "room")
         {
             integer i = llListFindList(ROOM_BUTTONS, [m]);
             if (i == -1) return;
@@ -321,42 +357,44 @@ default
                   + ". The guard drags the prisoner away and turns the key.");
             return;
         }
-        if (m == "Settings" && id == llGetOwner()) llMessageLinked(LINK_SET, 9700, "menu", id);
-        else if (m == "Open all") { llMessageLinked(LINK_SET, 9400, "all|open", id); narrate(id, who(id) + " orders every gate of the Pit opened."); }
-        else if (m == "Close all") { llMessageLinked(LINK_SET, 9400, "all|close", id); narrate(id, who(id) + " orders every gate shut."); }
-        else if (m == "Mood") { MODE = "mood"; dialog(id, "The mood of the Pit", ["WATCH", "GLOOM", "JUDGEMENT", "DARKNESS"]); }
-        else if (llListFindList(["WATCH", "GLOOM", "JUDGEMENT", "DARKNESS"], [m]) != -1)
+        if (mode == "mood")
         {
+            if (llListFindList(["WATCH", "GLOOM", "JUDGEMENT", "DARKNESS"], [m]) == -1) return;
             llMessageLinked(LINK_SET, 9200, m, id);
             if (m == "DARKNESS") narrate(id, "The torches die one by one. Only the braziers by the throne still burn.");
             else if (m == "JUDGEMENT") narrate(id, "The braziers roar and the whole Pit turns red.");
             else if (m == "GLOOM") narrate(id, "The flames sink low. Shadows creep along the walls.");
             else narrate(id, "The torches burn steady again. The watch goes on.");
+            return;
         }
-        else if (m == "Judgement") { MODE = "choose"; llSensor("", NULL_KEY, AGENT, 30.0, PI); }
+        if (mode == "book")
+        {
+            if (m == "Read book") llDialog(id, book(), ["Close"], CH);
+            else if (m == "Enlist") choose(id, "enlist", 8.0);
+            else if (m == "Oath")
+                narrate(id, who(id) + " lays a hand on the book and swears: \"My back to the lash, my blood to the sea, my life to the Lord of the Pit.\"");
+            return;
+        }
+        // mode "throne"
+        if (m == "Settings" && id == llGetOwner()) llMessageLinked(LINK_SET, 9700, "menu", id);
+        else if (m == "Report" && id == llGetOwner()) llMessageLinked(LINK_SET, 9800, "report", id);
+        else if (m == "Open all") { llMessageLinked(LINK_SET, 9400, "all|open", id); narrate(id, who(id) + " orders every gate of the Pit opened."); }
+        else if (m == "Close all") { llMessageLinked(LINK_SET, 9400, "all|close", id); narrate(id, who(id) + " orders every gate shut."); }
+        else if (m == "Mood") dialog(id, "mood", "The mood of the Pit", ["WATCH", "GLOOM", "JUDGEMENT", "DARKNESS"]);
+        else if (m == "Judgement") choose(id, "choose", 30.0);
         else if (m == "Bell")
         {
             llMessageLinked(LINK_SET, 9300, "bell", id);
             narrate(id, "DONG... The Lord orders the press-gang bell rung.");
         }
-        else if (m == "Book" || m == "Read book") llDialog(id, book(), ["Close"], CH);
-        else if (m == "Enlist") { MODE = "enlist"; llSensor("", NULL_KEY, AGENT, 8.0, PI); }
-        else if (m == "Oath")
-            narrate(id, who(id) + " lays a hand on the book and swears: \"My back to the lash, my blood to the sea, my life to the Lord of the Pit.\"");
+        else if (m == "Book") llDialog(id, book(), ["Close"], CH);
     }
 
-    sensor(integer num)
+    timer()
     {
-        NEAR = []; list b = [];
+        integer now = llGetUnixTime();
         integer i;
-        for (i = 0; i < num && i < 12; ++i)
-        {
-            string nm = llGetSubString(llDetectedName(i), 0, 23);
-            NEAR += [nm, llDetectedKey(i)]; b += nm;
-        }
-        if (MODE == "brand") MODE = "brand_choose";
-        dialog(USER, "Choose who:", b);
+        for (i = llGetListLength(SESS) - 5; i >= 0; i -= 5)
+            if (llList2Integer(SESS, i + 3) < now) SESS = llDeleteSubList(SESS, i, i + 4);
     }
-    no_sensor() { llRegionSayTo(USER, 0, "Nobody is near."); }
-    timer() { llListenRemove(LH); llSetTimerEvent(0.0); }
 }

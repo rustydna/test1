@@ -46,14 +46,14 @@ string  UUID_DRIP = "";          // drip.png            drips from the vaults
 string  UUID_PROJECTOR = "";     // fire_projector.png  projector light (throne braziers, kennel
                                  //                     lantern, yard lanterns)
 float   FLIPBOOK_FPS = 12.0;     // flipbook frames per second (each fire varies a little)
-float   TICK = 0.12;
-integer PER_TICK = 5;
+float   TICK = 0.2;
+integer PER_TICK = 4;
 
 string T_FLIPBOOK; string T_FLAME; string T_SMOKE; string T_FOG; string T_SPARK; string T_DRIP; string T_PROJECTOR;
 
 list F_LINK; list F_TYPE; list F_POS; list F_LEVEL; list F_VEL; list F_GUST;  // type: 0 torch, 1 lantern, 2 brazier
 list F_SMOKE; list F_PROJ;   // smoke: next switch time (>0 flame, <0 smoke); proj: carries a projector light
-integer CURSOR;
+integer CURSOR; integer PRIMS; integer IDLE_CHECK; integer IDLE;
 string MOOD = "WATCH";
 float  K_LIGHT = 1.0; float K_RADIUS = 1.0; vector TINT = <1.0, 0.55, 0.22>; float FOG_DENSITY = 1.0;
 
@@ -239,7 +239,7 @@ light(integer i, float lv)
         if (MOOD == "JUDGEMENT") { radius = radius * 1.4; falloff = 0.8; }
         float k = K_LIGHT; if (type == 2 && MOOD == "DARKNESS") k = 0.7;
         vector col = TINT + <0.0, (lv - 1.0) * 0.12, (lv - 1.0) * 0.05>;
-        p = [PRIM_POINT_LIGHT, TRUE, col, base * k * lv, radius * K_RADIUS * (0.9 + 0.1 * lv), falloff];
+        p = [PRIM_POINT_LIGHT, TRUE, llsRGB2Linear(col), base * k * lv, radius * K_RADIUS * (0.9 + 0.1 * lv), falloff];
     }
     if (GLOW) p += [PRIM_GLOW, 7, 0.12 + 0.2 * lv];
     else p += [PRIM_GLOW, 7, 0.0];
@@ -324,6 +324,7 @@ scan()
 {
     F_LINK = []; F_TYPE = []; F_POS = []; F_LEVEL = []; F_VEL = []; F_GUST = []; F_SMOKE = []; F_PROJ = [];
     integer n = llGetObjectPrimCount(llGetKey());
+    PRIMS = n;
     integer i;
     for (i = 1; i <= n; ++i)
     {
@@ -373,7 +374,8 @@ default
     on_rez(integer p) { llResetScript(); }
     changed(integer c)
     {
-        if (c & CHANGED_LINK) scan();
+        // sitting down or standing up also raises CHANGED_LINK: rescan only if the prims changed
+        if ((c & CHANGED_LINK) && llGetObjectPrimCount(llGetKey()) != PRIMS) scan();
         else if (c & CHANGED_INVENTORY) { load_textures(); apply(); }
     }
     linkset_data(integer action, string name, string value)
@@ -433,6 +435,9 @@ default
     {
         integer n = llGetListLength(F_LINK);
         if (n == 0) return;
+        // nobody on the parcel: let the fire rest (checked every ~10 s)
+        if (++IDLE_CHECK >= 50) { IDLE_CHECK = 0; IDLE = (llGetAgentList(AGENT_LIST_PARCEL, []) == []); }
+        if (IDLE) return;
         integer j;
         for (j = 0; j < PER_TICK; ++j)
         {

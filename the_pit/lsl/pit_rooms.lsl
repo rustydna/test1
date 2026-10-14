@@ -22,7 +22,8 @@ vector CHAIR_PIVOT = <0.525,0.000,0.100>;
 
 float CHAIR_ANGLE = -28.0;
 float CAGE_RISE = 1.4;
-integer CH; integer LH; key USER; string PIECE; integer LINK;
+integer CH; key USER; string PIECE; integer LINK;
+list SESS;      // open menus, one per avatar: [avatar, link, mode, expires]
 string OPTS;
 
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
@@ -60,11 +61,27 @@ string feature(string nm)
 integer active(string nm) { return opt("furniture") && opt(feature(nm)); }
 
 key occupant(string nm) { return (key)llLinksetDataRead("sit:" + nm); }
-string who(key k) { if (k == NULL_KEY) return "nobody"; return llGetDisplayName(k); }
+string who(key k) { if (k == NULL_KEY || (string)k == "") return "nobody"; return llGetDisplayName(k); }
+
+// RP line for everyone within 20 m of the piece (the root can be 25 m away), or only USER
 narrate(string s)
 {
-    if (opt("narration")) llSay(0, s);
-    else llRegionSayTo(USER, 0, s);
+    if (!opt("narration")) { llRegionSayTo(USER, 0, s); return; }
+    vector c = llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POSITION]), 0);
+    list ag = llGetAgentList(AGENT_LIST_REGION, []);
+    integer i;
+    for (i = 0; i < llGetListLength(ag); ++i)
+    {
+        key a = llList2Key(ag, i);
+        if (llVecDist(llList2Vector(llGetObjectDetails(a, [OBJECT_POS]), 0), c) <= 20.0) llRegionSayTo(a, 0, s);
+    }
+}
+
+session(key k, integer l, string mode)
+{
+    integer i = llListFindList(SESS, [k]);
+    if (i != -1) SESS = llDeleteSubList(SESS, i, i + 3);
+    SESS += [k, l, mode, llGetUnixTime() + 60];
 }
 string pick(list l) { return llList2String(l, (integer)llFrand(llGetListLength(l))); }
 
@@ -152,9 +169,7 @@ menu(key k, integer l)
     else if (PIECE == "V_Table") { t = "THE GUARD TABLE"; b = ["Dice", "Toast"]; }
     else if (PIECE == "V_Basket") { t = "LAUNDRY BASKET\nThe dirty underwear of the guards and the slaves."; b = ["Throw clothes"]; }
     else if (PIECE == "N_Kneeling_Stone") { t = "KNEELING STONE\nBefore the throne: " + who(oc); b = ["Present"]; }
-    llListenRemove(LH);
-    LH = llListen(CH, "", k, "");
-    llSetTimerEvent(60.0);
+    session(k, l, "main");
     llDialog(k, t, b, CH);
 }
 
@@ -236,6 +251,7 @@ act(string b)
     else if (b == "Salt") narrate(q + " rubs salt from the barrel into " + v + "'s back. An old ship's custom.");
     else if (b == "Name dog")
     {
+        session(USER, LINK, "name");
         llTextBox(USER, "Dog name for whoever lives in this kennel:", CH);
         return;
     }
@@ -278,6 +294,8 @@ default
     state_entry()
     {
         CH = -1 - (integer)llFrand(1000000.0);
+        llListen(CH, "", NULL_KEY, "");
+        llSetTimerEvent(30.0);
         OPTS = llLinksetDataRead("opts");
         texts();
         report();
@@ -295,8 +313,12 @@ default
     touch_start(integer n) { menu(llDetectedKey(0), llDetectedLinkNumber(0)); }
     listen(integer c, string n, key id, string m)
     {
-        if (id != USER) return;
-        if (llSubStringIndex(PIECE, "C05_Kennel") == 0 && llListFindList(["Name dog", "Bark", "Remove name"], [m]) == -1)
+        integer si = llListFindList(SESS, [id]);
+        if (si == -1 || llList2Integer(SESS, si + 3) < llGetUnixTime()) return;
+        USER = id; LINK = llList2Integer(SESS, si + 1); PIECE = llGetLinkName(LINK);
+        string mode = llList2String(SESS, si + 2);
+        SESS = llDeleteSubList(SESS, si, si + 3);
+        if (mode == "name")
         {
             string txt = "DOG: " + llGetSubString(m, 0, 30) + "\nOwner: " + who(id);
             llLinksetDataWrite("dog:" + PIECE, txt);
@@ -306,5 +328,11 @@ default
         }
         act(m);
     }
-    timer() { llListenRemove(LH); llSetTimerEvent(0.0); }
+    timer()
+    {
+        integer now = llGetUnixTime();
+        integer i;
+        for (i = llGetListLength(SESS) - 4; i >= 0; i -= 4)
+            if (llList2Integer(SESS, i + 3) < now) SESS = llDeleteSubList(SESS, i, i + 3);
+    }
 }

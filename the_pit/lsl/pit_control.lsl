@@ -405,7 +405,12 @@ default
     link_message(integer s, integer n, string str, key id)
     {
         if (n == 9700 && id == llGetOwner()) menu(-1);
-        else if (n == 9001) find_water();
+        else if (n == 9001) { find_water(); if (opt("auto_materials")) start(); }   // pieces renamed: water needs its own material
+        else if (n == 9800)
+        {
+            llOwnerSay("pit_control: " + status() + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+            start();
+        }
     }
 
     listen(integer c, string n, key id, string m)
@@ -413,12 +418,7 @@ default
         if (c == 7)
         {
             if (m == "materials") start();
-            else if (m == "report")
-            {
-                llOwnerSay("pit_control: settings - " + status() + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
-                start();
-                llMessageLinked(LINK_SET, 9800, "report", NULL_KEY);
-            }
+            else if (m == "report") llMessageLinked(LINK_SET, 9800, "report", NULL_KEY);
             else command(m);
             return;
         }
@@ -449,7 +449,28 @@ default
         }
         list p = llParseString2List(d, ["="], []);
         if (llGetListLength(p) == 2)
-            ASSIGN += [llStringTrim(llList2String(p, 0), STRING_TRIM), llStringTrim(llList2String(p, 1), STRING_TRIM)];
+        {
+            // block names in any case; material by exact name, UUID or part of its name
+            string blk = llToLower(llStringTrim(llList2String(p, 0), STRING_TRIM));
+            string want = llStringTrim(llList2String(p, 1), STRING_TRIM);
+            integer b; integer found = -1;
+            for (b = 0; b < llGetListLength(BLOCKS); ++b) if (llToLower(llList2String(BLOCKS, b)) == blk) found = b;
+            string mat = "";
+            integer is_uuid = FALSE;
+            if ((key)want) is_uuid = TRUE;
+            if (is_uuid || (llGetInventoryType(want) != INVENTORY_NONE && !not_material(llGetInventoryType(want)))) mat = want;
+            else
+            {
+                integer i;
+                for (i = 0; i < llGetInventoryNumber(INVENTORY_ALL) && mat == ""; ++i)
+                {
+                    string it = llGetInventoryName(INVENTORY_ALL, i);
+                    if (!not_material(llGetInventoryType(it)) && llSubStringIndex(llToLower(it), llToLower(want)) != -1) mat = it;
+                }
+            }
+            if (found != -1 && mat != "") ASSIGN += [llList2String(BLOCKS, found), mat];
+            else if (llStringTrim(d, STRING_TRIM) != "") llOwnerSay("pit_control: materials notecard line not usable: " + d);
+        }
         Q = llGetNotecardLine("materials", ++LINE);
     }
 
