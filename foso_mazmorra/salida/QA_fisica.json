@@ -1,0 +1,36 @@
+{
+ "accesible": {
+  "Patio centro": true,
+  "Vestíbulo oeste": true,
+  "Vestíbulo este": true,
+  "Estrado (brasero)": true,
+  "Sala del perrero oeste": true,
+  "Sala del perrero este": true,
+  "Celda C01": true,
+  "Celda C05": true,
+  "Celda C02": true,
+  "Celda C06": true,
+  "Celda C03": true,
+  "Celda C07": true,
+  "Celda C04": true,
+  "Celda C08": true
+ },
+ "todo_accesible": true,
+ "celdas_pared_invisible": 2,
+ "pared_invisible_por_pieza_m2": {
+  "G_Torre_O": 0.04,
+  "G_Torre_E": 0.04
+ },
+ "celdas_atravesables": 0,
+ "atravesables_muestra": [],
+ "puntos_alcanzables_sin_suelo": 0,
+ "parametros": {
+  "paso_m": 0.2,
+  "radio_avatar_m": 0.25,
+  "franja_cuerpo_m": [
+   0.35,
+   1.9
+  ],
+  "puertas": "abiertas (sin física de hojas)"
+ }
+}

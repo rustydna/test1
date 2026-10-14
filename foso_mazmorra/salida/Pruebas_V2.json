@@ -1,0 +1,14 @@
+{
+ "mismos_objetos_en_todos_los_niveles": true,
+ "sin_imagenes_ni_texturas": true,
+ "indices_validos": true,
+ "materiales_de_cada_lod_dentro_del_high": true,
+ "misma_caja_en_todos_los_niveles": true,
+ "triangulos_no_degenerados": true,
+ "huella_dentro_de_media_parcela": true,
+ "land_impact_estimado_bajo_objetivo": true,
+ "piezas_con_fisica_prim_no_bajan_de_medio_metro": true,
+ "llamas_en_la_cara_0": true,
+ "circulacion_completa": true,
+ "nombres_que_usan_los_scripts_lsl": true
+}
