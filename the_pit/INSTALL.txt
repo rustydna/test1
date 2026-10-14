@@ -12,7 +12,8 @@ folder. You get three folders: 1_model, 2_bulk_upload, 3_scripts.
 2. MATERIALS AND EFFECTS - one upload
    Build > Upload > Bulk... > open 2_bulk_upload > Ctrl+A > Open > Upload.
    That is the 8 PBR materials (Stone, Floor, Wood, Iron, Cloth, Bone, Straw,
-   Water) and the 7 effect textures. Keep "Scale textures to 1024px" ticked.
+   Water) and the 7 effect textures (all 1024 px or smaller: the 2K option
+   in that window makes no difference).
 
 3. REZ AND FILL
    Drag "The Pit" from your inventory onto the ground.
