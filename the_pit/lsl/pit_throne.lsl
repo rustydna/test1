@@ -77,6 +77,16 @@ check()
         key av = llList2Key(SITTERS, i + 1);
         if (llAvatarOnLinkSitTarget(l) != av)
         {
+            // stop the pose if this script still holds that avatar's permission
+            if (llGetPermissionsKey() == av && (llGetPermissions() & PERMISSION_TRIGGER_ANIMATION)
+                && llGetAgentSize(av) != ZERO_VECTOR)
+                llStopAnimation(llList2String(SITTERS, i + 2));
+            integer q = llListFindList(QUEUE, [av]);
+            if (q != -1)
+            {
+                QUEUE = llDeleteSubList(QUEUE, q, q + 1);
+                if (q == 0) animate_next();
+            }
             llLinksetDataDelete("sit:" + llGetLinkName(l));
             llMessageLinked(LINK_SET, 9600, "out|" + llGetLinkName(l), av);
             SITTERS = llDeleteSubList(SITTERS, i, i + 2);

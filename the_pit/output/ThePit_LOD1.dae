@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <COLLADA xmlns="http://www.collada.org/2005/11/COLLADASchema" version="1.4.1">
 <asset><contributor><authoring_tool>The Pit V2 (Blender)</authoring_tool></contributor>
-<created>2026-10-14T21:06:30Z</created><modified>2026-10-14T21:06:30Z</modified>
+<created>2026-10-14T21:10:37Z</created><modified>2026-10-14T21:10:37Z</modified>
 <unit name="meter" meter="1"/><up_axis>Z_UP</up_axis></asset>
 <library_effects>
 <effect id="Stone-effect"><profile_COMMON><technique sid="common"><lambert><diffuse><color>0.42 0.4 0.37 1</color></diffuse></lambert></technique></profile_COMMON></effect>
