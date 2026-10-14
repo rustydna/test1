@@ -25,7 +25,39 @@ string  SONIDO_CERROJO = "";
 string  SONIDO_RASTRILLO = "";
 string  SONIDO_CAMPANA = "";
 
+vector PIVOTE_SILLA = <0.525,0.000,0.100>;
+list ASIENTOS = [
+    "C01_Escritorio", <0.000,-0.477,0.253>, 90, "foso_escriba", "sit",
+    "C02_Potro", <-0.285,-0.080,0.368>, 0, "foso_potro", "dead",
+    "C03_Picota", <0.000,0.150,0.183>, 90, "foso_picota", "stand",
+    "C03_Cepos", <0.000,0.335,0.670>, -90, "foso_cepos", "sit",
+    "C04_Silla", <-2.075,0.000,0.000>, 0, "foso_silla", "sit",
+    "C05_Caseta_1", <0.005,0.085,-0.150>, 180, "foso_perro", "sleep",
+    "C05_Caseta_2", <0.005,0.085,-0.150>, 180, "foso_perro", "sleep",
+    "C05_Caseta_3", <0.005,0.085,-0.150>, 180, "foso_perro", "sleep",
+    "C07_Jaula_1", <0.000,0.000,-1.863>, 0, "foso_jaula", "stand",
+    "C07_Jaula_2", <0.000,0.000,-1.863>, 0, "foso_jaula", "stand",
+    "C08_Mastil", <0.150,-0.538,-0.723>, 90, "foso_mastil", "stand",
+    "G_Torno", <-0.775,-0.491,-0.915>, 90, "foso_torno", "stand",
+    "V_Mesa", <0.000,-0.800,0.330>, 90, "foso_guardia", "sit",
+    "N_Trono", <0.000,0.094,-0.643>, -90, "foso_senor", "sit",
+    "N_Piedra", <-0.063,-0.200,0.313>, 90, "foso_rodillas", "sit_ground_constrained"];
+vector TRONO_TAM = <1.950,1.387,3.413>;
+list MOVILES = [
+    "C01_Puerta", <0.218,1.415,2.550>, <-3.450,-23.054,-1.288>,
+    "C02_Puerta", <0.218,1.415,2.550>, <-3.450,-17.304,-1.288>,
+    "C03_Puerta", <0.218,1.415,2.550>, <-3.450,-11.554,-1.288>,
+    "C04_Puerta", <0.218,1.415,2.550>, <-3.450,-5.804,-1.288>,
+    "C05_Puerta", <0.218,1.415,2.550>, <3.450,-23.054,-1.288>,
+    "C06_Puerta", <0.218,1.415,2.550>, <3.450,-17.304,-1.288>,
+    "C07_Puerta", <0.218,1.415,2.550>, <3.450,-11.554,-1.288>,
+    "C08_Puerta", <0.218,1.415,2.550>, <3.450,-5.804,-1.288>,
+    "G_Rastrillo", <3.540,0.160,5.600>, <0.000,-32.026,0.207>,
+    "G_Hoja_O", <1.826,0.258,3.050>, <-0.922,-28.735,-1.038>,
+    "G_Hoja_E", <1.826,0.258,3.050>, <0.922,-28.735,-1.038>];
+
 float INSET = 0.03;
+integer PRIMS;                // nº de primitivas en el último escaneo (las sentadas de avatares no cuentan)
 list E_LINK; list E_TAG; list E_TIPO; list E_POS; list E_ROT; list E_EJE; list E_ANG;
 list ABIERTA;                 // por etiqueta: [tag, 0/1, ...]
 list INTENTOS;                // [key, unix]
@@ -81,28 +113,81 @@ integer tiene_llave(string t, key k)
     return FALSE;
 }
 
+// Devuelve el nombre de pieza móvil de un enlace: por su nombre o, si SL no lo
+// conservó, por su tamaño y su posición respecto al trono (y la renombra).
+string identificar(integer link, integer trono, vector base)
+{
+    string nm = llGetLinkName(link);
+    if (llListFindList(MOVILES, [nm]) != -1) return nm;
+    vector sz = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_SIZE]), 0);
+    vector p = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_POS_LOCAL]), 0);
+    integer i; float mejor = 999.0; string elegido = "";
+    for (i = 0; i < llGetListLength(MOVILES); i += 3)
+    {
+        vector ts = llList2Vector(MOVILES, i + 1);
+        if (llVecDist(ts, sz) < 0.05)
+        {
+            float d = 0.0;
+            if (trono > 0) d = llVecDist(llList2Vector(MOVILES, i + 2), p - base);
+            if (d < mejor) { mejor = d; elegido = llList2String(MOVILES, i); }
+        }
+    }
+    if (elegido != "" && mejor < 0.5)
+    {
+        llSetLinkPrimitiveParamsFast(link, [PRIM_NAME, elegido]);
+        return elegido;
+    }
+    return "";
+}
+
 escanear()
 {
     E_LINK = []; E_TAG = []; E_TIPO = []; E_POS = []; E_ROT = []; E_EJE = []; E_ANG = []; ABIERTA = [];
     integer n = llGetObjectPrimCount(llGetKey());
-    integer i; float suma = 0.0; integer cuenta = 0;
+    PRIMS = n;
+    integer i;
+    // el trono sirve de referencia para reconocer piezas sin nombre
+    integer trono = -1; vector base = ZERO_VECTOR;
+    for (i = 1; i <= n && trono == -1; ++i)
+        if (llGetLinkName(i) == "N_Trono" ||
+            llVecDist(llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_SIZE]), 0), TRONO_TAM) < 0.03)
+            trono = i;
+    if (trono > 1) base = llList2Vector(llGetLinkPrimitiveParams(trono, [PRIM_POS_LOCAL]), 0);
+    list nombres = [];
+    float suma = 0.0; integer cuenta = 0;
     for (i = 2; i <= n; ++i)
-        if (llSubStringIndex(llGetLinkName(i), "_Puerta") != -1)
+    {
+        string nm = identificar(i, trono, base);
+        nombres += nm;
+        if (llSubStringIndex(nm, "_Puerta") != -1)
         {
             suma += llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_POS_LOCAL]), 0).x; ++cuenta;
         }
+    }
     float centro = 0.0; if (cuenta) centro = suma / cuenta;
+    integer celdas = 0; integer hojas = 0; integer rastrillo = 0;
     for (i = 2; i <= n; ++i)
     {
-        string nm = llGetLinkName(i);
+        string nm = llList2String(nombres, i - 2);
         integer tipo = -1; string tag = "";
-        if (llSubStringIndex(nm, "_Puerta") != -1) { tipo = 0; tag = llGetSubString(nm, 0, 2); }
-        else if (llSubStringIndex(nm, "G_Hoja") == 0) { tipo = 1; tag = "G"; }
-        else if (nm == "G_Rastrillo") { tipo = 2; tag = "R"; }
+        if (llSubStringIndex(nm, "_Puerta") != -1) { tipo = 0; tag = llGetSubString(nm, 0, 2); ++celdas; }
+        else if (llSubStringIndex(nm, "G_Hoja") == 0) { tipo = 1; tag = "G"; ++hojas; }
+        else if (nm == "G_Rastrillo") { tipo = 2; tag = "R"; ++rastrillo; }
         if (tipo >= 0)
         {
             list p = llGetLinkPrimitiveParams(i, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL, PRIM_SIZE]);
             vector pos = llList2Vector(p, 0); rotation rot = llList2Rot(p, 1); vector sz = llList2Vector(p, 2);
+            // posición CERRADA guardada la primera vez: si ahora está movida, es que estaba abierta
+            integer abierta_ahora = FALSE;
+            string guardada = llLinksetDataRead("cerr:" + nm);
+            if (guardada == "") llLinksetDataWrite("cerr:" + nm, (string)pos + "|" + (string)rot);
+            else
+            {
+                list g = llParseString2List(guardada, ["|"], []);
+                vector gp = (vector)llList2String(g, 0);
+                if (llVecDist(gp, pos) > 0.05) abierta_ahora = TRUE;
+                pos = gp; rot = (rotation)llList2String(g, 1);
+            }
             vector off = ZERO_VECTOR; float ang = 0.0;
             if (tipo == 0)
             {
@@ -116,9 +201,16 @@ escanear()
             }
             E_LINK += i; E_TAG += tag; E_TIPO += tipo; E_POS += pos; E_ROT += rot;
             E_EJE += pos + off * rot; E_ANG += ang;
-            if (llListFindList(ABIERTA, [tag]) == -1) ABIERTA += [tag, 0];
+            integer ia = llListFindList(ABIERTA, [tag]);
+            if (ia == -1) ABIERTA += [tag, abierta_ahora];
+            else if (abierta_ahora) ABIERTA = llListReplaceList(ABIERTA, [TRUE], ia + 1, ia + 1);
         }
     }
+    string aviso = "Puertas listas: " + (string)celdas + " de celda (esperadas 8), " + (string)hojas
+        + " hojas del portón (2), rastrillo: " + (string)rastrillo + " (1).";
+    if (celdas < 8 || hojas < 2 || rastrillo < 1)
+        aviso += " FALTAN PIEZAS: comprueba que subiste el modelo a escala 1,0 y escribe /7 puertas para reintentar.";
+    llOwnerSay(aviso);
     tablon();
 }
 
@@ -297,11 +389,16 @@ default
     state_entry()
     {
         CANAL = -1 - (integer)llFrand(1000000.0);
+        llListen(7, "", llGetOwner(), "");
         escanear();
         llSetTimerEvent(30.0);
     }
     on_rez(integer p) { llResetScript(); }
-    changed(integer c) { if (c & CHANGED_LINK) escanear(); }
+    changed(integer c)
+    {
+        // sentarse/levantarse también lanza CHANGED_LINK: solo se reescanea si cambian las primitivas
+        if ((c & CHANGED_LINK) && llGetObjectPrimCount(llGetKey()) != PRIMS) escanear();
+    }
 
     link_message(integer s, integer n, string str, key id)
     {
@@ -345,6 +442,20 @@ default
 
     listen(integer c, string n, key id, string m)
     {
+        if (c == 7)
+        {
+            // /7 puertas            -> vuelve a buscar las puertas
+            // /7 puertas cerradas   -> con TODO cerrado, guarda de nuevo la posición cerrada de cada hoja
+            if (m == "puertas") escanear();
+            else if (m == "puertas cerradas")
+            {
+                list ks = llLinksetDataFindKeys("^cerr:", 0, 100);
+                integer i;
+                for (i = 0; i < llGetListLength(ks); ++i) llLinksetDataDelete(llList2String(ks, i));
+                escanear();
+            }
+            return;
+        }
         if (id != USUARIO) return;
         if (MODO == "dar")
         {

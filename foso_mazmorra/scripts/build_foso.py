@@ -365,6 +365,12 @@ def write_lsl_table(report):
             a = p["asiento"]
             seats.append(f'"{p["nombre"]}", {_v(a["offset"])}, {a["giro"]}, "{a["anim"]}", "{a["reserva"]}"')
     consts += "\nlist ASIENTOS = [\n    " + ",\n    ".join(seats) + "];"
+    # piezas móviles (puertas, portón, rastrillo) con tamaño y posición respecto al trono, para
+    # reconocerlas aunque SL no conserve los nombres
+    mov = [f'"{p["nombre"]}", {_v(p["tamano_m"])}, {_v(Vector(p["centro"]) - rc)}'
+           for p in report["piezas"] if p["tipo"] == "puerta"]
+    consts += "\nvector TRONO_TAM = " + _v(ref["tamano_m"]) + ";"
+    consts += "\nlist MOVILES = [\n    " + ",\n    ".join(mov) + "];"
     for fn in os.listdir(os.path.join(LSL_DIR, "plantillas")):
         src = open(os.path.join(LSL_DIR, "plantillas", fn), encoding="utf-8").read()
         src = src.replace("//@@TABLA@@", table).replace("//@@CONSTANTES@@", consts)
