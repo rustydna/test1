@@ -86,6 +86,19 @@ def export_model(context, filepath, objects, export_format="GLB", apply_modifier
         warnings.append("glTF rigged es experimental en SL; si el subidor falla usa .dae")
 
     to_select = objects + ([armature] if rigged else [])
+    # Pose de reposo también en versiones sin export_rest_position_armature (< 3.6).
+    old_pose = armature.data.pose_position if rigged else None
+    if rigged:
+        armature.data.pose_position = "REST"
+    try:
+        _export_selected(context, filepath, export_format, to_select, apply_modifiers, rigged)
+    finally:
+        if rigged:
+            armature.data.pose_position = old_pose
+    return warnings
+
+
+def _export_selected(context, filepath, export_format, to_select, apply_modifiers, rigged):
     with _Selection(context, to_select):
         _call_exporter(
             filepath,
@@ -108,7 +121,6 @@ def export_model(context, filepath, objects, export_format="GLB", apply_modifier
             export_influence_nb=SL_MAX_INFLUENCES,
             export_all_influences=False,
         )
-    return warnings
 
 
 def _safe_filename(name):

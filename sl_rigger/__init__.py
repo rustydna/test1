@@ -1,8 +1,8 @@
 bl_info = {
     "name": "SL Rigger",
     "author": "SL Rigger contributors",
-    "version": (0, 3, 0),
-    "blender": (3, 6, 0),
+    "version": (0, 3, 1),
+    "blender": (3, 5, 0),
     "location": "Vista 3D > Barra lateral (N) > SL Rigger",
     "description": "Convierte mallas en avatares, ropa rigged y objetos para Second Life",
     "category": "Import-Export",

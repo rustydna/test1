@@ -6,7 +6,7 @@ from bpy.props import BoolProperty, EnumProperty, FloatProperty, StringProperty
 from bpy_extras.io_utils import ExportHelper
 from mathutils import Vector
 
-from . import collada, gltf, mappings, presets, skeleton, weights
+from . import collada, compat, gltf, mappings, presets, skeleton, weights
 
 
 def _selected_meshes(context):
@@ -256,9 +256,9 @@ class SLR_OT_make_lods(bpy.types.Operator):
                 copy["sl_lod_level"] = level
                 dec = copy.modifiers.new("SL_Decimate", "DECIMATE")
                 dec.ratio = ratio
-                # El decimado debe ir antes del armature.
-                copy.modifiers.move(copy.modifiers.find(dec.name), 0)
                 coll.objects.link(copy)
+                # El decimado debe ir antes del armature.
+                compat.move_modifier_first(context, copy, dec.name)
                 copy.hide_set(True)
         self.report({"INFO"}, "LODs creados (ocultos) en colecciones SL_LOD_*")
         return {"FINISHED"}

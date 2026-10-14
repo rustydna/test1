@@ -16,7 +16,7 @@ Formatos de exportación:
 1. Comprime la carpeta `sl_rigger` en un `.zip` (por ejemplo `zip -r sl_rigger.zip sl_rigger`).
 2. En Blender: *Editar → Preferencias → Complementos → Instalar desde disco…* y elige el zip.
    * Blender 4.2 o superior lo instala como extensión (`blender_manifest.toml`).
-   * Blender 3.6–4.1 lo instala como complemento clásico (`bl_info`).
+   * Blender 3.5–4.1 lo instala como complemento clásico (`bl_info`). En 3.5 instala el zip con *Instalar…*.
 3. El panel aparece en la vista 3D, en la barra lateral (`N`), pestaña **SL Rigger**.
    Los exportadores también están en *Archivo → Exportar*.
 
