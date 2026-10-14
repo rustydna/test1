@@ -325,6 +325,7 @@ def build(save=True, export=True):
     with open(os.path.join(OUT, "Informe_V2.json"), "w", encoding="utf-8") as f:
         json.dump(report, f, ensure_ascii=False, indent=1)
     if save:
+        bpy.context.preferences.filepaths.save_version = 0
         bpy.ops.wm.save_as_mainfile(filepath=os.path.join(OUT, "Foso_V2.blend"), compress=True)
     return report, objs
 
