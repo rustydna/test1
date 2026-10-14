@@ -12,7 +12,7 @@ Señor del Foso ve todas las rejas. Todo es rol consentido entre adultos.
 | ![Perrera](salida/03_La_Perrera.png) | ![Cisterna](salida/04_La_Cisterna.png) |
 | ![Jaulas](salida/05_Las_Jaulas.png) | ![Potro](salida/07_El_Potro.png) |
 
-*(Renders en gris neutro, solo con la luz del fuego: las texturas PBR las pones tú.)*
+*(Renders de Cycles con las texturas PBR de `salida/texturas/` y la llama del primer fotograma del flipbook, solo con la luz del fuego y la niebla. Se rehacen con `python foso_mazmorra/scripts/render.py --only 02,06`; `--sin-pbr` vuelve al gris neutro.)*
 
 ## Cifras
 
@@ -144,6 +144,47 @@ A mano también funciona: con *Select Face* y la cara 3, por ejemplo, eliges el 
 Las UV son de caja en coordenadas de mundo, así que las texturas repetibles casan entre piezas.
 La escala es 1 repetición = 2 m en piedra y suelo, 1 m en madera y paja, 0,5 m en hierro, 0,6 m en
 tela y 0,3 m en hueso. Si hace falta, ajústala con *Repeats per meter*. La cara 7 (llama) la gestiona el script del fuego: no le pongas PBR.
+
+### Texturas PBR procedurales
+
+`python foso_mazmorra/scripts/texturas_pbr.py` (unos 25 s, sólo numpy + pillow) genera en `salida/texturas/` un juego repetible y sin costuras por material (`<Material>_basecolor.png` sRGB, `_normal.png` glTF/OpenGL +Y arriba, `_orm.png` con R oclusión, G rugosidad, B metalicidad; 1024x1024) y la hoja `_muestrario.png`; y en `salida/materiales_pbr/<Material>.glb` un material glTF 2.0 con las tres imágenes embebidas y un quad, listo para el subidor de materiales de Second Life. La escala de cada textura coincide con los metros por repetición del mapeado (Piedra 2 m, Hierro 0,5 m...). El propio script comprueba la continuidad borde-borde y valida cada .glb.
+
+## Texturas PBR y efectos
+
+Todo lo de esta sección es opcional: sin ello el Foso funciona igual, con colores planos y la
+partícula de fuego por defecto.
+
+**Materiales PBR (8 `.glb`).** `scripts/texturas_pbr.py` deja en `salida/materiales_pbr/` un
+`.glb` por material: Piedra, Suelo, Madera, Hierro, Tela, Hueso, Paja y Agua.
+
+1. **Build → Upload → Material** y elige `salida/materiales_pbr/Piedra.glb`. Repite con los ocho.
+   Cada uno sube color base, normal y ORM (oclusión, rugosidad y metal) de una vez.
+2. Mete los ocho materiales en el contenido de la raíz junto a `foso_materiales.lsl` y una nota
+   «materiales» como la de la sección anterior (`Piedra = Piedra`, `Suelo = Suelo`...; vale el
+   nombre del material en el inventario o su UUID).
+3. Toca la raíz: cada material se aplica a su cara (0 a 6) en todas las piezas y el Agua a
+   `P_Agua` y `C04_Agua`. Las texturas repiten sin costuras y su escala ya casa con las UV
+   (1 repetición = 2 m en piedra, 0,5 m en hierro...): no cambies *Repeats per meter*.
+
+**Texturas de efectos (7 PNG).** `scripts/sprites_efectos.py` las genera en `salida/efectos/`.
+Sube cada una con **Build → Upload → Image**; en el inventario, clic derecho → **Copiar UUID** y
+pégalo entre las comillas de su constante al principio de `foso_fuego.lsl` (la plantilla está en
+`lsl/plantillas/`; si vuelves a ejecutar la build, pega los UUID en la plantilla). Guarda el script.
+
+| PNG | Constante | Efecto |
+|---|---|---|
+| `fuego_flipbook.png` | `TEXTURA_FLIPBOOK` | Llamas de malla animadas: la cara 7 reproduce un bucle de 4x4 fotogramas (velocidad `FPS_FUEGO`, cada fuego algo distinto). |
+| `llama_particula.png` | `TEXTURA_LLAMA` | Partículas de llama sobre antorchas y braseros. |
+| `humo.png` | `TEXTURA_HUMO` | Humo que sube de los braseros, alternando con la llama. |
+| `niebla.png` | `TEXTURA_NIEBLA` | Niebla del canal, bruma y vapor. |
+| `chispa.png` | `TEXTURA_CHISPA` | Chispas de los chasquidos del fuego, la marca y el azote. |
+| `gota.png` | `TEXTURA_GOTA` | Gotas que caen de las bóvedas. |
+| `proyector_fuego.png` | `TEXTURA_PROYECTOR` | Luz proyectora con sombras en los braseros del trono, el farol de la perrera y los faroles del patio. |
+
+Las luces proyectoras y sus sombras solo se ven con las sombras activadas en el visor:
+**Preferencias → Gráficos → Sombras: «Sol/Luna + proyectores»**. Proyectan hacia el −Z local de
+la pieza (hacia abajo). En TINIEBLAS se apagan y el flipbook se para en los fuegos que se apagan.
+Una constante vacía (`""`) deja ese efecto como antes.
 
 ## Instalación en Second Life
 

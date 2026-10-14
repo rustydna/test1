@@ -1,6 +1,10 @@
-"""Renders de presentación del Foso V2 (Cycles). No cambia el modelo exportado.
+"""Renders de presentación del Foso V3 (Cycles). No cambia el modelo exportado.
 
-    python foso_mazmorra/scripts/render.py [--fast] [--only 01,03]
+    python foso_mazmorra/scripts/render.py [--fast] [--only 01,03] [--samples 96] [--sin-pbr]
+
+Tras abrir el .blend sustituye (solo en memoria, sin --save) los materiales planos por
+las texturas PBR de salida/texturas/ y la llama por el primer fotograma del flipbook de
+salida/efectos/. Los DAE para SL no se tocan: siguen sin referenciar imágenes.
 """
 
 import math
@@ -15,9 +19,13 @@ from mathutils import Vector  # noqa: E402
 
 ROOT = os.path.dirname(HERE)
 OUT = os.path.join(ROOT, "salida")
+TEX = os.path.join(OUT, "texturas")
+EFX = os.path.join(OUT, "efectos")
+PBR = ["Piedra", "Suelo", "Madera", "Hierro", "Tela", "Hueso", "Paja", "Agua"]
 
 VIEWS = {
-    "01_Puerta_exterior": dict(loc=(13.5, -36.0, 6.5), look=(0.0, -16.0, 5.2), lens=30),
+    "01_Puerta_exterior": dict(loc=(13.5, -36.0, 6.5), look=(0.0, -16.0, 5.2), lens=30, moon=4.0, exp=1.5,
+                               fill=(16.0, -40.0, 12.0), fill_w=6000),
     "02_El_Foso_hacia_el_trono": dict(loc=(0.9, -12.4, 1.65), look=(-0.2, 14.0, 2.4), lens=22),
     "03_La_Perrera": dict(loc=(4.2, -10.7, 1.75), look=(10.4, -4.8, 0.55), lens=20, fill=(7.6, -6.8, 3.5), exp=1.5),
     "04_La_Cisterna": dict(loc=(-4.3, 6.2, 1.9), look=(-9.4, 9.2, 0.9), lens=20, fill=(-7.0, 8.0, 3.6), exp=1.2),
@@ -34,16 +42,109 @@ def look_at(ob, target):
     ob.rotation_euler = d.to_track_quat("-Z", "Y").to_euler()
 
 
-def setup(fast):
+def imagen(ruta, color):
+    """Carga una PNG una sola vez; color=False la deja en Non-Color."""
+    img = bpy.data.images.load(ruta, check_existing=True)
+    img.colorspace_settings.name = "sRGB" if color else "Non-Color"
+    return img
+
+
+def material_pbr(m, nombre):
+    """basecolor sRGB (x oclusión), ORM separado en AO/rugosidad/metal y normal glTF."""
+    nt = m.node_tree
+    nt.nodes.clear()
+    N, L = nt.nodes, nt.links
+    out = N.new("ShaderNodeOutputMaterial")
+    bsdf = N.new("ShaderNodeBsdfPrincipled")
+    uv = N.new("ShaderNodeUVMap")
+    uv.uv_map = "UVMap"
+    tx = {}
+    for k, color in (("basecolor", True), ("orm", False), ("normal", False)):
+        t = N.new("ShaderNodeTexImage")
+        t.image = imagen(os.path.join(TEX, f"{nombre}_{k}.png"), color)
+        t.interpolation = "Cubic" if k == "normal" else "Linear"
+        L.new(uv.outputs["UV"], t.inputs["Vector"])
+        tx[k] = t
+    sep = N.new("ShaderNodeSeparateColor")
+    L.new(tx["orm"].outputs["Color"], sep.inputs["Color"])
+    ao = N.new("ShaderNodeMix")
+    ao.data_type = "RGBA"
+    ao.blend_type = "MULTIPLY"
+    ao.inputs["Factor"].default_value = 1.0
+    L.new(tx["basecolor"].outputs["Color"], ao.inputs["A"])
+    L.new(sep.outputs["Red"], ao.inputs["B"])
+    L.new(ao.outputs["Result"], bsdf.inputs["Base Color"])
+    L.new(sep.outputs["Green"], bsdf.inputs["Roughness"])
+    L.new(sep.outputs["Blue"], bsdf.inputs["Metallic"])
+    nm = N.new("ShaderNodeNormalMap")
+    nm.uv_map = "UVMap"
+    nm.inputs["Strength"].default_value = 1.0
+    L.new(tx["normal"].outputs["Color"], nm.inputs["Color"])
+    L.new(nm.outputs["Normal"], bsdf.inputs["Normal"])
+    L.new(bsdf.outputs["BSDF"], out.inputs["Surface"])
+
+
+def material_llama(m):
+    """Emisión con el primer fotograma (arriba a la izquierda) del flipbook 4x4."""
+    ruta = os.path.join(EFX, "fuego_flipbook.png")
+    if not os.path.exists(ruta):
+        return  # se queda la emisión cálida plana del .blend
+    nt = m.node_tree
+    nt.nodes.clear()
+    N, L = nt.nodes, nt.links
+    out = N.new("ShaderNodeOutputMaterial")
+    uv = N.new("ShaderNodeUVMap")
+    uv.uv_map = "UVMap"
+    mp = N.new("ShaderNodeMapping")
+    mp.vector_type = "POINT"
+    mp.inputs["Scale"].default_value = (0.25, 0.25, 1.0)
+    mp.inputs["Location"].default_value = (0.0, 0.75, 0.0)
+    L.new(uv.outputs["UV"], mp.inputs["Vector"])
+    t = N.new("ShaderNodeTexImage")
+    t.image = imagen(ruta, True)
+    t.extension = "CLIP"
+    L.new(mp.outputs["Vector"], t.inputs["Vector"])
+    # color de fuego por rampa sobre la luminancia del fotograma: el rojo saturado
+    # se vuelve rosa con AgX, así que la rampa va de naranja a amarillo pálido
+    bw = N.new("ShaderNodeRGBToBW")
+    L.new(t.outputs["Color"], bw.inputs["Color"])
+    cr = N.new("ShaderNodeValToRGB")
+    els = cr.color_ramp.elements
+    els[0].position, els[0].color = 0.0, (0.85, 0.22, 0.02, 1.0)
+    els[1].position, els[1].color = 1.0, (1.0, 0.78, 0.38, 1.0)
+    e = els.new(0.55)
+    e.color = (1.0, 0.45, 0.07, 1.0)
+    L.new(bw.outputs["Val"], cr.inputs["Fac"])
+    em = N.new("ShaderNodeEmission")
+    em.inputs["Strength"].default_value = 4.0
+    L.new(cr.outputs["Color"], em.inputs["Color"])
+    tr = N.new("ShaderNodeBsdfTransparent")
+    mx = N.new("ShaderNodeMixShader")
+    L.new(t.outputs["Alpha"], mx.inputs["Fac"])
+    L.new(tr.outputs["BSDF"], mx.inputs[1])
+    L.new(em.outputs["Emission"], mx.inputs[2])
+    L.new(mx.outputs["Shader"], out.inputs["Surface"])
+
+
+def aplicar_pbr():
+    for nombre in PBR:
+        m = bpy.data.materials.get(nombre)
+        if m and os.path.exists(os.path.join(TEX, f"{nombre}_basecolor.png")):
+            material_pbr(m, nombre)
+    if bpy.data.materials.get("Llama"):
+        material_llama(bpy.data.materials["Llama"])
+
+
+def setup(fast, samples=None):
     sc = bpy.context.scene
     sc.render.engine = "CYCLES"
     sc.cycles.device = "CPU"
-    sc.cycles.samples = 24 if fast else 64
+    sc.cycles.samples = samples or (24 if fast else 64)
     sc.cycles.volume_step_rate = 4.0
     sc.cycles.use_denoising = True
     sc.cycles.max_bounces = 6
-    sc.render.resolution_x = 960 if fast else 1440
-    sc.render.resolution_y = 540 if fast else 810
+    sc.render.resolution_x = 960 if fast else 1280
+    sc.render.resolution_y = 540 if fast else 720
     sc.render.image_settings.file_format = "PNG"
     sc.view_settings.view_transform = "AgX"
     sc.view_settings.look = "AgX - Medium High Contrast"
@@ -108,7 +209,7 @@ def render(name, v, coll, moon_ob):
         look_at(cam, v["look"])
     base_res = (sc.render.resolution_x, sc.render.resolution_y)
     if "res" in v:
-        k = sc.render.resolution_x / 1440
+        k = sc.render.resolution_x / 1280
         sc.render.resolution_x, sc.render.resolution_y = int(v["res"][0] * k), int(v["res"][1] * k)
     if "ortho" in v:
         cam_data.type = "ORTHO"
@@ -122,10 +223,12 @@ def render(name, v, coll, moon_ob):
     fill = None
     if "fill" in v:
         fl = bpy.data.lights.new(f"Relleno_{name}", "POINT")
-        fl.energy = 25
+        fl.energy = v.get("fill_w", 25)
         fl.color = (0.85, 0.85, 1.0)
         fill = bpy.data.objects.new(f"Relleno_{name}", fl)
         fill.location = Vector(v["fill"])
+        fill.visible_volume_scatter = False  # sin halo en la niebla
+        fill.visible_camera = False
         coll.objects.link(fill)
     hidden = []
     vol = sc.world.node_tree.nodes.get(sc.get("_vol", ""))
@@ -152,7 +255,10 @@ def main():
     if "--only" in sys.argv:
         only = sys.argv[sys.argv.index("--only") + 1].split(",")
     bpy.ops.wm.open_mainfile(filepath=os.path.join(OUT, "Foso_V3.blend"))
-    coll, moon = setup(fast)
+    if "--sin-pbr" not in sys.argv:
+        aplicar_pbr()
+    samples = int(sys.argv[sys.argv.index("--samples") + 1]) if "--samples" in sys.argv else None
+    coll, moon = setup(fast, samples)
     for name, v in VIEWS.items():
         if only and not any(name.startswith(o) for o in only):
             continue

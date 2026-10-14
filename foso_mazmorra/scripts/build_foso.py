@@ -166,6 +166,65 @@ def uv_for(co, n, mat):
     return u / s, v / s
 
 
+def uv_llamas(me, present, uvl):
+    """UV 0-1 para el flipbook de fuego (cara 7): mapeado cilíndrico por isla.
+
+    Cada isla conectada de polígonos "Llama" (una llama) recibe
+    u = ángulo alrededor de su eje vertical / 2π y v = altura relativa en la
+    isla, de modo que el fotograma entero del flipbook cubre la llama.
+    """
+    if "Llama" not in present:
+        return
+    im = present.index("Llama")
+    polys = [p for p in me.polygons if p.material_index == im]
+    padre = {}
+
+    def raiz(a):
+        while padre.setdefault(a, a) != a:
+            padre[a] = padre[padre[a]]
+            a = padre[a]
+        return a
+
+    for p in polys:
+        vs = list(p.vertices)
+        for v in vs[1:]:
+            padre[raiz(v)] = raiz(vs[0])
+    islas = {}
+    for p in polys:
+        islas.setdefault(raiz(p.vertices[0]), []).append(p)
+    for ps in islas.values():
+        vids = {v for p in ps for v in p.vertices}
+        cos = [me.vertices[v].co for v in vids]
+        cx = (min(c.x for c in cos) + max(c.x for c in cos)) / 2
+        cy = (min(c.y for c in cos) + max(c.y for c in cos)) / 2
+        z0 = min(c.z for c in cos)
+        dz = max(max(c.z for c in cos) - z0, 1e-6)
+        rmax = max(max(math.hypot(c.x - cx, c.y - cy) for c in cos), 1e-6)
+        for p in ps:
+            pc = p.center
+            if abs(p.normal.z) > 0.7:      # tapa de la base: planar, dentro de 0-1
+                for li in p.loop_indices:
+                    co = me.vertices[me.loops[li].vertex_index].co
+                    uvl.data[li].uv = (0.5 + 0.45 * (co.x - cx) / rmax, (co.z - z0) / dz)
+                continue
+            uvs = []
+            for li in p.loop_indices:
+                co = me.vertices[me.loops[li].vertex_index].co
+                dx, dy = co.x - cx, co.y - cy
+                if dx * dx + dy * dy < 1e-10:          # vértice sobre el eje: ángulo del polígono
+                    dx, dy = pc.x - cx, pc.y - cy
+                uvs.append([(math.atan2(dy, dx) / (2 * math.pi)) % 1.0, (co.z - z0) / dz])
+            # costura: el polígono que cruza u=0/1 no debe recorrer la textura
+            # entera; se pega al borde (margen transparente del fotograma) para
+            # no invadir el fotograma vecino del flipbook
+            us = [uv[0] for uv in uvs]
+            if max(us) - min(us) > 0.5:
+                for uv in uvs:
+                    uv[0] = 1.0 if uv[0] < 0.5 else uv[0]
+            for li, uv in zip(p.loop_indices, uvs):
+                uvl.data[li].uv = uv
+
+
 def mesh_object(name, g, origin, coll, level, sl_name, kind):
     me = bpy.data.meshes.new(name)
     verts = [v - origin for v in g.verts]
@@ -209,9 +268,12 @@ def mesh_object(name, g, origin, coll, level, sl_name, kind):
     uvl = me.uv_layers.new(name="UVMap")
     for p in me.polygons:
         m = present[p.material_index]
+        if m == "Llama":
+            continue
         for li in p.loop_indices:
             co = me.vertices[me.loops[li].vertex_index].co + origin
             uvl.data[li].uv = uv_for(co, p.normal, m)
+    uv_llamas(me, present, uvl)
     me.update()
     ob = bpy.data.objects.new(name, me)
     ob.location = origin

@@ -15,16 +15,42 @@
 //  * Ambientes (los elige el Señor desde el trono): VIGILIA, PENUMBRA,
 //    JUICIO (todo rojo, braseros rugiendo) y TINIEBLAS (solo los braseros).
 //
-//  TEXTURA_LLAMA: deja "" para la partícula por defecto o pon el UUID de
-//  una textura de llama (mejor una con alfa suave) para más realismo.
+//  * Con texturas propias (ver abajo): llama de malla animada (flipbook
+//    4x4), humo que alterna con la llama en los braseros y luces
+//    proyectoras que dibujan barrotes y cadenas en suelos y paredes.
 // =====================================================================
 
+// ---------------------------------------------------------------------
+//  TEXTURAS DE EFECTOS: las genera scripts/sprites_efectos.py en
+//  salida/efectos/. Sube cada PNG (Construir > Subir > Imagen), en el
+//  inventario clic derecho > "Copiar UUID" y pégalo entre las comillas.
+//  Vacío ("") = comportamiento anterior (partícula por defecto, sin
+//  flipbook, sin humo alterno, sin proyector).
+//    TEXTURA_FLIPBOOK   fuego_flipbook.png   llama de malla (cara 7), 4x4 fotogramas
+//    TEXTURA_LLAMA      llama_particula.png  partícula de llama
+//    TEXTURA_HUMO       humo.png             humo que sube de los braseros
+//    TEXTURA_NIEBLA     niebla.png           niebla del canal, bruma y vapor
+//    TEXTURA_CHISPA     chispa.png           chispas de los chasquidos y la marca
+//    TEXTURA_GOTA       gota.png             gotas que caen de las bóvedas
+//    TEXTURA_PROYECTOR  proyector_fuego.png  luz proyectora en los braseros del
+//                       trono, el farol de la perrera y los faroles del patio.
+//  Las luces proyectoras y sus sombras solo se ven con las sombras activadas
+//  en el visor (Preferencias > Gráficos > Sombras: "Sol/Luna + proyectores").
+//  Proyectan hacia el -Z local de la pieza (hacia abajo).
+// ---------------------------------------------------------------------
+string  TEXTURA_FLIPBOOK = "";
 string  TEXTURA_LLAMA = "";
+string  TEXTURA_HUMO = "";
 string  TEXTURA_NIEBLA = "";
+string  TEXTURA_CHISPA = "";
+string  TEXTURA_GOTA = "";
+string  TEXTURA_PROYECTOR = "";
+float   FPS_FUEGO = 12.0;        // fotogramas por segundo del flipbook (cada fuego varía un poco)
 float   TICK = 0.12;
 integer POR_TICK = 5;
 
 list F_LINK; list F_TIPO; list F_POS; list F_NIVEL; list F_VEL; list F_RACHA;  // tipo: 0 antorcha, 1 farol, 2 brasero
+list F_HUMO; list F_PROY;   // humo: próximo cambio (>0 llama, <0 humo); proy: lleva luz proyectora
 integer cursor;
 string AMBIENTE = "VIGILIA";
 float  K_LUZ = 1.0; float K_RADIO = 1.0; vector TINTE = <1.0, 0.55, 0.22>;
@@ -39,6 +65,7 @@ list llama(integer tipo, float viento_x, float viento_y, integer chispas)
     if (chispas)
         return [PSYS_PART_FLAGS, PSYS_PART_EMISSIVE_MASK | PSYS_PART_INTERP_COLOR_MASK | PSYS_PART_WIND_MASK,
                 PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_ANGLE_CONE, PSYS_SRC_ANGLE_BEGIN, 0.0, PSYS_SRC_ANGLE_END, 0.6,
+                PSYS_SRC_TEXTURE, TEXTURA_CHISPA,
                 PSYS_PART_START_COLOR, <1.0, 0.85, 0.4>, PSYS_PART_END_COLOR, <0.9, 0.2, 0.0>,
                 PSYS_PART_START_ALPHA, 1.0, PSYS_PART_END_ALPHA, 0.0,
                 PSYS_PART_START_SCALE, <0.03, 0.03, 0.0>, PSYS_PART_END_SCALE, <0.01, 0.01, 0.0>,
@@ -54,6 +81,21 @@ list llama(integer tipo, float viento_x, float viento_y, integer chispas)
             PSYS_PART_MAX_AGE, vida, PSYS_SRC_BURST_RATE, 0.03, PSYS_SRC_BURST_PART_COUNT, cant,
             PSYS_SRC_BURST_RADIUS, esc * 0.2, PSYS_SRC_BURST_SPEED_MIN, 0.03, PSYS_SRC_BURST_SPEED_MAX, 0.12,
             PSYS_SRC_ACCEL, <viento_x, viento_y, sube>, PSYS_SRC_MAX_AGE, 0.0];
+}
+
+// humo de brasero: alterna con la llama de partículas (una prim solo tiene
+// un sistema); mientras humea, la llama de malla animada sigue ardiendo
+list humo()
+{
+    return [PSYS_PART_FLAGS, PSYS_PART_INTERP_COLOR_MASK | PSYS_PART_INTERP_SCALE_MASK | PSYS_PART_WIND_MASK,
+            PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_ANGLE_CONE, PSYS_SRC_ANGLE_BEGIN, 0.0, PSYS_SRC_ANGLE_END, 0.2,
+            PSYS_SRC_TEXTURE, TEXTURA_HUMO,
+            PSYS_PART_START_COLOR, <0.30, 0.27, 0.24>, PSYS_PART_END_COLOR, <0.16, 0.15, 0.14>,
+            PSYS_PART_START_ALPHA, 0.32, PSYS_PART_END_ALPHA, 0.0,
+            PSYS_PART_START_SCALE, <0.3, 0.3, 0.0>, PSYS_PART_END_SCALE, <1.5, 1.5, 0.0>,
+            PSYS_PART_MAX_AGE, 4.5, PSYS_SRC_BURST_RATE, 0.12, PSYS_SRC_BURST_PART_COUNT, 1,
+            PSYS_SRC_BURST_RADIUS, 0.05, PSYS_SRC_BURST_SPEED_MIN, 0.35, PSYS_SRC_BURST_SPEED_MAX, 0.6,
+            PSYS_SRC_ACCEL, <0.0, 0.0, 0.15>, PSYS_SRC_MAX_AGE, 0.0];
 }
 
 list niebla(float densidad, vector color, float radio)
@@ -74,6 +116,7 @@ list goteo()
 {
     return [PSYS_PART_FLAGS, PSYS_PART_FOLLOW_VELOCITY_MASK | PSYS_PART_INTERP_COLOR_MASK,
             PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_EXPLODE,
+            PSYS_SRC_TEXTURE, TEXTURA_GOTA,
             PSYS_PART_START_COLOR, <0.7, 0.8, 0.85>, PSYS_PART_END_COLOR, <0.7, 0.8, 0.85>,
             PSYS_PART_START_ALPHA, 0.55, PSYS_PART_END_ALPHA, 0.35,
             PSYS_PART_START_SCALE, <0.012, 0.07, 0.0>, PSYS_PART_END_SCALE, <0.012, 0.09, 0.0>,
@@ -105,6 +148,7 @@ list rafaga(string que)
     // marca / azote: polvo y chispas
     return [PSYS_PART_FLAGS, PSYS_PART_EMISSIVE_MASK | PSYS_PART_INTERP_COLOR_MASK,
             PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_EXPLODE,
+            PSYS_SRC_TEXTURE, TEXTURA_CHISPA,
             PSYS_PART_START_COLOR, <1.0, 0.7, 0.3>, PSYS_PART_END_COLOR, <0.5, 0.1, 0.0>,
             PSYS_PART_START_ALPHA, 1.0, PSYS_PART_END_ALPHA, 0.0,
             PSYS_PART_START_SCALE, <0.04, 0.04, 0.0>, PSYS_PART_END_SCALE, <0.01, 0.01, 0.0>,
@@ -121,6 +165,15 @@ integer link_de(string nombre)
     return -1;
 }
 
+// braseros del trono, farol de la perrera y faroles del patio
+integer es_proyector(string nm)
+{
+    if (llSubStringIndex(nm, "N_Brasero") == 0) return TRUE;
+    if (nm == "C05_Farol") return TRUE;
+    if (llGetSubString(nm, 0, 0) == "T" && llSubStringIndex(nm, "_Farol") != -1) return TRUE;
+    return FALSE;
+}
+
 ambientar()
 {
     float d = 1.0;
@@ -128,16 +181,37 @@ ambientar()
     else if (AMBIENTE == "PENUMBRA") { K_LUZ = 0.5; K_RADIO = 0.7; TINTE = <1.0, 0.45, 0.18>; d = 1.6; }
     else if (AMBIENTE == "JUICIO") { K_LUZ = 1.3; K_RADIO = 1.2; TINTE = <1.0, 0.25, 0.08>; d = 0.8; }
     else if (AMBIENTE == "TINIEBLAS") { K_LUZ = 0.0; K_RADIO = 0.6; TINTE = <0.9, 0.3, 0.1>; d = 2.2; }
+    // con flipbook la textura ya trae el color: el tinte apenas la calienta
+    vector tinte_llama = <1.0, 0.7, 0.35>;
+    if (TEXTURA_FLIPBOOK != "") tinte_llama = <1.0, 0.92, 0.82>;
     integer i;
     for (i = 0; i < llGetListLength(F_LINK); ++i)
     {
         integer l = llList2Integer(F_LINK, i);
-        llLinkParticleSystem(l, llama(llList2Integer(F_TIPO, i), 0.0, 0.0, FALSE));
-        if (AMBIENTE == "TINIEBLAS" && llList2Integer(F_TIPO, i) != 2)
+        integer tipo = llList2Integer(F_TIPO, i);
+        integer apagado = (AMBIENTE == "TINIEBLAS" && tipo != 2);
+        llLinkParticleSystem(l, llama(tipo, 0.0, 0.0, FALSE));
+        if (TEXTURA_FLIPBOOK != "")
+        {
+            llSetLinkPrimitiveParamsFast(l, [PRIM_TEXTURE, 7, TEXTURA_FLIPBOOK, <1.0, 1.0, 0.0>, ZERO_VECTOR, 0.0,
+                                            PRIM_ALPHA_MODE, 7, PRIM_ALPHA_MODE_BLEND, 0]);
+            // velocidad algo distinta en cada fuego: no laten a la vez
+            if (apagado) llSetLinkTextureAnim(l, FALSE, 7, 4, 4, 0.0, 16.0, 1.0);
+            else llSetLinkTextureAnim(l, ANIM_ON | LOOP, 7, 4, 4, 0.0, 16.0, FPS_FUEGO * (0.82 + 0.045 * (i % 9)));
+        }
+        if (TEXTURA_PROYECTOR != "" && llList2Integer(F_PROY, i))
+        {
+            // FOV amplio, foco corto y ambiente bajo: barrotes y cadenas en sombra
+            float fov = 2.2;
+            if (tipo == 2) fov = 2.8;
+            if (apagado) llSetLinkPrimitiveParamsFast(l, [PRIM_PROJECTOR, NULL_KEY, fov, 1.5, 0.0]);
+            else llSetLinkPrimitiveParamsFast(l, [PRIM_PROJECTOR, TEXTURA_PROYECTOR, fov, 1.5, 0.08]);
+        }
+        if (apagado)
             llSetLinkPrimitiveParamsFast(l, [PRIM_POINT_LIGHT, FALSE, ZERO_VECTOR, 0, 0, 0, PRIM_GLOW, 7, 0.0,
                                             PRIM_COLOR, 7, <0.1, 0.05, 0.03>, 1.0, PRIM_FULLBRIGHT, 7, FALSE]);
         else
-            llSetLinkPrimitiveParamsFast(l, [PRIM_COLOR, 7, <1.0, 0.7, 0.35>, 1.0, PRIM_FULLBRIGHT, 7, TRUE]);
+            llSetLinkPrimitiveParamsFast(l, [PRIM_COLOR, 7, tinte_llama, 1.0, PRIM_FULLBRIGHT, 7, TRUE]);
     }
     integer a = link_de("P_Agua");
     if (a > 0) llLinkParticleSystem(a, niebla(d, <0.55, 0.62, 0.68>, 1.2));
@@ -155,7 +229,7 @@ ambientar()
 
 escanear()
 {
-    F_LINK = []; F_TIPO = []; F_POS = []; F_NIVEL = []; F_VEL = []; F_RACHA = [];
+    F_LINK = []; F_TIPO = []; F_POS = []; F_NIVEL = []; F_VEL = []; F_RACHA = []; F_HUMO = []; F_PROY = [];
     integer n = llGetObjectPrimCount(llGetKey());
     integer i;
     for (i = 1; i <= n; ++i)
@@ -170,6 +244,7 @@ escanear()
             vector p = ZERO_VECTOR;
             if (i > 1) p = llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_POS_LOCAL]), 0);
             F_LINK += i; F_TIPO += t; F_POS += p; F_NIVEL += 1.0; F_VEL += 0.0; F_RACHA += 0;
+            F_HUMO += llGetTime() + 2.0 + llFrand(5.0); F_PROY += es_proyector(nm);
         }
     }
     ambientar();
@@ -256,6 +331,23 @@ default
                 racha = 2;
             }
             else if (azar < 0.02) nivel = 0.4;   // boqueada
+            // braseros: cada pocos segundos el sistema pasa de llama a humo y vuelve
+            if (tipo == 2 && racha == 0 && TEXTURA_HUMO != "")
+            {
+                float th = llList2Float(F_HUMO, i);
+                float ahora = llGetTime();
+                if (th > 0.0 && ahora > th)
+                {
+                    llLinkParticleSystem(llList2Integer(F_LINK, i), humo());
+                    th = -(ahora + 2.5 + llFrand(2.5));
+                }
+                else if (th < 0.0 && ahora > -th)
+                {
+                    llLinkParticleSystem(llList2Integer(F_LINK, i), llama(tipo, 0, 0, FALSE));
+                    th = ahora + 3.0 + llFrand(5.0);
+                }
+                F_HUMO = llListReplaceList(F_HUMO, [th], i, i);
+            }
             if (nivel < 0.3) nivel = 0.3;
             if (nivel > 1.5) nivel = 1.5;
             F_NIVEL = llListReplaceList(F_NIVEL, [nivel], i, i);
