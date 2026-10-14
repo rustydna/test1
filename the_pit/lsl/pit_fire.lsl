@@ -104,17 +104,18 @@ load_textures()
 list flame(integer type, float wind_x, float wind_y)
 {
     if (!FLAMES || (MOOD == "DARKNESS" && type != 2)) return [];
-    float sc = 0.09; float life = 0.7; integer count = 3; float rise = 0.55;
-    if (type == 1) { sc = 0.045; life = 0.5; count = 2; rise = 0.3; }
-    if (type == 2) { sc = 0.22; life = 1.0; count = 6; rise = 0.9; }
-    if (MOOD == "JUDGEMENT") { count = count * 2; rise = rise * 1.4; }
+    // few, larger particles: 24 fires stay well under the viewer's particle budget
+    float sc = 0.11; float life = 0.7; integer count = 1; float rise = 0.55;
+    if (type == 1) { sc = 0.055; life = 0.5; count = 1; rise = 0.3; }
+    if (type == 2) { sc = 0.26; life = 1.0; count = 3; rise = 0.9; }
+    if (MOOD == "JUDGEMENT") { sc = sc * 1.3; rise = rise * 1.4; }
     return [PSYS_PART_FLAGS, PSYS_PART_EMISSIVE_MASK | PSYS_PART_INTERP_COLOR_MASK | PSYS_PART_INTERP_SCALE_MASK,
             PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_ANGLE_CONE, PSYS_SRC_ANGLE_BEGIN, 0.0, PSYS_SRC_ANGLE_END, 0.25,
             PSYS_SRC_TEXTURE, T_FLAME,
             PSYS_PART_START_COLOR, <1.0, 0.92, 0.6>, PSYS_PART_END_COLOR, <0.75, 0.12, 0.02>,
             PSYS_PART_START_ALPHA, 0.85, PSYS_PART_END_ALPHA, 0.0,
             PSYS_PART_START_SCALE, <sc, sc * 1.6, 0.0>, PSYS_PART_END_SCALE, <sc * 0.3, sc * 0.6, 0.0>,
-            PSYS_PART_MAX_AGE, life, PSYS_SRC_BURST_RATE, 0.03, PSYS_SRC_BURST_PART_COUNT, count,
+            PSYS_PART_MAX_AGE, life, PSYS_SRC_BURST_RATE, 0.08, PSYS_SRC_BURST_PART_COUNT, count,
             PSYS_SRC_BURST_RADIUS, sc * 0.2, PSYS_SRC_BURST_SPEED_MIN, 0.03, PSYS_SRC_BURST_SPEED_MAX, 0.12,
             PSYS_SRC_ACCEL, <wind_x, wind_y, rise>, PSYS_SRC_MAX_AGE, 0.0];
 }
@@ -231,12 +232,14 @@ light(integer i, float lv)
     list p = [PRIM_POINT_LIGHT, FALSE, ZERO_VECTOR, 0.0, 0.0, 0.0];
     if (LIGHTS)
     {
-        float base = 0.75; float radius = 6.0;
-        if (type == 1) { base = 0.5; radius = 4.5; }
-        if (type == 2) { base = 1.0; radius = 10.0; if (MOOD == "JUDGEMENT") base = 1.6; }
+        // intensity is capped at 1.0 by SL: the peak (lv 1.5) stays just under it so the flicker shows
+        float base = 0.6; float radius = 6.0; float falloff = 1.4;
+        if (type == 1) { base = 0.4; radius = 4.5; }
+        if (type == 2) { base = 0.62; radius = 10.0; }
+        if (MOOD == "JUDGEMENT") { radius = radius * 1.4; falloff = 0.8; }
         float k = K_LIGHT; if (type == 2 && MOOD == "DARKNESS") k = 0.7;
         vector col = TINT + <0.0, (lv - 1.0) * 0.12, (lv - 1.0) * 0.05>;
-        p = [PRIM_POINT_LIGHT, TRUE, col, base * k * lv, radius * K_RADIUS * (0.9 + 0.1 * lv), 1.4];
+        p = [PRIM_POINT_LIGHT, TRUE, col, base * k * lv, radius * K_RADIUS * (0.9 + 0.1 * lv), falloff];
     }
     if (GLOW) p += [PRIM_GLOW, 7, 0.12 + 0.2 * lv];
     else p += [PRIM_GLOW, 7, 0.0];
@@ -264,7 +267,7 @@ apply()
 {
     if (MOOD == "WATCH") { K_LIGHT = 1.0; K_RADIUS = 1.0; TINT = <1.0, 0.55, 0.22>; FOG_DENSITY = 1.0; }
     else if (MOOD == "GLOOM") { K_LIGHT = 0.5; K_RADIUS = 0.7; TINT = <1.0, 0.45, 0.18>; FOG_DENSITY = 1.6; }
-    else if (MOOD == "JUDGEMENT") { K_LIGHT = 1.3; K_RADIUS = 1.2; TINT = <1.0, 0.25, 0.08>; FOG_DENSITY = 0.8; }
+    else if (MOOD == "JUDGEMENT") { K_LIGHT = 1.0; K_RADIUS = 1.0; TINT = <1.0, 0.25, 0.08>; FOG_DENSITY = 0.8; }
     else if (MOOD == "DARKNESS") { K_LIGHT = 0.0; K_RADIUS = 0.6; TINT = <0.9, 0.3, 0.1>; FOG_DENSITY = 2.2; }
     // the flipbook texture already carries the colour: the tint only warms it a little
     vector flame_tint = <1.0, 0.7, 0.35>;

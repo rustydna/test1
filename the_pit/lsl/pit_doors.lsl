@@ -54,7 +54,7 @@ integer PRIMS;                    // prim count at the last scan (seated avatars
 list D_LINK; list D_NAME; list D_TAG; list D_TYPE; list D_POS; list D_ROT; list D_HINGE; list D_ANG;
 list OPEN;                        // per tag: [tag, 0/1, ...]
 list TRIES;                       // [avatar, unix time]
-integer CH; integer LH;
+integer CH; integer LH; integer LISTEN_UNTIL;
 key USER; string MENU_TAG; string MODE;
 list NEAR;
 string OPTS;
@@ -76,6 +76,8 @@ string room(string t)
 }
 
 string who(key k) { return llGetDisplayName(k); }
+
+integer utf8(string s) { return (llStringLength(llStringToBase64(s)) * 3) >> 2; }   // byte length
 
 string snd(string uuid, string name)
 {
@@ -302,10 +304,11 @@ board()
         list e = lock_state(t);
         if (llList2Integer(e, 0))
         {
-            string line = room(t) + " - key: " + llList2String(e, 2);
+            string line = room(t) + " - " + llGetSubString(llList2String(e, 2), 0, 13);
             integer until = llList2Integer(e, 3);
             if (until > 0) line += " (" + (string)((until - llGetUnixTime()) / 60 + 1) + " min)";
-            txt += line + "\n"; any = TRUE;
+            if (utf8(txt + line) < 240) txt += line + "\n";   // floating text stops at 254 bytes
+            any = TRUE;
         }
     }
     if (!any) txt += "(no gate is locked)";
@@ -316,7 +319,7 @@ dialog(key k, string txt, list buttons)
 {
     llListenRemove(LH);
     LH = llListen(CH, "", k, "");
-    llSetTimerEvent(30.0);
+    LISTEN_UNTIL = llGetUnixTime() + 60;
     llDialog(k, txt, buttons, CH);
 }
 
@@ -407,6 +410,7 @@ act(key k, string b)
         }
         if (i != -1) TRIES = llDeleteSubList(TRIES, i, i + 1);
         TRIES += [k, llGetUnixTime()];
+        if (llGetListLength(TRIES) > 40) TRIES = llList2List(TRIES, -40, -1);
         integer d = 1 + (integer)llFrand(20.0);
         if (d >= PICK_DIFFICULTY)
         {
@@ -460,7 +464,7 @@ default
         llListen(7, "", llGetOwner(), "doors");
         llListen(7, "", llGetOwner(), "doors reset");
         scan();
-        llSetTimerEvent(30.0);
+        llSetTimerEvent(10.0);
     }
     on_rez(integer p) { llResetScript(); }
     changed(integer c)
@@ -564,8 +568,11 @@ default
 
     timer()
     {
-        llListenRemove(LH);
-        llSetTimerEvent(30.0);
+        integer now = llGetUnixTime();
+        if (LH && now >= LISTEN_UNTIL) { llListenRemove(LH); LH = 0; }
+        integer i;
+        for (i = llGetListLength(TRIES) - 2; i >= 0; i -= 2)
+            if (now - llList2Integer(TRIES, i + 1) >= PICK_COOLDOWN) TRIES = llDeleteSubList(TRIES, i, i + 1);
         check_sentences();
     }
 }

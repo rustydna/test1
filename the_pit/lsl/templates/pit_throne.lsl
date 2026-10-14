@@ -112,6 +112,7 @@ integer link_of(string name)
     return -1;
 }
 string who(key k) { return llGetDisplayName(k); }
+integer utf8(string s) { return (llStringLength(llStringToBase64(s)) * 3) >> 2; }   // byte length
 narrate(key k, string s)
 {
     if (opt("narration")) llSay(0, s);
@@ -153,8 +154,10 @@ string book()
     {
         list e = llParseString2List(llLinksetDataRead("muster:" + (string)i), ["|"], []);
         key k = (key)llList2String(e, 0);
-        t += "No. " + (string)i + " " + llList2String(e, 1) + " - " + llList2String(e, 2)
+        string line = "No. " + (string)i + " " + llGetSubString(llList2String(e, 1), 0, 15) + " - " + llList2String(e, 2)
              + " - brands: " + (string)((integer)llLinksetDataRead("brands:" + (string)k)) + "\n";
+        if (utf8(t + line) > 500) i = 0;      // a dialog message must stay under 512 bytes
+        else t += line;
     }
     return t;
 }

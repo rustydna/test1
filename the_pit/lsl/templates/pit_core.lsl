@@ -127,7 +127,7 @@ diagnose()
     if (doors == []) { llOwnerSay("Diagnose: no cell doors found (type /7 doors)."); return; }
     float centre = sum / llGetListLength(doors);
     vector rp = llGetRootPosition(); rotation rr = llGetRootRotation();
-    integer bad = 0;
+    integer bad = 0; integer untested = 0;
     for (i = 0; i < llGetListLength(doors); ++i)
     {
         integer l = llList2Integer(doors, i);
@@ -139,9 +139,12 @@ diagnose()
         {
             vector a = rp + (p + <-dir * 2.0, 0.3, z>) * rr;
             vector b = rp + (p + < dir * 2.0, 0.3, z>) * rr;
-            list hits = llCastRay(a, b, [RC_REJECT_TYPES, RC_REJECT_AGENTS | RC_REJECT_LAND,
-                                         RC_DATA_FLAGS, RC_GET_LINK_NUM, RC_MAX_HITS, 4]);
+            list opts = [RC_REJECT_TYPES, RC_REJECT_AGENTS | RC_REJECT_LAND, RC_DATA_FLAGS, RC_GET_LINK_NUM, RC_MAX_HITS, 4];
+            list hits = llCastRay(a, b, opts);
             integer h = llList2Integer(hits, -1);
+            if (h < 0) { llSleep(0.3); hits = llCastRay(a, b, opts); h = llList2Integer(hits, -1); }
+            if (h < 0) ++untested;
+            llSleep(0.05);
             integer j;
             for (j = 0; j < h; ++j)
             {
@@ -155,7 +158,8 @@ diagnose()
             }
         }
     }
-    if (bad == 0) llOwnerSay("Diagnose: all " + (string)llGetListLength(doors)
+    if (untested) llOwnerSay("Diagnose: the region refused " + (string)untested + " test rays (busy). Type /7 diagnose again later.");
+    else if (bad == 0) llOwnerSay("Diagnose: all " + (string)llGetListLength(doors)
         + " doorways are clear (with the door open).");
 }
 
