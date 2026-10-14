@@ -203,6 +203,21 @@ lord_menu(key k)
     dialog(k, "LORD OF THE PIT", b);
 }
 
+report()
+{
+    integer seats = 0; integer i;
+    for (i = 0; i < llGetListLength(SEATS); i += 5) if (link_of(llList2String(SEATS, i)) > 0) ++seats;
+    integer anims = 0;
+    for (i = 0; i < llGetListLength(SEATS); i += 5)
+        if (llGetInventoryType(llList2String(SEATS, i + 3)) == INVENTORY_ANIMATION) ++anims;
+    string s = "pit_throne: throne ";
+    if (link_of("N_Throne") > 0) s += "found"; else s += "NOT found";
+    s += ", " + (string)seats + " of " + (string)(llGetListLength(SEATS) / 5) + " seats, "
+        + (string)anims + " pose animations in the Contents (missing ones use built-in SL poses)";
+    if (seats == 0) s += ". NO SEATS: the pieces still have their old names - is pit_core in the root?";
+    llOwnerSay(s + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+}
+
 list ROOM_BUTTONS = ["Press-Gang", "Rack", "Stocks", "Cistern", "Kennel", "Cages", "Mast"];
 list ROOM_TAGS = ["C01", "C02", "C03", "C04", "C05", "C07", "C08"];
 
@@ -214,6 +229,7 @@ default
         OPTS = llLinksetDataRead("opts");
         place(); check();
         signs();
+        report();
     }
     on_rez(integer p) { llResetScript(); }
     linkset_data(integer action, string name, string value)
@@ -250,7 +266,8 @@ default
             llLinksetDataDelete("lord");
             signs();
         }
-        else if (n == 9001) { place(); signs(); }
+        else if (n == 9001) { place(); signs(); report(); }
+        else if (n == 9800) report();
     }
 
     touch_start(integer t)

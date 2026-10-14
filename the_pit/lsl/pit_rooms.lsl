@@ -262,6 +262,17 @@ act(string b)
         narrate(q + " forces " + v + " to kneel on the stone. Let the Lord of the Pit decide " + v + "'s fate.");
 }
 
+report()
+{
+    list want = ["C02_Rack", "C03_Pillory", "C03_Stocks", "C04_Chair", "C07_Cage_1", "C07_Cage_2", "C08_Mast",
+                 "C05_Kennel_1", "C05_Kennel_2", "C05_Kennel_3", "C05_Bowls", "V_Table", "V_Basket", "N_Kneeling_Stone"];
+    integer found = 0; integer i;
+    for (i = 0; i < llGetListLength(want); ++i) if (link_of(llList2String(want, i)) > 0) ++found;
+    string s = "pit_rooms: " + (string)found + " of " + (string)llGetListLength(want) + " pieces of furniture found";
+    if (found == 0) s += ". NONE: the pieces still have their old names - is pit_core in the root?";
+    llOwnerSay(s + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+}
+
 default
 {
     state_entry()
@@ -269,9 +280,14 @@ default
         CH = -1 - (integer)llFrand(1000000.0);
         OPTS = llLinksetDataRead("opts");
         texts();
+        report();
     }
     on_rez(integer p) { llResetScript(); }
-    link_message(integer s, integer n, string str, key id) { if (n == 9001) texts(); }
+    link_message(integer s, integer n, string str, key id)
+    {
+        if (n == 9001) { texts(); report(); }
+        else if (n == 9800) report();
+    }
     linkset_data(integer action, string name, string value)
     {
         if (name == "opts" || action == LINKSETDATA_RESET) { OPTS = llLinksetDataRead("opts"); texts(); }

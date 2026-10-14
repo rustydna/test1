@@ -232,7 +232,7 @@ recognise()
             }
         }
     }
-    llOwnerSay("Pieces recognised: " + (string)n + " (" + (string)renamed + " renamed).");
+    llOwnerSay("pit_core: " + (string)n + " pieces, " + (string)renamed + " renamed to their English names.");
 }
 
 physics()
@@ -342,7 +342,7 @@ default
         if (opt("diagnose")) diagnose();
         llMessageLinked(LINK_SET, 9001, "ready", NULL_KEY);
         llListen(7, "", llGetOwner(), "diagnose");
-        llOwnerSay("Ready. Type /7 help for the owner commands, /7 settings to switch features on or off.");
+        llOwnerSay("pit_core ready" + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB." + " Type /7 report for every script's status, /7 help for all commands.");
     }
     on_rez(integer p) { llResetScript(); }
     changed(integer c) { if (c & CHANGED_OWNER) llResetScript(); }

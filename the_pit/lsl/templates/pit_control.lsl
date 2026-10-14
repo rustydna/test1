@@ -130,6 +130,7 @@ help()
     llOwnerSay("THE PIT - owner commands (channel 7):\n"
         + "/7 settings - switch any feature on or off\n"
         + "/7 off <name> | /7 on <name> - e.g. /7 off fog\n"
+        + "/7 report - what every script found (send this to support if something fails)\n"
         + "/7 status - what is switched off\n"
         + "/7 all on | /7 all off | /7 lowlag - presets\n"
         + "/7 doors - find the doors again | /7 doors reset - forget stored door poses\n"
@@ -201,6 +202,9 @@ command(string m)
 
 // ------------------------------------------------------------- PBR materials
 list BLOCKS = ["Stone", "Floor", "Wood", "Iron", "Cloth", "Bone", "Straw", "Water"];
+// the same blocks under the names the first release used, so materials already uploaded
+// with those names are found without a notecard or a new upload
+list OLD_NAMES = ["piedra", "suelo", "madera", "hierro", "tela", "hueso", "paja", "agua"];
 list ASSIGN;   // [block, material]
 key Q; integer LINE;
 
@@ -226,8 +230,10 @@ by_name()
         for (i = 0; i < n; ++i)
         {
             string it = llGetInventoryName(INVENTORY_ALL, i);
+            string low = llToLower(it);
             if (!not_material(llGetInventoryType(it))
-                && llSubStringIndex(llToLower(it), llToLower(block)) != -1
+                && (llSubStringIndex(low, llToLower(block)) != -1
+                    || llSubStringIndex(low, llList2String(OLD_NAMES, b)) != -1)
                 && llListFindList(ASSIGN, [block]) == -1)
                 ASSIGN += [block, it];
         }
@@ -249,8 +255,8 @@ apply()
 {
     if (ASSIGN == [])
     {
-        llOwnerSay("Materials: none found. Drop the PBR materials (Stone, Floor, Wood, Iron, Cloth, Bone, "
-            + "Straw, Water) into the build's Contents tab.");
+        llOwnerSay("pit_control: no PBR materials in the root's Contents yet. Drop the 8 uploaded materials "
+            + "(Stone, Floor, Wood, Iron, Cloth, Bone, Straw, Water) into the Contents tab of the ROOT prim.");
         return;
     }
     integer n = llGetObjectPrimCount(llGetKey());
@@ -284,7 +290,7 @@ apply()
         if (j == -1) summary += block + ": MISSING  ";
         else summary += block + " = " + llList2String(ASSIGN, j + 1) + "  ";
     }
-    llOwnerSay("Materials applied to " + (string)done + " pieces. " + summary);
+    llOwnerSay("pit_control: materials applied to " + (string)done + " pieces. " + summary);
 }
 
 // ------------------------------------------------------------- tide and voices
@@ -406,6 +412,12 @@ default
         if (c == 7)
         {
             if (m == "materials") start();
+            else if (m == "report")
+            {
+                llOwnerSay("pit_control: settings - " + status() + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+                start();
+                llMessageLinked(LINK_SET, 9800, "report", NULL_KEY);
+            }
             else command(m);
             return;
         }

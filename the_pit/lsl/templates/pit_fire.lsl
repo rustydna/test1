@@ -339,9 +339,33 @@ scan()
     apply();
 }
 
+report()
+{
+    integer n = llGetListLength(F_LINK);
+    integer t = 0; integer l = 0; integer b = 0; integer i;
+    for (i = 0; i < n; ++i)
+    {
+        integer k = llList2Integer(F_TYPE, i);
+        if (k == 0) ++t; else if (k == 1) ++l; else ++b;
+    }
+    list tex = [];
+    if (T_FLIPBOOK != "") tex += "fire_flipbook";
+    if (T_FLAME != "") tex += "flame_particle";
+    if (T_SMOKE != "") tex += "smoke";
+    if (T_FOG != "") tex += "fog";
+    if (T_SPARK != "") tex += "spark";
+    if (T_DRIP != "") tex += "drip";
+    if (T_PROJECTOR != "") tex += "fire_projector";
+    string s = "pit_fire: " + (string)n + " fires (" + (string)t + " torches, " + (string)l + " lanterns, "
+        + (string)b + " braziers; 24 expected). Effect textures: ";
+    if (tex == []) s += "none (optional)"; else s += llDumpList2String(tex, ", ");
+    if (n == 0) s += ". NO FIRES: the pieces still have their old names - is pit_core in the root?";
+    llOwnerSay(s + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+}
+
 default
 {
-    state_entry() { load_options(); load_textures(); scan(); }
+    state_entry() { load_options(); load_textures(); scan(); report(); }
     on_rez(integer p) { llResetScript(); }
     changed(integer c)
     {
@@ -355,7 +379,8 @@ default
 
     link_message(integer s, integer num, string str, key id)
     {
-        if (num == 9001) scan();
+        if (num == 9001) { scan(); report(); }
+        else if (num == 9800) report();
         else if (num == 9200) { if (MOODS) { MOOD = str; apply(); } }
         else if (num == 9100)
         {

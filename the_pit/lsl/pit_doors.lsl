@@ -233,7 +233,7 @@ scan()
         + " gate leaves (2), portcullis: " + (string)portcullis + " (1).";
     if (cells < 8 || leaves < 2 || portcullis < 1)
         report += " MISSING PIECES: check the model was uploaded at scale 1.0, then type /7 doors to retry.";
-    llOwnerSay(report);
+    llOwnerSay(report + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
     board();
 }
 
@@ -476,7 +476,7 @@ default
 
     link_message(integer s, integer n, string str, key id)
     {
-        if (n == 9001) scan();
+        if (n == 9001 || n == 9800) scan();
         else if (n == 9400 && opt("doors"))
         {
             // throne orders: "all|open", "all|close", "judge|C04|<lord key>|<lord name>"
