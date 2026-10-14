@@ -1,7 +1,7 @@
 """Grupos de vértices: conversión de nombres, limpieza de pesos y validación."""
 
 from . import mappings
-from .skeleton import ALL_SL_BONE_NAMES, find_armature
+from .skeleton import ALL_SL_BONE_NAMES, SL_MAX_JOINTS_PER_MESH, find_armature, joints_with_ancestors
 
 SL_MAX_INFLUENCES = 4
 SL_MAX_MATERIALS = 8
@@ -136,11 +136,17 @@ def validate_object(obj):
             unweighted += 1
         elif n > SL_MAX_INFLUENCES:
             too_many += 1
+    used = {groups[g.group].name for v in me.vertices for g in v.groups
+            if g.group in sl_idx and g.weight > 0.0}
+    joints = joints_with_ancestors(arm, used)
+    if len(joints) > SL_MAX_JOINTS_PER_MESH:
+        out.append(("ERROR", f"{name}: usa {len(joints)} articulaciones (máx. {SL_MAX_JOINTS_PER_MESH} por malla); "
+                             "SL desactivaría el rigging. Separa la malla en partes"))
     if unweighted:
         out.append(("ERROR", f"{name}: {unweighted} vértices sin peso (SL rechaza la subida)"))
     if too_many:
         out.append(("WARNING", f"{name}: {too_many} vértices con más de {SL_MAX_INFLUENCES} huesos "
                                "(al exportar se conservan los 4 mayores)"))
     if not out or all(lvl == "INFO" for lvl, _ in out):
-        out.append(("INFO", f"{name}: rigged OK ({len(me.vertices)} vértices)"))
+        out.append(("INFO", f"{name}: rigged OK ({len(me.vertices)} vértices, {len(joints)} articulaciones)"))
     return out

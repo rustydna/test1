@@ -6,7 +6,7 @@ from bpy.props import BoolProperty, EnumProperty, FloatProperty, StringProperty
 from bpy_extras.io_utils import ExportHelper
 from mathutils import Vector
 
-from . import collada, compat, gltf, mappings, presets, skeleton, weights
+from . import collada, compat, gltf, hud, mappings, presets, skeleton, weights
 
 
 def _selected_meshes(context):
@@ -30,30 +30,41 @@ def _world_bbox(objs):
 
 # --------------------------------------------------------------------------- esqueleto
 
+def _deform_props():
+    return {key: BoolProperty(name=label, default=key == "HANDS",
+                              description=f"Los huesos de '{label}' deforman la malla (pesos automáticos y exportación)")
+            for key, (label, _, _) in skeleton.DEFORM_GROUPS.items()}
+
+
 class SLR_OT_create_rig(bpy.types.Operator):
-    """Crea un esqueleto con los huesos y posiciones de Second Life"""
+    """Crea el esqueleto oficial de Second Life: 133 huesos Bento + 26 volúmenes de colisión"""
     bl_idname = "slr.create_rig"
     bl_label = "Crear esqueleto SL"
     bl_options = {"REGISTER", "UNDO"}
 
     preset: EnumProperty(name="Preset", items=presets.enum_items(), default="HUMAN")
-    bento_hands: BoolProperty(name="Dedos Bento", default=True)
-    tail: BoolProperty(name="Cola Bento", default=False,
-                       description="Añade mTail1–6 (los presets de furro la incluyen siempre)")
-    ears: BoolProperty(name="Orejas Bento", default=False,
-                       description="Añade mFaceEar1/2 (los presets de furro las incluyen siempre)")
+    __annotations__.update({f"deform_{k.lower()}": v for k, v in _deform_props().items()})
 
     def invoke(self, context, event):
         self.preset = context.scene.slr_preset
+        for key in presets.default_deform(self.preset):
+            setattr(self, f"deform_{key.lower()}", True)
         return self.execute(context)
+
+    def draw(self, context):
+        layout = self.layout
+        layout.prop(self, "preset")
+        layout.label(text="Grupos que deforman:")
+        grid = layout.grid_flow(columns=2, align=True)
+        for key in skeleton.DEFORM_GROUPS:
+            grid.prop(self, f"deform_{key.lower()}", toggle=True)
 
     def execute(self, context):
         if context.mode != "OBJECT":
             bpy.ops.object.mode_set(mode="OBJECT")
-        extras = [k for k, on in (("tail", self.tail), ("ears", self.ears)) if on]
+        deform = [k for k in skeleton.DEFORM_GROUPS if getattr(self, f"deform_{k.lower()}")]
         arm = skeleton.create_sl_armature(context, name=f"SL_{presets.PRESETS[self.preset]['label']}",
-                                          include_bento_hands=self.bento_hands,
-                                          preset=self.preset, extras=extras)
+                                          preset=self.preset, deform=deform)
         bones = arm.data.bones
         height = (bones["mSkull"].head_local.z + 0.10 * presets.PRESETS[self.preset].get("scale", 1.0)
                   - min(b.head_local.z for b in bones))
@@ -62,6 +73,33 @@ class SLR_OT_create_rig(bpy.types.Operator):
             msg += ". Sube con 'Include joint positions'"
         self.report({"INFO"}, msg)
         return {"FINISHED"}
+
+
+class SLR_OT_set_deform(bpy.types.Operator):
+    """Activa o desactiva la deformación de un grupo Bento en el esqueleto activo"""
+    bl_idname = "slr.set_deform"
+    bl_label = "Deformación de grupo"
+    bl_options = {"REGISTER", "UNDO"}
+
+    group: EnumProperty(items=[(k, v[0], "") for k, v in skeleton.DEFORM_GROUPS.items()])
+    enable: BoolProperty(default=True)
+
+    def execute(self, context):
+        arm = _sl_rig_in_selection(context) or _rig_of_active(context)
+        if arm is None:
+            self.report({"ERROR"}, "Selecciona un esqueleto SL o una malla vinculada")
+            return {"CANCELLED"}
+        skeleton.set_group_deform(arm, self.group, self.enable)
+        return {"FINISHED"}
+
+
+def _rig_of_active(context):
+    obj = context.active_object
+    if obj is not None and obj.type == "MESH":
+        arm = skeleton.find_armature(obj)
+        if skeleton.is_sl_armature(arm):
+            return arm
+    return None
 
 
 class SLR_OT_fit_rig(bpy.types.Operator):
@@ -325,6 +363,7 @@ class SLR_OT_validate(bpy.types.Operator):
                     seen.add(slot.material.name)
                     results += gltf.validate_material_textures(slot.material)
         context.scene.slr_report = "\n".join(f"{lvl}|{msg}" for lvl, msg in results)
+        hud.invalidate()
         errors = sum(1 for lvl, _ in results if lvl == "ERROR")
         warns = sum(1 for lvl, _ in results if lvl == "WARNING")
         for lvl, msg in results:
@@ -474,6 +513,7 @@ class SLR_OT_export_materials(bpy.types.Operator):
 
 classes = (
     SLR_OT_create_rig,
+    SLR_OT_set_deform,
     SLR_OT_fit_rig,
     SLR_OT_convert_groups,
     SLR_OT_bind,

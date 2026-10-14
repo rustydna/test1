@@ -11,14 +11,40 @@ Formatos de exportación:
   (también Firestorm). Recomendado para objetos estáticos.
 * **Materiales PBR `.glb`**: un archivo por material para *Build → Upload → Material*.
 
+## Ediciones
+
+| Edición | Blender | Paquete |
+|---|---|---|
+| **Founder Edition** | 3.5 o superior | `sl_rigger_founder_X.Y.Z.zip` (complemento clásico) |
+| **Standard Edition** | 4.2 o superior (incluido 5.x) | `sl_rigger_standard_X.Y.Z.zip` (extensión) |
+
+Las dos salen del mismo código con `python build.py` (se escriben en `dist/`).
+
 ## Instalación
 
-1. Comprime la carpeta `sl_rigger` en un `.zip` (por ejemplo `zip -r sl_rigger.zip sl_rigger`).
-2. En Blender: *Editar → Preferencias → Complementos → Instalar desde disco…* y elige el zip.
-   * Blender 4.2 o superior lo instala como extensión (`blender_manifest.toml`).
-   * Blender 3.5–4.1 lo instala como complemento clásico (`bl_info`). En 3.5 instala el zip con *Instalar…*.
-3. El panel aparece en la vista 3D, en la barra lateral (`N`), pestaña **SL Rigger**.
-   Los exportadores también están en *Archivo → Exportar*.
+* **Founder (Blender 3.5–4.1):** *Editar → Preferencias → Complementos → Instalar…*, elige el zip y activa **SL Rigger**.
+* **Standard (Blender 4.2+):** *Editar → Preferencias → Extensiones → ⌄ → Instalar desde disco…* y elige el zip.
+
+El panel está en la vista 3D, barra lateral (`N`), pestaña **SL Rigger**. Menú radial: **Mayús+Alt+Q**.
+Los exportadores también están en *Archivo → Exportar*.
+
+## Novedades de la 0.4
+
+* **Esqueleto oficial completo**: los 133 huesos (26 base + 107 Bento) y los 26 volúmenes de
+  colisión, con las posiciones exactas del `avatar_skeleton.xml` del visor.
+* **Bento por grupos**: el rig siempre lleva todos los huesos (para que funcione cualquier
+  animación Bento) y tú eliges qué grupos deforman: manos, cara, orejas, cola, alas, patas
+  traseras, ingle, columna y *fitted mesh*. Cada grupo tiene su color.
+* **Fitted mesh**: los volúmenes (`BELLY`, `BUTT`, `CHEST`, `LEFT_PEC`…) se exportan con su
+  rotación y escala oficiales, como necesita SL.
+* **Límite de 110 articulaciones por malla** (el del visor): el exportador solo lista los huesos
+  usados y sus padres, y la validación avisa si una malla se pasa.
+* **Auto-rig en un clic**: preset → esqueleto → ajuste → pesos → limpieza → validación.
+* **Transferir pesos del cuerpo a la ropa**, **simetrizar pesos** y **rig rígido** para robots.
+* **Monitor HUD** en el visor 3D con estado en vivo y **mapa de calor de pesos**
+  (rojo: sin peso, verde: correcto, magenta: más de 4 huesos).
+* Interfaz nueva con tablero de estado, secciones plegables y menú radial.
+* Batería de pruebas automáticas (`tests/test_addon.py`).
 
 ## Presets de avatar
 
@@ -37,13 +63,13 @@ En el desplegable sobre **Crear esqueleto SL** eliges las proporciones de partid
 | Kemono / chibi furro | 1,4 m | Estilo anime, cabeza grande, cola y orejas |
 
 Todo preset distinto de *Humano estándar* necesita subirse con **Include joint positions**.
-La cola (`mTail1–6`) y las orejas (`mFaceEar1/2`) son huesos Bento; también se pueden
-añadir a cualquier preset desde las opciones del operador (panel de *Ajustar última operación*).
+Los presets de furro activan la deformación de la cola y las orejas. Cualquier grupo Bento se
+puede activar o desactivar después en *Esqueleto Bento → Grupos que deforman*.
 
 ## Flujo: malla → avatar o ropa rigged
 
-1. **Crear esqueleto SL**: crea un armature con los 26 huesos base de Second Life y,
-   si lo activas, los 30 huesos Bento de los dedos. Mira hacia −Y (vista frontal de Blender).
+1. **Crear esqueleto SL**: crea el esqueleto oficial completo (Bento y volúmenes). En el panel
+   *Ajustar última operación* eliges qué grupos deforman. Mira hacia −Y (vista frontal de Blender).
 2. **Ajustar esqueleto a la malla** (opcional): selecciona las mallas y el esqueleto
    (el esqueleto como objeto activo). Se escala y se centra según la altura de la malla.
    Después aplica la escala (`Ctrl+A → Escala`) y, al subir el modelo a SL, marca
@@ -104,12 +130,9 @@ En SL: *Build → Upload → Material* (solo en regiones con PBR) y luego aplica
   asignan a `mPelvis` y se avisa.
 * La geometría se lee en la pose de reposo y se aplican los modificadores, salvo el armature.
 
-## Limitaciones de esta versión (0.3 beta)
+## Limitaciones de esta versión (0.4 beta)
 
-* Huesos Bento incluidos: manos, cola y orejas. Faltan el resto de la cara, las alas y las
-  extremidades traseras.
-* No hay volúmenes de colisión (`PELVIS`, `BELLY`… para el *fitted mesh*).
-* No exporta animaciones (`.anim` o `.bvh`).
-* Las posiciones de los dedos, la cola y las orejas son aproximadas, y las proporciones de los presets
-  son un punto de partida. Comprueba el resultado en el
-  visor (o en Aditi, la red beta, que es gratis) antes de subirlo en la red principal.
+* No se ha probado todavía subiendo a Second Life: necesita pruebas en Aditi u OpenSim.
+* La edición Founder se ha revisado contra la API de Blender 3.5 pero solo se ha ejecutado en 4.2.
+* No exporta animaciones (`.anim` o `.bvh`) ni importa formas (shapes) de SL.
+* Las proporciones de los presets son un punto de partida.

@@ -2,7 +2,7 @@
 
 Lista de todo lo que queda por añadir. Se marca cada punto al terminarlo.
 
-Estado actual (0.3 beta): esqueleto base con dedos Bento, presets de avatar (gigantes, tinies, furros) con cola y orejas, conversión de Mixamo, Unreal y Rigify,
+Estado actual (0.4 beta): esqueleto oficial Bento completo con fitted mesh, límite de 110 articulaciones, auto-rig en un clic, transferencia y simetría de pesos, rig rígido, monitor HUD, dos ediciones (Founder 3.5+ y Standard 4.2+). Antes: esqueleto base con dedos Bento, presets de avatar (gigantes, tinies, furros) con cola y orejas, conversión de Mixamo, Unreal y Rigify,
 vinculación y limpieza de pesos, LODs y física, validación, exportación a `.dae`, glTF y
 materiales PBR.
 
@@ -10,9 +10,9 @@ materiales PBR.
 
 ## 1. Esqueleto y rigging
 
-- [ ] Leer las posiciones exactas del `avatar_skeleton.xml` oficial (en lugar de valores aproximados).
-- [ ] Esqueleto Bento completo: cara (unos 50 huesos), alas, cola, patas traseras y los huesos `mSpine1–4`.
-- [ ] Volúmenes de colisión para *fitted mesh* (`PELVIS`, `BELLY`, `BUTT`, `CHEST`, `LEFT_PEC`, `UPPER_BACK`, `LOWER_BACK`, `L_UPPER_ARM`…).
+- [x] Leer las posiciones exactas del `avatar_skeleton.xml` oficial (en lugar de valores aproximados).
+- [x] Esqueleto Bento completo: cara (unos 50 huesos), alas, cola, patas traseras y los huesos `mSpine1–4`.
+- [x] Volúmenes de colisión para *fitted mesh* (`PELVIS`, `BELLY`, `BUTT`, `CHEST`, `LEFT_PEC`, `UPPER_BACK`, `LOWER_BACK`, `L_UPPER_ARM`…).
 - [ ] Puntos de anclaje (*attachment points*: `Chest`, `Spine`, `Avatar Center`, `Left Hand`…) con sus posiciones reales.
 - [ ] Rig de control para animar (IK y FK, controles de mano y de cara) sobre los huesos `m*`.
 - [ ] Distinguir entre forma neutra y forma por defecto al vincular (fuente clásica de deformaciones).
@@ -28,12 +28,12 @@ materiales PBR.
 
 ## 3. Pesos
 
-- [ ] Copiar pesos de un cuerpo de referencia a la ropa (transferencia por proximidad o por superficie), imprescindible para kits de desarrollo.
-- [ ] Simetrizar pesos de izquierda a derecha y viceversa.
+- [x] Copiar pesos de un cuerpo de referencia a la ropa (transferencia por proximidad o por superficie), imprescindible para kits de desarrollo.
+- [x] Simetrizar pesos de izquierda a derecha y viceversa.
 - [ ] Suavizar pesos solo en zonas seleccionadas, sin pasar de 4 influencias.
 - [ ] Copiar pesos de los volúmenes de colisión (*fitted*) de forma proporcional a los huesos `m*`.
 - [ ] Preajustes de pesos por zona (cuello, hombros, caderas) para corregir los problemas típicos.
-- [ ] Mapa de calor de influencias por vértice (verde con 1–4 influencias, rojo con más de 4 o sin peso).
+- [x] Mapa de calor de influencias por vértice (verde con 1–4 influencias, rojo con más de 4 o sin peso).
 
 ## 4. Ropa y cuerpos de malla
 
@@ -85,7 +85,7 @@ materiales PBR.
 - [ ] Hocicos Bento: presets de cara para perro, gato, zorro, lobo y dragón (mandíbula, labios, nariz).
 - [ ] Orejas largas (conejo), cuernos y crestas.
 - [ ] Manos de 3 o 4 dedos y zarpas (fusionando pesos de dedos).
-- [ ] Robots y mechas: pesos rígidos (1 hueso por pieza) con un clic.
+- [x] Robots y mechas: pesos rígidos (1 hueso por pieza) con un clic.
 - [ ] Animaciones procedurales: cola que se mueve, orejas que se agitan, respiración e *idle* furro.
 - [ ] Pelo y peluche: tarjetas de pelo con alfa, peluche en capas y aviso del coste en complejidad.
 - [ ] Editor de presets: guardar las proporciones de un rig como preset propio y compartirlo (JSON).
@@ -102,7 +102,10 @@ materiales PBR.
 
 ## 10. Calidad del plugin
 
-- [ ] Pruebas automáticas (ejecutando `bpy` sin interfaz) para cada función.
+- [ ] Preferencias del add-on: tema de color del HUD, atajo configurable, idioma.
+- [ ] Guardar y cargar presets propios (JSON) desde un rig ajustado.
+
+- [x] Pruebas automáticas (ejecutando `bpy` sin interfaz) para cada función.
 - [ ] Probar en Blender 3.6, 4.2 LTS y 5.x.
 - [ ] Interfaz en español e inglés.
 - [ ] Validación real con el visor en Aditi u OpenSim, a partir de los registros del subidor.

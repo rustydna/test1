@@ -17,7 +17,8 @@ from xml.sax.saxutils import quoteattr
 
 from mathutils import Matrix, Vector
 
-from .skeleton import ALL_SL_BONE_NAMES, BLENDER_TO_SL, find_armature
+from .skeleton import (ALL_SL_BONE_NAMES, BLENDER_TO_SL, SL_INFO, SL_MAX_JOINTS_PER_MESH,
+                       cv_local_matrix, find_armature, joints_with_ancestors)
 from .weights import SL_MAX_INFLUENCES
 
 
@@ -97,9 +98,10 @@ def _extract_mesh(obj, depsgraph, apply_modifiers, vert_matrix, joint_index):
                 loop_uv.append(idx)
 
         tris = {}
+        mirrored = vert_matrix.determinant() < 0.0
         for t in me.loop_triangles:
             bucket = tris.setdefault(t.material_index, [])
-            for li in t.loops:
+            for li in (reversed(t.loops) if mirrored else t.loops):
                 vi = me.loops[li].vertex_index
                 bucket.append((vi, loop_n[li], loop_uv[li] if loop_uv is not None else None))
 
@@ -138,6 +140,19 @@ def _extract_mesh(obj, depsgraph, apply_modifiers, vert_matrix, joint_index):
         src.to_mesh_clear()
 
 
+def _limit_joints(data, all_joints, armature, warnings):
+    """Reduce la lista de articulaciones a las usadas (más antecesores) y reindexa pesos."""
+    used = {all_joints[j] for infl in data["weights"] for j, _ in infl}
+    mesh_joints = joints_with_ancestors(armature, used)
+    remap = {all_joints.index(n): i for i, n in enumerate(mesh_joints)}
+    data["weights"] = [[(remap[j], wt) for j, wt in infl] for infl in data["weights"]]
+    data["joints"] = mesh_joints
+    if len(mesh_joints) > SL_MAX_JOINTS_PER_MESH:
+        warnings.append(f"{data['obj'].name if 'obj' in data else ''}: usa {len(mesh_joints)} articulaciones; "
+                        f"SL admite {SL_MAX_JOINTS_PER_MESH} por malla y desactivará el rigging. "
+                        "Divide la malla (p. ej. cabeza y cuerpo por separado)")
+
+
 def _material_name(obj, index):
     if index < len(obj.material_slots) and obj.material_slots[index].material is not None:
         return obj.material_slots[index].material.name
@@ -173,6 +188,7 @@ def export(filepath, objects, depsgraph, apply_modifiers=True, rigged=None):
 
     ids = _Ids()
     joints, joint_index, joint_world, joint_parent = [], {}, {}, {}
+    joint_local = {}  # matriz local (respecto al padre SL) de cada articulación
     old_pose = None
     if rigged:
         bones = [b for b in armature.data.bones if b.name in ALL_SL_BONE_NAMES]
@@ -184,6 +200,24 @@ def export(filepath, objects, depsgraph, apply_modifiers=True, rigged=None):
             while p is not None and p.name not in ALL_SL_BONE_NAMES:
                 p = p.parent
             joint_parent[b.name] = p.name if p is not None else None
+        for j in joints:
+            parent = joint_parent[j]
+            local = joint_world[j] - (joint_world[parent] if parent else Vector((0.0, 0.0, 0.0)))
+            if SL_INFO[j]["kind"] == "cv":
+                joint_local[j] = cv_local_matrix(j, local)
+            else:
+                joint_local[j] = Matrix.Translation(local)
+        # Matriz de mundo: los huesos SL no tienen rotación; los volúmenes sí (rot + escala).
+        joint_mat = {}
+
+        def world_of(j):
+            if j not in joint_mat:
+                parent = joint_parent[j]
+                joint_mat[j] = (world_of(parent) if parent else Matrix.Identity(4)) @ joint_local[j]
+            return joint_mat[j]
+
+        for j in joints:
+            world_of(j)
         for name in joints:
             ids.used.add(name)
         # La geometría debe leerse en la pose de reposo.
@@ -211,6 +245,8 @@ def export(filepath, objects, depsgraph, apply_modifiers=True, rigged=None):
             data["geom_id"] = ids.make(obj.name + "-mesh")
             data["node_id"] = ids.make(obj.name)
             data["skin_id"] = ids.make(obj.name + "-skin") if rigged else None
+            if rigged:
+                _limit_joints(data, joints, armature, warnings)
             meshes.append(data)
     finally:
         if old_pose is not None:
@@ -296,10 +332,11 @@ def export(filepath, objects, depsgraph, apply_modifiers=True, rigged=None):
 
     if rigged:
         identity = _matrix(Matrix.Identity(4))
-        names = " ".join(joints)
-        inv_binds = " ".join(_matrix(Matrix.Translation(-joint_world[j])) for j in joints)
         w("  <library_controllers>")
         for m in meshes:
+            mesh_joints = m["joints"]
+            names = " ".join(mesh_joints)
+            inv_binds = " ".join(_matrix(joint_mat[j].inverted_safe()) for j in mesh_joints)
             sid = m["skin_id"]
             flat_w, vcount, v = [], [], []
             for infl in m["weights"]:
@@ -309,13 +346,13 @@ def export(filepath, objects, depsgraph, apply_modifiers=True, rigged=None):
                     flat_w.append(wt)
             w(f'    <controller id="{sid}" name={quoteattr(m["obj"].name)}><skin source="#{m["geom_id"]}">')
             w(f"      <bind_shape_matrix>{identity}</bind_shape_matrix>")
-            w(f'      <source id="{sid}-joints"><Name_array id="{sid}-joints-array" count="{len(joints)}">'
+            w(f'      <source id="{sid}-joints"><Name_array id="{sid}-joints-array" count="{len(mesh_joints)}">'
               f"{names}</Name_array>")
-            w(f'        <technique_common><accessor source="#{sid}-joints-array" count="{len(joints)}" stride="1">'
+            w(f'        <technique_common><accessor source="#{sid}-joints-array" count="{len(mesh_joints)}" stride="1">'
               '<param name="JOINT" type="name"/></accessor></technique_common></source>')
             w(f'      <source id="{sid}-bind_poses"><float_array id="{sid}-bind_poses-array" '
-              f'count="{len(joints) * 16}">{inv_binds}</float_array>')
-            w(f'        <technique_common><accessor source="#{sid}-bind_poses-array" count="{len(joints)}" '
+              f'count="{len(mesh_joints) * 16}">{inv_binds}</float_array>')
+            w(f'        <technique_common><accessor source="#{sid}-bind_poses-array" count="{len(mesh_joints)}" '
               'stride="16"><param name="TRANSFORM" type="float4x4"/></accessor></technique_common></source>')
             w(f'      <source id="{sid}-weights"><float_array id="{sid}-weights-array" count="{len(flat_w)}">'
               + _floats(flat_w) + "</float_array>")
@@ -350,10 +387,8 @@ def export(filepath, objects, depsgraph, apply_modifiers=True, rigged=None):
         arm_id = ids.make(armature.name)
 
         def write_joint(j, indent):
-            parent = joint_parent[j]
-            local = joint_world[j] - (joint_world[parent] if parent else Vector((0.0, 0.0, 0.0)))
             w(f'{indent}<node id="{j}" name="{j}" sid="{j}" type="JOINT">')
-            w(f'{indent}  <matrix sid="transform">{_matrix(Matrix.Translation(local))}</matrix>')
+            w(f'{indent}  <matrix sid="transform">{_matrix(joint_local[j])}</matrix>')
             for c in children.get(j, []):
                 write_joint(c, indent + "  ")
             w(f"{indent}</node>")
@@ -363,13 +398,13 @@ def export(filepath, objects, depsgraph, apply_modifiers=True, rigged=None):
         for root in children.get(None, []):
             write_joint(root, "      ")
         w("    </node>")
-        roots = children.get(None, [])
         for m in meshes:
             w(f'    <node id="{m["node_id"]}" name={quoteattr(m["obj"].name)} type="NODE">')
             w(f'      <matrix sid="transform">{identity}</matrix>')
             w(f'      <instance_controller url="#{m["skin_id"]}">')
-            for r in roots:
-                w(f"        <skeleton>#{r}</skeleton>")
+            # El esqueleto apunta al nodo del armature: así el visor resuelve todas
+            # las articulaciones (incluida la raíz mPelvis) por su sid.
+            w(f"        <skeleton>#{arm_id}</skeleton>")
             bind_material(m, "        ")
             w("      </instance_controller>")
             w("    </node>")

@@ -5,31 +5,11 @@ Cada preset modifica los desplazamientos del esqueleto SL antes de crearlo:
   * mul:   multiplica por componentes (X delante, Y izquierda, Z arriba) el
            desplazamiento de un hueso respecto a su padre.
   * add:   suma un desplazamiento (en ejes SL; para huesos "Right" se refleja Y).
-  * extras: grupos de huesos Bento opcionales ("tail", "ears").
+  * deform: grupos Bento que deforman por defecto (ver skeleton.DEFORM_GROUPS).
 
 Los avatares con proporciones distintas a las de SL necesitan subirse con
 "Include joint positions" marcado.
 """
-
-# Huesos Bento extra. Posiciones aproximadas, con la jerarquía de avatar_skeleton.xml.
-BENTO_TAIL = [
-    ("mTail1", "mPelvis", (-0.116, 0.0, 0.047)),
-    ("mTail2", "mTail1", (-0.197, 0.0, 0.0)),
-    ("mTail3", "mTail2", (-0.168, 0.0, 0.0)),
-    ("mTail4", "mTail3", (-0.142, 0.0, 0.0)),
-    ("mTail5", "mTail4", (-0.112, 0.0, 0.0)),
-    ("mTail6", "mTail5", (-0.094, 0.0, 0.0)),
-]
-
-BENTO_EARS = [
-    ("mFaceRoot", "mHead", (0.025, 0.0, 0.045)),
-    ("mFaceEar1Left", "mFaceRoot", (-0.019, 0.060, 0.008)),
-    ("mFaceEar2Left", "mFaceEar1Left", (-0.013, 0.0, 0.033)),
-    ("mFaceEar1Right", "mFaceRoot", (-0.019, -0.060, 0.008)),
-    ("mFaceEar2Right", "mFaceEar1Right", (-0.013, 0.0, 0.033)),
-]
-
-EXTRAS = {"tail": BENTO_TAIL, "ears": BENTO_EARS}
 
 _LEGS = ("mKneeLeft", "mKneeRight", "mAnkleLeft", "mAnkleRight")
 _ARMS = ("mElbowLeft", "mElbowRight", "mWristLeft", "mWristRight")
@@ -86,7 +66,7 @@ PRESETS = {
             "mEyeLeft": (1.2, 1.5, 1.6), "mEyeRight": (1.2, 1.5, 1.6),
             "mSkull": (1, 1, 1.8), "mHead": (1, 1, 1.4),
         },
-        "extras": ["tail", "ears"],
+        "deform": ["HANDS", "TAIL", "EARS"],
     },
     "FURRY": {
         "label": "Furro antropomorfo",
@@ -95,7 +75,7 @@ PRESETS = {
             "mNeck": (1, 1, 1.15),
             "mEyeLeft": (1.3, 1.1, 1), "mEyeRight": (1.3, 1.1, 1),
         },
-        "extras": ["tail", "ears"],
+        "deform": ["HANDS", "TAIL", "EARS"],
     },
     "FURRY_DIGI": {
         "label": "Furro digitígrado",
@@ -109,7 +89,7 @@ PRESETS = {
             "mToeLeft": (0.6, 1, 1), "mToeRight": (0.6, 1, 1),
         },
         "add": {"mKneeLeft": (0.06, 0, 0), "mKneeRight": (0.06, 0, 0)},
-        "extras": ["tail", "ears"],
+        "deform": ["HANDS", "TAIL", "EARS"],
     },
     "KEMONO": {
         "label": "Kemono / chibi furro",
@@ -121,7 +101,7 @@ PRESETS = {
             "mEyeLeft": (1.2, 1.4, 1.4), "mEyeRight": (1.2, 1.4, 1.4),
             "mSkull": (1, 1, 1.5),
         },
-        "extras": ["tail", "ears"],
+        "deform": ["HANDS", "TAIL", "EARS"],
     },
 }
 
@@ -131,24 +111,24 @@ def enum_items():
 
 
 def apply(bones, preset_key):
-    """Devuelve la tabla de huesos con el preset aplicado (y sus huesos extra)."""
+    """Devuelve la tabla [(nombre, padre, pos)] con el preset aplicado."""
     preset = PRESETS.get(preset_key or "HUMAN", PRESETS["HUMAN"])
-    present = {b[0] for b in bones}
-    out = list(bones)
-    for extra in preset.get("extras", []):
-        out += [b for b in EXTRAS[extra] if b[0] not in present]
     scale = preset.get("scale", 1.0)
     mul = preset.get("mul", {})
     add = preset.get("add", {})
     result = []
-    for name, parent, (x, y, z) in out:
+    for name, parent, (x, y, z) in bones:
         mx, my, mz = mul.get(name, (1.0, 1.0, 1.0))
         ax, ay, az = add.get(name, (0.0, 0.0, 0.0))
         if "Right" in name:
             ay = -ay
         result.append((name, parent, ((x * mx + ax) * scale, (y * my + ay) * scale, (z * mz + az) * scale)))
-    base_foot = _lowest_foot(out)
+    base_foot = _lowest_foot(bones)
     return _ground(result, target=None if base_foot is None else base_foot * scale)
+
+
+def default_deform(preset_key):
+    return PRESETS.get(preset_key or "HUMAN", PRESETS["HUMAN"]).get("deform", ["HANDS"])
 
 
 def _lowest_foot(bones):
