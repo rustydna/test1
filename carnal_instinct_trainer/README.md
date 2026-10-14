@@ -14,7 +14,15 @@ Mod Lua para [UE4SS](https://github.com/UE4SS-RE/RE-UE4SS). Busca las variables 
 | F8 | Rastreador de objetos (on/off; viene activado). Lo que se consigue va a `items_seen.log` |
 | F9 | Velocidad x2 (on/off) |
 
-## Instalación
+## Uso rápido (3 pasos)
+
+1. Descarga el zip y descomprímelo donde quieras.
+2. Abre la carpeta `carnal_instinct_trainer` y haz doble clic en **INSTALAR.bat**. Descarga UE4SS, encuentra el juego y lo instala todo.
+3. Abre el juego desde Steam, carga partida y usa **F1–F9**.
+
+Para quitarlo, usa **DESINSTALAR.bat**. Si Windows avisa con "Windows protegió su PC", pulsa *Más información* y luego *Ejecutar de todas formas*.
+
+## Instalación manual
 
 1. Descarga UE4SS **para UE5** (el zip `UE4SS_v3.x.x.zip`, o el *experimental-latest* si el juego no arranca con la versión estable).
 2. Busca el `.exe` que lanza realmente el juego (no el lanzador). Suele estar en
