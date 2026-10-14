@@ -42,11 +42,15 @@ class SLR_PT_main(bpy.types.Panel):
             for line in report.splitlines():
                 lvl, _, msg = line.partition("|")
                 col.label(text=msg, icon=icons.get(lvl, "DOT"))
-        box.operator("slr.export_dae", icon="FILE_3D")
+        col = box.column(align=True)
+        col.operator("slr.export_dae", icon="FILE_3D")
+        col.operator("slr.export_gltf", icon="FILE_3D")
+        col.operator("slr.export_materials", icon="MATERIAL")
 
 
 def menu_export(self, context):
     self.layout.operator("slr.export_dae", text="Second Life Collada (.dae)")
+    self.layout.operator("slr.export_gltf", text="Second Life glTF (.glb/.gltf)")
 
 
 classes = (SLR_PT_main,)

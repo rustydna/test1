@@ -6,7 +6,7 @@ from bpy.props import BoolProperty, EnumProperty, FloatProperty, StringProperty
 from bpy_extras.io_utils import ExportHelper
 from mathutils import Vector
 
-from . import collada, mappings, skeleton, weights
+from . import collada, gltf, mappings, skeleton, weights
 
 
 def _selected_meshes(context):
@@ -299,8 +299,13 @@ class SLR_OT_validate(bpy.types.Operator):
             self.report({"ERROR"}, "Selecciona al menos una malla")
             return {"CANCELLED"}
         results = []
+        seen = set()
         for obj in meshes:
             results += weights.validate_object(obj)
+            for slot in obj.material_slots:
+                if slot.material is not None and slot.material.name not in seen:
+                    seen.add(slot.material.name)
+                    results += gltf.validate_material_textures(slot.material)
         context.scene.slr_report = "\n".join(f"{lvl}|{msg}" for lvl, msg in results)
         errors = sum(1 for lvl, _ in results if lvl == "ERROR")
         warns = sum(1 for lvl, _ in results if lvl == "WARNING")
@@ -311,6 +316,46 @@ class SLR_OT_validate(bpy.types.Operator):
         return {"FINISHED"}
 
 
+_KIND_ITEMS = [
+    ("AUTO", "Automático", "Rigged si las mallas usan un esqueleto SL"),
+    ("RIGGED", "Avatar / ropa rigged", ""),
+    ("STATIC", "Objeto estático", ""),
+]
+
+
+def _export_with_lods(op, context, filepath, writer):
+    """Exporta las mallas seleccionadas y, si se pide, sus LODs y física a archivos hermanos."""
+    meshes = [o for o in _selected_meshes(context) if "sl_lod_of" not in o]
+    if not meshes:
+        op.report({"ERROR"}, "Selecciona al menos una malla")
+        return {"CANCELLED"}
+    if context.mode != "OBJECT":
+        bpy.ops.object.mode_set(mode="OBJECT")
+    rigged = {"AUTO": None, "RIGGED": True, "STATIC": False}[op.kind]
+    written, warnings_all = [], []
+    try:
+        warnings_all += writer(filepath, meshes, rigged)
+        written.append(filepath)
+        if op.include_lods:
+            base, ext = os.path.splitext(filepath)
+            names = {o.name for o in meshes}
+            for level in [lv for lv, _ in LOD_LEVELS] + ["PHYS"]:
+                objs = [o for o in context.scene.objects
+                        if o.get("sl_lod_of") in names and o.get("sl_lod_level") == level]
+                if not objs:
+                    continue
+                path = f"{base}_{level}{ext}"
+                warnings_all += writer(path, objs, False if level == "PHYS" else rigged)
+                written.append(path)
+    except ValueError as e:
+        op.report({"ERROR"}, str(e))
+        return {"CANCELLED"}
+    for msg in dict.fromkeys(warnings_all):
+        op.report({"WARNING"}, msg)
+    op.report({"INFO"}, "Exportado: " + ", ".join(os.path.basename(p) for p in written))
+    return {"FINISHED"}
+
+
 class SLR_OT_export(bpy.types.Operator, ExportHelper):
     """Exporta las mallas seleccionadas a Collada (.dae) para el subidor de Second Life"""
     bl_idname = "slr.export_dae"
@@ -318,50 +363,94 @@ class SLR_OT_export(bpy.types.Operator, ExportHelper):
     filename_ext = ".dae"
     filter_glob: StringProperty(default="*.dae", options={"HIDDEN"})
 
-    kind: EnumProperty(
-        name="Tipo",
-        items=[
-            ("AUTO", "Automático", "Rigged si las mallas usan un esqueleto SL"),
-            ("RIGGED", "Avatar / ropa rigged", ""),
-            ("STATIC", "Objeto estático", ""),
-        ],
-        default="AUTO",
-    )
+    kind: EnumProperty(name="Tipo", items=_KIND_ITEMS, default="AUTO")
     apply_modifiers: BoolProperty(name="Aplicar modificadores", default=True)
     include_lods: BoolProperty(name="Exportar LODs y física", default=True,
                                description="Crea archivos _MED, _LOW, _LOWEST y _PHYS si existen")
 
     def execute(self, context):
-        meshes = [o for o in _selected_meshes(context) if "sl_lod_of" not in o]
-        if not meshes:
-            self.report({"ERROR"}, "Selecciona al menos una malla")
+        depsgraph = context.evaluated_depsgraph_get()
+
+        def writer(path, objs, rigged):
+            return collada.export(path, objs, depsgraph, self.apply_modifiers, rigged)
+
+        return _export_with_lods(self, context, self.filepath, writer)
+
+
+class SLR_OT_export_gltf(bpy.types.Operator, ExportHelper):
+    """Exporta las mallas seleccionadas a glTF (.glb/.gltf) para el subidor de Second Life"""
+    bl_idname = "slr.export_gltf"
+    bl_label = "Exportar glTF para SL"
+    filename_ext = ".glb"
+    filter_glob: StringProperty(default="*.glb;*.gltf", options={"HIDDEN"})
+
+    export_format: EnumProperty(
+        name="Formato",
+        items=[
+            ("GLB", "glTF binario (.glb)", "Un solo archivo con texturas incluidas"),
+            ("GLTF_SEPARATE", "glTF separado (.gltf + .bin + texturas)", ""),
+        ],
+        default="GLB",
+    )
+    kind: EnumProperty(name="Tipo", items=_KIND_ITEMS, default="STATIC")
+    apply_modifiers: BoolProperty(name="Aplicar modificadores", default=True)
+    include_lods: BoolProperty(name="Exportar LODs y física", default=True,
+                               description="Crea archivos _MED, _LOW, _LOWEST y _PHYS si existen")
+
+    def _ext(self):
+        return ".glb" if self.export_format == "GLB" else ".gltf"
+
+    def check(self, context):
+        old = self.filepath
+        base, ext = os.path.splitext(old)
+        if ext.lower() in (".glb", ".gltf"):
+            old_base = base
+        else:
+            old_base = old
+        self.filepath = old_base + self._ext()
+        return self.filepath != old
+
+    def execute(self, context):
+        self.check(context)
+
+        def writer(path, objs, rigged):
+            return gltf.export_model(context, path, objs, self.export_format, self.apply_modifiers, rigged)
+
+        return _export_with_lods(self, context, self.filepath, writer)
+
+
+class SLR_OT_export_materials(bpy.types.Operator):
+    """Exporta los materiales PBR de las mallas seleccionadas, un .glb por material (Build → Upload → Material)"""
+    bl_idname = "slr.export_materials"
+    bl_label = "Exportar materiales PBR"
+
+    directory: StringProperty(subtype="DIR_PATH")
+    filter_folder: BoolProperty(default=True, options={"HIDDEN"})
+
+    def invoke(self, context, event):
+        context.window_manager.fileselect_add(self)
+        return {"RUNNING_MODAL"}
+
+    def execute(self, context):
+        mats = []
+        for obj in _selected_meshes(context):
+            for slot in obj.material_slots:
+                if slot.material is not None and slot.material not in mats:
+                    mats.append(slot.material)
+        if not mats:
+            self.report({"ERROR"}, "Las mallas seleccionadas no tienen materiales")
+            return {"CANCELLED"}
+        if not self.directory or not os.path.isdir(self.directory):
+            self.report({"ERROR"}, "Elige una carpeta de destino")
             return {"CANCELLED"}
         if context.mode != "OBJECT":
             bpy.ops.object.mode_set(mode="OBJECT")
-        rigged = {"AUTO": None, "RIGGED": True, "STATIC": False}[self.kind]
-        depsgraph = context.evaluated_depsgraph_get()
-        written, warnings_all = [], []
         try:
-            warnings_all += collada.export(self.filepath, meshes, depsgraph, self.apply_modifiers, rigged)
-            written.append(self.filepath)
-            if self.include_lods:
-                base, ext = os.path.splitext(self.filepath)
-                names = {o.name for o in meshes}
-                for level in [lv for lv, _ in LOD_LEVELS] + ["PHYS"]:
-                    objs = [o for o in context.scene.objects
-                            if o.get("sl_lod_of") in names and o.get("sl_lod_level") == level]
-                    if not objs:
-                        continue
-                    path = f"{base}_{level}{ext}"
-                    lvl_rigged = False if level == "PHYS" else rigged
-                    warnings_all += collada.export(path, objs, depsgraph, self.apply_modifiers, lvl_rigged)
-                    written.append(path)
+            written = gltf.export_materials(context, self.directory, mats)
         except ValueError as e:
             self.report({"ERROR"}, str(e))
             return {"CANCELLED"}
-        for msg in warnings_all:
-            self.report({"WARNING"}, msg)
-        self.report({"INFO"}, "Exportado: " + ", ".join(os.path.basename(p) for p in written))
+        self.report({"INFO"}, "Materiales: " + ", ".join(os.path.basename(p) for p in written))
         return {"FINISHED"}
 
 
@@ -376,4 +465,6 @@ classes = (
     SLR_OT_make_physics,
     SLR_OT_validate,
     SLR_OT_export,
+    SLR_OT_export_gltf,
+    SLR_OT_export_materials,
 )

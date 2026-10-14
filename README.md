@@ -3,8 +3,13 @@
 Add-on de Blender (en la línea de Avastar o Bento Buddy) para convertir mallas 3D en
 **avatares y ropa rigged** y en **objetos estáticos** listos para subir a **Second Life**.
 
-Incluye su propio exportador Collada (`.dae`), así que no depende del exportador de
-Blender, que se ha eliminado en versiones recientes.
+Formatos de exportación:
+
+* **Collada `.dae`**: exportador propio (Blender ya no trae el suyo). Es el formato
+  recomendado para avatares y ropa rigged.
+* **glTF `.glb` / `.gltf`**: lo acepta el subidor de modelos de SL desde el visor 2025.05
+  (también Firestorm). Recomendado para objetos estáticos.
+* **Materiales PBR `.glb`**: un archivo por material para *Build → Upload → Material*.
 
 ## Instalación
 
@@ -13,7 +18,7 @@ Blender, que se ha eliminado en versiones recientes.
    * Blender 4.2 o superior lo instala como extensión (`blender_manifest.toml`).
    * Blender 3.6–4.1 lo instala como complemento clásico (`bl_info`).
 3. El panel aparece en la vista 3D, en la barra lateral (`N`), pestaña **SL Rigger**.
-   El exportador también está en *Archivo → Exportar → Second Life Collada (.dae)*.
+   Los exportadores también están en *Archivo → Exportar*.
 
 ## Flujo: malla → avatar o ropa rigged
 
@@ -45,10 +50,26 @@ y, si moviste o escalaste huesos, **Include joint positions**.
 4. **Exportar .dae**: escribe `modelo.dae` y, si existen, `modelo_MED.dae`, `modelo_LOW.dae`,
    `modelo_LOWEST.dae` y `modelo_PHYS.dae`. En el subidor, carga cada uno en su nivel de LOD o de física.
 
+## glTF y materiales PBR
+
+**Exportar glTF para SL** usa el exportador glTF de Blender con los ajustes que pide SL:
+eje Y arriba, sin animaciones, sin morphs, sin compresión Draco ni WebP, máximo 4 influencias
+por vértice y pose de reposo. Exporta también los LODs y la física igual que con `.dae`.
+
+* En el subidor (*Build → Upload → Model*) carga el `.glb`. De momento SL solo toma el
+  **color base** del modelo; no marques subir texturas.
+* El glTF **rigged es experimental** en SL. Si el subidor falla, usa `.dae` para avatares y ropa.
+
+**Exportar materiales PBR** escribe un `.glb` por cada material de las mallas seleccionadas.
+Usa un *Principled BSDF* con texturas conectadas a *Base Color*, *Metallic*, *Roughness*,
+*Normal* y *Emission*; el exportador empaqueta metal y rugosidad en un solo PNG como pide glTF.
+En SL: *Build → Upload → Material* (solo en regiones con PBR) y luego aplica el material al objeto.
+
 ## Comprobaciones de la validación
 
 * Máximo 8 materiales por objeto.
-* Aviso a partir de 21 844 triángulos por material (SL divide la cara).
+* Aviso a partir de 21 844 triángulos o 65 534 vértices por material (SL divide la cara).
+* Texturas de más de 2048 px o que no son potencia de 2 (SL las reescala).
 * Materiales sin caras y falta de mapa UV.
 * Tamaño máximo de 64 m por eje y escala sin aplicar.
 * Rigged: vértices sin peso, más de 4 influencias, grupos que no son huesos SL
@@ -63,7 +84,7 @@ y, si moviste o escalaste huesos, **Include joint positions**.
   asignan a `mPelvis` y se avisa.
 * La geometría se lee en la pose de reposo y se aplican los modificadores, salvo el armature.
 
-## Limitaciones de esta versión (0.1)
+## Limitaciones de esta versión (0.2)
 
 * Huesos Bento incluidos: solo las manos. Faltan la cara, las alas, la cola y las
   extremidades traseras.

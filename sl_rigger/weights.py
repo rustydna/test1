@@ -6,6 +6,7 @@ from .skeleton import ALL_SL_BONE_NAMES, find_armature
 SL_MAX_INFLUENCES = 4
 SL_MAX_MATERIALS = 8
 SL_MAX_TRIS_PER_MATERIAL = 21844
+SL_MAX_VERTS_PER_MATERIAL = 65534
 SL_MAX_DIMENSION = 64.0
 
 
@@ -90,6 +91,13 @@ def validate_object(obj):
         if count > SL_MAX_TRIS_PER_MATERIAL:
             out.append(("WARNING", f"{name}: material {mi} tiene {count} triángulos "
                                    f"(SL lo divide a partir de {SL_MAX_TRIS_PER_MATERIAL})"))
+    verts_per_mat = {}
+    for p in me.polygons:
+        verts_per_mat.setdefault(p.material_index, set()).update(p.vertices)
+    for mi, vs in verts_per_mat.items():
+        if len(vs) > SL_MAX_VERTS_PER_MATERIAL:
+            out.append(("WARNING", f"{name}: material {mi} tiene {len(vs)} vértices "
+                                   f"(SL lo divide a partir de {SL_MAX_VERTS_PER_MATERIAL})"))
     used = set(per_mat)
     for mi in range(len(obj.material_slots)):
         if mi not in used:
