@@ -11,7 +11,7 @@ Mod Lua para [UE4SS](https://github.com/UE4SS-RE/RE-UE4SS). Busca las variables 
 | F5 | + experiencia y puntos de habilidad |
 | F6 | Desbloquear todo (booleanos tipo Unlocked/Collected) y dar todos los objetos |
 | F7 | Volcado: genera `dump.txt` e `items_catalog.txt` |
-| F8 | Rastreador de objetos (on/off; viene activado). Lo que se consigue va a `items_seen.log` |
+| F8 | Rastreador de objetos (on/off; viene apagado). Lo que se consigue va a `items_seen.log` |
 | F9 | Velocidad x2 (on/off) |
 
 ## Uso rápido (3 pasos)

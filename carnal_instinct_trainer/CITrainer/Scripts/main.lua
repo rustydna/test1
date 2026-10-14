@@ -88,6 +88,22 @@ local function forEachGameProp(obj, cb)
     end
 end
 
+-- Tipo de struct de una StructProperty (p.ej. "GameplayAttributeData").
+local function structName(p)
+    return safe(function() return p:GetStruct():GetFName():ToString() end) or ""
+end
+
+local function isAttrProp(p) return structName(p) == "GameplayAttributeData" end
+
+-- Propiedad interna de un ArrayProperty.
+local function innerProp(p)
+    return safe(function() return p:GetInner() end)
+end
+
+local function propType(p)
+    return safe(function() return p:GetClass():GetFName():ToString() end) or "?"
+end
+
 local function forEachGameFunc(obj, cb)
     local cls = safe(function() return obj:GetClass() end)
     while valid(cls) and not isEngineClass(cls) do
@@ -140,9 +156,6 @@ local function writeNum(obj, name, ptype, val)
         if s then
             safe(function() s.BaseValue = val end)
             safe(function() s.CurrentValue = val end)
-            if readNum(obj, name, ptype) ~= val then
-                safe(function() obj[name] = { BaseValue = val, CurrentValue = val } end)
-            end
         end
     end
 end
@@ -170,32 +183,54 @@ local function getCore()
     return core
 end
 
--- Jugador + controller + PlayerState + GameInstance + GameState y todos sus
--- subobjetos (componentes, AttributeSets, inventarios, subsistemas) hasta 2
--- niveles, más cualquier SaveGame cargado.
+-- Jugador + controller + PlayerState + GameInstance + GameState y los
+-- objetos a los que apuntan sus variables (componentes, AttributeSets,
+-- inventarios, SaveGame...) hasta 2 niveles. No se recorre toda la memoria.
+local ActorClass = nil
+local function isActor(o)
+    if not ActorClass then ActorClass = safe(function() return StaticFindObject("/Script/Engine.Actor") end) end
+    if not valid(ActorClass) then return false end
+    return safe(function() return o:IsA(ActorClass) end) == true
+end
+
 local function collectTargets()
     local core = getCore()
-    local roots, list, seen = {}, {}, {}
-    local function add(o)
+    local list, seen = {}, {}
+    local queue = {}
+    local function add(o, depth)
         local a = addr(o)
-        if a and not seen[a] then seen[a] = true; table.insert(list, o) end
+        if a and not seen[a] then
+            seen[a] = true
+            table.insert(list, o)
+            table.insert(queue, { o, depth })
+        end
     end
-    for _, o in pairs(core) do
-        local a = addr(o)
-        if a then roots[a] = true end
-        add(o)
+    for _, o in pairs(core) do add(o, 0) end
+    local i = 1
+    while i <= #queue do
+        local obj, depth = queue[i][1], queue[i][2]
+        i = i + 1
+        if depth < 2 then
+            forEachGameProp(obj, function(p, n, t)
+                local candidates = {}
+                if t == "ObjectProperty" then
+                    table.insert(candidates, safe(function() return obj[n] end))
+                elseif t == "ArrayProperty" and propType(innerProp(p)) == "ObjectProperty" then
+                    safe(function()
+                        local arr = obj[n]
+                        local count = arr:GetArrayNum()
+                        for k = 1, math.min(count, 32) do table.insert(candidates, arr[k]) end
+                    end)
+                end
+                for _, v in ipairs(candidates) do
+                    if valid(v) and not isCDO(v) and not isActor(v)
+                       and not isEngineClass(safe(function() return v:GetClass() end)) then
+                        add(v, depth + 1)
+                    end
+                end
+            end)
+        end
     end
-    ForEachUObject(function(o)
-        if isCDO(o) then return end
-        local outer = safe(function() return o:GetOuter() end)
-        local oa = outer and addr(outer)
-        if oa and roots[oa] then add(o); return end
-        local outer2 = outer and safe(function() return outer:GetOuter() end)
-        local oa2 = outer2 and addr(outer2)
-        if oa2 and roots[oa2] and className(outer) ~= "Package" then add(o); return end
-        local cn = className(o)
-        if cn:find("Save") and fullname(o):find("/Game/", 1, true) then add(o) end
-    end)
     return core, list
 end
 
@@ -246,7 +281,7 @@ end
 
 local function isNumericField(f)
     if NUMERIC[f.type] then return true end
-    if f.type == "StructProperty" then return readNum(f.obj, f.name, f.type) ~= nil end
+    if f.type == "StructProperty" then return isAttrProp(f.prop) and readNum(f.obj, f.name, f.type) ~= nil end
     return false
 end
 
@@ -428,14 +463,15 @@ local function buildItemCatalog()
     preloadAssets()
     local catalog = {}
     ForEachUObject(function(o)
-        if isCDO(o) then return end
-        local n = lower(fname(o))
-        if n:find("^skel_") or n:find("^reinst_") then return end
-        local cn = className(o)
-        local hit = containsAny(n, Config.ItemAssetPatterns) or containsAny(lower(cn), Config.ItemAssetPatterns)
-        if not hit then return end
+        -- Una sola llamada por objeto: "Clase /Game/Ruta/Asset.Asset"
         local fn = fullname(o)
         if not fn:find(" /Game/", 1, true) then return end
+        local cn, path = fn:match("^(%S+) (.*)$")
+        if not cn then return end
+        local n = lower(path:match("([^%.:/]+)$") or "")
+        if n:find("^default__") or n:find("^skel_") or n:find("^reinst_") then return end
+        local hit = containsAny(n, Config.ItemAssetPatterns) or containsAny(lower(cn), Config.ItemAssetPatterns)
+        if not hit then return end
         local outer = safe(function() return o:GetOuter() end)
         local isAsset = outer and className(outer) == "Package"
         local kind = isAsset and (cn == "BlueprintGeneratedClass" and "clase" or (cn == "DataTable" and "tabla" or "asset")) or "en mundo"
@@ -449,56 +485,62 @@ end
 -- Rastreador de objetos (detecta lo que se va consiguiendo)
 ------------------------------------------------------------------------
 
-local Tracker = { on = true, known = {}, primed = false }
+local Tracker = { on = false, known = {}, primed = false }
 
-local function valueToString(v, depth)
-    depth = depth or 0
-    if v == nil then return "nil" end
-    local t = type(v)
-    if t ~= "userdata" then return tostring(v) end
-    local s = safe(function() return v:GetFullName() end)
-    if s and s ~= "" then return s end
-    s = safe(function() return v:ToString() end)
+local SIMPLE = { IntProperty = true, Int64Property = true, FloatProperty = true, DoubleProperty = true,
+                 BoolProperty = true, ByteProperty = true, NameProperty = true, StrProperty = true,
+                 ObjectProperty = true, ClassProperty = true }
+
+local function valueToString(v)
+    if v == nil then return nil end
+    if type(v) ~= "userdata" then return tostring(v) end
+    if valid(v) then return fullname(v) end
+    local s = safe(function() return v:ToString() end)
     if type(s) == "string" then return s end
-    if depth < 2 then
-        local parts = {}
-        for _, k in ipairs({ "ItemID", "ID", "Id", "RowName", "Name", "ItemName", "Item", "ItemData",
-                             "Data", "Asset", "Class", "Tag", "Quantity", "Count", "Amount" }) do
-            local fv = safe(function() return v[k] end)
-            if fv ~= nil then
-                local str = valueToString(fv, depth + 1)
-                if str and str ~= "nil" and str ~= "" then table.insert(parts, k .. "=" .. str) end
-            end
-        end
-        if #parts > 0 then return "{" .. table.concat(parts, ", ") .. "}" end
-    end
     return nil
 end
 
-local function containerEntries(obj, name, ptype)
+-- Lee las entradas de un array. Sólo tipos simples o structs con campos
+-- simples (mapas, sets y otros tipos pueden tumbar el juego).
+local function containerEntries(obj, name, p)
     local out = {}
-    local c = safe(function() return obj[name] end)
-    if not c then return out end
-    if ptype == "ArrayProperty" or ptype == "SetProperty" then
+    local inner = innerProp(p)
+    local it = propType(inner)
+    local fields
+    if it == "StructProperty" then
+        fields = {}
         safe(function()
-            c:ForEach(function(_, elem)
-                local s = valueToString(safe(function() return elem:get() end))
-                if s then table.insert(out, s) end
+            inner:GetStruct():ForEachProperty(function(q)
+                local qt = q:GetClass():GetFName():ToString()
+                if SIMPLE[qt] and #fields < 6 then table.insert(fields, q:GetFName():ToString()) end
             end)
         end)
-    elseif ptype == "MapProperty" then
-        safe(function()
-            c:ForEach(function(k, v)
-                local ks = valueToString(safe(function() return k:get() end))
-                local vs = valueToString(safe(function() return v:get() end))
-                if ks then table.insert(out, ks .. (vs and (" => " .. vs) or "")) end
-            end)
-        end)
+        if #fields == 0 then return out end
+    elseif not SIMPLE[it] then
+        return out
     end
+    safe(function()
+        local arr = obj[name]
+        local count = arr:GetArrayNum()
+        for k = 1, math.min(count, 512) do
+            local e = arr[k]
+            if fields then
+                local parts = {}
+                for _, fn in ipairs(fields) do
+                    local sv = valueToString(safe(function() return e[fn] end))
+                    if sv then table.insert(parts, fn .. "=" .. sv) end
+                end
+                if #parts > 0 then table.insert(out, "{" .. table.concat(parts, ", ") .. "}") end
+            else
+                local sv = valueToString(e)
+                if sv then table.insert(out, sv) end
+            end
+        end
+    end)
     return out
 end
 
-local CONTAINER = { ArrayProperty = true, SetProperty = true, MapProperty = true }
+local CONTAINER = { ArrayProperty = true }
 
 local function trackerTick()
     refresh(false)
@@ -506,7 +548,7 @@ local function trackerTick()
     local newLines = {}
     for _, f in ipairs(fields) do
         local key = className(f.obj) .. "." .. f.name
-        for _, e in ipairs(containerEntries(f.obj, f.name, f.type)) do
+        for _, e in ipairs(containerEntries(f.obj, f.name, f.prop)) do
             local id = key .. " | " .. e
             if not Tracker.known[id] then
                 Tracker.known[id] = true
@@ -575,11 +617,14 @@ local function unlockBools()
     -- Arrays de bool (p.ej. GalleryUnlocked[])
     local arrays = matchCategory(Config.Unlock, function(f) return f.type == "ArrayProperty" end, { allowIgnored = true })
     for _, f in ipairs(arrays) do
-        safe(function()
-            f.obj[f.name]:ForEach(function(_, elem)
-                if elem:get() == false then elem:set(true); n = n + 1 end
+        if propType(innerProp(f.prop)) == "BoolProperty" then
+            safe(function()
+                local arr = f.obj[f.name]
+                for k = 1, arr:GetArrayNum() do
+                    if arr[k] == false then arr[k] = true; n = n + 1 end
+                end
             end)
-        end)
+        end
     end
     log("Desbloqueos booleanos: " .. n)
 end
@@ -701,19 +746,19 @@ end
 -- Volcado (F7)
 ------------------------------------------------------------------------
 
-local function simpleValue(obj, name, t)
+local function simpleValue(obj, name, t, p)
     if NUMERIC[t] or t == "BoolProperty" or t == "StrProperty" or t == "NameProperty" or t == "TextProperty" then
         local v = safe(function() return obj[name] end)
         if type(v) == "userdata" then v = safe(function() return v:ToString() end) end
         return tostring(v)
-    elseif t == "StructProperty" then
+    elseif t == "StructProperty" and isAttrProp(p) then
         local v = readNum(obj, name, t)
         if v then return "Attr " .. tostring(v) end
     elseif t == "ObjectProperty" then
         local v = safe(function() return obj[name] end)
         if valid(v) then return fullname(v) end
     elseif CONTAINER[t] then
-        local e = containerEntries(obj, name, t)
+        local e = containerEntries(obj, name, p)
         local s = #e .. " elem"
         if #e > 0 then s = s .. ": " .. table.concat(e, " ; ", 1, math.min(#e, 10)) end
         return s
@@ -732,8 +777,8 @@ local function dump()
     w("\n== VARIABLES (clase.variable [tipo] = valor) ==\n")
     for _, obj in ipairs(c.targets) do
         local lines = {}
-        forEachGameProp(obj, function(_, n, t)
-            table.insert(lines, string.format("    %s [%s] = %s\n", n, t, simpleValue(obj, n, t) or ""))
+        forEachGameProp(obj, function(p, n, t)
+            table.insert(lines, string.format("    %s [%s] = %s\n", n, t, simpleValue(obj, n, t, p) or ""))
         end)
         if #lines > 0 then
             w("\n  " .. fullname(obj) .. "\n")

@@ -84,8 +84,10 @@ return {
     -- Si no acierta, mira la sección FUNCIONES de dump.txt y rellena:
     --   Object   = nombre (o parte) de la clase que tiene la función, p.ej. "InventoryComponent"
     --   Function = nombre exacto, p.ej. "AddItem"
+    -- Desactivado por defecto: llamar a una función equivocada puede cerrar
+    -- el juego. Actívalo (true) sólo cuando dump.txt muestre la función buena.
     GiveAll = {
-        Auto = true,
+        Auto = false,
         Object = "",
         Function = "",
         Quantity = 1,
