@@ -6,7 +6,7 @@ from bpy.props import BoolProperty, EnumProperty, FloatProperty, StringProperty
 from bpy_extras.io_utils import ExportHelper
 from mathutils import Vector
 
-from . import collada, gltf, mappings, skeleton, weights
+from . import collada, gltf, mappings, presets, skeleton, weights
 
 
 def _selected_meshes(context):
@@ -36,13 +36,31 @@ class SLR_OT_create_rig(bpy.types.Operator):
     bl_label = "Crear esqueleto SL"
     bl_options = {"REGISTER", "UNDO"}
 
+    preset: EnumProperty(name="Preset", items=presets.enum_items(), default="HUMAN")
     bento_hands: BoolProperty(name="Dedos Bento", default=True)
+    tail: BoolProperty(name="Cola Bento", default=False,
+                       description="Añade mTail1–6 (los presets de furro la incluyen siempre)")
+    ears: BoolProperty(name="Orejas Bento", default=False,
+                       description="Añade mFaceEar1/2 (los presets de furro las incluyen siempre)")
+
+    def invoke(self, context, event):
+        self.preset = context.scene.slr_preset
+        return self.execute(context)
 
     def execute(self, context):
         if context.mode != "OBJECT":
             bpy.ops.object.mode_set(mode="OBJECT")
-        arm = skeleton.create_sl_armature(context, include_bento_hands=self.bento_hands)
-        self.report({"INFO"}, f"Creado '{arm.name}' con {len(arm.data.bones)} huesos")
+        extras = [k for k, on in (("tail", self.tail), ("ears", self.ears)) if on]
+        arm = skeleton.create_sl_armature(context, name=f"SL_{presets.PRESETS[self.preset]['label']}",
+                                          include_bento_hands=self.bento_hands,
+                                          preset=self.preset, extras=extras)
+        bones = arm.data.bones
+        height = (bones["mSkull"].head_local.z + 0.10 * presets.PRESETS[self.preset].get("scale", 1.0)
+                  - min(b.head_local.z for b in bones))
+        msg = f"Creado '{arm.name}': {len(bones)} huesos, ~{height:.2f} m"
+        if self.preset != "HUMAN":
+            msg += ". Sube con 'Include joint positions'"
+        self.report({"INFO"}, msg)
         return {"FINISHED"}
 
 

@@ -20,6 +20,26 @@ Formatos de exportación:
 3. El panel aparece en la vista 3D, en la barra lateral (`N`), pestaña **SL Rigger**.
    Los exportadores también están en *Archivo → Exportar*.
 
+## Presets de avatar
+
+En el desplegable sobre **Crear esqueleto SL** eliges las proporciones de partida:
+
+| Preset | Altura aprox. | Notas |
+|---|---|---|
+| Humano estándar | 1,9 m | Igual que el esqueleto de SL |
+| Petite | 1,5 m | Adulto pequeño |
+| Gigante | 3 m | Hombros algo más anchos |
+| Titán / kaiju | 4,5 m | Torso y hombros masivos |
+| Musculoso | 2,1 m | Espalda ancha, cuello corto |
+| Tiny | 0,7 m | Cabeza grande, extremidades cortas, cola y orejas |
+| Furro antropomorfo | 1,9 m | Hocico, cuello algo más largo, cola y orejas |
+| Furro digitígrado | 1,8 m | Patas de animal (tobillo elevado, pie largo), cola y orejas |
+| Kemono / chibi furro | 1,4 m | Estilo anime, cabeza grande, cola y orejas |
+
+Todo preset distinto de *Humano estándar* necesita subirse con **Include joint positions**.
+La cola (`mTail1–6`) y las orejas (`mFaceEar1/2`) son huesos Bento; también se pueden
+añadir a cualquier preset desde las opciones del operador (panel de *Ajustar última operación*).
+
 ## Flujo: malla → avatar o ropa rigged
 
 1. **Crear esqueleto SL**: crea un armature con los 26 huesos base de Second Life y,
@@ -84,11 +104,12 @@ En SL: *Build → Upload → Material* (solo en regiones con PBR) y luego aplica
   asignan a `mPelvis` y se avisa.
 * La geometría se lee en la pose de reposo y se aplican los modificadores, salvo el armature.
 
-## Limitaciones de esta versión (0.2)
+## Limitaciones de esta versión (0.3 beta)
 
-* Huesos Bento incluidos: solo las manos. Faltan la cara, las alas, la cola y las
+* Huesos Bento incluidos: manos, cola y orejas. Faltan el resto de la cara, las alas y las
   extremidades traseras.
 * No hay volúmenes de colisión (`PELVIS`, `BELLY`… para el *fitted mesh*).
 * No exporta animaciones (`.anim` o `.bvh`).
-* Las posiciones de los dedos Bento son aproximadas. Comprueba el resultado en el
+* Las posiciones de los dedos, la cola y las orejas son aproximadas, y las proporciones de los presets
+  son un punto de partida. Comprueba el resultado en el
   visor (o en Aditi, la red beta, que es gratis) antes de subirlo en la red principal.

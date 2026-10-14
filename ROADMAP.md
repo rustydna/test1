@@ -2,7 +2,7 @@
 
 Lista de todo lo que queda por añadir. Se marca cada punto al terminarlo.
 
-Estado actual (0.2): esqueleto base con dedos Bento, conversión de Mixamo, Unreal y Rigify,
+Estado actual (0.3 beta): esqueleto base con dedos Bento, presets de avatar (gigantes, tinies, furros) con cola y orejas, conversión de Mixamo, Unreal y Rigify,
 vinculación y limpieza de pesos, LODs y física, validación, exportación a `.dae`, glTF y
 materiales PBR.
 
@@ -74,6 +74,22 @@ materiales PBR.
 - [ ] Biblioteca de poses de mano y de expresiones faciales Bento.
 - [ ] Cargar animaciones estándar de SL (estar de pie, andar, sentarse) para probar cómo deforma la ropa.
 - [ ] Animaciones con traslación de cadera y de articulaciones, y con prioridades por hueso.
+
+## 8b. Avatares no humanos y de tamaño especial
+
+- [x] Presets de proporciones: petite, gigante, titán, musculoso, tiny, furro, digitígrado, kemono.
+- [ ] Taur y centauro: cuerpo trasero con los huesos `mHindLimb1–4` y pesos preconfigurados.
+- [ ] Naga y sirena: cola larga como parte inferior del cuerpo con `mTail1–6` y las piernas recogidas.
+- [ ] Alas Bento (`mWing1–4` y `mWing4Fan`) con presets: pájaro, dragón, murciélago y hada.
+- [ ] Cuadrúpedos (*feral*): lobo, felino o caballo sobre el esqueleto SL, con animaciones de andar.
+- [ ] Hocicos Bento: presets de cara para perro, gato, zorro, lobo y dragón (mandíbula, labios, nariz).
+- [ ] Orejas largas (conejo), cuernos y crestas.
+- [ ] Manos de 3 o 4 dedos y zarpas (fusionando pesos de dedos).
+- [ ] Robots y mechas: pesos rígidos (1 hueso por pieza) con un clic.
+- [ ] Animaciones procedurales: cola que se mueve, orejas que se agitan, respiración e *idle* furro.
+- [ ] Pelo y peluche: tarjetas de pelo con alfa, peluche en capas y aviso del coste en complejidad.
+- [ ] Editor de presets: guardar las proporciones de un rig como preset propio y compartirlo (JSON).
+- [ ] Aviso de escala: comprobar los límites de desplazamiento de articulaciones y la altura de la cámara.
 
 ## 9. Exportación y flujo de trabajo
 

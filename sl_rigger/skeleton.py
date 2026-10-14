@@ -80,19 +80,29 @@ _TAIL_TARGET = {
     "mHead": "mSkull",
 }
 
+def _extra_bone_names():
+    from .presets import EXTRAS
+    return {b[0] for group in EXTRAS.values() for b in group}
+
+
 # Todos los nombres de hueso conocidos (para validar grupos de vértices).
-ALL_SL_BONE_NAMES = {b[0] for b in SL_BASE_BONES} | {b[0] for b in SL_BENTO_HAND_BONES}
+ALL_SL_BONE_NAMES = ({b[0] for b in SL_BASE_BONES} | {b[0] for b in SL_BENTO_HAND_BONES}
+                     | _extra_bone_names())
 
 # Rotación de ejes Blender (frente -Y) -> Second Life (frente +X): +90º en Z.
 BLENDER_TO_SL = Matrix.Rotation(1.5707963267948966, 4, "Z")
 SL_TO_BLENDER = BLENDER_TO_SL.inverted()
 
 
-def bone_table(include_bento_hands=True):
+def bone_table(include_bento_hands=True, preset=None, extras=()):
+    from . import presets
     bones = list(SL_BASE_BONES)
     if include_bento_hands:
         bones += SL_BENTO_HAND_BONES
-    return bones
+    present = {b[0] for b in bones}
+    for extra in extras:
+        bones += [b for b in presets.EXTRAS[extra] if b[0] not in present]
+    return presets.apply(bones, preset)
 
 
 def world_positions_sl(bones):
@@ -104,8 +114,8 @@ def world_positions_sl(bones):
     return pos
 
 
-def create_sl_armature(context, name="SL_Avatar", include_bento_hands=True):
-    bones = bone_table(include_bento_hands)
+def create_sl_armature(context, name="SL_Avatar", include_bento_hands=True, preset=None, extras=()):
+    bones = bone_table(include_bento_hands, preset, extras)
     pos_sl = world_positions_sl(bones)
     pos = {n: (SL_TO_BLENDER.to_3x3() @ p) for n, p in pos_sl.items()}
     children = {}
@@ -117,6 +127,7 @@ def create_sl_armature(context, name="SL_Avatar", include_bento_hands=True):
     context.collection.objects.link(arm_obj)
     arm_obj.location = context.scene.cursor.location.copy()
     arm_obj["sl_rig"] = True
+    arm_obj["sl_preset"] = preset or "HUMAN"
     arm_data.display_type = "STICK"
     arm_obj.show_in_front = True
 
@@ -142,7 +153,7 @@ def create_sl_armature(context, name="SL_Avatar", include_bento_hands=True):
             direction = head - pos[parent] if parent else Vector((0, 0, 1))
             if direction.length < 1e-4:
                 direction = Vector((0, 0, 1))
-            length = 0.02 if "Hand" in n or "Eye" in n else 0.06
+            length = 0.02 if any(k in n for k in ("Hand", "Eye", "Face")) else 0.06
             tail = head + direction.normalized() * length
         eb.head = head
         eb.tail = tail

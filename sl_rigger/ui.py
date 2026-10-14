@@ -13,6 +13,7 @@ class SLR_PT_main(bpy.types.Panel):
 
         box = layout.box()
         box.label(text="1. Esqueleto", icon="ARMATURE_DATA")
+        box.prop(context.scene, "slr_preset", text="")
         box.operator("slr.create_rig", icon="ADD")
         box.operator("slr.fit_rig", icon="FULLSCREEN_ENTER")
 
