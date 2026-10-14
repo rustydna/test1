@@ -82,7 +82,7 @@ nudge(string how)
     integer s = llListFindList(SITTERS, [me]);
     if (s == -1) { llOwnerSay("Sit on the seat you want to adjust first."); return; }
     integer l = llList2Integer(SITTERS, s - 1);
-    string nm = llGetLinkName(l);
+    string nm = piece(l);
     integer i = llListFindList(SEATS, [nm]);
     if (i == -1) return;
     rotation yaw = llEuler2Rot(<0.0, 0.0, llList2Float(SEATS, i + 2) * DEG_TO_RAD>);
@@ -134,8 +134,8 @@ check()
                 QUEUE = llDeleteSubList(QUEUE, q, q + 1);
                 if (q == 0) animate_next();
             }
-            llLinksetDataDelete("sit:" + llGetLinkName(l));
-            llMessageLinked(LINK_SET, 9600, "out|" + llGetLinkName(l), av);
+            llLinksetDataDelete("sit:" + piece(l));
+            llMessageLinked(LINK_SET, 9600, "out|" + piece(l), av);
             SITTERS = llDeleteSubList(SITTERS, i, i + 2);
         }
     }
@@ -167,11 +167,22 @@ string OPTS;
 
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
 
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
+
 integer link_of(string name)
 {
     integer n = llGetObjectPrimCount(llGetKey());
     integer i;
-    for (i = 1; i <= n; ++i) if (llGetLinkName(i) == name) return i;
+    for (i = 1; i <= n; ++i) if (piece(i) == name) return i;
     return -1;
 }
 string who(key k) { return llGetDisplayName(k); }
@@ -324,6 +335,11 @@ default
         llListen(7, "", llGetOwner(), "");
         llSetTimerEvent(30.0);
         OPTS = llLinksetDataRead("opts");
+        // nobody is seated as far as this fresh script knows: forget the old Lord and sitters
+        llLinksetDataDelete("lord");
+        list ks = llLinksetDataFindKeys("^sit:", 0, 0);
+        integer i;
+        for (i = 0; i < llGetListLength(ks); ++i) llLinksetDataDelete(llList2String(ks, i));
         place(); check();
         signs();
         report();
@@ -372,7 +388,7 @@ default
     {
         key k = llDetectedKey(0);
         integer l = llDetectedLinkNumber(0);
-        string p = llGetLinkName(l);
+        string p = piece(l);
         if (p == "N_Throne")
         {
             if (k != llGetOwner() && (!opt("throne") || k != (key)llLinksetDataRead("lord")))
@@ -454,6 +470,9 @@ default
         else if (m == "Bell")
         {
             llMessageLinked(LINK_SET, 9300, "bell", id);
+            integer w = link_of("G_Winch");
+            if (w > 0 && opt("door_sounds") && llGetInventoryType("press_gang_bell") == INVENTORY_SOUND)
+                llLinkPlaySound(w, "press_gang_bell", 1.0, SOUND_PLAY);
             narrate(id, "DONG... The Lord orders the press-gang bell rung.");
         }
         else if (m == "Book") llDialog(id, book(), ["Close"], CH);

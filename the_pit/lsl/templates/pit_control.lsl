@@ -13,15 +13,18 @@
 //    /7 help                every chat command of The Pit
 //  The owner also gets a "Settings" button in the throne menu.
 //
-//  PBR MATERIALS. Every piece has the same faces in the same order:
-//    0 Stone · 1 Floor · 2 Wood · 3 Iron · 4 Cloth (and leather)
-//    5 Bone  · 6 Straw · 7 Flame        (water: P_Water, C04_Water)
-//  Drop the PBR materials into the root's Contents: they are applied at
-//  once to every piece, each to the block whose name it contains (Stone,
-//  Floor, Wood, Iron, Cloth, Bone, Straw, Water). Other names: add a
+//  PBR MATERIALS. Every piece has the same 8 materials. SL sorts mesh faces
+//  alphabetically by material name, so the face numbers are:
+//    English upload:  0 Bone · 1 Cloth · 2 Flame · 3 Floor · 4 Iron · 5 Stone · 6 Straw · 7 Wood
+//    first release:   0 Iron · 1 Bone · 2 Flame · 3 Wood · 4 Straw · 5 Stone · 6 Floor · 7 Cloth
+//  (water: P_Water, C04_Water). The script tells the two apart by the
+//  uploaded face colours. Drop the PBR materials into the root's Contents:
+//  they are applied at once to every piece, each to the block whose name it
+//  contains (Stone/Piedra, Floor/Suelo, Wood/Madera, Iron/Hierro,
+//  Cloth/Tela, Bone/Hueso, Straw/Paja, Water/Agua). Other names: add a
 //  notecard "materials" with lines like  Stone = <material name or UUID>
 //  (ready-made: lsl/materials_notecard.txt). /7 materials applies again.
-//  Face 7 (flame) belongs to the fire script.
+//  Face 2 (flame) belongs to the fire script.
 //
 //  TIDE AND VOICES. The channel water rises and falls a few centimetres;
 //  while people are around, now and then something is heard in the dark
@@ -34,6 +37,17 @@
 
 string OPTS;
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
+
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
 
 // ------------------------------------------------------------- settings
 // name, category, short description (keep descriptions under ~34 characters)
@@ -207,6 +221,34 @@ list BLOCKS = ["Stone", "Floor", "Wood", "Iron", "Cloth", "Bone", "Straw", "Wate
 // with those names are found without a notecard or a new upload
 list OLD_NAMES = ["piedra", "suelo", "madera", "hierro", "tela", "hueso", "paja", "agua"];
 list ASSIGN;   // [block, material]
+
+// SL sorts the faces of every uploaded mesh alphabetically by material name, so the face of
+// each block depends on the language of the upload:
+//   ThePit.dae (English):   0 Bone 1 Cloth 2 Flame 3 Floor 4 Iron 5 Stone 6 Straw 7 Wood
+//   first release (Spanish): 0 Iron 1 Bone 2 Flame 3 Wood 4 Straw 5 Stone 6 Floor 7 Cloth
+// Faces for Stone, Floor, Wood, Iron, Cloth, Bone, Straw:
+list FACES_EN = [5, 3, 7, 4, 1, 0, 6];
+list FACES_ES = [5, 6, 3, 0, 7, 1, 4];
+list FACES;
+
+// The upload keeps each material's colour: face 0 is light bone in the English upload and dark
+// iron in the Spanish one (face 4 the other way round). A few pieces vote.
+pick_faces()
+{
+    integer en = 0; integer es = 0; integer i;
+    integer n = llGetObjectPrimCount(llGetKey());
+    for (i = 2; i <= n && en + es < 9; i += 13)
+    {
+        if (llSubStringIndex(piece(i), "_Water") == -1)
+        {
+            list c = llGetLinkPrimitiveParams(i, [PRIM_COLOR, 0, PRIM_COLOR, 4]);
+            vector a = llList2Vector(c, 0); vector b = llList2Vector(c, 2);
+            if (a.x + a.y + a.z >= b.x + b.y + b.z) ++en; else ++es;
+        }
+    }
+    if (es > en) { FACES = FACES_ES; llLinksetDataWrite("faces", "es"); }
+    else { FACES = FACES_EN; llLinksetDataWrite("faces", "en"); }
+}
 key Q; integer LINE;
 
 // inventory types that are NOT materials (anything else is taken as a material)
@@ -260,11 +302,12 @@ apply()
             + "(Stone, Floor, Wood, Iron, Cloth, Bone, Straw, Water) into the Contents tab of the ROOT prim.");
         return;
     }
+    pick_faces();
     integer n = llGetObjectPrimCount(llGetKey());
     integer link; integer done = 0;
     for (link = 1; link <= n; ++link)
     {
-        string nm = llGetLinkName(link);
+        string nm = piece(link);
         list rules = [];
         if (llSubStringIndex(nm, "_Water") != -1)
         {
@@ -277,8 +320,9 @@ apply()
             for (c = 0; c < 7; ++c)
             {
                 integer j = llListFindList(ASSIGN, [llList2String(BLOCKS, c)]);
-                if (j != -1) rules += [PRIM_RENDER_MATERIAL, c, llList2String(ASSIGN, j + 1)];
+                if (j != -1) rules += [PRIM_RENDER_MATERIAL, llList2Integer(FACES, c), llList2String(ASSIGN, j + 1)];
             }
+            rules += [PRIM_RENDER_MATERIAL, 2, NULL_KEY];   // face 2 is the flame: no PBR there
         }
         if (rules != []) { llSetLinkPrimitiveParamsFast(link, rules); ++done; }
     }
@@ -291,7 +335,8 @@ apply()
         if (j == -1) summary += block + ": MISSING  ";
         else summary += block + " = " + llList2String(ASSIGN, j + 1) + "  ";
     }
-    llOwnerSay("pit_control: materials applied to " + (string)done + " pieces. " + summary);
+    llOwnerSay("pit_control: materials applied to " + (string)done + " pieces (" + llLinksetDataRead("faces")
+        + " face order). " + summary);
 }
 
 // ------------------------------------------------------------- tide and voices
@@ -328,7 +373,7 @@ integer link_of(string name)
 {
     integer n = llGetObjectPrimCount(llGetKey());
     integer i;
-    for (i = 1; i <= n; ++i) if (llGetLinkName(i) == name) return i;
+    for (i = 1; i <= n; ++i) if (piece(i) == name) return i;
     return -1;
 }
 

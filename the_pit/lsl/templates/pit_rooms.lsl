@@ -27,11 +27,22 @@ string OPTS;
 
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
 
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
+
 integer link_of(string name)
 {
     integer n = llGetObjectPrimCount(llGetKey());
     integer i;
-    for (i = 1; i <= n; ++i) if (llGetLinkName(i) == name) return i;
+    for (i = 1; i <= n; ++i) if (piece(i) == name) return i;
     return -1;
 }
 
@@ -87,7 +98,7 @@ string pick(list l) { return llList2String(l, (integer)llFrand(llGetListLength(l
 text(integer l, string t)
 {
     if (l < 1) return;
-    if (!opt("hovertext") || !active(llGetLinkName(l))) t = "";
+    if (!opt("hovertext") || !active(piece(l))) t = "";
     llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, t, <0.8, 0.55, 0.35>, 0.8]);
 }
 
@@ -118,7 +129,7 @@ move_with_avatar(integer l, vector pivot, rotation turn, vector shift, integer s
 {
     list d = llGetLinkPrimitiveParams(l, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL]);
     vector p0 = llList2Vector(d, 0); rotation r0 = llList2Rot(d, 1);
-    key av = occupant(llGetLinkName(l));
+    key av = occupant(piece(l));
     integer al = -1; vector ap0; rotation ar0;
     if (av != NULL_KEY) al = avatar_link(av);
     if (al > 0) { list a = llGetLinkPrimitiveParams(al, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL]);
@@ -138,7 +149,7 @@ move_with_avatar(integer l, vector pivot, rotation turn, vector shift, integer s
 
 menu(key k, integer l)
 {
-    string nm = llGetLinkName(l);
+    string nm = piece(l);
     if (feature(nm) == "") return;
     if (!active(nm)) { llRegionSayTo(k, 0, "This is not in use right now."); return; }
     USER = k; LINK = l; PIECE = nm;
@@ -314,7 +325,7 @@ default
     {
         integer si = llListFindList(SESS, [id]);
         if (si == -1 || llList2Integer(SESS, si + 3) < llGetUnixTime()) return;
-        USER = id; LINK = llList2Integer(SESS, si + 1); PIECE = llGetLinkName(LINK);
+        USER = id; LINK = llList2Integer(SESS, si + 1); PIECE = piece(LINK);
         string mode = llList2String(SESS, si + 2);
         SESS = llDeleteSubList(SESS, si, si + 3);
         if (mode == "name")

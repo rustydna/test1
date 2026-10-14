@@ -75,13 +75,16 @@ its size and position, and keeps your locks and the muster book.
 
 ## PBR materials by block
 
-Every piece has **the same 8 faces in the same order**:
+Every piece carries **the same 8 materials**. Second Life sorts the faces of an uploaded mesh
+alphabetically by material name, so the face numbers are:
 
 | Face | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 |---|---|---|---|---|---|---|---|---|
-| Material | Stone | Floor | Wood | Iron | Cloth & leather | Bone | Straw | Flame |
+| `ThePit.dae` (English) | Bone | Cloth & leather | Flame | Floor | Iron | Stone | Straw | Wood |
+| first release (Spanish) | Iron | Bone | Flame | Wood | Straw | Stone | Floor | Cloth & leather |
 
-The water has its own pieces, `P_Water` and `C04_Water`.
+`pit_control` tells the two uploads apart by the uploaded face colours and puts every material on
+the right face. The water has its own pieces, `P_Water` and `C04_Water`.
 
 1. **Build → Upload → Bulk** with the eight `.glb` files of `output/pbr_materials/` (Stone, Floor,
    Wood, Iron, Cloth, Bone, Straw, Water). Each uploads base colour, normal and ORM (occlusion,
@@ -93,8 +96,8 @@ The water has its own pieces, `P_Water` and `C04_Water`.
 3. `/7 materials` applies them again. The textures tile seamlessly and their scale already matches
    the UVs (1 repeat = 2 m of stone, 0.5 m of iron...): don't change *Repeats per meter*.
 
-By hand also works: with *Select Face* and face 3, for example, you pick the iron of any piece.
-Face 7 (flame) belongs to the fire script: don't put PBR on it.
+By hand also works: with *Select Face* and face 4 (English upload), for example, you pick the iron of
+any piece. Face 2 (flame) belongs to the fire script: don't put PBR on it.
 
 ## Effect textures (7 PNGs)
 
@@ -104,7 +107,7 @@ the textures into the root's Contents **keeping their names**. `pit_fire` finds 
 
 | PNG | Effect |
 |---|---|
-| `fire_flipbook.png` | Animated mesh flames: face 7 plays a 4×4 frame loop (each fire at a slightly different speed). |
+| `fire_flipbook.png` | Animated mesh flames: face 2 plays a 4×4 frame loop (each fire at a slightly different speed). |
 | `flame_particle.png` | Flame particles on torches and braziers. |
 | `smoke.png` | Smoke rising from the braziers, alternating with the flame. |
 | `fog.png` | Channel fog, kennel mist, cistern steam. |

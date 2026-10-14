@@ -108,12 +108,27 @@ def lod_materials_within_high():
 
 @case
 def fixed_pbr_faces():
-    """Every piece (except the water) has the 8 faces in the same order: one PBR material per block."""
+    """Every piece (except the water) has the same 8 materials, so once SL sorts the faces by
+    material name (LLModel::sortVolumeFacesByMaterialName) each block lands on the same face in
+    every piece, and pit_control / pit_fire use exactly those face numbers."""
+    import re
     for name, g in DATA["HIGH"][1].items():
         mats = [m.replace("-material", "") for m, _ in g["tris"]]
         if mats == ["Water"]:
             continue
-        assert mats == FACE_MATS, (name, mats)
+        assert sorted(mats) == sorted(FACE_MATS), (name, mats)
+    sl_order = sorted(FACE_MATS, key=str.lower)                  # face index as SL builds it
+    spanish = {"Stone": "Piedra", "Floor": "Suelo", "Wood": "Madera", "Iron": "Hierro", "Cloth": "Tela",
+               "Bone": "Hueso", "Straw": "Paja", "Flame": "Llama"}  # material names of the first release
+    sl_order_es = [m for _, m in sorted((spanish[m].lower(), m) for m in FACE_MATS)]
+    lsl = open(os.path.join(ROOT, "lsl", "pit_control.lsl"), encoding="utf-8").read()
+    blocks = re.search(r'list BLOCKS = \[([^\]]*)\]', lsl).group(1).replace('"', "").replace(" ", "").split(",")
+    for var, order in (("FACES_EN", sl_order), ("FACES_ES", sl_order_es)):
+        faces = [int(x) for x in re.search(r"list " + var + r" = \[([^\]]*)\]", lsl).group(1).split(",")]
+        assert faces == [order.index(b) for b in blocks[:7]], (var, faces)
+    fire = open(os.path.join(ROOT, "lsl", "pit_fire.lsl"), encoding="utf-8").read()
+    assert "integer FLAME = %d;" % sl_order.index("Flame") in fire
+    assert sl_order.index("Flame") == sl_order_es.index("Flame")
 
 
 @case

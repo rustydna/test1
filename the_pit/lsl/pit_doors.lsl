@@ -60,6 +60,17 @@ string OPTS;
 
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
 
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
+
 string room(string t)
 {
     if (t == "C01") return "THE PRESS-GANG";
@@ -173,7 +184,7 @@ integer has_key(string t, key k)
 // it, by its size and position relative to the throne (and it gets renamed).
 string identify(integer link, integer throne, vector base, rotation trot)
 {
-    string nm = llGetLinkName(link);
+    string nm = piece(link);
     if (llListFindList(MOVERS, [nm]) != -1) return nm;
     vector sz = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_SIZE]), 0);
     vector p = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_POS_LOCAL]), 0);
@@ -204,7 +215,7 @@ scan()
     // the throne is the reference to recognise pieces and their closed position
     integer throne = -1; vector base = ZERO_VECTOR; rotation trot = ZERO_ROTATION;
     for (i = 1; i <= n && throne == -1; ++i)
-        if (llGetLinkName(i) == "N_Throne" ||
+        if (piece(i) == "N_Throne" ||
             llVecDist(llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_SIZE]), 0), THRONE_SIZE) < 0.03)
             throne = i;
     if (throne > 1)
@@ -218,7 +229,11 @@ scan()
     {
         string nm = identify(i, throne, base, trot);
         integer type = -1; string tag = "";
-        if (llSubStringIndex(nm, "_Door") != -1) { type = 0; tag = llGetSubString(nm, 0, 2); ++cells; }
+        if (llSubStringIndex(nm, "_Door") != -1)
+        {
+            type = 0; tag = llGetSubString(nm, 0, 2); ++cells;
+            if (tag == "C06") tag = "C05";      // the kennel is one cell with two doors
+        }
         else if (llSubStringIndex(nm, "G_Leaf") == 0) { type = 1; tag = "G"; ++leaves; }
         else if (nm == "G_Portcullis") { type = 2; tag = "R"; ++portcullis; }
         if (type >= 0)
@@ -328,7 +343,7 @@ board()
     integer l = -1;
     integer i;
     for (i = 1; i <= llGetObjectPrimCount(llGetKey()) && l == -1; ++i)
-        if (llGetLinkName(i) == "V_Props_W") l = i;
+        if (piece(i) == "V_Props_W") l = i;
     if (l == -1) return;
     if (!opt("board") || !opt("hovertext") || !opt("locks"))
     {
@@ -336,7 +351,7 @@ board()
         return;
     }
     string txt = "SENTENCE BOARD\n";
-    list tags = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "G"];
+    list tags = ["C01", "C02", "C03", "C04", "C05", "C07", "C08", "G"];
     integer any = FALSE;
     for (i = 0; i < llGetListLength(tags); ++i)
     {
@@ -479,9 +494,9 @@ act(key k, string t, string mode, string b)
 
 check_sentences()
 {
-    list tags = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "G"];
+    list tags = ["C01", "C02", "C03", "C04", "C05", "C07", "C08", "G"];
     integer i;
-    for (i = 0; i < 9; ++i)
+    for (i = 0; i < llGetListLength(tags); ++i)
     {
         string t = llList2String(tags, i);
         list e = lock_state(t);
@@ -530,9 +545,9 @@ default
             if (o == "all")
             {
                 integer open = llList2String(p, 1) == "open";
-                list tags = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08"];
+                list tags = ["C01", "C02", "C03", "C04", "C05", "C07", "C08"];
                 integer i;
-                for (i = 0; i < 8; ++i)
+                for (i = 0; i < 7; ++i)
                 {
                     string t = llList2String(tags, i);
                     if (open) save(t, 0, NULL_KEY, "", 0, "");
@@ -542,7 +557,6 @@ default
             else if (o == "judge")
             {
                 list ts = [llList2String(p, 1)];
-                if (llList2String(p, 1) == "C05") ts += "C06";      // the kennel has two doors
                 integer j;
                 for (j = 0; j < llGetListLength(ts); ++j)
                 {
@@ -561,9 +575,13 @@ default
 
     touch_start(integer total)
     {
-        string nm = llGetLinkName(llDetectedLinkNumber(0));
+        string nm = piece(llDetectedLinkNumber(0));
         string tag = "";
-        if (llSubStringIndex(nm, "_Door") != -1) tag = llGetSubString(nm, 0, 2);
+        if (llSubStringIndex(nm, "_Door") != -1)
+        {
+            tag = llGetSubString(nm, 0, 2);
+            if (tag == "C06") tag = "C05";
+        }
         else if (llSubStringIndex(nm, "G_Leaf") == 0) tag = "G";
         else if (nm == "G_Portcullis" || nm == "G_Winch") tag = "R";
         if (tag != "") menu(llDetectedKey(0), tag);

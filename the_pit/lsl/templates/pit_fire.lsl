@@ -36,7 +36,7 @@
 //  the viewer (Preferences > Graphics > Shadows: "Sun/Moon + Projectors").
 //  They project along the piece's local -Z (downwards).
 // ---------------------------------------------------------------------
-string  UUID_FLIPBOOK = "";      // fire_flipbook.png   mesh flame (face 7), 4x4 frames
+string  UUID_FLIPBOOK = "";      // fire_flipbook.png   mesh flame (face 2), 4x4 frames
 string  UUID_FLAME = "";         // flame_particle.png  flame particle
 string  UUID_SMOKE = "";         // smoke.png           smoke rising from the braziers
 string  UUID_FOG = "";           // fog.png             channel fog, mist and steam
@@ -44,7 +44,10 @@ string  UUID_SPARK = "";         // spark.png           crackles and branding sp
 string  UUID_DRIP = "";          // drip.png            drips from the vaults
 string  UUID_PROJECTOR = "";     // fire_projector.png  projector light (throne braziers, kennel
                                  //                     lantern, yard lanterns)
-float   FLIPBOOK_FPS = 12.0;     // flipbook frames per second (each fire varies a little)
+float   FLIPBOOK_FPS = 12.0;
+// SL sorts mesh faces by material name: the flame is face 2 in both the English and the
+// Spanish upload (Bone Cloth FLAME Floor... / Hierro Hueso LLAMA Madera...)
+integer FLAME = 2;     // flipbook frames per second (each fire varies a little)
 float   TICK = 0.2;
 integer PER_TICK = 4;
 
@@ -61,6 +64,17 @@ integer FIRE; integer FLAMES; integer LIGHTS; integer FLICKER; integer GLOW; int
 integer SPARKS; integer PROJ; integer GUSTS; integer FOG; integer DRIPS; integer BURSTS; integer MOODS;
 
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
+
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
 
 load_options()
 {
@@ -211,7 +225,7 @@ integer link_of(string name)
 {
     integer n = llGetObjectPrimCount(llGetKey());
     integer i;
-    for (i = 1; i <= n; ++i) if (llGetLinkName(i) == name) return i;
+    for (i = 1; i <= n; ++i) if (piece(i) == name) return i;
     return -1;
 }
 
@@ -240,8 +254,8 @@ light(integer i, float lv)
         vector col = TINT + <0.0, (lv - 1.0) * 0.12, (lv - 1.0) * 0.05>;
         p = [PRIM_POINT_LIGHT, TRUE, llsRGB2Linear(col), base * k * lv, radius * K_RADIUS * (0.9 + 0.1 * lv), falloff];
     }
-    if (GLOW) p += [PRIM_GLOW, 7, 0.12 + 0.2 * lv];
-    else p += [PRIM_GLOW, 7, 0.0];
+    if (GLOW) p += [PRIM_GLOW, FLAME, 0.12 + 0.2 * lv];
+    else p += [PRIM_GLOW, FLAME, 0.0];
     llSetLinkPrimitiveParamsFast(llList2Integer(F_LINK, i), p);
 }
 
@@ -281,18 +295,18 @@ apply()
         llLinkParticleSystem(l, flame(type, 0.0, 0.0));
         if (use_flip && !dead)
         {
-            llSetLinkPrimitiveParamsFast(l, [PRIM_TEXTURE, 7, T_FLIPBOOK, <1.0, 1.0, 0.0>, ZERO_VECTOR, 0.0,
-                                            PRIM_ALPHA_MODE, 7, PRIM_ALPHA_MODE_BLEND, 0]);
+            llSetLinkPrimitiveParamsFast(l, [PRIM_TEXTURE, FLAME, T_FLIPBOOK, <1.0, 1.0, 0.0>, ZERO_VECTOR, 0.0,
+                                            PRIM_ALPHA_MODE, FLAME, PRIM_ALPHA_MODE_BLEND, 0]);
             // a slightly different speed for every fire: they never pulse together
-            llSetLinkTextureAnim(l, ANIM_ON | LOOP, 7, 4, 4, 0.0, 16.0, FLIPBOOK_FPS * (0.82 + 0.045 * (i % 9)));
+            llSetLinkTextureAnim(l, ANIM_ON | LOOP, FLAME, 4, 4, 0.0, 16.0, FLIPBOOK_FPS * (0.82 + 0.045 * (i % 9)));
         }
         else
         {
-            llSetLinkTextureAnim(l, FALSE, 7, 4, 4, 0.0, 16.0, 1.0);
+            llSetLinkTextureAnim(l, FALSE, FLAME, 4, 4, 0.0, 16.0, 1.0);
             // flipbook switched off: a plain solid flame instead of the whole 4x4 sheet
             if (T_FLIPBOOK != "")
-                llSetLinkPrimitiveParamsFast(l, [PRIM_TEXTURE, 7, TEXTURE_BLANK, <1.0, 1.0, 0.0>, ZERO_VECTOR, 0.0,
-                                                PRIM_ALPHA_MODE, 7, PRIM_ALPHA_MODE_NONE, 0]);
+                llSetLinkPrimitiveParamsFast(l, [PRIM_TEXTURE, FLAME, TEXTURE_BLANK, <1.0, 1.0, 0.0>, ZERO_VECTOR, 0.0,
+                                                PRIM_ALPHA_MODE, FLAME, PRIM_ALPHA_MODE_NONE, 0]);
         }
         if (llList2Integer(F_PROJ, i))
         {
@@ -304,11 +318,11 @@ apply()
             else llSetLinkPrimitiveParamsFast(l, [PRIM_PROJECTOR, NULL_KEY, fov, 1.5, 0.0]);
         }
         if (dead)
-            llSetLinkPrimitiveParamsFast(l, [PRIM_POINT_LIGHT, FALSE, ZERO_VECTOR, 0.0, 0.0, 0.0, PRIM_GLOW, 7, 0.0,
-                                            PRIM_COLOR, 7, <0.1, 0.05, 0.03>, 1.0, PRIM_FULLBRIGHT, 7, FALSE]);
+            llSetLinkPrimitiveParamsFast(l, [PRIM_POINT_LIGHT, FALSE, ZERO_VECTOR, 0.0, 0.0, 0.0, PRIM_GLOW, FLAME, 0.0,
+                                            PRIM_COLOR, FLAME, <0.1, 0.05, 0.03>, 1.0, PRIM_FULLBRIGHT, FLAME, FALSE]);
         else
         {
-            llSetLinkPrimitiveParamsFast(l, [PRIM_COLOR, 7, flame_tint, 1.0, PRIM_FULLBRIGHT, 7, TRUE]);
+            llSetLinkPrimitiveParamsFast(l, [PRIM_COLOR, FLAME, flame_tint, 1.0, PRIM_FULLBRIGHT, FLAME, TRUE]);
             light(i, 1.0);
         }
     }
@@ -327,7 +341,7 @@ scan()
     integer i;
     for (i = 1; i <= n; ++i)
     {
-        string nm = llGetLinkName(i);
+        string nm = piece(i);
         integer t = -1;
         if (llSubStringIndex(nm, "Torch") != -1) t = 0;
         else if (llSubStringIndex(nm, "Lantern") != -1) t = 1;
@@ -336,6 +350,12 @@ scan()
         {
             vector p = ZERO_VECTOR;
             if (i > 1) p = llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_POS_LOCAL]), 0);
+            // older scripts animated face 7 (wood or cloth): give it back its plain look once
+            vector c7 = <0.36, 0.24, 0.14>;                                   // wood (English upload)
+            if (llLinksetDataRead("faces") == "es") c7 = <0.38, 0.34, 0.28>;  // cloth (Spanish upload)
+            llSetLinkPrimitiveParamsFast(i, [PRIM_GLOW, 7, 0.0, PRIM_FULLBRIGHT, 7, FALSE, PRIM_COLOR, 7, c7, 1.0,
+                PRIM_TEXTURE, 7, TEXTURE_BLANK, <1.0, 1.0, 0.0>, ZERO_VECTOR, 0.0, PRIM_ALPHA_MODE, 7, PRIM_ALPHA_MODE_NONE, 0,
+                PRIM_RENDER_MATERIAL, FLAME, NULL_KEY]);
             F_LINK += i; F_TYPE += t; F_POS += p; F_LEVEL += 1.0; F_VEL += 0.0; F_GUST += 0;
             F_SMOKE += llGetTime() + 2.0 + llFrand(5.0); F_PROJ += is_projector(nm);
         }

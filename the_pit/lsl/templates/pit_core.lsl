@@ -52,43 +52,44 @@ integer kind_of(string name)
 recognise()
 {
     integer n = llGetObjectPrimCount(llGetKey());
-    integer i; integer named = 0;
-    for (i = 1; i <= n; ++i) if (kind_of(llGetLinkName(i)) != -1) ++named;
-    integer renamed = 0;
-    if (named < n * 9 / 10)
+    // find the throne by its unique size and measure everything from it
+    integer throne = -1; integer i;
+    vector ts = llList2Vector(TABLE, llListFindList(TABLE, ["N_Throne"]) + 2);
+    for (i = 1; i <= n && throne == -1; ++i)
     {
-        // find the throne by its unique size and measure everything from it
-        integer throne = -1;
-        vector ts = llList2Vector(TABLE, llListFindList(TABLE, ["N_Throne"]) + 2);
-        for (i = 1; i <= n && throne == -1; ++i)
+        vector s = llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_SIZE]), 0);
+        if (llVecDist(s, ts) < 0.03) throne = i;
+    }
+    if (throne == -1)
+    {
+        llOwnerSay("pit_core: can't find the throne by its size: was the build rescaled? Upload it at scale 1.0.");
+        return;
+    }
+    vector base = ZERO_VECTOR; rotation trot = ZERO_ROTATION;
+    if (throne > 1)
+    {
+        list t = llGetLinkPrimitiveParams(throne, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL]);
+        base = llList2Vector(t, 0); trot = llList2Rot(t, 1);
+    }
+    // the root prim keeps the object's name; which piece it is goes to linkset data
+    string root = name_from_table(1, (ZERO_VECTOR - base) / trot);
+    if (root != "") llLinksetDataWrite("root_piece", root);
+    if (kind_of(llGetLinkName(1)) != -1) llSetLinkPrimitiveParamsFast(1, [PRIM_NAME, "The Pit"]);
+    integer named = 0;
+    for (i = 2; i <= n; ++i) if (kind_of(llGetLinkName(i)) != -1) ++named;
+    integer renamed = 0;
+    if (named < (n - 1) * 9 / 10)
+        for (i = 2; i <= n; ++i)
         {
-            vector s = llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_SIZE]), 0);
-            if (llVecDist(s, ts) < 0.03) throne = i;
-        }
-        if (throne == -1)
-        {
-            llOwnerSay("Can't find the throne by its size: was the build rescaled? Upload it at scale 1.0.");
-            return;
-        }
-        vector base = ZERO_VECTOR; rotation trot = ZERO_ROTATION;
-        if (throne > 1)
-        {
-            list t = llGetLinkPrimitiveParams(throne, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL]);
-            base = llList2Vector(t, 0); trot = llList2Rot(t, 1);
-        }
-        for (i = 1; i <= n; ++i)
-        {
-            vector p = ZERO_VECTOR;
-            if (i > 1) p = llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_POS_LOCAL]), 0);
-            string nm = name_from_table(i, (p - base) / trot);
+            string nm = name_from_table(i, (llList2Vector(llGetLinkPrimitiveParams(i, [PRIM_POS_LOCAL]), 0) - base) / trot);
             if (nm != "" && nm != llGetLinkName(i))
             {
                 llSetLinkPrimitiveParamsFast(i, [PRIM_NAME, nm]);
                 ++renamed;
             }
         }
-    }
-    llOwnerSay("pit_core: " + (string)n + " pieces, " + (string)renamed + " renamed to their English names.");
+    llOwnerSay("pit_core: " + (string)n + " pieces, " + (string)renamed + " renamed to their English names; the root is "
+        + root + ".");
 }
 
 physics()
@@ -97,7 +98,9 @@ physics()
     integer i; integer c0 = 0; integer c1 = 0; integer c2 = 0;
     for (i = 1; i <= n; ++i)
     {
-        integer t = kind_of(llGetLinkName(i));
+        string nm = llGetLinkName(i);
+        if (i == 1) nm = llLinksetDataRead("root_piece");
+        integer t = kind_of(nm);
         integer shape = PRIM_PHYSICS_SHAPE_PRIM;
         if (t == 1 || t == 4) shape = PRIM_PHYSICS_SHAPE_CONVEX;
         else if (t == 2 || t == 3 || t == 5) shape = PRIM_PHYSICS_SHAPE_NONE;
@@ -234,7 +237,7 @@ default
         if (opt("rename")) recognise();
         llSleep(1.5);    // let the new names settle before reading them back
         if (opt("physics")) physics();
-        string root = llGetLinkName(1);
+        string root = llLinksetDataRead("root_piece");
         if (llSubStringIndex(root, "_Door") != -1 || llSubStringIndex(root, "G_Leaf") == 0 || root == "G_Portcullis"
             || root == "C04_Chair" || llSubStringIndex(root, "C07_Cage") == 0)
             llOwnerSay("pit_core WARNING: the root prim is " + root + ", a moving piece: it cannot move without moving "
@@ -255,6 +258,13 @@ default
         if (name == "opts" || action == LINKSETDATA_RESET) OPTS = llLinksetDataRead("opts");
     }
     listen(integer c, string n, key id, string m) { diagnose(); }
+    link_message(integer s, integer n, string str, key id)
+    {
+        if (n == 9800)
+            llOwnerSay("pit_core: " + (string)llGetObjectPrimCount(llGetKey()) + " pieces, root = "
+                + llLinksetDataRead("root_piece") + ", face order = " + llLinksetDataRead("faces")
+                + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+    }
     touch_start(integer t)
     {
         if (llDetectedKey(0) == llGetOwner() && llDetectedLinkNumber(0) == 1) diagnose();
