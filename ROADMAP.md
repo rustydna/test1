@@ -2,7 +2,7 @@
 
 Lista de todo lo que queda por añadir. Se marca cada punto al terminarlo.
 
-Estado actual (0.4 beta): esqueleto oficial Bento completo con fitted mesh, límite de 110 articulaciones, auto-rig en un clic, transferencia y simetría de pesos, rig rígido, monitor HUD, dos ediciones (Founder 3.5+ y Standard 4.2+). Antes: esqueleto base con dedos Bento, presets de avatar (gigantes, tinies, furros) con cola y orejas, conversión de Mixamo, Unreal y Rigify,
+Estado actual (0.5 beta): exportador .anim, biblioteca de poses y animaciones, retarget, anclajes, ropa, materiales PBR, certificado e interfaz nueva. Antes (0.4): esqueleto oficial Bento completo con fitted mesh, límite de 110 articulaciones, auto-rig en un clic, transferencia y simetría de pesos, rig rígido, monitor HUD, dos ediciones (Founder 3.5+ y Standard 4.2+). Antes: esqueleto base con dedos Bento, presets de avatar (gigantes, tinies, furros) con cola y orejas, conversión de Mixamo, Unreal y Rigify,
 vinculación y limpieza de pesos, LODs y física, validación, exportación a `.dae`, glTF y
 materiales PBR.
 
@@ -13,7 +13,7 @@ materiales PBR.
 - [x] Leer las posiciones exactas del `avatar_skeleton.xml` oficial (en lugar de valores aproximados).
 - [x] Esqueleto Bento completo: cara (unos 50 huesos), alas, cola, patas traseras y los huesos `mSpine1–4`.
 - [x] Volúmenes de colisión para *fitted mesh* (`PELVIS`, `BELLY`, `BUTT`, `CHEST`, `LEFT_PEC`, `UPPER_BACK`, `LOWER_BACK`, `L_UPPER_ARM`…).
-- [ ] Puntos de anclaje (*attachment points*: `Chest`, `Spine`, `Avatar Center`, `Left Hand`…) con sus posiciones reales.
+- [x] Puntos de anclaje (*attachment points*: `Chest`, `Spine`, `Avatar Center`, `Left Hand`…) con sus posiciones reales.
 - [ ] Rig de control para animar (IK y FK, controles de mano y de cara) sobre los huesos `m*`.
 - [ ] Distinguir entre forma neutra y forma por defecto al vincular (fuente clásica de deformaciones).
 - [ ] Ajuste del rig a la malla por huesos (brazos, piernas, cabeza), no solo por escala uniforme.
@@ -38,9 +38,9 @@ materiales PBR.
 ## 4. Ropa y cuerpos de malla
 
 - [ ] Importar `.dae` de SL y kits de desarrollo (Maitreya, Legacy, Reborn, eBody, Belleza…; licencia de cada creador).
-- [ ] Generar tallas (XXS–XL) a partir de una prenda, con desplazamiento por volumen.
-- [ ] Ajuste automático de la prenda al cuerpo (evitar que el cuerpo atraviese la ropa) con distancia mínima configurable.
-- [ ] Dividir el cuerpo en zonas de alfa (*alpha cuts* o caras para el HUD de alfas) a partir de materiales o selecciones.
+- [x] Generar tallas (XXS–XL) a partir de una prenda, con desplazamiento por volumen.
+- [x] Ajuste automático de la prenda al cuerpo (evitar que el cuerpo atraviese la ropa) con distancia mínima configurable.
+- [x] Dividir el cuerpo en zonas de alfa (*alpha cuts* o caras para el HUD de alfas) a partir de materiales o selecciones.
 - [ ] Soldar normales entre piezas separadas (cuello entre cabeza y cuerpo, muñecas y tobillos) para que no se vea la costura.
 
 ## 5. Bakes on Mesh (BOM) y texturas
@@ -57,7 +57,7 @@ materiales PBR.
 
 - [ ] Calcular aproximadamente el *Land Impact* (peso de descarga, física y servidor) antes de subir.
 - [ ] LODs de mejor calidad: conservar bordes, UVs y todos los materiales en cada nivel.
-- [ ] Física avanzada: cajas automáticas para edificios, descomposición convexa y física por pieza.
+- [x] Física avanzada: cajas automáticas para edificios, descomposición convexa y física por pieza.
 - [ ] Exportar varios objetos como *linkset* con nombres y orden de enlazado.
 - [ ] Control del pivote y del origen pensando en cómo se rotan y editan los objetos en SL.
 
@@ -68,10 +68,10 @@ materiales PBR.
 
 ## 8. Animaciones
 
-- [ ] Exportar a `.anim` (formato nativo: prioridad por articulación, bucle, *ease in/out*, huesos Bento, traslaciones).
+- [x] Exportar a `.anim` (formato nativo: prioridad por articulación, bucle, *ease in/out*, huesos Bento, traslaciones).
 - [ ] Exportar a `.bvh`.
-- [ ] Pasar animaciones de Mixamo (y de otros rigs) al esqueleto SL.
-- [ ] Biblioteca de poses de mano y de expresiones faciales Bento.
+- [x] Pasar animaciones de Mixamo (y de otros rigs) al esqueleto SL.
+- [x] Biblioteca de poses de mano y de expresiones faciales Bento.
 - [ ] Cargar animaciones estándar de SL (estar de pie, andar, sentarse) para probar cómo deforma la ropa.
 - [ ] Animaciones con traslación de cadera y de articulaciones, y con prioridades por hueso.
 
@@ -86,24 +86,24 @@ materiales PBR.
 - [ ] Orejas largas (conejo), cuernos y crestas.
 - [ ] Manos de 3 o 4 dedos y zarpas (fusionando pesos de dedos).
 - [x] Robots y mechas: pesos rígidos (1 hueso por pieza) con un clic.
-- [ ] Animaciones procedurales: cola que se mueve, orejas que se agitan, respiración e *idle* furro.
+- [x] Animaciones procedurales: cola que se mueve, orejas que se agitan, respiración e *idle* furro.
 - [ ] Pelo y peluche: tarjetas de pelo con alfa, peluche en capas y aviso del coste en complejidad.
-- [ ] Editor de presets: guardar las proporciones de un rig como preset propio y compartirlo (JSON).
+- [x] Editor de presets: guardar las proporciones de un rig como preset propio y compartirlo (JSON).
 - [ ] Aviso de escala: comprobar los límites de desplazamiento de articulaciones y la altura de la cámara.
 
 ## 9. Exportación y flujo de trabajo
 
-- [ ] Exportación por lotes: varios objetos o tallas a varios archivos de una vez.
+- [x] Exportación por lotes: varios objetos o tallas a varios archivos de una vez.
 - [ ] Preajustes de exportación guardables (por proyecto o por tipo de prenda).
 - [ ] Nombres de archivo automáticos con versión (`prenda_v03_M.dae`).
 - [ ] Perfiles por red: Second Life (red principal y Aditi) y OpenSim, con sus límites.
-- [ ] Informe previo a la subida exportable (texto o HTML) con todos los avisos.
+- [x] Informe previo a la subida exportable (texto o HTML) con todos los avisos.
 - [ ] Importar copias de seguridad de Firestorm (`.oxp` o `.dae`) para recuperar trabajo.
 
 ## 10. Calidad del plugin
 
-- [ ] Preferencias del add-on: tema de color del HUD, atajo configurable, idioma.
-- [ ] Guardar y cargar presets propios (JSON) desde un rig ajustado.
+- [x] Preferencias del add-on: tema de color del HUD, atajo configurable, idioma.
+- [x] Guardar y cargar presets propios (JSON) desde un rig ajustado.
 
 - [x] Pruebas automáticas (ejecutando `bpy` sin interfaz) para cada función.
 - [ ] Probar en Blender 3.6, 4.2 LTS y 5.x.

@@ -77,9 +77,14 @@ def cv_local_matrix(name, local_pos):
     return Matrix.Translation(local_pos) @ rot @ scale
 
 
-def create_sl_armature(context, name="SL_Avatar", preset=None, deform=("HANDS",)):
-    """Crea el rig completo. `deform`: grupos (claves de DEFORM_GROUPS) que deforman."""
+def create_sl_armature(context, name="SL_Avatar", preset=None, deform=("HANDS",), custom_offsets=None):
+    """Crea el rig completo. `deform`: grupos (claves de DEFORM_GROUPS) que deforman.
+
+    custom_offsets: {hueso: (x, y, z)} desplazamientos respecto al padre (preset propio).
+    """
     bones = bone_table(preset)
+    if custom_offsets:
+        bones = [(n, p, custom_offsets.get(n, off)) for n, p, off in bones]
     pos_sl = world_positions_sl(bones)
     rot3 = SL_TO_BLENDER.to_3x3()
     scale = _preset_scale(preset)

@@ -28,6 +28,68 @@ Las dos salen del mismo código con `python build.py` (se escriben en `dist/`).
 El panel está en la vista 3D, barra lateral (`N`), pestaña **SL Rigger**. Menú radial: **Mayús+Alt+Q**.
 Los exportadores también están en *Archivo → Exportar*.
 
+## Novedades de la 0.5
+
+### Interfaz
+1. **Pestañas con iconos**: Esqueleto, Pesos, Animación, Ropa, Objetos, Materiales y Exportar.
+2. **Tablero en vivo** con nota (S, A, B, C, D) de la malla activa.
+3. **Puntuación SL Ready** de 0 a 100 con barra y los motivos que restan puntos.
+4. **Guía paso a paso** con casillas que se marcan solas.
+5. Botón **Siguiente paso**, que ejecuta lo que falta.
+6. **Galería de presets con miniaturas** (siluetas dibujadas a partir de cada esqueleto).
+7. **HUD con 4 temas**: neón cian, oro Founder, synthwave y matrix.
+8. HUD configurable: esquina, tamaño y opacidad.
+9. Barra de puntuación dentro del HUD.
+10. **Notificaciones emergentes** al terminar cada operación.
+11. **Etiquetas de grupos Bento** flotando sobre el esqueleto en el visor.
+12. **Indicador SL** en la barra de estado de Blender.
+13. **Chip SL** en la cabecera del visor 3D (activa el HUD).
+14. **Segundo menú radial** de animación (Mayús+Alt+W).
+15. **Pantalla de bienvenida** con guía rápida.
+16. **Hoja de atajos** y trucos.
+17. **Consejos** en cada pestaña.
+18. Botones desactivados que **explican por qué** (qué hay que seleccionar).
+19. **Barras de progreso** en exportaciones, retarget y animaciones.
+20. **Leyenda de colores** de los grupos Bento.
+21. **Aislar un grupo Bento** en el visor.
+22. **Pintura de pesos en modo SL** (auto-normalizar y ver ceros).
+23. **Preferencias** del add-on.
+
+### Funciones
+1. **Exportador .anim nativo** (formato verificado con el código del visor): prioridad 0–6,
+   bucle, *ease in/out*, mano del sistema y traslaciones Bento.
+2. **Pose actual a .anim** en un clic (para poses de sentarse o posar).
+3. **8 poses de mano** Bento: relajada, puño, señalar, paz, OK, abierta, garra y pulgar arriba.
+4. **7 expresiones faciales**: sonrisa, sorpresa, enfado, guiño, beso, ojos cerrados y boca abierta.
+5. **6 poses de cuerpo**: T-pose, A-pose, de pie, sentado, héroe y saludo.
+6. Animación **cola que se menea**.
+7. Animación **orejas que se mueven**.
+8. Animación **alas aleteando**.
+9. Animación **respiración** (idle).
+10. Animación **parpadeo**.
+11. Animación **caminar** (básica).
+12. Animación **saludar**.
+13. Animación **bailecito**.
+14. **Prueba de deformación** con posturas extremas.
+15. **Retarget de Mixamo, Unreal o Rigify a SL**, fotograma a fotograma.
+16. **Simetrizar pose** izquierda ↔ derecha.
+17. **Presets propios**: guardar y cargar proporciones en JSON.
+18. **Escalar a una altura exacta**.
+19. **47 puntos de anclaje oficiales** visibles en el visor.
+20. **Posición para SL de un accesorio**: calcula posición y rotación y las copia al portapapeles.
+21. **Ajustar ropa sin atravesar** el cuerpo.
+22. **Tallas XXS–XXL** de una prenda.
+23. **Zonas de alfa automáticas** (8 caras por zonas del cuerpo).
+24. **Optimizar malla** en un clic.
+25. **UV automático**.
+26. **Física en caja, envolvente o simplificada**.
+27. **Exportación por lotes**.
+28. **Fusionar un grupo de vértices** en un hueso SL.
+29. **PBR en un clic** desde una carpeta de texturas.
+30. **Empaquetar ORM** (oclusión, rugosidad y metal en una textura).
+31. **Texturas a tamaño SL** (potencias de 2 hasta 512, 1024 o 2048).
+32. **Certificado HTML SL Ready** con puntuación y comprobaciones.
+
 ## Novedades de la 0.4
 
 * **Esqueleto oficial completo**: los 133 huesos (26 base + 107 Bento) y los 26 volúmenes de
@@ -130,9 +192,11 @@ En SL: *Build → Upload → Material* (solo en regiones con PBR) y luego aplica
   asignan a `mPelvis` y se avisa.
 * La geometría se lee en la pose de reposo y se aplican los modificadores, salvo el armature.
 
-## Limitaciones de esta versión (0.4 beta)
+## Limitaciones de esta versión (0.5 beta)
 
 * No se ha probado todavía subiendo a Second Life: necesita pruebas en Aditi u OpenSim.
 * La edición Founder se ha revisado contra la API de Blender 3.5 pero solo se ha ejecutado en 4.2.
-* No exporta animaciones (`.anim` o `.bvh`) ni importa formas (shapes) de SL.
-* Las proporciones de los presets son un punto de partida.
+* El dibujo del HUD (gráficos del visor) no se puede probar sin pantalla; el resto de la interfaz sí.
+* Poses, expresiones y animaciones generadas son puntos de partida para retocar.
+* El cálculo de posición de accesorios es beta: compruébalo en el visor.
+* No importa formas (shapes) de SL.

@@ -303,10 +303,21 @@ class SLR_OT_make_lods(bpy.types.Operator):
 
 
 class SLR_OT_make_physics(bpy.types.Operator):
-    """Crea una malla de física simple (envolvente convexa) para objetos estáticos"""
+    """Crea una malla de física para objetos estáticos (menos peso de física = menos Land Impact)"""
     bl_idname = "slr.make_physics"
     bl_label = "Generar física"
     bl_options = {"REGISTER", "UNDO"}
+
+    shape: EnumProperty(
+        name="Forma",
+        items=[
+            ("HULL", "Envolvente convexa", "Buena para objetos compactos"),
+            ("BOX", "Caja", "La más ligera; ideal para muebles y paredes"),
+            ("SIMPLE", "Simplificada", "Copia muy reducida de la malla; para formas cóncavas (arcos, sofás)"),
+        ],
+        default="HULL",
+    )
+    ratio: FloatProperty(name="Reducción (simplificada)", default=0.05, min=0.005, max=0.5)
 
     def execute(self, context):
         meshes = [o for o in _selected_meshes(context) if "sl_lod_of" not in o]
@@ -319,9 +330,34 @@ class SLR_OT_make_physics(bpy.types.Operator):
             bm = bmesh.new()
             bm.from_mesh(ev.to_mesh())
             ev.to_mesh_clear()
-            res = bmesh.ops.convex_hull(bm, input=bm.verts)
-            bmesh.ops.delete(bm, geom=[g for g in res["geom_interior"] + res["geom_unused"]
-                                       if isinstance(g, bmesh.types.BMVert)], context="VERTS")
+            if self.shape == "BOX":
+                xs = [v.co.x for v in bm.verts]
+                ys = [v.co.y for v in bm.verts]
+                zs = [v.co.z for v in bm.verts]
+                bm.clear()
+                bmesh.ops.create_cube(bm, size=1.0)
+                for v in bm.verts:
+                    v.co.x = min(xs) if v.co.x < 0 else max(xs)
+                    v.co.y = min(ys) if v.co.y < 0 else max(ys)
+                    v.co.z = min(zs) if v.co.z < 0 else max(zs)
+            elif self.shape == "SIMPLE":
+                tmp = bpy.data.meshes.new("slr_tmp")
+                bm.to_mesh(tmp)
+                bm.free()
+                tobj = bpy.data.objects.new("slr_tmp", tmp)
+                context.scene.collection.objects.link(tobj)
+                dec = tobj.modifiers.new("d", "DECIMATE")
+                dec.ratio = self.ratio
+                ev2 = tobj.evaluated_get(context.evaluated_depsgraph_get())
+                bm = bmesh.new()
+                bm.from_mesh(ev2.to_mesh())
+                ev2.to_mesh_clear()
+                bpy.data.objects.remove(tobj)
+                bpy.data.meshes.remove(tmp)
+            else:
+                res = bmesh.ops.convex_hull(bm, input=bm.verts)
+                bmesh.ops.delete(bm, geom=[g for g in res["geom_interior"] + res["geom_unused"]
+                                           if isinstance(g, bmesh.types.BMVert)], context="VERTS")
             name = f"{obj.name}_PHYS"
             old = bpy.data.objects.get(name)
             if old is not None:
@@ -409,7 +445,10 @@ def _export_with_lods(op, context, filepath, writer):
         return {"CANCELLED"}
     for msg in dict.fromkeys(warnings_all):
         op.report({"WARNING"}, msg)
-    op.report({"INFO"}, "Exportado: " + ", ".join(os.path.basename(p) for p in written))
+    context.scene["slr_last_export"] = filepath
+    msg = "Exportado: " + ", ".join(os.path.basename(p) for p in written)
+    hud.toast(msg)
+    op.report({"INFO"}, msg)
     return {"FINISHED"}
 
 
