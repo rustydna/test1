@@ -1,0 +1,571 @@
+# pit_lore - lore of The Pit V4. Canon: docs/STORY_BIBLE.md. ASCII, max 250 bytes a line.
+#
+# == C01 THE PRESS-GANG
+EXAMINE|C01|Stone|The north wall is notched every hand from five feet to seven. The Wren measures every man against it before he writes him down.
+EXAMINE|C01|Stone|Soot climbs the south wall above the branding brazier in a black plume, ten years thick.
+EXAMINE|C01|Stone|Beside a shackle ring someone scratched 77, small and deep. Next to it, cut later by a surer hand, a hook.
+EXAMINE|C01|Stone|Names crowd the stone under the shackles, begun by men waiting for the quill. Most stop after the first letter.
+EXAMINE|C01|Stone|Moonlight falls through the grate in the vault onto the desk. The Wren calls it the only honest clerk in the Pit.
+EXAMINE|C01|Wood|The desk's edge is worn pale where the Wren's wrist has rested for twenty years, first for the Crown, then for the Lord.
+EXAMINE|C01|Wood|The notice board is nailed through older notices. Under the Lord's, the Crown's; under the Crown's, one nobody can read.
+EXAMINE|C01|Wood|The recruits' chest smells of new canvas and old fear. Its iron bands are rubbed bright where a hundred hands lifted the lid.
+EXAMINE|C01|Wood|On the shelf under the desk lie three ledgers. The lowest is stamped FORT CLEMENCY and has not been opened since the Ebb.
+EXAMINE|C01|Iron|Three irons rest in the coals: the Hook for crew, the Bar for every escape tried, the Ring for a man bought free.
+EXAMINE|C01|Iron|The shackles on the wall are worn bright inside, where wrists turned in them all night.
+EXAMINE|C01|Iron|The inkwell is iron, not silver. The Wren says silver was the Crown's vanity and iron is the Lord's honesty.
+EXAMINE|C01|Iron|Wire spectacles lie on the ledge, one lens starred. The Wren dropped them the night a drowned man walked back in.
+EXAMINE|C01|Cloth|The Muster Book lies open: number, name, height in hands, marks, trade, ship, how taken, and a last column, H or P.
+EXAMINE|C01|Cloth|Folded shirts of grey canvas wait on the chest, every one the same size, which is to say nobody's.
+EXAMINE|C01|Cloth|A sack by the chest is tied with a numbered chit. Inside, by the shape: a letter, a lucky coin and one boot.
+EXAMINE|C01|Cloth|The leather apron on the brazier leg is covered in little burnt hooks. The Smith tries each iron on himself first.
+EXAMINE|C01|Cloth|High in the vault, confiscated hats hang on pegs: a marine's, a fisherman's cap, a merchant's beaver. Out of reach.
+EXAMINE|C01|Straw|The desk candle is tallow on a rush wick. The Book is never left in the dark.
+EXAMINE|C01|Straw|Straw is trodden flat from the grille to the desk by men who walked in one way and out another.
+EXAMINE|C01|Straw|A frayed rope-end hangs from a shackle ring, cut, not untied. Somebody left in a hurry.
+EXAMINE|C01|Straw|The confiscated sack is tied with tarred twine in a ropemaker's knot. The Purse learned it from somebody.
+EXAMINE|C01|Floor|The earth round the brazier is burnt black in a ring. Men are made to stand inside it.
+EXAMINE|C01|Floor|At the edge of the burnt ring lies a tooth. Someone bit down very hard when the iron came.
+EXAMINE|C01|Floor|The path from the grille to the desk is worn into the floor. Nobody walks round the desk; everybody faces it.
+EXAMINE|C01|Floor|Spilled sand glitters by the desk leg. The Wren dries every entry, and the floor drinks the rest.
+EXAMINE|C01|Bone|The quill is a gull's flight feather. Gulls are the only free thing that comes in here.
+EXAMINE|C01|Bone|A horn cup holds spare quills cut sharp. The Wren cuts a new one every hundred names.
+EXAMINE|C01|Bone|A stick of sealing wax lies by the sand shaker. It is used once a Book: on the page where number 77 is written in red.
+EXAMINE|C01|Bone|The quill's bone stem is bitten flat at the end. The Wren chews it when a man will not give his name.
+EXAMINE|C01|Flame|The branding coals glow under grey ash. The Smith keeps them alive with a goatskin bellows, humming a hymn.
+EXAMINE|C01|Flame|The desk candle leans toward the grille whenever it opens, as if it wanted to see who was coming.
+EXAMINE|C01|Flame|Heat rolls off the brazier. The irons tick as they wait, like a clock with three hours.
+EXAMINE|C01|Flame|The candle flame bows each time the scribe breathes out. He breathes out after every name.
+EXAMINE|C01|ANY|This was the Crown's Registry. The Lord kept the clerk, the desk and the purpose, and only changed the word over the door.
+#
+# == C02 THE RACK
+EXAMINE|C02|Stone|On the vault above the rack a wide white eye is painted. Men on the rack stare at it for hours; it stares back.
+EXAMINE|C02|Stone|A stone at the foot of the north wall sits a finger proud of the rest. Something leather shows in the gap.
+EXAMINE|C02|Stone|Cut into the outer wall: THE SEA GIVES BACK WHAT THE ROPE TAKES. A.R., in a careful ropemaker's hand.
+EXAMINE|C02|Stone|A rat hole gapes at the foot of the outer wall. Vole named this one Hask's. Knuckle bones lie at its mouth like tolls.
+EXAMINE|C02|Wood|Five notches are cut in the rack's rail by the wheel, one for each turn. The fifth is deeper, and signed A.R.
+EXAMINE|C02|Wood|The rollers are polished where hands gripped them, and stained where they could not.
+EXAMINE|C02|Wood|A plank on the north wall holds knotted rope: reef, bowline, sheepshank, and a hangman's knot left unfinished.
+EXAMINE|C02|Wood|A wooden bit hangs from the head of the rack on a thong, bitten into the shape of many different teeth.
+EXAMINE|C02|Iron|On the tool board six tools hang on six pegs. Beside the last, only the rust-shadow of a hook. Vole took it for picks.
+EXAMINE|C02|Iron|The pincers are older than the Lord. The Crown's questioner left them; nobody has needed new ones.
+EXAMINE|C02|Iron|An iron ring and pulley hang high in the vault. The Crown asked its questions higher.
+EXAMINE|C02|Iron|A tin dipper hangs on the bucket, dented where it was thrown at a guard. It missed. He was racked for his aim.
+EXAMINE|C02|Cloth|The leather cuffs are cracked and dark. Inside one, A.R. is scratched with a thumbnail.
+EXAMINE|C02|Cloth|A heap of shirts lies by the wall, each torn at the left shoulder where it was pulled down to look for a brand.
+EXAMINE|C02|Cloth|Behind the loose stone, the corner of a small leather prayer book, swollen with damp.
+EXAMINE|C02|Cloth|The thong of the wooden bit is knotted with a reef knot. Even the gags here are tied properly.
+EXAMINE|C02|Straw|The rack's ropes are tarred hemp from Reed's walk in Gullhaven: three strands, left-laid. He knew them by their twist.
+EXAMINE|C02|Straw|The rope at the wheel end is frayed to a beard. Every turn eats another strand.
+EXAMINE|C02|Straw|The straw by the north wall is pressed into the shape of a very long man, as if it remembers him.
+EXAMINE|C02|Straw|A rope-end hangs from the pulley in the vault, rotted short. Nobody has climbed up to cut it down.
+EXAMINE|C02|Floor|The earth under the rack is stained in a long dark shape, darkest where the brine is thrown over the fainted.
+EXAMINE|C02|Floor|Grooves show the rack's feet have crept toward the wall an inch a year.
+EXAMINE|C02|Floor|Salt crust rings the spot where the bucket stands. It has been refilled every day since the Crown.
+EXAMINE|C02|Floor|A path is worn from the grille to the wheel. Nobody ever needed a path to the rack's head.
+EXAMINE|C02|Bone|A skeleton lies along the north wall, longer than a man should be. They say Reed came off the rack a hand taller.
+EXAMINE|C02|Bone|The long skeleton's head lies toward the loose stone, and his finger bones are curled as if tying a knot.
+EXAMINE|C02|Bone|Gnawed knuckle bones at the rat hole are laid out in a neat row. The rats did not do the laying.
+EXAMINE|C02|Bone|The painted eye is lime-white. Up close it has an iris drawn in soot: a hook.
+EXAMINE|C02|Flame|The torch throws the rack's shadow across the vault, and the shadow is longer than the rack.
+EXAMINE|C02|Flame|Tallow from the torch has built a white beard on the stone below, a year's worth at least.
+EXAMINE|C02|Flame|The torch leans away from the rack, as if even fire did not like it here.
+EXAMINE|C02|Flame|In the torchlight the painted eye seems to move. It does not. Probably.
+EXAMINE|C02|ANY|The Question Room asked the Crown's questions for sixty years. The Lord asks only one: hook or pit?
+#
+# == C03 THE STOCKS (the old chapel)
+EXAMINE|C03|Stone|Under the soot on the outer wall a painted man holds an anchor: Saint Clement. His eyes have been scratched out.
+EXAMINE|C03|Stone|A niche in the north wall once held holy water. Now it holds a candle stub and a frozen waterfall of grey wax.
+EXAMINE|C03|Stone|Faint white stars are painted on the vault, flaking. This was a chapel before it was a joke.
+EXAMINE|C03|Stone|The moonbeam from the vault's grate falls on the pillory. The Crown called it the saint's finger.
+EXAMINE|C03|Wood|The pillory's top edge is crowded with initials, cut by men who could see nothing else.
+EXAMINE|C03|Wood|At the platform's corner a broken board shows carved stone: the edge of an altar, and an anchor.
+EXAMINE|C03|Wood|The bench of the foot stocks bears a line of song: OH THE TOOTH BITES DEEP AND THE TOOTH BITES SLOW.
+EXAMINE|C03|Wood|The holes of the foot stocks are worn glossy. The wood remembers ankles better than faces.
+EXAMINE|C03|Iron|The pillory's hasp is scratched all round the keyhole: patience, or a bent nail.
+EXAMINE|C03|Iron|Three iron buttons lie by the skulls at the wheel, stamped with the Crown's gull. Marines' buttons.
+EXAMINE|C03|Iron|The wheel hangs from one iron pin. It turns a little whenever the grille slams.
+EXAMINE|C03|Iron|In a mortar joint by the floor a bent nail is pushed in flush. You would not find it unless you were a thief.
+EXAMINE|C03|Cloth|A scrap of red coat lies with the three skulls. The marines held this door on the Night of the Ebb.
+EXAMINE|C03|Cloth|A cord sign lies in the corner, one word chalked: COWARD. It has been round many necks.
+EXAMINE|C03|Cloth|Crusts and rags are kicked into the corner, the leavings of a good mocking.
+EXAMINE|C03|Cloth|A pair of breeches hangs from the wheel's rim, a guards' joke older than the guards.
+EXAMINE|C03|Straw|Behind the wheel a little straw man is tucked out of sight, plaited by a prisoner. He holds a straw anchor.
+EXAMINE|C03|Straw|Rotten straw is heaped where the altar steps were. The guards call it the pew.
+EXAMINE|C03|Straw|A short rope hangs from a hole in the vault. The chapel bell hung there; now it rings for fresh meat at the gate.
+EXAMINE|C03|Straw|Fresh straw is strewn before the pillory. Someone expects a crowd.
+EXAMINE|C03|Floor|Egg shells and crusts are trodden into the platform, a midden of other men's laughter.
+EXAMINE|C03|Floor|Two hollows are worn before the foot stocks, where heels have dug in for years.
+EXAMINE|C03|Floor|The floor slopes toward the old altar. Every spill ends there.
+EXAMINE|C03|Floor|Wax drips run from the stoup niche to the floor and pool in a grey coin.
+EXAMINE|C03|Bone|Three skulls sit at the foot of the wheel, all facing the door. The guards call them the Saint's Three.
+EXAMINE|C03|Bone|A bone card wedges the bench leg: the Four of Bones. Fennick's deck travels.
+EXAMINE|C03|Bone|One of the Saint's Three has a Crown coin in his eye socket. Someone paid his ferry.
+EXAMINE|C03|Bone|The saint's painted halo is lime-white, the brightest thing on the wall. The soot avoids it, nobody knows why.
+EXAMINE|C03|Flame|The torch is hung so its smoke blackens the saint's face first. The Lord chose the spot himself.
+EXAMINE|C03|Flame|Prisoners light the stub in the old stoup with straws from the torch. The guards let them.
+EXAMINE|C03|Flame|When the torch flares, the shadows of the pillory's three holes slide up the wall like three open mouths.
+EXAMINE|C03|Flame|The flame finds a glint in the outer wall: a sliver of mirror, angled to catch the face of a man in the stocks.
+EXAMINE|C03|ANY|This was the chapel of Saint Clement. The Pit kept the kneeling and changed what you kneel to.
+#
+# == C04 THE CISTERN
+EXAMINE|C04|Stone|Under the soot, someone scratched forty-one strokes and then stopped. Beside them: L.D. I WILL COME BACK FOR THE KEY.
+EXAMINE|C04|Stone|Groups of ten strokes run along the wall, 300 ringed at the end, and a little seal drawn by a patient hand.
+EXAMINE|C04|Stone|A slate on the north wall is chalked with tides in the Mute's square figures. One night is circled twice: the Dead Ebb.
+EXAMINE|C04|Stone|Lines are cut across the north wall with years. The lowest says Y1 THE EBB. The highest, at the knee, FLOOD Y7.
+EXAMINE|C04|Wood|Knots run along a cord tied to the chair's arm, one for every ten counted under. The Mute cannot say the numbers.
+EXAMINE|C04|Wood|The chair's back is cut with J.P. 300, H.S. 140, N.P. 90, and under them: BEAT IT.
+EXAMINE|C04|Wood|The trestle legs are green with salt to the height of a man. The water has been higher than this.
+EXAMINE|C04|Wood|The counterweight beam is notched where hands grip it to drop the chair. The Mute's grip is the deepest.
+EXAMINE|C04|Iron|Under the water in the tank's west wall, an iron grate. Two bars are bent outward, the way a man's back bends.
+EXAMINE|C04|Iron|The skeleton's chain is short. Not short enough to stop him seeing the grate. Exactly short enough.
+EXAMINE|C04|Iron|The chair's pivot squeals like a gull. The Watch greases everything in the Pit except this.
+EXAMINE|C04|Iron|The light well's grate drips onto the tank. The moonbeam shakes on the water like a coin nobody can pick up.
+EXAMINE|C04|Cloth|The chair's strap is stiff with salt and bitten through at the middle.
+EXAMINE|C04|Cloth|A shirt is draped over the tank's rim to dry. It has been drying for a year.
+EXAMINE|C04|Cloth|Rags are piled by the skeleton, as if someone kept trying to make him comfortable.
+EXAMINE|C04|Cloth|A scrap of sailcloth is jammed in a crack by the culvert. The Lord's own patch, the old hands say.
+EXAMINE|C04|Straw|The Mute's knotted cord hangs from the chair. The longest run of knots has J.P. scratched beside it.
+EXAMINE|C04|Straw|Wet straw rots against the tank, the colour of weak tea.
+EXAMINE|C04|Straw|Bladder-wrack hangs from the grate, pulled in at high tide. The sea comes to visit.
+EXAMINE|C04|Straw|A twist of straw is tied round one finger bone of the skeleton, like a ring.
+EXAMINE|C04|Floor|Salt rime cracks underfoot along the tank. Wet footprints lead from it to the grille, none lead back.
+EXAMINE|C04|Floor|Crab shells and fish bones are swept into the north corner by the culvert's high-tide breath.
+EXAMINE|C04|Floor|An empty wooden bowl stands one hand beyond the skeleton's reach. It was water once.
+EXAMINE|C04|Floor|The puddles here are salt, never fresh. Men have tried to drink them. The Mute watches and does not stop them.
+EXAMINE|C04|Bone|A skeleton sits chained against the south wall, facing the grate. In his left hand, something small and grey: a pearl.
+EXAMINE|C04|Bone|A slate leans on the dead man's shin: THREE HUNDRED. COUNT IT.
+EXAMINE|C04|Bone|Salt has crusted white on the vault above the tank, like a frost that never melts.
+EXAMINE|C04|Bone|Salt has whitened the skull, so the dead man looks as if he went grey waiting.
+EXAMINE|C04|Flame|The torch hisses when spray from the chair reaches it. It is relit more often than any torch in the Pit.
+EXAMINE|C04|Flame|Torchlight on the water lays a ladder of gold up the wall. It leads nowhere.
+EXAMINE|C04|Flame|Steam rises off the tank when the torch flares. The Cistern breathes like a sleeper.
+EXAMINE|C04|Flame|Held close, the flame shows a hook cut over the forty-one strokes, deeper and much later.
+EXAMINE|C04|Water|The water is green and cold and tastes of the open sea. It came in through the grate at the last flood.
+EXAMINE|C04|Water|Look long enough and the grate appears, then the dark beyond it. That dark goes all the way to the Narrows.
+EXAMINE|C04|Water|The surface trembles with every wave that strikes the Widow's Tooth. The Cistern feels the sea's pulse.
+EXAMINE|C04|Water|Something pale turns over at the bottom: a crab, a button, or the last thing a man let go of.
+EXAMINE|C04|ANY|The Lord walked out of this room through the culvert, and twelve years later walked back in the same way.
+#
+# == C05 THE KENNEL
+EXAMINE|C05|Stone|Between the first two kennels: EAT LAST. SLEEP FIRST. NEVER LOOK AT THE THRONE. Old Fetch's rules.
+EXAMINE|C05|Stone|One stone near the floor is grey with strokes: eight winters of them, in fives, signed with a scratched paw.
+EXAMINE|C05|Stone|A stone behind the middle kennel sits proud of the wall. In the gap, the white corner of a bone card.
+EXAMINE|C05|Stone|A compass rose is scratched on the south wall. North points at the throne, and a line is cut through north.
+EXAMINE|C05|Wood|Under each name tag, an older plate: GRIP. HOLDFAST. SORROW. The Governor's mastiffs slept here first.
+EXAMINE|C05|Wood|The posts of the first kennel are cut all over with strokes, so many that the wood is soft with them.
+EXAMINE|C05|Wood|The roof hatch is bolted from above. When it opens the light comes first, and the rags right after.
+EXAMINE|C05|Wood|Two wooden spoons hang from the tether bar on twine. A dog eats from the bowl; a man earns the spoon.
+EXAMINE|C05|Iron|The collars on the tether bar are worn bright inside, and each has a ring for a name tag.
+EXAMINE|C05|Iron|A rusted tag is still wired to the third kennel: SEAL. The Seal swam better than he barked.
+EXAMINE|C05|Iron|The chamber pot is a Crown marine's helmet turned upside down. The gull on its brow is worn away.
+EXAMINE|C05|Iron|Scratched inside the bowl rims: FETCH, SEAL, LIEUTENANT, DICER, and one blank. It is waiting.
+EXAMINE|C05|Cloth|A rag in the pile has a brown thread in it that was gold once: a strip of the Crown's banner, cut up for the dogs.
+EXAMINE|C05|Cloth|The piles are the Watch's breeches, shirts and loincloths, thrown down the hatch on rest-days. All stink of other men.
+EXAMINE|C05|Cloth|A leather collar lies round the skeleton's neck bones. The tag can still be read: FETCH.
+EXAMINE|C05|Cloth|A shirt is snagged on the hatch hinge, high under the roof. It has hung there a year. Nobody fetches it.
+EXAMINE|C05|Straw|The kennel straw is mainland straw, gold when it arrives and grey within the week.
+EXAMINE|C05|Straw|The straw is pressed into round hollows before the kennels, where men curl up to be near the bars.
+EXAMINE|C05|Straw|The spoons' twine is knotted to the bar with a knot only the kennelman can undo.
+EXAMINE|C05|Straw|A wisp of straw is braided into a collar for a rat. The rat is still wearing it.
+EXAMINE|C05|Floor|Chain grooves fan across the floor from the tether bar, each exactly a chain's length long.
+EXAMINE|C05|Floor|Two bone cards lie face up by the middle kennel: the Three of Keys and the Queen of Crowns. Nobody picks them up.
+EXAMINE|C05|Floor|The trough has worn a dark crescent into the floor where the slop runs over twice a day.
+EXAMINE|C05|Floor|Knee prints. The floor between the bowls and the kennels is pocked with them.
+EXAMINE|C05|Bone|A skeleton lies among the rags in a collar. The kennelman will not have him moved: he is on watch.
+EXAMINE|C05|Bone|Soup bones gnawed white are tucked into every kennel. The best were carved into cards, long ago.
+EXAMINE|C05|Bone|A rib bone sharpened to a point is hidden in the straw. Someone was going to do something, and didn't.
+EXAMINE|C05|Bone|Little bones are lined along the trough's lip in fives with a stroke across. Even the dogs keep tally.
+EXAMINE|C05|Flame|The lantern hangs from the roof and is never put out. Fenwick says dogs sleep better with a light.
+EXAMINE|C05|Flame|In the lantern's glow the kennels throw barred shadows on the floor: a cage inside a cage.
+EXAMINE|C05|Flame|The lantern candle is a fat Crown candle stamped with the gull. The Governor bought it for his hounds.
+EXAMINE|C05|Flame|When the hatch opens the lantern flame bows toward it, hungry for the air from above.
+EXAMINE|C05|ANY|The only cell in the Pit where men live. Everywhere else they are only taken, and brought back.
+#
+# == C06 THE KENNEL (second grille)
+EXAMINE|C06|Stone|Over this grille a Crown board still reads GOVERNOR'S HOUNDS - DO NOT FEED. Someone scratched out DO NOT.
+EXAMINE|C06|Stone|The pier by this grille is rubbed smooth at the height of a crouching man's shoulder.
+EXAMINE|C06|Stone|A dog's head is scratched into the jamb, and under it a name, BRAN, and under that a number.
+EXAMINE|C06|Stone|The keystone has a fresh hook cut into it. The Kennel belongs to the Lord now, not the Governor.
+EXAMINE|C06|Iron|The lock of this grille is scratched all round the keyhole: lift and turn, lift and turn. Vole was here.
+EXAMINE|C06|Iron|Two bars are bent a finger apart at knee height: wide enough for a bowl, not for a man.
+EXAMINE|C06|Iron|The hinges are greased. The kennelman will not have his dogs woken by a squeal.
+EXAMINE|C06|Iron|A tag on a wire swings from the grille. It reads DOG, which is either a joke or a promise.
+#
+# == C07 THE CAGES
+EXAMINE|C07|Stone|A ship is cut into the north wall in fine lines: three masts, thirty-two gun ports counted, STEADFAST under her stern.
+EXAMINE|C07|Stone|A stone in the outer wall is loose. Behind it, scraps rolled tight, written in a small officer's hand.
+EXAMINE|C07|Stone|Cut south of the slit: THREE DAYS UP. THE TENANT TALKS AT NIGHT. R.C.
+EXAMINE|C07|Stone|A gulls' nest sits on the vault's springing, built of cell straw and mess fish bones.
+EXAMINE|C07|Wood|The winch drum is grooved by the chain into neat spirals, like a ropewalk's spool.
+EXAMINE|C07|Wood|A long pole with a hook and a little bucket leans by the winch: the only way to give a caged man a drink.
+EXAMINE|C07|Wood|The handles of the winch wheel are polished black. The Watch takes turns, and bets on the swing.
+EXAMINE|C07|Wood|The winch posts are older than the Pit's grilles: Crown oak, brought down from Gallows Point with the cages.
+EXAMINE|C07|Iron|The far cage's bottom hoop is filed with two hundred and eleven tiny notches. The hangman counted his work.
+EXAMINE|C07|Iron|Higher on the same cage, nine deep notches. He counted his days too, until he couldn't.
+EXAMINE|C07|Iron|A plate on the winch: PROPERTY OF THE CROWN - GALLOWS POINT. Scratched beneath: NOW PROPERTY OF THE PIT.
+EXAMINE|C07|Iron|A ship is scratched into the floor plate of the near cage. Its owner had a season to get the rigging right.
+EXAMINE|C07|Cloth|A black hood lies crumpled at the Tenant's feet. The Crown's hangman wore it for thirty years.
+EXAMINE|C07|Cloth|Rags are knotted along the near cage's bars, every one a perfect reef knot. An officer kept his hands busy.
+EXAMINE|C07|Cloth|A strip of shirt is wound round the winch chain where it chafes. Somebody cared about the noise.
+EXAMINE|C07|Cloth|Behind the loose stone the scraps are sailcloth, not paper: winds, tides and sails, three years of them.
+EXAMINE|C07|Straw|The gulls' nest in the vault is woven of prison straw. The birds take what the men leave.
+EXAMINE|C07|Straw|Straw pushed into the near cage for bedding falls through the floor faster than it can be slept on.
+EXAMINE|C07|Straw|A rope is made off on the winch cleat with a hangman's knot, tied upside down. The Watch's joke.
+EXAMINE|C07|Straw|Straw lies in a ring under each cage, swept by the swing of men who could not keep still.
+EXAMINE|C07|Floor|Under the near cage lie a wooden spoon and a crust, things that slipped through the bars out of reach.
+EXAMINE|C07|Floor|A dark stain spreads under the far cage, older than the Lord.
+EXAMINE|C07|Floor|Loose bones lie by the south wall in no order. The cages drop what they do not need.
+EXAMINE|C07|Floor|The moon square from the vault grate crawls across the floor between the cages, a clock for men who hang.
+EXAMINE|C07|Bone|In the far cage stands the Tenant: Hob Lacey, the Crown's hangman, put in his own cage on the Night of the Ebb.
+EXAMINE|C07|Bone|Three skulls by the winch face the wall. The Watch turns them round each morning. By night they face the wall again.
+EXAMINE|C07|Bone|The Tenant's jaw hangs open. The Watch says he is still asking for his warrant.
+EXAMINE|C07|Bone|A bone card is wedged between the near cage's bars: the Jack of Keys. Fennick's deck gets everywhere.
+EXAMINE|C07|Flame|The torch swings the cages' shadows across the vault like two slow pendulums.
+EXAMINE|C07|Flame|Smoke from the torch has blackened one side of the far cage. The Tenant is cured like a ham.
+EXAMINE|C07|Flame|The torch flame stands still while the cages sway. It is the only thing in here that does.
+EXAMINE|C07|Flame|Hold the light up: on the vault, faint, a tally no man could have reached without a cage.
+EXAMINE|C07|ANY|The Crown hung pirates in these cages on Gallows Point for the gulls. The Lord brought them indoors, out of kindness to the gulls.
+#
+# == C08 THE MAST
+EXAMINE|C08|Stone|Verses cut into the outer wall: HAUL AWAY FOR THE WIDOW, BOYS. Tam Wicken sang through sixty lashes and carved the rest.
+EXAMINE|C08|Stone|A seal is scratched south of the slit with J.P. 40 beneath it. Forty for the culvert, and he called it cheap.
+EXAMINE|C08|Stone|High on the north wall, a frigate with her mainmast missing. Under it, in an officer's hand: HER MAST IS HERE.
+EXAMINE|C08|Stone|Fourteen names with numbers run along the south wall: the Steadfast's men and their lashes, in the order taken.
+EXAMINE|C08|Wood|At the mast's foot the Crown's arrow is burnt into the wood, and over it the Lord's hook.
+EXAMINE|C08|Wood|On the back of the mast, rows of notches: one for every hundred lashes. The rows climb higher than a man can reach.
+EXAMINE|C08|Wood|At the height of bound hands a single letter is cut deep: L. It is older than every other mark on the mast.
+EXAMINE|C08|Wood|The broken yardarm still carries the Steadfast's paint, Crown red, peeling like old skin.
+EXAMINE|C08|Iron|A Crown coin is nailed to the mast, the King's face pierced. Sailors put a coin under a mast for luck. This one's ran out.
+EXAMINE|C08|Iron|The mast's iron bands are polished where chests have been pressed against them.
+EXAMINE|C08|Iron|The shackle ring is worn thin on one side. Every man pulls the same way.
+EXAMINE|C08|Iron|The light well's grate is right above the mast. Crake waits for the moon to lie on the bound man's back.
+EXAMINE|C08|Cloth|Three cats hang on the board, names burnt above them: MERCY, MARGERY, WIDOW. Nine knotted tails each.
+EXAMINE|C08|Cloth|A leather strap hangs from a peg, bitten through in a dozen places by a dozen jaws.
+EXAMINE|C08|Cloth|A shirt lies by the salt barrel, its back cut into ribbons. It was put back on afterward.
+EXAMINE|C08|Cloth|Crake's lash book hangs on a nail, its pages stiff with salt.
+EXAMINE|C08|Straw|The ropes coiled at the mast's foot are the Steadfast's own sheets, still faintly tarred.
+EXAMINE|C08|Straw|A tackle hangs from the vault: the Steadfast's block, which once raised her topsails and now raises hands.
+EXAMINE|C08|Straw|Straw is spread thick round the mast in a circle, like sawdust in a fighting ring.
+EXAMINE|C08|Straw|A rope-end is tied round the mast at shoulder height with nine knots, by nine different men.
+EXAMINE|C08|Floor|The ground at the mast's foot is stained dark and crusted white: blood first, then the salt.
+EXAMINE|C08|Floor|Footprints in spilled salt lead from the barrel to the mast. Drag marks lead back.
+EXAMINE|C08|Floor|The floor here is swept every morning. The Bosun likes a clean deck.
+EXAMINE|C08|Floor|A shallow groove marks where the bound man's feet go. Nobody has to tell him.
+EXAMINE|C08|Bone|The barrel is full to the brim with coarse white salt. An old ship's custom, the Bosun says: a kindness.
+EXAMINE|C08|Bone|A wooden scoop rests on the salt, its handle carved with a tally of the backs it has served.
+EXAMINE|C08|Bone|A whalebone fid for splicing lies by the coils: the Bosun's own.
+EXAMINE|C08|Bone|Salt grains glitter in the cracks of the floor like a frost that never melts.
+EXAMINE|C08|Flame|The torch is set so the bound man's shadow falls on the wall before him. He watches it flinch before he does.
+EXAMINE|C08|Flame|Smoke has blackened the vault over the mast, a dark sail spread above it.
+EXAMINE|C08|Flame|In the old men's tales the torch flares with every lash. It is only the draught from the grille.
+EXAMINE|C08|Flame|In the firelight the knots in the mast look like eyes. The Steadfast's crew said the same at sea.
+EXAMINE|C08|ANY|The Steadfast's mainmast was cut down in the third year. She sails on under another, and her men still salute this one.
+#
+# == YARD
+EXAMINE|YARD|Stone|Low on the pier by the Kennel grilles: DO NOT LOOK AT THE THRONE. Cut by a man on his knees.
+EXAMINE|YARD|Stone|A groove is chiselled across the yard by the gate: the roll-call line. Numbers are cut beside it, worn shallow by toes.
+EXAMINE|YARD|Stone|Before the dais two hollows are worn in the flagstones by the knees of the waiting.
+EXAMINE|YARD|Stone|Over every grille a Crown room-name is chiselled out and the Lord's word daubed over it in tar. Two were left alone.
+EXAMINE|YARD|Wood|The underside of the Governor's beam is notched: twenty-three cuts since the Ebb. The Governor was the first.
+EXAMINE|YARD|Wood|Initials are cut in a row along the fourth beam: fourteen men of the Steadfast, the night they took the hook.
+EXAMINE|YARD|Wood|A noose is coiled tight against the middle beam, ready. The Watch says it is kept for the Crown's next Governor.
+EXAMINE|YARD|Wood|The placard on the Governor's chest reads THE CROWN KEEPS THE YARD. The Watch greets him every dawn.
+EXAMINE|YARD|Iron|Butcher's hooks hang beside the Governor. Salt fish dry on one. The Quartermaster wastes nothing, not even that air.
+EXAMINE|YARD|Iron|The Governor hangs by a ship's chain, not a rope. The Lord said a gentleman deserves iron.
+EXAMINE|YARD|Iron|An iron ring is set in the last pier before the throne. Men are tied to it to wait their turn to kneel.
+EXAMINE|YARD|Iron|The drain grates are choked with fish bones, buttons and the odd tooth.
+EXAMINE|YARD|Floor|The flagstones under the Governor are stained darker in a ring. It drips still, in wet weather.
+EXAMINE|YARD|Floor|Salt rime crusts the channel's lip, white as frost, and cracks when you step near.
+EXAMINE|YARD|Floor|The flagstones are worn into a shallow path down the middle: the walk from the gate to the dais.
+EXAMINE|YARD|Floor|Rubble and chips of broken flagstone lie where the Watch drops the cages' counterweights for sport.
+EXAMINE|YARD|Water|The channel rises and falls with the tide outside. At the ebb it smells of rot; at the flood, of the open sea.
+EXAMINE|YARD|Water|Fog crawls off the channel and pools round your ankles like something that wants to be let out.
+EXAMINE|YARD|Water|Things float in the channel at the flood: straw, a crust, once, the Watch swears, a Crown hat.
+EXAMINE|YARD|Water|The channel runs under the gate to the sea. The Crown cut it to flush the Pit. The Pit is never clean.
+EXAMINE|YARD|Bone|The Governor's bones are green where the chain rubs. His buttons were gilt once. The gilt is on the throne now.
+EXAMINE|YARD|Bone|Chalk counts climb a pier in columns: the morning count and the evening count. They seldom match.
+EXAMINE|YARD|Bone|A salt fish on the butcher's hook has dried to the colour of the Governor.
+EXAMINE|YARD|Bone|Gnawed bones are heaped at the foot of a pier: rats' leavings, or the Watch's.
+EXAMINE|YARD|Straw|Swallows have stuck mud nests under the first beam. They come and go through the gate as they please.
+EXAMINE|YARD|Straw|Straw drifts down the channel from the cells, carried to the sea a stalk at a time.
+EXAMINE|YARD|Straw|The noose on the middle beam is new hemp, the only new rope in the Pit.
+EXAMINE|YARD|Straw|On court nights fresh straw is strewn from the gate to the dais, so nobody slips on his way to kneel.
+EXAMINE|YARD|Cloth|The Governor's coat hangs in strips. The buttonholes are torn where the buttons were cut away; one tarnished button was missed.
+EXAMINE|YARD|Cloth|The Lord's pennant on the last beam: a white hook through a broken crown, singed at one corner on the Night of the Ebb.
+EXAMINE|YARD|Cloth|A notice is nailed to a pier: PRISONERS ANSWER WITH THEIR NUMBER, NOT THEIR NAME. Under it, three older orders.
+EXAMINE|YARD|Cloth|A red rag is tied to a staple on the first pier. Fresh meat is lined up under it.
+EXAMINE|YARD|Flame|The lanterns swing from the beams on chains. The Watch counts them at lights out.
+EXAMINE|YARD|Flame|Ten torches on the piers are lit from one spill each dusk, from the gate end toward the throne.
+EXAMINE|YARD|Flame|The flames lean toward the throne when the tide turns. Old Keys says the Pit is breathing in.
+EXAMINE|YARD|Flame|Lantern light walks the Governor's shadow up and down the yard as he turns on his chain.
+EXAMINE|YARD|ANY|Every man who comes in walks under the Governor. Most look up. The wise ones bow.
+#
+# == GATE
+EXAMINE|GATE|Stone|Over the gate the Crown's red gull was chiselled off the arms and the Lord's hook cut in its place.
+EXAMINE|GATE|Stone|Under the arms: WHAT THE SEA GIVES, THE PIT KEEPS. The letters are cut deep enough to hold rain.
+EXAMINE|GATE|Stone|In the passage: W.A. KEPT THIS GATE NINE YEARS. Will Ashby cut it. His skull is above the gate now.
+EXAMINE|GATE|Stone|Tide lines are cut in the passage wall with years. The highest reads FLOOD Y7, at the knee.
+EXAMINE|GATE|Wood|The portcullis is oak shod with iron. Its teeth are worn round from biting the step a thousand times.
+EXAMINE|GATE|Wood|The bell post is chalked with strokes, one for every man rung in this year. The column has reached the ground.
+EXAMINE|GATE|Wood|Chalk on the winch frame: 37 TURNS UP. LET IT DROP AND YOU PAY FOR THE TOES.
+EXAMINE|GATE|Wood|The gate leaves are scarred with axe cuts from the Night of the Ebb, never planed out.
+EXAMINE|GATE|Iron|Two skulls are nailed beside the arms, a Crown coin wedged in each jaw. The Ashbys were paid in full.
+EXAMINE|GATE|Iron|The bell is cast SAINT CLEMENT KEEP THE SAILORS. Someone filed SAINT away. The bell kept ringing.
+EXAMINE|GATE|Iron|A mooring ring is sunk in the jamb at the stair head. At the high springs boats tie up inside the gate.
+EXAMINE|GATE|Iron|The portcullis chain is greased black. The winch takes thirty-seven turns, and the Watch counts them aloud.
+EXAMINE|GATE|Floor|The Water Stair is hollowed in the middle by a century of feet coming up, and very few going down.
+EXAMINE|GATE|Floor|A groove runs up the steps where chains are dragged, bright where iron bites stone.
+EXAMINE|GATE|Floor|Weed and salt crust the lowest step. At high tide the sea climbs two steps and waits.
+EXAMINE|GATE|Floor|One flag in the passage is newer than the rest. The Lord had the old one broken: the Governor's name was cut in it.
+EXAMINE|GATE|Bone|The Ashby skulls look down the stair. The Watch says they still count who comes in.
+EXAMINE|GATE|Bone|Bird bones lie at the stair head: gulls that flew at the portcullis in the fog.
+EXAMINE|GATE|Bone|The left skull has lost two teeth. The coin sits where they were.
+EXAMINE|GATE|Bone|The chalk on the bell post is not chalk: it is ground bone mixed with spit. Chalk is the Purse's, and costs.
+EXAMINE|GATE|Straw|The bell rope is new hemp spliced to old. The old part is dark with hands.
+EXAMINE|GATE|Straw|Weed and straw choke the channel's outflow under the gate. The sea rinses it twice a day.
+EXAMINE|GATE|Straw|Bladder-wrack drapes the lowest step like a wet rug laid out for visitors.
+EXAMINE|GATE|Straw|On press-gang nights straw is scattered at the stair head so the fresh meat does not slip on the weed.
+EXAMINE|GATE|ANY|The Water Stair is the only way into the Pit. Everybody knows the Lord found another.
+#
+# == HALL (guardroom)
+EXAMINE|HALL|Stone|The names of the Watch are cut in the east wall: DACE, MULL, ROOK, HOLLIS, TOLLEY, ORRIN, KETCH. The newest: FENNICK.
+EXAMINE|HALL|Stone|High on the south wall the Crown's arms are painted, flaking, a black hook daubed across them.
+EXAMINE|HALL|Stone|A slate on the north wall asks HOW LONG UNDER? beneath it, names and wagers. The Cistern is the Watch's sport.
+EXAMINE|HALL|Stone|A square is cut into the floor: STRIP HERE. Every man's clothes leave him on this spot.
+EXAMINE|HALL|Wood|Knifed into the table: DACE OWES MULL 4. MULL OWES ROOK 9. ROOK OWES THE LORD EVERYTHING.
+EXAMINE|HALL|Wood|A dagger stands in the table: the Lord's Due. Whoever loses the last throw puts his stake beneath it.
+EXAMINE|HALL|Wood|The Sentence Board is a slate in a wooden frame, chalked in Hask's square hand. Lines are struck, never wiped.
+EXAMINE|HALL|Wood|A forked stick leans on the basket. Nobody touches the Watch's breeches by hand.
+EXAMINE|HALL|Iron|The anchor of the Good Intent leans on the wall, its shank worn bright where every guard touches it before the watch.
+EXAMINE|HALL|Iron|Eight keys hang on the board, each a different weight. The Kennel keys are the heaviest.
+EXAMINE|HALL|Iron|A pewter plate holds fish bones and a crust. The Watch eats before the prisoners, and leaves them the bones.
+EXAMINE|HALL|Iron|Coins are stacked at the dagger's foot: the Lord's Due. Nobody touches them, not even Rook.
+EXAMINE|HALL|Cloth|Wanted posters on the wall: LUCAN DRAVE, PIRATE, 200 CROWNS. Then 500. Then 1,000. The Watch drew moustaches on all three.
+EXAMINE|HALL|Cloth|The laundry basket is heaped with the Watch's shirts and breeches, rank, waiting for rest-day and the Kennel hatch.
+EXAMINE|HALL|Cloth|The Standing Orders are nailed by the key board, nine of them, in the Wren's round hand.
+EXAMINE|HALL|Cloth|Sergeant Rook's belt hangs on a peg, its sword-frog empty. He lost the sword at dice.
+EXAMINE|HALL|Straw|The basket's rim is notched with a knife: forty-seven baskets down the hatch this year.
+EXAMINE|HALL|Straw|The basket stinks so that the flies will not land on it.
+EXAMINE|HALL|Straw|Rushes are strewn on the guardroom floor, fresher than any straw in the cells.
+EXAMINE|HALL|Straw|A twist of tobacco lies on the table, tied with straw. It belongs to whoever is winning.
+EXAMINE|HALL|Floor|Spilled rum has soaked the floor under the table into a dark map of the Narrows.
+EXAMINE|HALL|Floor|Dice-chips pit the flagstones where a throw went wide and a guard stamped on it to hide the number.
+EXAMINE|HALL|Floor|Wet footprints run from the gate to the table and stop. Guards come in, sit down, stay.
+EXAMINE|HALL|Floor|The flags by the winch are scored by the dropped portcullis chain, a white scar for each careless night.
+EXAMINE|HALL|Bone|Three bone dice on the table. One is cracked to show a bead of lead inside: Fennick's.
+EXAMINE|HALL|Bone|A bone card lies on the table: the Two of Bones. On its back: K.F. DEALT IN THE KENNEL, WON AT THIS TABLE.
+EXAMINE|HALL|Bone|Eight bone tags hang from the keys: PRESS, RACK, STOCKS, CISTERN, KENNEL, KENNEL, CAGES, MAST. The Cistern's is green.
+EXAMINE|HALL|Bone|Fish bones on the plate are picked clean and arranged in the shape of a hook. Somebody is bored.
+EXAMINE|HALL|Flame|The table candle stands in a puddle of its own wax. The Watch measures the night in candles, not hours.
+EXAMINE|HALL|Flame|The hall torches light the key board and leave the dice in shadow.
+EXAMINE|HALL|Flame|The candle gutters whenever the gate leaves move. The Watch has learned to look up when it does.
+EXAMINE|HALL|Flame|Wax has built a little white tower on the table's corner, a night's worth for every finger.
+EXAMINE|HALL|ANY|The guardroom smells of rum, wet wool and tallow. The Watch never opens the gate to air it.
+#
+# == THRONE
+EXAMINE|THRONE|Stone|In the niche behind the throne the Crown's arms were chiselled off. The ship's wheel hangs where the King looked out.
+EXAMINE|THRONE|Stone|Scratched small on the throne's plinth: 77. The Lord's Crown number. He sits on it.
+EXAMINE|THRONE|Stone|Two hollows are polished into the kneeling stone. Initials crowd its edge, cut by men waiting for a word.
+EXAMINE|THRONE|Stone|The lowest step of the dais is cut with one word: KNEEL. The letters are worn to the shape of knees.
+EXAMINE|THRONE|Stone|A level line along the west wall: FLOOD Y7. The sea came to the second step; the Lord held court with his boots in it.
+EXAMINE|THRONE|Iron|The braziers' rims are crowned with gilt spikes: the Governor's coronet of office, beaten flat and nailed on.
+EXAMINE|THRONE|Iron|A spyglass hangs on the throne's arm. From here the Lord can count the bars of every grille, and does.
+EXAMINE|THRONE|Iron|Crown officers' swords hang on the east wall, gilt hilts out, blades blackening: captains who came to take the Tooth back.
+EXAMINE|THRONE|Iron|The chain on the kneeling stone ends in a collar, warm from the braziers. It is never cold.
+EXAMINE|THRONE|Cloth|The Lord's banners hang behind the throne: a white hook through a broken crown, on black, torn at the edges.
+EXAMINE|THRONE|Cloth|A Crown banner hangs upside down, its red gull diving into nothing. The rest of it went to the Kennel as rags.
+EXAMINE|THRONE|Cloth|On the back wall, the Lord's chart of the Narrows in a gilt frame. A circle is drawn round the Tooth many times over.
+EXAMINE|THRONE|Cloth|A working chart lies over the bales, weighted with dividers. This year's Dead Ebb is marked in red.
+EXAMINE|THRONE|Wood|The wheel of the Gallows Bride hangs behind the throne. The Lord wrecked her on the Water Gate and saved only this.
+EXAMINE|THRONE|Wood|The throne's back is carved with the hook and broken crown, in gilt. It is the only clean thing in the Pit.
+EXAMINE|THRONE|Wood|Gilt letters are nailed upside down across the back wall: STEADFAST, taken from her stern.
+EXAMINE|THRONE|Wood|A black board lists thirty-one ships in gilt paint with their dates. The last line is left blank.
+EXAMINE|THRONE|Floor|A line of gilt nail heads runs along the top step. None but the Lord crosses it standing.
+EXAMINE|THRONE|Floor|The flags before the dais are worn into a path from the yard: straight, short, and always walked slowly.
+EXAMINE|THRONE|Floor|Wine has dried on the dais in rings, where the Lord's cup stands at high-tide court.
+EXAMINE|THRONE|Floor|The floor round the braziers is scorched in two black suns.
+EXAMINE|THRONE|Bone|The skulls on the throne's posts wear little gilt crowns, beaten from the hanged Governor's buttons.
+EXAMINE|THRONE|Bone|In the loot chest stands a gilt reliquary of Saint Clement. The Quartermaster opened it: it holds a fishbone.
+EXAMINE|THRONE|Bone|Grey pearls spill from the chest. Sixty, and a gap where one is missing. Ask the Cistern.
+EXAMINE|THRONE|Bone|Thirty-one gilt studs run along the throne's arms, one for every prize. There is room for more.
+EXAMINE|THRONE|Flame|The braziers burn day and night. In DARKNESS they are the only fire in the Pit, and the Lord sits between them.
+EXAMINE|THRONE|Flame|Every torch in the Pit is lit from these braziers by a carried spill. The Lord's fire is in every room.
+EXAMINE|THRONE|Flame|Embers fall through the brazier grates and hiss on the stone. The dais is freckled with burns.
+EXAMINE|THRONE|Flame|The firelight reaches the gilt and stops there. Everything else in this hall is shadow.
+EXAMINE|THRONE|Straw|Hay bales are stacked by the west wall: fodder, and a bed for messengers who must wait for an answer.
+EXAMINE|THRONE|Straw|Straw is strewn before the kneeling stone and never cleared. Every man leaves a little.
+EXAMINE|THRONE|Straw|The chart rolls are tied with plaited cord in neat knots. Reed taught them, on a ropewalk, to a boy.
+EXAMINE|THRONE|Straw|The bales smell of mainland summer. Men presented here sometimes weep at the smell and do not know why.
+EXAMINE|THRONE|ANY|The Lord holds court at high tide. What is decided at the flood is not undone at the ebb.
+#
+# == ANY area
+EXAMINE|ANY|Stone|The stone of the Widow's Tooth is black basalt cut from the quarry under the yard. It sweats salt in every weather.
+EXAMINE|ANY|Iron|Iron rusts in a season here. Everything iron in the Pit is the colour of old blood, except what the Lord wears.
+EXAMINE|ANY|Wood|Most of the Pit's timber came off taken ships. Look close and you find paint, gun-port hinges and names.
+EXAMINE|ANY|Straw|Straw comes over on the supply boat, gold for a day, then the colour of the Pit.
+EXAMINE|ANY|Cloth|All cloth in the Pit ends as rags in the Kennel sooner or later: shirts, banners, sails.
+EXAMINE|ANY|Bone|Bones in the Pit are never buried. The rats clean them, the Watch arranges them, the prisoners carve them.
+EXAMINE|ANY|Floor|The floors are packed earth and salt. Dig a hand deep and you find older straw, then stone.
+EXAMINE|ANY|Flame|Every flame in the Pit was lit from the throne braziers. The Lord's fire is in every room.
+EXAMINE|ANY|Water|Every drop in the Pit is salt, except what the Purse pours, and he pours it by the dipper.
+EXAMINE|ANY|ANY|Every surface here has been counted by someone: strokes, notches, knots. Try to find a thing nobody has counted.
+EXAMINE|ANY|ANY|Somewhere close, under the grime, someone has scratched a number. Everyone here is a number first.
+EXAMINE|ANY|ANY|You smell salt, tallow and old straw. The Pit has no other smells, only more and less of these.
+#
+# == CARVINGS (past prisoners)
+CARVING|C01|L.D.|77. Remember the number. I will.
+CARVING|C01|Absalom Reed|REFUSED. REFUSED. REFUSED. Write it plain, clerk.
+CARVING|C01|Oswin Tull|Asked my name. Gave them my number. Kept the name.
+CARVING|C01|Tam Wicken|They wrote down my number, they burnt me a hook, and my name's at the bottom of the Wren's black book.
+CARVING|C02|Absalom Reed|The sea gives back what the rope takes.
+CARVING|C02|Oswin Tull|I told the truth.
+CARVING|C02|unsigned|The fifth time.
+CARVING|C02|Matthias Kemble|My father owns nine ships and cannot buy one inch of this rope.
+CARVING|C03|Tam Wicken|Oh, the Tooth bites deep and the Tooth bites slow, and the tide comes in where the drowned men go.
+CARVING|C03|Matthias Kemble|Still Matthias. Day two hundred.
+CARVING|C03|Garrett Vole|Lock on this one is a fool. Two scratches and a prayer. G.V.
+CARVING|C03|Absalom Reed|Saint Clement, they took your bell. Keep your ears.
+CARVING|C04|L.D.|I will come back for the key.
+CARVING|C04|Jory the Seal|Three hundred. Beat it.
+CARVING|C04|Jory the Seal|The grate is loose at the dead ebb.
+CARVING|C04|Ambrose|Tide marks only. Mine. Do not scratch over them.
+CARVING|C04|Hal Stubbs|Hundred and forty. Saw the bottom. Saw a face down there.
+CARVING|C05|Old Fetch|Eat last. Sleep first. Never look at the throne.
+CARVING|C05|Old Fetch|Eight winters. The straw is warmer than the Crown ever was.
+CARVING|C05|Kit Fennick|The Ace of Hooks is where a dog can reach and a guard cannot.
+CARVING|C05|Hugh Ormond|Day 700. North is the throne. I do not look.
+CARVING|C05|Jory the Seal|Named SEAL by the kennelman. Fine. Seals swim.
+CARVING|C06|Garrett Vole|Kennel grille: lift and turn. You did not read this.
+CARVING|C06|unsigned|A dog's name is a gift, the kennelman says. Mine was Bran.
+CARVING|C07|Hugh Ormond|Steadfast, 32 guns, four years mine. Day 90 in the cage.
+CARVING|C07|Rafe Corbin|Three days up. The Tenant talks at night.
+CARVING|C07|Garrett Vole|Picked it up there. Fell. Worth it.
+CARVING|C07|Hob Lacey|Two hundred and eleven by the Crown's warrant. Then me.
+CARVING|C07|unsigned|Do not swing. He likes it when you swing.
+CARVING|C08|Tam Wicken|Haul away for the Widow, boys, haul away for the Tooth; the Lord keeps all the keys, and the sea keeps all the truth.
+CARVING|C08|Jory the Seal|Forty for the culvert. Worth forty.
+CARVING|C08|Hugh Ormond|This was my mainmast. I stood her watch nine hundred nights. Her mast is here.
+CARVING|C08|L.D.|L. Forty lashes. I remember the bosun's face.
+CARVING|YARD|Old Fetch|Do not look at the throne.
+CARVING|GATE|Will Ashby|W.A. kept this gate nine years. Ned kept it ten.
+CARVING|HALL|Kit Fennick|K.F. won here. Double six. Ask Rook.
+#
+# == NOTES (pages of one piece on consecutive lines)
+NOTE|C01_Desk|Rules of the Book, I-III|I. The Book takes men grown, and no other; a beardless face goes back over the water. II. Number first, name after; no name, then NAMELESS. III. Write height in hands, marks, trade, ship, how taken.
+NOTE|C01_Desk|Rules of the Book, IV-VI|IV. Every man is offered the Choice: H, the Hook, or P, the Pit. P may become H, never the reverse. V. A line through a name: dead. A ring: redeemed. A hook: crew. VI. Number 77 goes in red; the Lord is told.
+NOTE|C01_Desk|Rules of the Book, VII-IX|VII. Sentences go in days, struck off at roll call by the jailer. VIII. No blot is scraped: a wrong line is struck once and written again. IX. Only the Lord reads the Book aloud. - T. Wren, Scribe
+NOTE|C01_Desk|Pasted inside the cover|This is Book the Third. Book the Second closed this spring on its four hundred and twelfth entry. Both lie on the shelf below, with the Crown's register under them. The Crown's register is not opened. - T.W.
+NOTE|C01_Desk|Last entry of Book the Second (copied)|No. 412. NAMELESS. Nine hands two. Burn scar, left forearm. Trade: none given. Ship: the Gullhaven tide-boat. How taken: drunk. Choice: P. To the Kennel.
+NOTE|C01_Props|MEN WANTED|By order of the Lord of the Pit: able men wanted for the sea. Paid to the bringer at the Water Stair, at slack tide: one crown a head, two for a seaman, three for a carpenter or a cook, nothing for a drunk who cannot stand.
+NOTE|C01_Props|Under it, an older notice|BY ORDER OF THE CROWN, FORT CLEMENCY. Deserters, mutineers and smugglers to be held for the Assize, fed at the Crown's charge at one penny a day. God save the King. - A. Prynne, Governor
+NOTE|C01_Props|Issue of Clothing|From the chest: one shirt of canvas, one pair of breeches, no shoes. A man's own clothes go to the basket in the Hall, and from there to the dogs. - A. Kettering, Quartermaster
+NOTE|C02_Props|Crown orders for the Question Room|Five turns of the wheel and no more, the clerk to write each answer. A man who lies at the fifth will lie at the tenth. By order, A. Prynne, Governor.
+NOTE|C02_Props|Flyleaf of the prayer book|For Lucan, who learned his knots on my walk and his cruelty elsewhere. I pray for him still, and for the men he will buy. - A. Reed, ropemaker, Gullhaven
+NOTE|C03_Props|Order of the Stocks|Mockery is permitted. Crusts are permitted. Stones are not: the Lord wants them whole. - E. Rook, Sgt. of the Watch
+NOTE|C03_Props|Under the soot, the old dedication|This chapel of Saint Clement, who was bound to an anchor and given to the sea, was built at the Crown's charge for the souls of sailors. Pray for them.
+NOTE|C03_Props|Scratched round a sliver of mirror|STILL ME. DAY 90. STILL MATTHIAS. DAY 200. FATHER, PAY THE MAN.
+NOTE|C04_Props|Slate in the dead man's lap|THREE HUNDRED. COUNT IT. THE GRATE IS LOOSE AT THE DEAD EBB. I WAS TOO SLOW. J.P.
+NOTE|C04_Props|Order nailed above the chain|This man tried the way out three times. Let him look at it. - L.D.
+NOTE|C04_Props|The Mute's tide slate|High water: dawn and a glass, dusk and a glass. Springs at full and dark moon. Dead Ebb, once a year: the grate shows dry for as long as it takes to sing the Widow's Tooth twice.
+NOTE|C05_Bowls|Kennel Orders|Slop twice a day, water when asked nicely. Collars stay on. A dog who speaks English when he is told to bark loses his bowl until dusk. A dog who is good gets a spoon. - F. Dunne, Kennelman
+NOTE|C05_Bowls|The old Crown feeding board|GRIP, two pounds of horse. HOLDFAST, two pounds. SORROW, one pound, she is old. - Kennel of His Excellency the Governor
+NOTE|C07_Winch|Plate on the winch|PROPERTY OF THE CROWN - GALLOWS POINT - TWO CAGES, ONE CHAIN EACH. Scratched beneath: NOW PROPERTY OF THE PIT.
+NOTE|C07_Winch|Filed on the far cage's hoop|Two hundred and eleven hanged by the Crown's warrant, by my hand. Then nine days in this. Count them, whoever comes. - H.L.
+NOTE|C08_Props|Bosun Crake's lash book|Mercy for the first dozen, Margery for the second, the Widow for what remains. Salt after, always: it is a kindness, whatever they say.
+NOTE|C08_Props|Entries|Y3, T. Wicken, 60, sang throughout, flat. Y5, J. Penhallow, 40, the culvert. Y6, the same, 40, the same. Y9, a Crown spy, 12, and the beam.
+NOTE|C08_Props|Articles of the Second Bride (copy)|Every hooked man has a vote and a share. A share for the Lord, two for the master, one and a half for the bosun, one for every back. The Mast settles what the vote cannot.
+NOTE|G_Winch|Cast on the bell|SAINT CLEMENT KEEP THE SAILORS - FORT CLEMENCY - IN THE THIRD YEAR OF KING ALDRED. The word SAINT is filed away.
+NOTE|G_Winch|Bell orders, painted on the post|One stroke: the watch changes. Two: messes. Three: fresh meat at the Water Stair. Five: fire. Seven: the Lord comes down. Without end: a man is loose.
+NOTE|G_Winch|Chalk on the winch|37 TURNS UP. LET IT DROP AND YOU PAY FOR THE TOES.
+NOTE|V_Props_W|Standing Orders of the Watch, I-III|I. Keys hang on their hooks before the dice come out. II. No guard sits on the dais steps, drunk or sober. III. The Governor is greeted when you pass under him. He was a gentleman; we are not.
+NOTE|V_Props_W|Standing Orders, IV-VI|IV. At roll call every man answers with his number; dogs bark once. V. Tallies are counted against the board: a stroke too many is a lie, too few a dream. Both are punished. VI. The word drowned is not said.
+NOTE|V_Props_W|Standing Orders, VII-IX|VII. The basket goes down the Kennel hatch on rest-days only. VIII. A man in the Cistern comes up when the Mute raises his hand, not before. IX. Whoever loses the last throw pays the Lord's Due.
+NOTE|V_Props_W|The Sentence Board|Chalked in Hask's square hand: room, number, days, the key-holder's mark. Struck through at roll call. Never wiped: only struck.
+NOTE|V_Props_W|Pinned to the board's corner|Vole - if one more key goes missing from this board I will hang you from it by the ear. - G. Hask
+NOTE|V_Table|Knifed into the tabletop|DACE OWES MULL 4. MULL OWES ROOK 9. ROOK OWES THE LORD EVERYTHING. ORRIN OWES NOBODY: NOBODY DARES.
+NOTE|V_Table|Hazard, as played at this table|Two dice. Seven or eleven, the caster takes the pot. Double one: he drinks and pays the Due. On Ebb Night a double six frees a prisoner, if the Lord allows it.
+NOTE|V_Table|A bone card under a tankard|The Two of Bones, carved fine. On its back, in tiny letters: K.F. DEALT IN THE KENNEL, WON AT THIS TABLE.
+NOTE|V_Basket|Label tied to the handle|FOR THE DOGS. Rest-days only. Count what goes down. - Q.M.
+NOTE|V_Basket|Cut in the rim|Baskets down this year: XLVII. Shirts come back: none.
+NOTE|N_Props_W|Chart of the Narrows - legend|Black ink: rock. Red: Crown patrol lines. Hooks: our ships. Crosses: wrecks. A circle at the Widow's Tooth, drawn many times over: home. The culvert is marked in pencil only.
+NOTE|N_Props_W|Margin, in the Lord's hand|Dead Ebb this year: the ninth night of the wolf moon. The Crown's frigates do not sail the Narrows in fog. We do.
+NOTE|N_Props_W|Letter, sealed, never sent|To the Lord Admiral of the Crown. You offer a thousand crowns for my head. I keep your Governor's. Come and trade. - L. Drave, of the Pit
+NOTE|N_Props_W|Tally of prizes|Thirty-one sail since the Ebb. Kept: five. Burned: nine. Sold in Gullhaven under false colours: seventeen. Men pressed from them: see the Book.
+NOTE|N_Props_W|Letter from H. Ormond|My Lord, the Second Bride sails well under her new mast, though she remembers the old one. I do not ask to see it again. - H.O., Master
+NOTE|N_Props_E|Ransom letter, copy kept|To Master Josiah Kemble, pepper merchant of Gullhaven. Your son is well and eats twice a day. His price is his weight in pepper, at the Water Stair. Each month it rises by a finger. - L.D.
+NOTE|N_Props_E|Reply, pinned beneath|Sir, a son is not a cargo. I offer half. - J. Kemble. And under it, in the Lord's hand: Then I keep half.
+NOTE|N_Props_E|Quartermaster's list of the chest|Crown coin, mixed. Pearls, grey, from the Saint's Finger: sixty, and one missing. A gilt reliquary said to hold the finger of Saint Clement. It holds a fishbone. - A.K.
+NOTE|N_Props_E|From the Admiralty, unanswered|The Crown appoints Sir Edmund Vayle Governor of Fort Clemency, to take up his post at the first occasion. Beneath, in the Lord's hand: The beam is free.
+#
+# == VOICES
+VOICE|Somewhere in the Kennel a man counts aloud, in numbers, never in names.
+VOICE|A quill scratches in the Press-Gang. The Wren never sleeps before the Book is dry.
+VOICE|Old Keys whistles The Widow's Tooth as he walks the yard. He always stops at the same bar of the song.
+VOICE|The Governor's chain creaks once, as if he had shifted his weight.
+VOICE|From the Cistern, a bubble breaks the surface. Then another. Then none.
+VOICE|A laugh at the guards' table, and a die rolls off it and keeps rolling, much too long.
+VOICE|The rack's wheel clicks back one notch by itself.
+VOICE|Low from somewhere below: ...and the tide comes in where the drowned men go.
+VOICE|A rat runs the length of the channel and vanishes under the dais.
+VOICE|The branding irons tick as they cool in the dark.
+VOICE|Far above, a door closes. Every guard in the Pit straightens at once.
+VOICE|The bell rope at the gate sways, though the air is still.
+VOICE|A voice from the Stocks: Saint Clement, if you can hear me, I am sorry about your bell.
+VOICE|A collar chain drags across the Kennel floor and stops at the end of its length.
+VOICE|Water knocks on the culvert grate under the Cistern three times, like a visitor.
+VOICE|In the guardroom someone reads the Sentence Board aloud, slowly, and then laughs.
+VOICE|The kennelman's whistle, two notes, far off. Something in the straw answers.
+VOICE|The cats on their pegs in the Mast stir, all twenty-seven tails at once.
+VOICE|A coin rings on stone near the gate. When you look, it is a Crown coin, green with age.
+VOICE|Scratch, scratch, scratch, scratch, and the long stroke across. Someone has finished a day.
+VOICE|The tide turns. You feel it in the stones before you hear it.
+VOICE|The banners behind the throne lift and settle, though no door has opened.
+VOICE|Someone whispers your number. You did not know you had one yet.
+VOICE|A crust drops down a light well and lands in the moonbeam. Somebody up there is laughing.
+VOICE|In the throne hall the ship's wheel turns a spoke's width, as if the Pit had changed course.
+VOICE|The Mute laughs. Nobody has ever heard the Mute laugh.
+VOICE|A bone card skates out from under a grille, face up: the Ace of Hooks. When you look again it is gone.
+#
+# == BELLS
+BELL|DAWN|One stroke from the gate bell. Grey seeps down the arrow slits and the dawn watch spits into the channel.
+BELL|DAWN|Dawn. The Watch files under the Governor and touches its caps to him. He does not touch his.
+BELL|DAWN|The dawn stroke. Gulls scream over the Widow's Tooth, and the night buckets go into the channel.
+BELL|DAWN|First light. Old Keys walks the yard rattling every grille once, as the Crown's turnkeys did before him.
+BELL|RATIONS|Two strokes: messes. Biscuit, salt fish and a dipper of water, weighed by the Purse to the crumb.
+BELL|RATIONS|Two strokes. The slop bucket bangs down the yard toward the Kennel, and the dogs know the sound.
+BELL|RATIONS|Messes. The Quartermaster counts the bowls going out and the spoons coming back.
+BELL|RATIONS|Second mess: pease boiled grey and a heel of bread. The hooked men get a tot of rum, and make sure you smell it.
+BELL|ROLLCALL|Roll call. Hask reads the Sentence Board. Numbers answer from every grille; the Kennel answers with barks.
+BELL|ROLLCALL|Roll call. Tallies are counted against the chalk. Somewhere a man has one stroke too many.
+BELL|ROLLCALL|Numbers, not names. A new voice gives a name, and the whole Pit goes quiet.
+BELL|ROLLCALL|The Wren comes down with the Book under his arm. Every number is struck or kept.
+BELL|LIGHTSOUT|Darken the Pit. The cell torches are banked low; only the yard lanterns and the Lord's braziers burn on.
+BELL|LIGHTSOUT|Lights out. The keys go back on their hooks, and the dice come out.
+BELL|LIGHTSOUT|Lights out. Moonlight comes down the light wells in white columns, and the cells count by it instead.
+BELL|LIGHTSOUT|The last stroke. Tam Wicken's song goes round from cell to cell, low, until a guard bangs the bars.
+BELL|HIGHTIDE|High tide. The sea shoulders up the channel, the Cistern rises, and every drain in the Pit breathes out.
+BELL|HIGHTIDE|The tide is full. The Lord holds court: whoever kneels now is heard.
+BELL|HIGHTIDE|High water. Spray comes through the arrow slits and salts the straw.
+BELL|HIGHTIDE|The flood. The culvert under the Cistern booms like a drum, the way it boomed the night the Lord came back.
+#
+# == CHORES (prisoner in a cell; {target} = cellmates)
+CHORE|Scratch a tally|{who} scratches another stroke into the wall of {cell}. The fifth stroke goes across, and {target} watch it like a clock.
+CHORE|Wash in the bucket|{who} washes in the brine bucket of {cell} and comes up smelling of the sea instead of the Pit.
+CHORE|Knock on the wall|{who} knocks three times on the wall of {cell}. After a long while, three knocks answer.
+CHORE|Stash in the straw|{who} pushes something small deep into the straw of {cell} and lies on it, the way Fennick hid his cards.
+CHORE|Pray to the saint|{who} kneels in {cell} and prays to Saint Clement, who was also given to the sea.
+CHORE|Sing a shanty|{who} sings a verse of The Widow's Tooth, low. Down the yard, someone hums the next.
+CHORE|Sleep in the straw|{who} burrows into the straw of {cell} between {target} and sleeps like a dog, one ear open.
+CHORE|Pick at the mortar|{who} works at the mortar of {cell} with a thumbnail, the way Vole did. A crumb of lime falls.
+CHORE|Watch the moon|{who} sits in the square of moonlight from the light well and lets it crawl over him, the only clock in {cell}.
+#
+# == GUARD (to a cell or prisoner)
+GUARD|Feed slop|{who} slops the mess through the bars of {cell}. {target} gets the bowl; the rats get the spill.
+GUARD|Douse with brine|{who} empties a bucket of cold brine over {target}. The salt finds every scratch.
+GUARD|Search the straw|{who} kicks through the straw of {cell} looking for nails, bones and cards, and finds one of each.
+GUARD|Read the record|{who} reads {target}'s line from the Book aloud: number first, name after, and how taken.
+GUARD|Count the strokes|{who} counts the strokes on the wall of {cell} against the Sentence Board. They do not agree.
+GUARD|Throw in rags|{who} throws an armful of rags from the basket into {cell}. Nobody's shirt is anyone's for long.
+GUARD|Walk in the yard|{who} hooks a chain to {target}'s collar and walks him once round the yard, under the Governor.
+GUARD|Inspect the brand|{who} pulls {target}'s shirt off the left shoulder to look for the Hook, and takes his time looking.
+GUARD|Rattle the bars|{who} drags a key along the bars of {cell}, slow, so every man in the Pit hears it.

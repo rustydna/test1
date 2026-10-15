@@ -492,7 +492,12 @@ The owner's brief is a set of contrasts. Every room should show both halves of a
   shillings, leagues, hands (height), glass (time), mess, watch, tot, spill, tallow, slop.
 * ASCII only, no `|` inside a field, at most 250 bytes a line (Second Life notecard limits). The whole
   notecard stays under 64 KB.
-* `{who}` the actor, `{target}` the other avatar, `{cell}` the cell name: only in CHORE and GUARD lines.
+* `{who}` the actor, `{target}` the other avatar (in CHORE lines: the cell's other inmates), `{cell}`
+  the cell name as shown in-world (e.g. THE KENNEL): only in CHORE and GUARD lines.
+* CHORE and GUARD: at most 9 of each, buttons of 20 characters or fewer, never named Examine, Carve or
+  Close. The script picks the effect by keyword in the button: tally/scratch/mark, wash/scrub/bucket/douse,
+  knock, hide/stash, feed/ration/slop/bread, search, record; anything else only narrates.
+* All NOTE pages of one piece sit on consecutive lines.
 * Never contradict a placed prop. If a line mentions a thing, it is either modelled (see
   story_props.json and the existing pieces) or small enough to live in a texture (a stain, a scratch, a
   crumb, a smell).
