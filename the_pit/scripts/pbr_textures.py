@@ -482,7 +482,7 @@ def stone(rng):
                 stamp_max(core, idx, np.exp(-((ddx - xr) / w) ** 2) * np.clip(1 - yy / Lr, 0, 1) ** 0.5
                           * _s(yy, -2, 5) * rng.uniform(0.6, 1.0))
     for _ in range(4):                                                 # long runs from far above
-        xc = rng.random() + 0.004 * noise(rng, 2, 20, 1.5, aniso=0.2)
+        xc = rng.random() + 0.004 * noise(rng, 2, 20, 1.5, aniso=5)
         mod = _s(noise(rng, 2, 30, 1.2, aniso=0.25), -0.6, 1.0)
         halo = np.maximum(halo, np.exp(-(_wrap(U - xc) / 0.006) ** 2) * mod * 0.8)
         core = np.maximum(core, np.exp(-(_wrap(U - xc - 0.001) / 0.0018) ** 2) * mod * 0.7)

@@ -46,6 +46,15 @@ Each cell is 7.8 m deep (x 3.8 .. 11.6) and 5.15 m wide, under a stone barrel va
 over the Kennel), lit by one barred arrow slit in the outer wall (z 2.3 .. 4.0) and one torch.
 The outer wall faces the open sea; the slits show a strip of grey water and the gulls.
 
+**Light wells.** Every vaulted cell (C01-C04, C07, C08) has a barred iron grate in the crown of its
+vault, centred on the room: the top of a shaft the Crown cut up through the rock to the fort's
+courtyard for air. At night the only white light in the Pit comes down these shafts as a column of
+moonlight onto the middle of each cell floor (the build projects it from the vault centre). Prisoners
+tell the time by where the moon square lies; the Mute reads the tide by its angle in the Cistern; in
+the old chapel (C03) the Crown called the beam "the saint's finger"; Crake likes the moon on the bound
+man's back at the Mast. Guards on the courtyard above sometimes spit, or drop crusts, down the wells.
+The Kennel has no well: its light is the lantern and, on rest-days, the rag hatch.
+
 The Widow's Tooth: black, wet, salt-sweating basalt. At the great spring ebbs a causeway of weed-slick
 rocks shows for an hour on the seaward side, below the Cistern's culvert. Nobody uses it. One man did,
 twice.

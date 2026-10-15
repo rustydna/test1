@@ -34,7 +34,7 @@
   "name": "fire_loop",
   "loop": true,
   "description": "Brazier: granular wood crackle, sap pops, steam sizzle over a low puffing roar (8 s loop)",
-  "build_s": 1.08
+  "build_s": 2.31
  },
  "torch_loop": {
   "channels": 1,
@@ -71,7 +71,7 @@
   "name": "torch_loop",
   "loop": true,
   "description": "Pitch torch: fluttering small flame, hiss, sputtering pitch bubbles, light crackle (6 s loop)",
-  "build_s": 0.4
+  "build_s": 0.6
  },
  "sea_loop": {
   "channels": 1,
@@ -108,7 +108,7 @@
   "name": "sea_loop",
   "loop": true,
   "description": "Waves breaking on the rock outside, heard through the stone: thumps, muffled wash, backwash gurgles, ground rumble (9.9 s loop)",
-  "build_s": 1.22
+  "build_s": 1.41
  },
  "ambient_wind": {
   "channels": 1,
@@ -145,7 +145,7 @@
   "name": "ambient_wind",
   "loop": true,
   "description": "Draught moaning through arrow slits: gusts, pitched aeolian moans that rise with the gusts, breathy edge hiss (9.9 s loop)",
-  "build_s": 1.49
+  "build_s": 1.31
  },
  "drip_1": {
   "channels": 1,
@@ -177,7 +177,7 @@
   "name": "drip_1",
   "loop": false,
   "description": "Cave drip: classic rising 'plink' (1.05 -> 2 kHz) in a stone vault",
-  "build_s": 0.11
+  "build_s": 0.1
  },
  "drip_2": {
   "channels": 1,
@@ -209,7 +209,7 @@
   "name": "drip_2",
   "loop": false,
   "description": "Cave drip: short high 'tik-plip' with a second tiny bubble",
-  "build_s": 0.03
+  "build_s": 0.42
  },
  "drip_3": {
   "channels": 1,
@@ -241,7 +241,7 @@
   "name": "drip_3",
   "loop": false,
   "description": "Cave drip: deep 'bloop' (620 Hz rising) and a rebound droplet",
-  "build_s": 0.04
+  "build_s": 0.13
  },
  "ambient_drip_echo": {
   "channels": 1,
@@ -273,7 +273,7 @@
   "name": "ambient_drip_echo",
   "loop": false,
   "description": "Slow drips falling far away in the great hall, long stone echo",
-  "build_s": 0.31
+  "build_s": 0.41
  },
  "chains_1": {
   "channels": 1,
@@ -305,7 +305,7 @@
   "name": "chains_1",
   "loop": false,
   "description": "Heavy chain shaken in its wall ring, then dropped on flagstones and settling",
-  "build_s": 0.87
+  "build_s": 1.19
  },
  "chains_2": {
   "channels": 1,
@@ -337,7 +337,7 @@
   "name": "chains_2",
   "loop": false,
   "description": "Heavy chain hauled hand over hand through an iron ring, dragged on stone, then slumping",
-  "build_s": 0.7
+  "build_s": 0.63
  },
  "door_creak": {
   "channels": 1,
@@ -369,7 +369,7 @@
   "name": "door_creak",
   "loop": false,
   "description": "Iron grille door swinging on two dry hinges: stick-slip creak gliding with the swing speed through the grille's ringing modes, bars rattling as it stops",
-  "build_s": 0.18
+  "build_s": 0.25
  },
  "lock_clank": {
   "channels": 1,
@@ -401,7 +401,7 @@
   "name": "lock_clank",
   "loop": false,
   "description": "Big iron lock: key rasping into the wards, levers ticking, bolt slamming home, hasp rattle",
-  "build_s": 0.08
+  "build_s": 0.1
  },
  "portcullis_chain": {
   "channels": 1,
@@ -433,7 +433,7 @@
   "name": "portcullis_chain",
   "loop": false,
   "description": "Gate winch: ratchet pawl clicking with each crank stroke, chain links over the drum, the grate grinding in its stone grooves, drum timber creaking, final pawl clank",
-  "build_s": 1.0
+  "build_s": 1.2
  },
  "press_gang_bell": {
   "channels": 1,
@@ -465,7 +465,7 @@
   "name": "press_gang_bell",
   "loop": false,
   "description": "Three slow tolls of a cracked bronze bell: hum/prime/tierce/quint/nominal partials split into beating doublets, sour mistuning, crack rattle, clapper clack",
-  "build_s": 1.04
+  "build_s": 1.2
  },
  "whip_crack": {
   "channels": 1,
@@ -497,7 +497,7 @@
   "name": "whip_crack",
   "loop": false,
   "description": "Bullwhip: rising swish of the thong, supersonic N-wave crack from the tip and its popper, stone-vault echo",
-  "build_s": 0.4
+  "build_s": 0.1
  },
  "splash": {
   "channels": 1,
@@ -529,7 +529,7 @@
   "name": "splash",
   "loop": false,
   "description": "Body dunked in the cistern tank: slap, cavity collapse 'gloop', spray falling back, bubbles from body and clothes, water slopping against the walls",
-  "build_s": 0.19
+  "build_s": 0.21
  },
  "rack_creak": {
   "channels": 1,
@@ -561,7 +561,7 @@
   "name": "rack_creak",
   "loop": false,
   "description": "The rack wound tighter: oak roller groaning in its socket (slow stick-slip), hemp rope creaking and crackling under tension, wooden pawl knocking over the ratchet",
-  "build_s": 0.25
+  "build_s": 0.28
  },
  "ambient_rats": {
   "channels": 1,
@@ -593,7 +593,7 @@
   "name": "ambient_rats",
   "loop": false,
   "description": "Rats in a dark corner: claws skittering over stone and straw, squeaks and a brief squabble",
-  "build_s": 0.15
+  "build_s": 0.16
  },
  "ambient_creak": {
   "channels": 1,
@@ -625,7 +625,7 @@
   "name": "ambient_creak",
   "loop": false,
   "description": "Old ceiling timbers settling: slow groaning stick-slip creaks of loaded oak beams and a fibre tick, in the hall",
-  "build_s": 0.31
+  "build_s": 0.32
  },
  "ambient_boom": {
   "channels": 1,
@@ -657,6 +657,6 @@
   "name": "ambient_boom",
   "loop": false,
   "description": "A heavy iron-bound door slammed somewhere far off: low thud, latch clank, corridor echoes and the long tail of the great vaults",
-  "build_s": 0.23
+  "build_s": 0.24
  }
 }
