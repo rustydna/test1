@@ -195,6 +195,7 @@ string fill(string s, key k, integer area)
 // RP line for everyone within 20 m of the piece (or only k with narration off)
 narrate(integer l, key k, string s)
 {
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
     if (!opt("narration")) { llRegionSayTo(k, 0, s); return; }
     vector c = llList2Vector(llGetLinkPrimitiveParams(l, [PRIM_POSITION]), 0);
     list ag = llGetAgentList(AGENT_LIST_REGION, []);

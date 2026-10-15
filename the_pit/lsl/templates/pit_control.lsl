@@ -95,6 +95,7 @@ list FEATURES = [
     "judgement",   4, "sentencing from the throne",
     "muster_book", 4, "the press-gang muster book",
     "branding",    4, "the branding brazier",
+    "chat",        5, "ALL text in local chat (master)",
     "narration",   5, "RP lines in local chat",
     "hovertext",   5, "floating text",
     "rename",      5, "auto-name pieces after upload",
@@ -156,6 +157,7 @@ help()
         + "/7 off <name> | /7 on <name> - e.g. /7 off fog\n"
         + "/7 report - what every script found (send this to support if something fails)\n"
         + "/7 status - what is switched off\n"
+        + "/7 off chat - silence every RP line in local chat (/7 on chat to bring them back)\n"
         + "/7 all on | /7 all off | /7 lowlag - presets\n"
         + "/7 doors - find the doors again | /7 doors reset - forget stored door poses\n"
         + "/7 materials - apply the PBR materials now\n"
@@ -412,6 +414,7 @@ scan_voices()
 
 whisper(string s)
 {
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
     string before = llGetObjectName();
     llSetObjectName("In the dark");
     llSay(0, s);

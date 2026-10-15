@@ -76,6 +76,7 @@ string who(key k) { if (k == NULL_KEY || (string)k == "") return "nobody"; retur
 // RP line for everyone within 20 m of the piece (the root can be 25 m away), or only USER
 narrate(string s)
 {
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
     if (!opt("narration")) { llRegionSayTo(USER, 0, s); return; }
     vector c = llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POSITION]), 0);
     list ag = llGetAgentList(AGENT_LIST_REGION, []);

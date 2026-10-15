@@ -227,6 +227,7 @@ prune()
 // RP line for everyone within 20 m of the piece (or only k with narration off)
 narrate(integer l, key k, string s)
 {
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
     if (!opt("narration")) { if (k) llRegionSayTo(k, 0, s); return; }
     vector c = llList2Vector(llGetLinkPrimitiveParams(l, [PRIM_POSITION]), 0);
     list ag = llGetAgentList(AGENT_LIST_REGION, []);
@@ -241,6 +242,7 @@ narrate(integer l, key k, string s)
 // heard by everyone on the parcel, from "The Pit"
 parcel(string s)
 {
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
     string before = llGetObjectName();
     if (before != "The Pit") llSetObjectName("The Pit");
     list ag = llGetAgentList(AGENT_LIST_PARCEL, []);

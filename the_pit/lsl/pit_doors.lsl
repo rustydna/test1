@@ -124,6 +124,7 @@ list near(integer link, float r)
 // RP line for everyone within 20 m of the piece (or only for k with narration off)
 narrate(integer link, key k, string s)
 {
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
     if (!opt("narration")) { if (k) llRegionSayTo(k, 0, s); return; }
     list n = near(link, 20.0);
     integer i;
