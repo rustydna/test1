@@ -14,5 +14,6 @@
  "lsl_scripts_consistent_with_model": true,
  "every_feature_can_be_switched_off": true,
  "lsl_scripts_compile_and_are_english": true,
- "pose_animations_are_looping_sl_anims": true
+ "pose_animations_are_looping_sl_anims": true,
+ "story_details_keep_every_piece_bounds": true
 }

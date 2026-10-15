@@ -94,6 +94,14 @@ session(key k, integer l, string mode)
     if (i != -1) SESS = llDeleteSubList(SESS, i, i + 3);
     SESS += [k, l, mode, llGetUnixTime() + 60];
 }
+// a sound from the Contents, played at the piece in use (switch "sounds")
+sound(string s, float vol)
+{
+    if (!opt("sounds")) return;
+    if (llGetInventoryType("pit_" + s) == INVENTORY_SOUND) s = "pit_" + s;      // delivered files carry "pit_"
+    if (llGetInventoryType(s) == INVENTORY_SOUND) llLinkPlaySound(LINK, s, vol, SOUND_PLAY);
+}
+
 string pick(list l) { return llList2String(l, (integer)llFrand(llGetListLength(l))); }
 
 text(integer l, string t)
@@ -177,7 +185,7 @@ menu(key k, integer l)
         b = ["Name dog", "Bark", "Remove name"];
     }
     else if (PIECE == "C05_Bowls") { t = "KENNEL BOWLS"; b = ["Slop", "Water"]; }
-    else if (PIECE == "V_Table") { t = "THE GUARD TABLE"; b = ["Dice", "Toast"]; }
+    else if (PIECE == "V_Table") { t = "THE GUARD TABLE"; b = ["Dice", "Toast", "Read"]; }
     else if (PIECE == "V_Basket") { t = "LAUNDRY BASKET\nThe dirty underwear of the guards and the slaves."; b = ["Throw clothes"]; }
     else if (PIECE == "N_Kneeling_Stone") { t = "KNEELING STONE\nBefore the throne: " + who(oc); b = ["Present"]; }
     session(k, l, "main");
@@ -206,6 +214,7 @@ act(string b)
                       v + "'s joints begin to complain.", "the roller groans; " + v + " arches.",
                       "the timber cracks and " + v + " can no longer move.",
                       "the rack is at its limit. One more turn would be cruel."];
+        sound("rack_creak", 1.0);
         narrate(q + " turns the wheel: " + llList2String(lines, n));
         text(LINK, tension_bar(n));
     }
@@ -229,6 +238,7 @@ act(string b)
                          + CHAIR_PIVOT * llList2Rot(llGetLinkPrimitiveParams(LINK, [PRIM_ROT_LOCAL]), 0),
                          llEuler2Rot(<0.0, -CHAIR_ANGLE * DEG_TO_RAD, 0.0>), ZERO_VECTOR, 18);
         integer secs = llGetUnixTime() - (integer)llLinksetDataRead("chair_t");
+        llMessageLinked(LINK_SET, 9510, "washed|" + (string)oc, USER);      // salt water: the inmate is clean
         llLinksetDataWrite("chair", "up");
         llMessageLinked(LINK_SET, 9300, "splash", USER);
         narrate(v + " comes up coughing after " + (string)secs + " seconds under water.");
@@ -236,6 +246,7 @@ act(string b)
     else if (b == "Hoist" || b == "Lower")
     {
         float dz = CAGE_RISE; if (b == "Lower") dz = -dz;
+        sound("chains_1", 1.0);
         vector p = llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POS_LOCAL]), 0);
         move_with_avatar(LINK, p, llEuler2Rot(<0.0, 0.0, 0.12>), <0.0, 0.0, dz>, 24);
         move_with_avatar(LINK, llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POS_LOCAL]), 0),
@@ -272,8 +283,13 @@ act(string b)
         llLinksetDataDelete("dog:" + PIECE); text(LINK, "");
         narrate(q + " tears the name tag off the kennel.");
     }
-    else if (b == "Slop") narrate(q + " tips a bucket of cold slop into the bowls. Let them eat on their knees.");
+    else if (b == "Slop")
+    {
+        llMessageLinked(LINK_SET, 9510, "fed|C05", USER);
+        narrate(q + " tips a bucket of cold slop into the bowls. Let them eat on their knees.");
+    }
     else if (b == "Water") narrate(q + " fills the bowls with murky water.");
+    else if (b == "Read") llMessageLinked(LINK_SET, 9500, "read|" + PIECE, USER);
     else if (b == "Dice")
     {
         integer a = 1 + (integer)llFrand(6.0); integer c = 1 + (integer)llFrand(6.0);

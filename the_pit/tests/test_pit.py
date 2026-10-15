@@ -281,6 +281,17 @@ def pose_animations_are_looping_sl_anims():
         assert (version, sub) == (1, 0) and priority == 4 and loop == 1 and joints == 19, (n, version, priority, loop, joints)
         assert 0 < duration and loop_out == duration, n
 
+
+@case
+def story_details_keep_every_piece_bounds():
+    """Story details live inside the pieces: same sizes and centres as the uploaded V3, so the
+    LSL piece table (and a build already uploaded) keep matching."""
+    base = json.load(open(os.path.join(ROOT, "tests", "baseline_bounds.json")))
+    for p in REPORT["pieces"]:
+        b = base[p["name"]]
+        assert max(abs(x - y) for x, y in zip(p["size_m"], b["size_m"])) < 0.002, (p["name"], p["size_m"], b["size_m"])
+        assert max(abs(x - y) for x, y in zip(p["center"], b["center"])) < 0.002, (p["name"], p["center"], b["center"])
+
 fails = [r for r in RESULTS if not r[1]]
 for name, ok, err in RESULTS:
     print(("OK  " if ok else "FAIL"), name)

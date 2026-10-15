@@ -209,6 +209,48 @@ def fire_projector(rng, n=512):
         os.path.join(OUT, "fire_projector.png"))
 
 
+# ------------------------------------------------------------------ moonlight, sea light, dust
+def light_well(rng, n=512):
+    """Cold moonlight falling through the iron grate of a light well: a grid of soft bars,
+    a few bent or missing, with damp blotches. Projected straight down from the vault."""
+    rows, cols = np.mgrid[0:n, 0:n] / (n - 1) * 2 - 1
+    r = np.sqrt(cols ** 2 + rows ** 2)
+    light = np.exp(-(r / 0.7) ** 2) * (0.7 + 0.45 * fbm(n, n, 4.0, 5, rng))
+    bend = 0.04 * np.sin(rows * 3.1 + 0.7)
+    gx = 1.0 - 0.9 * np.clip(np.cos((cols + bend) * np.pi * 3.5) * 1.8 - 0.9, 0, 1)
+    gy = 1.0 - 0.9 * np.clip(np.cos(rows * np.pi * 3.5) * 1.8 - 0.9, 0, 1)
+    missing = np.exp(-(((cols - 0.29) / 0.09) ** 2 + ((rows + 0.1) / 0.3) ** 2))   # one bar rusted away
+    grid = np.maximum(gx * gy, missing * 0.8)
+    i = light * grid * smooth(1.0, 0.8, r)
+    i = i / i.max()
+    rgb = ramp(i, [(0.0, (0.0, 0.0, 0.0)), (0.4, (0.16, 0.22, 0.34)), (0.75, (0.45, 0.58, 0.78)),
+                   (1.0, (0.78, 0.86, 1.0))])
+    Image.fromarray((np.clip(rgb, 0, 1) * 255 + 0.5).astype(np.uint8), "RGB").save(
+        os.path.join(OUT, "light_well.png"))
+
+
+def caustics(rng, n=512):
+    """Sea light thrown up by the channel: thin bright veins of a water caustic, periodic."""
+    acc = np.zeros((n, n))
+    for o, w in ((2.5, 1.0), (4.0, 0.5), (7.0, 0.2)):
+        acc += w * (1.0 - np.abs(noise(n, n, o, rng)) / 2.0)
+    acc = np.clip((acc - acc.min()) / (acc.max() - acc.min()), 0, 1) ** 5
+    rows, cols = np.mgrid[0:n, 0:n] / (n - 1) * 2 - 1
+    acc = acc * smooth(1.0, 0.75, np.sqrt(cols ** 2 + rows ** 2))
+    rgb = ramp(acc / acc.max(), [(0.0, (0.0, 0.0, 0.0)), (0.5, (0.10, 0.30, 0.32)), (1.0, (0.70, 0.95, 0.90))])
+    Image.fromarray((np.clip(rgb, 0, 1) * 255 + 0.5).astype(np.uint8), "RGB").save(
+        os.path.join(OUT, "caustics.png"))
+
+
+def dust_mote(n=64):
+    """A soft speck of dust or ash that drifts in the torchlight."""
+    rows, cols = np.mgrid[0:n, 0:n] / (n - 1) * 2 - 1
+    r = np.sqrt(cols ** 2 + rows ** 2)
+    alpha = np.exp(-(r / 0.35) ** 2)
+    rgb = np.ones((n, n, 3)) * np.array([1.0, 0.92, 0.8])
+    save(rgb, alpha, "dust_mote.png")
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     rng = np.random.default_rng(1666)
@@ -219,6 +261,9 @@ def main():
     spark()
     drip()
     fire_projector(rng)
+    light_well(np.random.default_rng(1667))      # own seeds: the older sprites stay identical
+    caustics(np.random.default_rng(1668))
+    dust_mote()
     for fn in sorted(os.listdir(OUT)):
         im = Image.open(os.path.join(OUT, fn))
         print(f"  {fn:22s} {im.size[0]}x{im.size[1]} {im.mode}")

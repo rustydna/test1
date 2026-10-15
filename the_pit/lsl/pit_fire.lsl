@@ -20,8 +20,15 @@
 //    alternating with the flame on the braziers, and projector lights
 //    that cast the bars and chains across floors and walls.
 //
+//  * Moonlight through the grates of the light wells in the vaults, sea
+//    light (caustics) under the yard beams, dust drifting in the light.
+//  * Sounds (if their files are in the Contents): fire_loop on the braziers,
+//    torch_loop in the cells, sea_loop on the channel, ambient_wind at the
+//    gate, drips from the vaults, whip_crack and splash with the bursts.
+//
 //  Switches (/7 settings): fire (master), flames, lights, flicker, glow,
-//  flipbook, smoke, sparks, projectors, gusts, fog, drips, bursts, moods.
+//  flipbook, smoke, sparks, projectors, gusts, fog, drips, bursts, moods,
+//  light_wells, caustics, dust, sounds.
 // =====================================================================
 
 // ---------------------------------------------------------------------
@@ -49,10 +56,13 @@ float   FLIPBOOK_FPS = 12.0;
 // SL sorts mesh faces by material name: the flame is face 2 in both the English and the
 // Spanish upload (Bone Cloth FLAME Floor... / Hierro Hueso LLAMA Madera...)
 integer FLAME = 2;     // flipbook frames per second (each fire varies a little)
+list CANDLES = ["C01_Desk", "V_Table"];
+
 float   TICK = 0.2;
 integer PER_TICK = 4;
 
 string T_FLIPBOOK; string T_FLAME; string T_SMOKE; string T_FOG; string T_SPARK; string T_DRIP; string T_PROJECTOR;
+string T_WELL; string T_CAUSTIC; string T_DUST;
 
 list F_LINK; list F_TYPE; list F_POS; list F_LEVEL; list F_VEL; list F_GUST;  // type: 0 torch, 1 lantern, 2 brazier
 list F_SMOKE; list F_PROJ;   // smoke: next switch time (>0 flame, <0 smoke); proj: carries a projector light
@@ -63,6 +73,7 @@ float  K_LIGHT = 1.0; float K_RADIUS = 1.0; vector TINT = <1.0, 0.55, 0.22>; flo
 string OPTS;
 integer FIRE; integer FLAMES; integer LIGHTS; integer FLICKER; integer GLOW; integer FLIP; integer SMOKE;
 integer SPARKS; integer PROJ; integer GUSTS; integer FOG; integer DRIPS; integer BURSTS; integer MOODS;
+integer WELLS; integer CAUSTIC; integer DUST; integer SOUNDS;
 
 integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
 
@@ -94,14 +105,25 @@ load_options()
     DRIPS = opt("drips");
     BURSTS = opt("bursts");
     MOODS = opt("moods");
+    WELLS = opt("light_wells");
+    CAUSTIC = opt("caustics");
+    DUST = opt("dust");
+    SOUNDS = opt("sounds");
     if (!MOODS) MOOD = "WATCH";
+}
+
+// an item of the Contents by name, with or without the "pit_" prefix of the delivered files
+string asset(string name, integer type)
+{
+    if (llGetInventoryType("pit_" + name) == type) return "pit_" + name;
+    if (llGetInventoryType(name) == type) return name;
+    return "";
 }
 
 string tex(string uuid, string name)
 {
     if (uuid != "") return uuid;
-    if (llGetInventoryType(name) == INVENTORY_TEXTURE) return name;
-    return "";
+    return asset(name, INVENTORY_TEXTURE);
 }
 
 load_textures()
@@ -113,6 +135,26 @@ load_textures()
     T_SPARK = tex(UUID_SPARK, "spark");
     T_DRIP = tex(UUID_DRIP, "drip");
     T_PROJECTOR = tex(UUID_PROJECTOR, "fire_projector");
+    T_WELL = tex("", "light_well");
+    T_CAUSTIC = tex("", "caustics");
+    T_DUST = tex("", "dust_mote");
+}
+
+integer has_sound(string s) { return asset(s, INVENTORY_SOUND) != ""; }
+
+// specks of dust and ash drifting in the light of the cells and the yard
+list dust()
+{
+    if (!DUST) return [];
+    return [PSYS_PART_FLAGS, PSYS_PART_EMISSIVE_MASK | PSYS_PART_INTERP_COLOR_MASK | PSYS_PART_WIND_MASK,
+            PSYS_SRC_PATTERN, PSYS_SRC_PATTERN_EXPLODE,
+            PSYS_SRC_TEXTURE, T_DUST,
+            PSYS_PART_START_COLOR, <1.0, 0.86, 0.66>, PSYS_PART_END_COLOR, <0.8, 0.7, 0.6>,
+            PSYS_PART_START_ALPHA, 0.0, PSYS_PART_END_ALPHA, 0.35,
+            PSYS_PART_START_SCALE, <0.02, 0.02, 0.0>, PSYS_PART_END_SCALE, <0.03, 0.03, 0.0>,
+            PSYS_PART_MAX_AGE, 14.0, PSYS_SRC_BURST_RATE, 0.9, PSYS_SRC_BURST_PART_COUNT, 1,
+            PSYS_SRC_BURST_RADIUS, 1.6, PSYS_SRC_BURST_SPEED_MIN, 0.0, PSYS_SRC_BURST_SPEED_MAX, 0.03,
+            PSYS_SRC_ACCEL, <0.0, 0.0, 0.012>, PSYS_SRC_MAX_AGE, 0.0];
 }
 
 list flame(integer type, float wind_x, float wind_y)
@@ -273,8 +315,48 @@ atmosphere()
     for (i = 0; i < llGetListLength(vaults); ++i)
     {
         a = link_of(llList2String(vaults, i));
-        if (a > 0) llLinkParticleSystem(a, drips());
+        if (a > 0)
+        {
+            llLinkParticleSystem(a, drips());
+            // cold moonlight falling through the grate of the light well in the crown of the vault
+            if (WELLS && T_WELL != "")
+                llSetLinkPrimitiveParamsFast(a, [PRIM_POINT_LIGHT, TRUE, llsRGB2Linear(<0.55, 0.66, 0.9>), 0.45, 5.0, 1.2,
+                                                 PRIM_PROJECTOR, T_WELL, 0.9, 3.0, 0.02]);
+            else llSetLinkPrimitiveParamsFast(a, [PRIM_POINT_LIGHT, FALSE, ZERO_VECTOR, 0.0, 0.0, 0.0,
+                                                  PRIM_PROJECTOR, NULL_KEY, 0.9, 3.0, 0.0]);
+        }
     }
+    // sea light thrown about by the channel
+    list beams = ["T1_Beam", "T3_Beam"];
+    for (i = 0; i < 2; ++i)
+    {
+        a = link_of(llList2String(beams, i));
+        if (a > 0)
+        {
+            if (CAUSTIC && T_CAUSTIC != "")
+                llSetLinkPrimitiveParamsFast(a, [PRIM_POINT_LIGHT, TRUE, llsRGB2Linear(<0.45, 0.8, 0.8>), 0.3, 7.0, 1.0,
+                                                 PRIM_PROJECTOR, T_CAUSTIC, 1.4, 4.0, 0.0]);
+            else llSetLinkPrimitiveParamsFast(a, [PRIM_POINT_LIGHT, FALSE, ZERO_VECTOR, 0.0, 0.0, 0.0,
+                                                  PRIM_PROJECTOR, NULL_KEY, 1.4, 4.0, 0.0]);
+        }
+    }
+    list floors = ["P1_Floor", "P2_Floor", "P3_Floor", "P4_Floor", "C01_Floor", "C02_Floor", "C03_Floor",
+                   "C07_Floor", "C08_Floor"];
+    for (i = 0; i < llGetListLength(floors); ++i)
+    {
+        a = link_of(llList2String(floors, i));
+        if (a > 0) llLinkParticleSystem(a, dust());
+    }
+    // the sea against the rock, and the wind through the arrow slits
+    loop_sound(link_of("P_Water"), "sea_loop", 0.7);
+    loop_sound(link_of("G_Tower_W"), "ambient_wind", 0.5);
+}
+
+loop_sound(integer l, string s, float vol)
+{
+    if (l < 1) return;
+    if (SOUNDS && has_sound(s) && vol > 0.0) llLinkPlaySound(l, asset(s, INVENTORY_SOUND), vol, SOUND_LOOP);
+    else llLinkStopSound(l);
 }
 
 apply()
@@ -318,6 +400,9 @@ apply()
                 llSetLinkPrimitiveParamsFast(l, [PRIM_PROJECTOR, T_PROJECTOR, fov, 1.5, 0.08]);
             else llSetLinkPrimitiveParamsFast(l, [PRIM_PROJECTOR, NULL_KEY, fov, 1.5, 0.0]);
         }
+        // crackle: braziers roar, cell torches hiss (only some torches, to spare the viewer's sound slots)
+        if (type == 2) loop_sound(l, "fire_loop", 0.8 * (!dead));
+        else if (type == 0 && llGetSubString(piece(l), 0, 0) == "C") loop_sound(l, "torch_loop", 0.45 * (!dead));
         if (dead)
             llSetLinkPrimitiveParamsFast(l, [PRIM_POINT_LIGHT, FALSE, ZERO_VECTOR, 0.0, 0.0, 0.0, PRIM_GLOW, FLAME, 0.0,
                                             PRIM_COLOR, FLAME, <0.1, 0.05, 0.03>, 1.0, PRIM_FULLBRIGHT, FLAME, FALSE]);
@@ -325,6 +410,20 @@ apply()
         {
             llSetLinkPrimitiveParamsFast(l, [PRIM_COLOR, FLAME, flame_tint, 1.0, PRIM_FULLBRIGHT, FLAME, TRUE]);
             light(i, 1.0);
+        }
+    }
+    // candles and lamps modelled into props, desks and tables: their flame face glows
+    for (i = 0; i < llGetListLength(CANDLES); ++i)
+    {
+        integer c = link_of(llList2String(CANDLES, i));
+        if (c > 0)
+        {
+            if (FIRE && MOOD != "DARKNESS")
+                llSetLinkPrimitiveParamsFast(c, [PRIM_COLOR, FLAME, <1.0, 0.78, 0.45>, 1.0, PRIM_FULLBRIGHT, FLAME, TRUE,
+                                                 PRIM_GLOW, FLAME, 0.18 * GLOW, PRIM_RENDER_MATERIAL, FLAME, NULL_KEY]);
+            else
+                llSetLinkPrimitiveParamsFast(c, [PRIM_COLOR, FLAME, <0.12, 0.08, 0.05>, 1.0, PRIM_FULLBRIGHT, FLAME, FALSE,
+                                                 PRIM_GLOW, FLAME, 0.0]);
         }
     }
     atmosphere();
@@ -443,6 +542,11 @@ default
             if (l > 0)
             {
                 llLinkParticleSystem(l, burst(str));
+                if (SOUNDS || opt("door_sounds"))
+                {
+                    if (str == "lash" && has_sound("whip_crack")) llLinkPlaySound(l, asset("whip_crack", INVENTORY_SOUND), 1.0, SOUND_PLAY);
+                    if (str == "splash" && has_sound("splash")) llLinkPlaySound(l, asset("splash", INVENTORY_SOUND), 1.0, SOUND_PLAY);
+                }
                 llSleep(2.0);
                 if (str == "brand") llLinkParticleSystem(l, flame(2, 0.0, 0.0));
                 else if (str == "splash") atmosphere();
@@ -458,6 +562,13 @@ default
         // nobody on the parcel: let the fire rest (checked every ~10 s)
         if (++IDLE_CHECK >= 50) { IDLE_CHECK = 0; IDLE = (llGetAgentList(AGENT_LIST_PARCEL, []) == []); }
         if (IDLE) return;
+        if (SOUNDS && llFrand(1.0) < 0.012)
+        {
+            integer v = link_of(llList2String(["C01_Vault", "C02_Vault", "C03_Vault", "C04_Vault", "C07_Vault", "C08_Vault", "N_Back_C"],
+                                              (integer)llFrand(7)));
+            string d = "drip_" + (string)(1 + (integer)llFrand(3));
+            if (v > 0 && has_sound(d)) llLinkPlaySound(v, asset(d, INVENTORY_SOUND), 0.25 + llFrand(0.3), SOUND_TRIGGER);
+        }
         integer j;
         for (j = 0; j < PER_TICK; ++j)
         {

@@ -23,6 +23,7 @@ import bmesh  # noqa: E402
 from mathutils import Vector  # noqa: E402
 
 import pieces_v3 as P  # noqa: E402
+import story  # noqa: E402  (story details added inside the pieces)
 from collada_static import write_dae  # noqa: E402
 from geo import FACE_MATS, MATS, SMOOTH_ANGLE, UV_TILE, Geo  # noqa: E402
 from mathutils import Matrix  # noqa: E402,F401
@@ -376,6 +377,10 @@ def write_lsl_table(report):
         "SEATS": "list SEATS = [\n    " + ",\n    ".join(seats) + "];",
         "THRONE_SIZE": "vector THRONE_SIZE = " + _v(ref["size_m"]) + ";",
         "MOVERS": "list MOVERS = [\n    " + ",\n    ".join(mov) + "];",
+        # pieces with candle or lamp flames that are not torches, lanterns or braziers: they glow too
+        "CANDLES": "list CANDLES = [" + ", ".join(
+            f'"{p["name"]}"' for p in report["pieces"]
+            if p.get("flame_tris", 0) > 0 and not p.get("fire") and p["kind"] != "water") + "];",
     }
     for fn in os.listdir(os.path.join(LSL_DIR, "templates")):
         src = open(os.path.join(LSL_DIR, "templates", fn), encoding="utf-8").read()
@@ -387,7 +392,14 @@ def write_lsl_table(report):
 
 
 # ------------------------------------------------------------------ main
-def build(save=True, export=True):
+def built(pc, lod):
+    """Geometry of a piece at one LOD plus its story details (scripts/story/)."""
+    g = pc.build(lod)
+    story.decorate(pc.name, lod, g)
+    return g
+
+
+def build(save=True, export=True, write=True):
     t0 = time.time()
     os.makedirs(OUT, exist_ok=True)
     bpy.ops.wm.read_factory_settings(use_empty=True)
@@ -407,14 +419,14 @@ def build(save=True, export=True):
         cache = {}
         if pc.kind in ("deco", "furniture", "light"):
             # LOD by radius: in SL, at a small radius the LOWEST weighs most; at a medium radius, LOW and MEDIUM
-            g0 = pc.build(0)
+            g0 = built(pc, 0)
             a0, b0 = g0.bounds()
             rad = (b0 - a0).length / 2
             pc.lod_map = (0, 0, 1, 3) if rad < 1.2 else ((0, 1, 2, 3) if rad < 2.2 else (0, 1, 3, 3))
             cache[0] = g0
         for m in pc.lod_map:
             if m not in cache:
-                cache[m] = pc.build(m)
+                cache[m] = built(pc, m)
         geos = [cache[pc.lod_map[0]]] + [_copy(cache[m]) for m in pc.lod_map[1:]]
         if pc.kind in ("deco", "furniture", "light", "door") and pc.lod_map == (0, 0, 1, 3):
             geos[1] = decimate(geos[1], 300)
@@ -458,7 +470,9 @@ def build(save=True, export=True):
         markers["PHYS"] = ensure_bounds(pg, mn, mx, "Physics")
         entry = {"name": pc.name, "kind": pc.kind, "role": getattr(pc, "role", ""), "fire": getattr(pc, "fire", False),
                  "size_m": [round(c, 3) for c in (mx - mn)],
-                 "center": [round(c, 3) for c in origin], "triangles": {}, "bbox_markers": markers}
+                 "center": [round(c, 3) for c in origin], "triangles": {}, "bbox_markers": markers,
+                 # real flame geometry (candles, braziers...), not counting the one filler triangle
+                 "flame_tris": sum(1 for m in geos[0].mats if m == "Flame") - 1}
         lod_bytes = []
         for i, lv in enumerate(LEVELS):
             ob = mesh_object(pc.name + SUFFIX[lv], geos[i], origin, colls[lv], lv, pc.name, pc.kind)
@@ -520,6 +534,8 @@ def build(save=True, export=True):
             write_dae(os.path.join(OUT, fn), objs[lv])
         report["files"] = list(names.values())
 
+    if not write:
+        return report, objs
     write_lsl_table(report)
     report["seconds"] = round(time.time() - t0, 1)
     with open(os.path.join(OUT, "Report.json"), "w", encoding="utf-8") as f:

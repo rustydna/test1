@@ -80,6 +80,7 @@ string snd(string uuid, string name)
 {
     if (!opt("door_sounds")) return "";
     if (uuid != "") return uuid;
+    if (llGetInventoryType("pit_" + name) == INVENTORY_SOUND) return "pit_" + name;   // delivered files carry "pit_"
     if (llGetInventoryType(name) == INVENTORY_SOUND) return name;
     return "";
 }
@@ -474,6 +475,8 @@ act(key k, string t, string mode, string b)
     }
     else if (b == "Rattle bars" && opt("pleas"))
     {
+        string s = snd("", "chains_2");
+        if (s != "") llLinkPlaySound(dl, s, 1.0, SOUND_PLAY);
         narrate(dl, k, q + " rattles the bars of " + room(t) + ". The iron booms through the whole Pit.");
         llMessageLinked(LINK_SET, 9100, "rattle|" + t + "|0", NULL_KEY);
     }

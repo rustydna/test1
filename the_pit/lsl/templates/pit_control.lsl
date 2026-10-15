@@ -68,7 +68,10 @@ list FEATURES = [
     "moods",       1, "the Lord can change the mood",
     "tide",        1, "the channel rises and falls",
     "voices",      1, "whispers in the dark (chat)",
-    "sounds",      1, "ambient sounds (if you add any)",
+    "sounds",      1, "fire, sea, wind, drip sounds",
+    "light_wells", 1, "moonlight through vault grates",
+    "caustics",    1, "sea light under the yard beams",
+    "dust",        1, "dust drifting in the light",
     "doors",       2, "door, gate and portcullis menus",
     "locks",       2, "locking with a personal key",
     "sentences",   2, "timed sentences",
@@ -97,10 +100,17 @@ list FEATURES = [
     "rename",      5, "auto-name pieces after upload",
     "physics",     5, "auto physics shapes",
     "diagnose",    5, "doorway test at start",
-    "auto_materials", 5, "auto-apply PBR materials"];
+    "auto_materials", 5, "auto-apply PBR materials",
+    "examine",     6, "lore when you touch a surface",
+    "carvings",    6, "players carve words, old graffiti",
+    "notes",       6, "letters and logs you can read",
+    "inmates",     6, "inmate records (master)",
+    "cell_signs",  6, "text over occupied cells",
+    "cell_life",   6, "prisoner chores, guard actions",
+    "routines",    6, "dawn, rations, roll call, tide"];
 
-list CATEGORIES = ["Fire & light", "Atmosphere", "Doors", "Rooms", "Throne", "System"];
-list LOWLAG = ["flicker", "smoke", "sparks", "projectors", "gusts", "fog", "drips", "tide", "voices"];
+list CATEGORIES = ["Fire & light", "Atmosphere", "Doors", "Rooms", "Throne", "System", "Prison life"];
+list LOWLAG = ["flicker", "smoke", "sparks", "projectors", "gusts", "fog", "drips", "tide", "voices", "dust", "caustics"];
 
 integer CH; integer LH; integer PAGE = -1; integer MENU_UNTIL;
 
@@ -150,6 +160,7 @@ help()
         + "/7 doors - find the doors again | /7 doors reset - forget stored door poses\n"
         + "/7 materials - apply the PBR materials now\n"
         + "/7 seat up | down | forward | back | reset - while you sit, move that seat 5 cm (saved)\n"
+        + "/7 inmates | /7 inmate release <n> - prison records | /7 carvings | /7 carvings clear | /7 lore\n"
         + "/7 diagnose - check that every doorway is clear\n"
         + "Feature names: " + llDumpList2String(llList2ListStrided(FEATURES, 0, -1, 3), ", "));
 }
@@ -385,9 +396,26 @@ list sounds()
     for (i = 0; i < n; ++i)
     {
         string nm = llGetInventoryName(INVENTORY_SOUND, i);
-        if (llSubStringIndex(nm, "ambient") == 0) s += nm;
+        if ((llSubStringIndex(nm, "ambient") == 0 || llSubStringIndex(nm, "pit_ambient") == 0)
+            && llSubStringIndex(nm, "wind") == -1) s += nm;      // the wind is a loop played at the gate
     }
     return s;
+}
+
+key VQ; key VQ2; integer VLINE; list VOICE_IDX;   // line numbers of the VOICE records of pit_lore
+
+scan_voices()
+{
+    VOICE_IDX = []; VLINE = 0;
+    if (llGetInventoryType("pit_lore") == INVENTORY_NOTECARD) VQ = llGetNotecardLine("pit_lore", 0);
+}
+
+whisper(string s)
+{
+    string before = llGetObjectName();
+    llSetObjectName("In the dark");
+    llSay(0, s);
+    llSetObjectName(before);
 }
 
 find_water()
@@ -408,10 +436,10 @@ ambience()
         NEXT = t + VOICE_MIN + llFrand(VOICE_MAX - VOICE_MIN);
         if (opt("voices") && llGetListLength(llGetAgentList(AGENT_LIST_PARCEL, [])) > 0)
         {
-            string before = llGetObjectName();
-            llSetObjectName("In the dark");
-            llSay(0, llList2String(VOICES, (integer)llFrand(llGetListLength(VOICES))));
-            llSetObjectName(before);
+            // the voices of the pit_lore notecard if there is one, the built-in ones otherwise
+            if (VOICE_IDX != [])
+                VQ2 = llGetNotecardLine("pit_lore", llList2Integer(VOICE_IDX, (integer)llFrand(llGetListLength(VOICE_IDX))));
+            else whisper(llList2String(VOICES, (integer)llFrand(llGetListLength(VOICES))));
             list s = sounds();
             if (opt("sounds") && s != []) llTriggerSound(llList2String(s, (integer)llFrand(llGetListLength(s))), 0.6);
         }
@@ -430,12 +458,14 @@ default
         NEXT = VOICE_MIN + llFrand(VOICE_MAX - VOICE_MIN);
         llSetTimerEvent(8.0);
         if (opt("auto_materials")) start();
+        scan_voices();
     }
     on_rez(integer p) { llResetScript(); }
     changed(integer c)
     {
         if (c & CHANGED_OWNER) llResetScript();
         if ((c & CHANGED_INVENTORY) && opt("auto_materials")) start();
+        if (c & CHANGED_INVENTORY) scan_voices();
     }
 
     linkset_data(integer action, string name, string value)
@@ -486,6 +516,18 @@ default
 
     dataserver(key id, string d)
     {
+        if (id == VQ)
+        {
+            if (d == EOF) return;
+            if (llSubStringIndex(d, "VOICE|") == 0) VOICE_IDX += VLINE;
+            VQ = llGetNotecardLine("pit_lore", ++VLINE);
+            return;
+        }
+        if (id == VQ2)
+        {
+            if (llSubStringIndex(d, "VOICE|") == 0) whisper(llGetSubString(d, 6, -1));
+            return;
+        }
         if (id != Q) return;
         if (d == EOF)
         {

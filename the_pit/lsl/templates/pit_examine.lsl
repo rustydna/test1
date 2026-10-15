@@ -1,0 +1,701 @@
+// =====================================================================
+//  THE PIT - EXAMINE: LORE, CARVINGS AND NOTES (root prim)
+//
+//  Every surface tells a story. Touch any piece that has no menu of its
+//  own (walls, floors, vaults, props, torches, the water, the hanged
+//  man...) and you are told, privately, what you see at the very spot
+//  you touched: the area comes from the piece, the material (stone,
+//  floor, wood, iron, cloth, bone, straw, flame, water) from the face.
+//  Then a menu:
+//    Carve here ..... scratch your own words into that spot, up to 120
+//                     characters. Whoever examines within 1.5 m of it
+//                     later reads them, with your name and how long ago.
+//                     The newest 60 carvings are kept.
+//    Look closer .... another detail of the same spot.
+//  Now and then the carving of an older prisoner shows instead (the
+//  CARVING lines). Pieces with NOTE pages (a letter, a list, a log...)
+//  open a "Read" menu that turns the pages.
+//  A prisoner locked in a cell gets the "Cell life" menu of pit_life when
+//  he touches his cell, and anyone else touching an occupied cell the
+//  "Guard" menu: both have an Examine button that comes back here.
+//
+//  The texts come from the notecard "pit_lore" in the root's Contents
+//  (lsl/pit_lore.txt pasted into it). The script reads it once and keeps
+//  only line numbers, so the notecard can be as long as a notecard can
+//  be. Edit it and the change is read at once.
+//
+//  Switches (/7 settings > Prison life): examine, carvings, notes.
+//  Owner chat: /7 carvings clear (wipe every carving made by players),
+//              /7 carvings (how many there are),
+//              /7 lore (read the notecard again).
+//  Link messages: 9500 "examine|<link>|<face>|<x,y,z cm>" and
+//  "carve|<link>|<face>|<x,y,z cm>" (sent by pit_life), "read|<piece>"
+//  (id = avatar): any script can open the notes of a piece that has a
+//  menu of its own, e.g. a "Read" button on the scribe's desk.
+// =====================================================================
+
+string  CARD = "pit_lore";      // the notecard
+float   NEAR = 1.5;             // a carving shows to whoever examines this close to it (m)
+integer MAX_CARVINGS = 60;      // the oldest goes when a new one is made
+integer COOLDOWN = 3;           // seconds between two touches of the same avatar
+float   SEED = 0.3;             // chance that an old prisoner's carving shows instead of a plain line
+
+// areas and blocks as written in the notecard (C06 is the kennel too)
+list AREAS = ["C01", "C02", "C03", "C04", "C05", "C06", "C07", "C08", "YARD", "GATE", "HALL", "THRONE", "ANY"];
+list PLACES = ["THE PRESS-GANG", "THE RACK", "THE STOCKS", "THE CISTERN", "THE KENNEL", "THE KENNEL", "THE CAGES",
+               "THE MAST", "THE YARD", "THE GATE", "THE GUARDROOM", "THE THRONE", "THE PIT"];
+list BLOCKS = ["STONE", "FLOOR", "WOOD", "IRON", "CLOTH", "BONE", "STRAW", "FLAME", "WATER", "ANY"];
+// SL sorts mesh faces by material name: the block of each face 0..7
+list FACE_EN = [5, 4, 7, 1, 3, 0, 6, 2];    // 0 Bone 1 Cloth 2 Flame 3 Floor 4 Iron 5 Stone 6 Straw 7 Wood
+list FACE_ES = [3, 5, 7, 2, 6, 0, 1, 4];    // 0 Iron 1 Bone 2 Flame 3 Wood 4 Straw 5 Stone 6 Floor 7 Cloth
+list ON = ["Carved into the stone", "Scratched into the flagstones", "Carved into the wood", "Scratched into the iron",
+           "Scrawled on the cloth", "Scratched into the bone", "Scratched into the wall", "Scratched into the wall",
+           "Scratched into the wall", "Carved into the stone"];
+list HANDS = ["in a shaky hand", "in deep, angry strokes", "in small, careful letters", "with the point of a nail",
+              "in letters gone soft with the damp"];
+list CELLS = ["C01", "C02", "C03", "C04", "C05", "C07", "C08"];
+
+// The notecard index: one integer per run of consecutive lines with the same code,
+// (code << 20) | (first line << 8) | count, code = type * 256 + area * 16 + block
+// (type 0 EXAMINE, 1 CARVING). NOTES: [piece name, (first line << 8) | count, ...]
+list IDX; list NOTES;
+integer LINE; key Q; key CARD_KEY; integer TOLD;
+integer N_EX; integer N_CV; integer N_PG; integer BAD; integer FIRST_BAD;
+
+integer CH;
+list SESS;      // open menus, one per avatar: [avatar, link, mode, expires, spot]
+list REQ;       // notecard lines on their way: [query, avatar, link, kind, spot]
+list COOL;      // [avatar, unix time of the last touch]
+string OPTS;
+// a "spot" travels as a string: area|block|x,y,z (cm, root frame)|line shown|note piece|page
+
+integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
+
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
+
+integer link_of(string name)
+{
+    integer n = llGetObjectPrimCount(llGetKey());
+    integer i;
+    for (i = 1; i <= n; ++i) if (piece(i) == name) return i;
+    return -1;
+}
+
+string who(key k)
+{
+    string n = llGetDisplayName(k);
+    if (n == "") n = llKey2Name(k);
+    return n;
+}
+
+string rest(list p, integer from)
+{
+    if (llGetListLength(p) <= from) return "";
+    return llDumpList2String(llList2List(p, from, -1), "|");
+}
+
+// pieces another script answers when touched (keep in step with pit_life)
+integer owned(string nm)
+{
+    if (llSubStringIndex(nm, "_Door") != -1 || llSubStringIndex(nm, "G_Leaf") == 0 || llSubStringIndex(nm, "C07_Cage") == 0
+        || llSubStringIndex(nm, "C05_Kennel") == 0) return TRUE;
+    if (llListFindList(["G_Portcullis", "G_Winch", "N_Throne", "C02_Rack", "C03_Pillory", "C03_Stocks", "C04_Chair",
+                        "C08_Mast", "C05_Bowls", "V_Table", "V_Basket", "N_Kneeling_Stone"], [nm]) != -1) return TRUE;
+    if (nm == "C01_Desk") return opt("muster_book");
+    if (nm == "C01_Branding_Brazier") return opt("branding");
+    return FALSE;
+}
+
+string cell_of(string nm)
+{
+    string t = llGetSubString(nm, 0, 2);
+    if (t == "C06") t = "C05";
+    if (llGetSubString(nm, 3, 3) != "_" || llListFindList(CELLS, [t]) == -1) return "";
+    return t;
+}
+
+// the cell this avatar is locked in now (written every minute by pit_life), "" if none
+string where(key k)
+{
+    integer i;
+    for (i = 0; i < 7; ++i)
+        if (llSubStringIndex(llLinksetDataRead("jail:" + llList2String(CELLS, i)), (string)k) != -1) return llList2String(CELLS, i);
+    return "";
+}
+
+// pit_life answers this touch with the Cell life or the Guard menu
+integer life_takes(key k, string nm)
+{
+    string t = cell_of(nm);
+    if (t == "" || !opt("inmates") || !opt("cell_life")) return FALSE;
+    return where(k) != "" || llLinksetDataRead("jail:" + t) != "";
+}
+
+integer area_of(string nm)
+{
+    string p = llGetSubString(nm, 0, 0);
+    if (p == "C")
+    {
+        integer a = (integer)llGetSubString(nm, 1, 2) - 1;
+        if (a == 5) a = 4;
+        if (a >= 0 && a < 8) return a;
+    }
+    if (p == "P" || p == "T" || p == "A" || p == "M") return 8;
+    if (p == "G") return 9;
+    if (p == "V") return 10;
+    if (p == "N") return 11;
+    return 12;
+}
+
+integer block_of(string nm, integer face)
+{
+    if (llSubStringIndex(nm, "_Water") != -1) return 8;
+    if (face < 0 || face > 7) return 9;
+    if (llLinksetDataRead("faces") == "es") return llList2Integer(FACE_ES, face);
+    return llList2Integer(FACE_EN, face);
+}
+
+// touch position in the root's frame, in whole centimetres
+string cm_of(vector p, integer l)
+{
+    if (p == TOUCH_INVALID_VECTOR || p == ZERO_VECTOR) p = llList2Vector(llGetLinkPrimitiveParams(l, [PRIM_POSITION]), 0);
+    p = (p - llGetRootPosition()) / llGetRootRotation();
+    return (string)llRound(p.x * 100.0) + "," + (string)llRound(p.y * 100.0) + "," + (string)llRound(p.z * 100.0);
+}
+
+vector cm2v(string s)
+{
+    list c = llParseString2List(s, [","], []);
+    return <llList2Float(c, 0), llList2Float(c, 1), llList2Float(c, 2)> * 0.01;
+}
+
+string spot(integer l, integer face, string cm)
+{
+    string nm = piece(l);
+    return llDumpList2String([area_of(nm), block_of(nm, face), cm, -1, nm, 0], "|");
+}
+
+string fill(string s, key k, integer area)
+{
+    s = llReplaceSubString(s, "{who}", who(k), 0);
+    s = llReplaceSubString(s, "{target}", "someone", 0);
+    return llReplaceSubString(s, "{cell}", llList2String(PLACES, area), 0);
+}
+
+// RP line for everyone within 20 m of the piece (or only k with narration off)
+narrate(integer l, key k, string s)
+{
+    if (!opt("narration")) { llRegionSayTo(k, 0, s); return; }
+    vector c = llList2Vector(llGetLinkPrimitiveParams(l, [PRIM_POSITION]), 0);
+    list ag = llGetAgentList(AGENT_LIST_REGION, []);
+    integer i;
+    for (i = 0; i < llGetListLength(ag); ++i)
+    {
+        key a = llList2Key(ag, i);
+        if (llVecDist(llList2Vector(llGetObjectDetails(a, [OBJECT_POS]), 0), c) <= 20.0) llRegionSayTo(a, 0, s);
+    }
+}
+
+dialog(key k, integer l, string mode, string sp, string txt, list b)
+{
+    integer i = llListFindList(SESS, [k]);
+    if (i != -1) SESS = llDeleteSubList(SESS, i, i + 4);
+    SESS += [k, l, mode, llGetUnixTime() + 120, sp];
+    if (mode == "c") llTextBox(k, txt, CH);
+    else llDialog(k, txt, b, CH);
+}
+
+// ------------------------------------------------------------- the notecard index
+index(integer code, integer line)
+{
+    integer n = llGetListLength(IDX);
+    if (n)
+    {
+        integer e = llList2Integer(IDX, -1);
+        if ((e >> 20) == code && ((e >> 8) & 4095) + (e & 255) == line && (e & 255) < 255)
+        {
+            IDX = llListReplaceList(IDX, [e + 1], -1, -1);
+            return;
+        }
+    }
+    // a very long, unsorted notecard could fill the script: the rest of it is skipped (and reported)
+    if (n < 1000 && llGetUsedMemory() < 52000) IDX += (code << 20) | (line << 8) | 1;
+    else ++BAD;
+}
+
+// a random line with this code, -1 if there is none
+integer pick(integer code)
+{
+    integer n = llGetListLength(IDX);
+    integer total = 0; integer i;
+    for (i = 0; i < n; ++i)
+    {
+        integer e = llList2Integer(IDX, i);
+        if ((e >> 20) == code) total += e & 255;
+    }
+    if (!total) return -1;
+    integer r = (integer)llFrand((float)total);
+    for (i = 0; i < n; ++i)
+    {
+        integer e = llList2Integer(IDX, i);
+        if ((e >> 20) == code)
+        {
+            if (r < (e & 255)) return ((e >> 8) & 4095) + r;
+            r -= e & 255;
+        }
+    }
+    return -1;
+}
+
+// EXAMINE line for (area, block), else (area, ANY), else (ANY, block), else (ANY, ANY);
+// "avoid" is the line shown last time
+integer lore(integer area, integer block, integer avoid)
+{
+    list codes = [area * 16 + block, area * 16 + 9, 192 + block, 201];
+    integer spare = -1; integer i;
+    for (i = 0; i < 4; ++i)
+    {
+        integer tries;
+        for (tries = 0; tries < 4; ++tries)
+        {
+            integer l = pick(llList2Integer(codes, i));
+            if (l == -1) tries = 4;
+            else if (l != avoid) return l;
+            else spare = l;
+        }
+    }
+    return spare;
+}
+
+integer pages(string pc)
+{
+    integer n = 0; integer i;
+    for (i = 0; i < llGetListLength(NOTES); i += 2)
+        if (llList2String(NOTES, i) == pc) n += llList2Integer(NOTES, i + 1) & 255;
+    return n;
+}
+
+integer page_line(string pc, integer page)
+{
+    integer i;
+    for (i = 0; i < llGetListLength(NOTES); i += 2)
+        if (llList2String(NOTES, i) == pc)
+        {
+            integer e = llList2Integer(NOTES, i + 1);
+            if (page < (e & 255)) return (e >> 8) + page;
+            page -= e & 255;
+        }
+    return -1;
+}
+
+parse(string d, integer line)
+{
+    d = llStringTrim(d, STRING_TRIM);
+    if (d == "" || llGetSubString(d, 0, 0) == "#") return;
+    list p = llParseStringKeepNulls(d, ["|"], []);
+    string t = llToUpper(llStringTrim(llList2String(p, 0), STRING_TRIM));
+    string f = llStringTrim(llList2String(p, 1), STRING_TRIM);
+    if (llListFindList(["BELL", "CHORE", "GUARD", "VOICE"], [t]) != -1) return;    // read by other scripts
+    integer a = llListFindList(AREAS, [llToUpper(f)]);
+    if (a == 5) a = 4;
+    integer b = 0;
+    if (t == "EXAMINE") b = llListFindList(BLOCKS, [llToUpper(llStringTrim(llList2String(p, 2), STRING_TRIM))]);
+    if (t == "NOTE" && f != "" && llGetListLength(p) >= 4 && line < 4096)
+    {
+        integer n = llGetListLength(NOTES);
+        if (n && llList2String(NOTES, n - 2) == f)
+        {
+            integer e = llList2Integer(NOTES, n - 1);
+            if ((e >> 8) + (e & 255) == line && (e & 255) < 255)
+            {
+                NOTES = llListReplaceList(NOTES, [e + 1], n - 1, n - 1);
+                ++N_PG;
+                return;
+            }
+        }
+        NOTES += [f, (line << 8) | 1];
+        ++N_PG;
+    }
+    else if ((t == "EXAMINE" || t == "CARVING") && a != -1 && b != -1 && llGetListLength(p) >= 4 && line < 4096)
+    {
+        if (t == "EXAMINE") { index(a * 16 + b, line); ++N_EX; }
+        else { index(256 + a * 16, line); ++N_CV; }
+    }
+    else
+    {
+        if (!BAD) FIRST_BAD = line + 1;
+        ++BAD;
+    }
+}
+
+read_card()
+{
+    IDX = []; NOTES = []; N_EX = 0; N_CV = 0; N_PG = 0; BAD = 0; LINE = 0; Q = NULL_KEY;
+    CARD_KEY = llGetInventoryKey(CARD);
+    if (llGetInventoryType(CARD) != INVENTORY_NOTECARD)
+    {
+        if (!TOLD)
+        {
+            llOwnerSay("pit_examine: there is no notecard \"pit_lore\" in the root's Contents, so touching the walls only "
+                + "gives a plain line (carvings work anyway). To add the stories: in the root prim's Contents tab, "
+                + "New Note, name it pit_lore, paste the text of lsl/pit_lore.txt into it and save. It is read at once.");
+            report();
+        }
+        TOLD = TRUE;
+        return;
+    }
+    Q = llGetNotecardLine(CARD, 0);
+}
+
+report()
+{
+    string s = "pit_examine: ";
+    if (llGetInventoryType(CARD) != INVENTORY_NOTECARD) s += "no notecard pit_lore (plain lines only)";
+    else if (Q != NULL_KEY) s += "still reading the notecard pit_lore (line " + (string)LINE + ")";
+    else
+    {
+        s += "notecard pit_lore: " + (string)N_EX + " examine lines, " + (string)N_CV + " old carvings, "
+            + (string)N_PG + " note pages (" + (string)llGetListLength(IDX) + " index entries)";
+        if (BAD) s += ", " + (string)BAD + " lines not understood (the first is line " + (string)FIRST_BAD + ")";
+        list miss = []; integer i;
+        for (i = 0; i < llGetListLength(NOTES); i += 2)
+        {
+            string pc = llList2String(NOTES, i);
+            if (llListFindList(miss, [pc]) == -1 && link_of(pc) == -1) miss += pc;
+        }
+        if (miss != []) s += "; NOTE pieces not in the build: " + llDumpList2String(miss, ", ");
+    }
+    s += "; " + (string)llLinksetDataCountFound("^carve:") + " of " + (string)MAX_CARVINGS + " carvings by players";
+    llOwnerSay(s + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+}
+
+// one line of the notecard, now if the region has it at hand, else through the dataserver
+fetch(integer line, key k, integer l, integer kind, string sp)
+{
+    if (llGetInventoryType(CARD) != INVENTORY_NOTECARD) { shown(k, l, kind, sp, ""); return; }
+    string d = llGetNotecardLineSync(CARD, line);
+    if (d == NAK)
+    {
+        REQ += [llGetNotecardLine(CARD, line), k, l, kind, sp];
+        if (llGetListLength(REQ) > 50) REQ = llList2List(REQ, -50, -1);    // 10 lines
+        return;
+    }
+    if (d == EOF) d = "";
+    shown(k, l, kind, sp, d);
+}
+
+// ------------------------------------------------------------- examine, carvings, notes
+string ago(integer t)
+{
+    integer d = (llGetUnixTime() - t) / 86400;
+    if (d < 1) return "today";
+    if (d < 2) return "yesterday";
+    if (d < 60) return (string)d + " days ago";
+    if (d < 730) return (string)(d / 30) + " months ago";
+    return (string)(d / 365) + " years ago";
+}
+
+// the nearest carving by a player within NEAR metres, ready to read ("" if none)
+string carving_near(integer area, integer block, vector pos)
+{
+    list ks = llLinksetDataFindKeys("^carve:", 0, 0);
+    float best = NEAR; string found = ""; integer i;
+    for (i = 0; i < llGetListLength(ks); ++i)
+    {
+        string v = llLinksetDataRead(llList2String(ks, i));
+        list f = llParseStringKeepNulls(v, ["|"], []);
+        if ((integer)llList2String(f, 0) == area)
+        {
+            float d = llVecDist(cm2v(llList2String(f, 1)), pos);
+            if (d <= best) { best = d; found = v; }
+        }
+    }
+    if (found == "") return "";
+    list f = llParseStringKeepNulls(found, ["|"], []);
+    return llList2String(ON, block) + " here, " + llList2String(HANDS, (integer)llFrand(llGetListLength(HANDS))) + ": \""
+        + rest(f, 4) + "\" - signed " + llList2String(f, 3) + ", " + ago((integer)llList2String(f, 2)) + ".";
+}
+
+examine(key k, integer l, string sp, integer avoid)
+{
+    list x = llParseStringKeepNulls(sp, ["|"], []);
+    integer area = (integer)llList2String(x, 0);
+    integer block = (integer)llList2String(x, 1);
+    integer kind = 0; integer line = -1;
+    if (opt("carvings") && llFrand(1.0) < SEED)
+    {
+        line = pick(256 + area * 16);
+        if (line == -1) line = pick(448);        // ANY area
+        if (line == avoid) line = -1;
+        if (line != -1) kind = 1;
+    }
+    if (line == -1) line = lore(area, block, avoid);
+    sp = llDumpList2String(llListReplaceList(x, [line], 3, 3), "|");
+    if (line == -1) shown(k, l, 0, sp, "");
+    else fetch(line, k, l, kind, sp);
+}
+
+// kind 0: an EXAMINE line, 1: an old CARVING, 2: a NOTE page; d is the notecard line
+shown(key k, integer l, integer kind, string sp, string d)
+{
+    list x = llParseStringKeepNulls(sp, ["|"], []);
+    integer area = (integer)llList2String(x, 0);
+    integer block = (integer)llList2String(x, 1);
+    list p = llParseStringKeepNulls(d, ["|"], []);
+    string txt = rest(p, 3);
+    if (kind == 2)
+    {
+        string pc = llList2String(x, 4);
+        integer page = (integer)llList2String(x, 5);
+        integer n = pages(pc);
+        list b = ["Close"];
+        if (page > 0) b = ["< Prev"] + b;
+        if (page < n - 1) b += ["Next >"];
+        dialog(k, l, "n", sp, llGetSubString(fill(llList2String(p, 2), k, area) + "   - page " + (string)(page + 1) + " of "
+               + (string)n + "\n\n" + fill(txt, k, area), 0, 499), b);
+        return;
+    }
+    if (kind == 1 && txt != "") txt = llList2String(ON, block) + " here, long ago: \"" + txt + "\" - signed " + llList2String(p, 2) + ".";
+    if (txt == "")
+    {
+        string w = "stone";
+        if (block < 8) w = llToLower(llList2String(BLOCKS, block));
+        txt = "You run your fingers over the " + w + ": cold, damp, and worn smooth by other hands before yours.";
+    }
+    llRegionSayTo(k, 0, fill(txt, k, area));
+    if (opt("carvings"))
+    {
+        string c = carving_near(area, block, cm2v(llList2String(x, 2)));
+        if (c != "") llRegionSayTo(k, 0, c);
+    }
+    string head = llList2String(PLACES, area);
+    if (block < 9) head += " - " + llToLower(llList2String(BLOCKS, block));
+    list b = ["Look closer", "Close"];
+    string ask = "\n\nLook closer?";
+    if (opt("carvings"))
+    {
+        b = ["Carve here"] + b;
+        ask = "\n\nLook closer, or carve your own words here for whoever comes after you.";
+    }
+    dialog(k, l, "x", sp, head + ask, b);
+}
+
+note_menu(key k, integer l, string sp)
+{
+    list x = llParseStringKeepNulls(sp, ["|"], []);
+    integer n = pages(llList2String(x, 4));
+    string s = " pages.";
+    if (n == 1) s = " page.";
+    list b = ["Read", "Close"];
+    if (opt("examine")) b = ["Examine"] + b;
+    dialog(k, l, "n", sp, llList2String(PLACES, (integer)llList2String(x, 0)) + "\n\nSomething is written here: "
+           + (string)n + s, b);
+}
+
+read_page(key k, integer l, string sp, integer page)
+{
+    list x = llParseStringKeepNulls(sp, ["|"], []);
+    integer line = page_line(llList2String(x, 4), page);
+    if (line == -1) return;
+    fetch(line, k, l, 2, llDumpList2String(llListReplaceList(x, [page], 5, 5), "|"));
+}
+
+carve(key k, integer l, string sp, string m)
+{
+    m = llStringTrim(llGetSubString(llDumpList2String(llParseString2List(m, ["\n", "|"], []), " "), 0, 119), STRING_TRIM);
+    if (m == "") return;
+    list x = llParseStringKeepNulls(sp, ["|"], []);
+    list ks = llListSort(llLinksetDataFindKeys("^carve:", 0, 0), 1, TRUE);    // oldest first
+    while (llGetListLength(ks) >= MAX_CARVINGS)
+    {
+        llLinksetDataDelete(llList2String(ks, 0));
+        ks = llDeleteSubList(ks, 0, 0);
+    }
+    if (llLinksetDataAvailable() < 1024)
+    {
+        llRegionSayTo(k, 0, "The surface is too worn to take another word (the build's memory is full).");
+        return;
+    }
+    integer id = (integer)llLinksetDataRead("carve_n") + 1;
+    llLinksetDataWrite("carve_n", (string)id);
+    string name = llGetSubString(llDumpList2String(llParseString2List(who(k), ["|"], []), " "), 0, 23);
+    llLinksetDataWrite("carve:" + llGetSubString((string)(1000000 + id), 1, -1), llList2String(x, 0) + "|"
+        + llList2String(x, 2) + "|" + (string)llGetUnixTime() + "|" + name + "|" + m);
+    integer block = (integer)llList2String(x, 1);
+    string w = "wall";
+    if (block < 6) w = llToLower(llList2String(BLOCKS, block));
+    narrate(l, k, who(k) + " scratches something into the " + w + " with a rusty nail.");
+    llRegionSayTo(k, 0, "You carved: \"" + m + "\". It will be here long after you.");
+}
+
+command(string m)
+{
+    if (m == "carvings clear")
+    {
+        integer n = 0; list ks;
+        while ((ks = llLinksetDataFindKeys("^carve:", 0, 20)) != [])
+        {
+            integer i;
+            for (i = 0; i < llGetListLength(ks); ++i) llLinksetDataDelete(llList2String(ks, i));
+            n += llGetListLength(ks);
+        }
+        llOwnerSay("pit_examine: " + (string)n + " carvings wiped. The walls are bare again.");
+    }
+    else if (m == "carvings")
+        llOwnerSay("pit_examine: " + (string)llLinksetDataCountFound("^carve:") + " of " + (string)MAX_CARVINGS
+            + " carvings by players. /7 carvings clear wipes them.");
+    else if (m == "lore")
+    {
+        TOLD = FALSE;
+        read_card();
+    }
+}
+
+default
+{
+    state_entry()
+    {
+        CH = -1 - (integer)llFrand(1000000.0);
+        llListen(CH, "", NULL_KEY, "");
+        llListen(7, "", llGetOwner(), "");
+        OPTS = llLinksetDataRead("opts");
+        llSetTimerEvent(30.0);
+        read_card();
+    }
+    on_rez(integer p) { llResetScript(); }
+    changed(integer c)
+    {
+        if (c & CHANGED_OWNER) llResetScript();
+        // a new or edited notecard has a new key (no key at all if it is not full permission)
+        if ((c & CHANGED_INVENTORY) && (llGetInventoryKey(CARD) != CARD_KEY
+            || (CARD_KEY == NULL_KEY && llGetInventoryType(CARD) == INVENTORY_NOTECARD))) read_card();
+    }
+    linkset_data(integer action, string name, string value)
+    {
+        if (name == "opts" || action == LINKSETDATA_RESET) OPTS = llLinksetDataRead("opts");
+    }
+
+    link_message(integer s, integer n, string str, key id)
+    {
+        if (n == 9800) report();
+        else if (n == 9500)
+        {
+            list p = llParseStringKeepNulls(str, ["|"], []);
+            string o = llList2String(p, 0);
+            if (o == "read")
+            {
+                string pc = llList2String(p, 1);
+                integer pl = link_of(pc);
+                if (opt("notes") && pages(pc) && pl > 0)
+                    read_page(id, pl, llDumpList2String([area_of(pc), 9, "0,0,0", -1, pc, 0], "|"), 0);
+                return;
+            }
+            integer l = (integer)llList2String(p, 1);
+            string sp = spot(l, (integer)llList2String(p, 2), llList2String(p, 3));
+            if (o == "carve" && opt("carvings"))
+                dialog(id, l, "c", sp, "Carve your words into this spot (120 characters at most). Whoever examines it "
+                       + "later will read them, signed with your name.", []);
+            else if (o == "examine")
+            {
+                if (opt("notes") && pages(piece(l))) note_menu(id, l, sp);
+                else if (opt("examine")) examine(id, l, sp, -1);
+            }
+        }
+    }
+
+    touch_start(integer t)
+    {
+        key k = llDetectedKey(0);
+        integer l = llDetectedLinkNumber(0);
+        if (l == 1 && k == llGetOwner()) return;        // pit_core: the owner's doorway test
+        string nm = piece(l);
+        if (owned(nm) || life_takes(k, nm)) return;
+        integer now = llGetUnixTime();
+        integer i;
+        for (i = llGetListLength(COOL) - 2; i >= 0; i -= 2)
+            if (now - llList2Integer(COOL, i + 1) >= COOLDOWN) COOL = llDeleteSubList(COOL, i, i + 1);
+        if (llListFindList(COOL, [k]) != -1) return;
+        string sp = spot(l, llDetectedTouchFace(0), cm_of(llDetectedTouchPos(0), l));
+        if (opt("notes") && pages(nm)) note_menu(k, l, sp);
+        else if (opt("examine"))
+        {
+            COOL += [k, now];
+            examine(k, l, sp, -1);
+        }
+    }
+
+    listen(integer c, string n, key id, string m)
+    {
+        if (c == 7) { command(llToLower(llStringTrim(m, STRING_TRIM))); return; }
+        integer si = llListFindList(SESS, [id]);
+        if (si == -1 || llList2Integer(SESS, si + 3) < llGetUnixTime()) return;
+        integer l = llList2Integer(SESS, si + 1);
+        string mode = llList2String(SESS, si + 2);
+        string sp = llList2String(SESS, si + 4);
+        SESS = llDeleteSubList(SESS, si, si + 4);
+        list x = llParseStringKeepNulls(sp, ["|"], []);
+        if (mode == "c") { if (opt("carvings")) carve(id, l, sp, m); return; }
+        if (m == "Look closer" && opt("examine")) examine(id, l, sp, (integer)llList2String(x, 3));
+        else if (m == "Examine" && opt("examine")) examine(id, l, sp, -1);
+        else if (m == "Carve here" && opt("carvings"))
+            dialog(id, l, "c", sp, "Carve your words into this spot (120 characters at most). Whoever examines it "
+                   + "later will read them, signed with your name.", []);
+        else if (mode == "n" && opt("notes"))
+        {
+            integer page = (integer)llList2String(x, 5);
+            if (m == "Read") page = 0;
+            else if (m == "Next >") ++page;
+            else if (m == "< Prev") --page;
+            else return;
+            read_page(id, l, sp, page);
+        }
+    }
+
+    dataserver(key id, string d)
+    {
+        if (id == Q)
+        {
+            // the first line arrives here; after that the region has the notecard at hand
+            while (d != EOF && d != NAK)
+            {
+                parse(d, LINE);
+                d = llGetNotecardLineSync(CARD, ++LINE);
+            }
+            if (d == NAK) Q = llGetNotecardLine(CARD, LINE);
+            else
+            {
+                Q = NULL_KEY;
+                report();
+            }
+            return;
+        }
+        integer i = llListFindList(REQ, [id]);
+        if (i == -1) return;
+        key k = llList2Key(REQ, i + 1);
+        integer l = llList2Integer(REQ, i + 2);
+        integer kind = llList2Integer(REQ, i + 3);
+        string sp = llList2String(REQ, i + 4);
+        REQ = llDeleteSubList(REQ, i, i + 4);
+        if (d == EOF) d = "";
+        shown(k, l, kind, sp, d);
+    }
+
+    timer()
+    {
+        integer now = llGetUnixTime();
+        integer i;
+        for (i = llGetListLength(SESS) - 5; i >= 0; i -= 5)
+            if (llList2Integer(SESS, i + 3) < now) SESS = llDeleteSubList(SESS, i, i + 4);
+        for (i = llGetListLength(COOL) - 2; i >= 0; i -= 2)
+            if (now - llList2Integer(COOL, i + 1) >= COOLDOWN) COOL = llDeleteSubList(COOL, i, i + 1);
+    }
+}

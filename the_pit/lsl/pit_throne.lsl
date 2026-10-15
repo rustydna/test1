@@ -402,7 +402,7 @@ default
         else if (p == "C01_Desk" && opt("muster_book"))
         {
             LINK = l; CHOSEN = NULL_KEY;
-            dialog(k, "book", "THE MUSTER BOOK", ["Enlist", "Read book", "Oath"]);
+            dialog(k, "book", "THE MUSTER BOOK", ["Enlist", "Read book", "Oath", "Rules"]);
         }
         else if (p == "C01_Branding_Brazier" && opt("branding")) { LINK = l; CHOSEN = NULL_KEY; choose(k, "brand", 8.0); }
     }
@@ -456,6 +456,7 @@ default
         {
             if (m == "Read book") llDialog(id, book(), ["Close"], CH);
             else if (m == "Enlist") choose(id, "enlist", 8.0);
+            else if (m == "Rules") llMessageLinked(LINK_SET, 9500, "read|C01_Desk", id);
             else if (m == "Oath")
                 narrate(id, who(id) + " lays a hand on the book and swears: \"My back to the lash, my blood to the sea, my life to the Lord of the Pit.\"");
             return;
@@ -471,8 +472,10 @@ default
         {
             llMessageLinked(LINK_SET, 9300, "bell", id);
             integer w = link_of("G_Winch");
-            if (w > 0 && opt("door_sounds") && llGetInventoryType("press_gang_bell") == INVENTORY_SOUND)
-                llLinkPlaySound(w, "press_gang_bell", 1.0, SOUND_PLAY);
+            string bell = "pit_press_gang_bell";
+            if (llGetInventoryType(bell) != INVENTORY_SOUND) bell = "press_gang_bell";
+            if (w > 0 && opt("door_sounds") && llGetInventoryType(bell) == INVENTORY_SOUND)
+                llLinkPlaySound(w, bell, 1.0, SOUND_PLAY);
             narrate(id, "DONG... The Lord orders the press-gang bell rung.");
         }
         else if (m == "Book") llDialog(id, book(), ["Close"], CH);
