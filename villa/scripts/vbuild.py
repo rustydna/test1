@@ -215,19 +215,64 @@ def streaming_cost(radius, lod_bytes):
     return sum(a * b for a, b in zip(w, tris)) / 250000.0 * 15000.0, w
 
 
+LI_PER_TRI = 0.04          # ~ land impact of one triangle at full LOD weight (16-byte verts, zlib)
+LI_TARGET = {"structure": 5.0, "glass": 2.0, "door": 1.0, "furniture": 1.6, "light": 0.8, "deco": 0.8,
+             "water": 1.5, "plant": 1.2, "core": 1.5}
+
+
+def lod_weights(radius):
+    return streaming_cost(radius, [400.0] * 4)[1]
+
+
 def auto_lods(pc, high, radius):
-    """Triangle targets for MEDIUM/LOW/LOWEST by radius: the levels that weigh most in the
-    Second Life cost get the tightest budget, without breaking the silhouette."""
+    """Triangle targets for MEDIUM/LOW/LOWEST. Second Life charges each level by how much of the
+    view it is shown in: a small piece is paid almost only by its LOWEST, a big one by MEDIUM.
+    So: start from quality ratios of the HIGH, then scale the lower levels down until the
+    piece fits its land impact target (meta li=..., else by kind). Floors keep silhouettes."""
     if pc.lods:
         return pc.lods
     t = high.tri_count()
-    if radius < 0.6:
-        return (max(40, t // 3), max(12, t // 12), 8)
-    if radius < 1.5:
-        return (max(80, t // 3), max(24, t // 10), 12)
-    if radius < 4:
-        return (max(150, t // 2), max(40, t // 6), 16)
-    return (max(300, int(t * 0.55)), max(80, t // 5), 24)
+    w = lod_weights(radius)
+    target = pc.meta.get("li", LI_TARGET.get(pc.kind, 1.0))
+    floors = (min(t, 60), min(t, 24), min(t, 8))
+    want = [max(f, int(t * r)) for f, r in zip(floors, (0.4, 0.1, 0.025))]
+    left = max(target - w[0] * t * LI_PER_TRI, target * 0.25)
+    cost = sum(wi * n * LI_PER_TRI for wi, n in zip(w[1:], want))
+    if cost > left:
+        k = left / cost
+        want = [max(f, int(n * k)) for f, n in zip(floors, want)]
+    # each level no richer than the one above it
+    want[1] = min(want[1], want[0])
+    want[2] = min(want[2], want[1])
+    return tuple(want)
+
+
+def impostor(s, dirs=None):
+    """A tiny convex stand-in for the LOWEST level: the hull of the extreme points of the piece in
+    14 directions, painted with the slot that covers most of the piece."""
+    dirs = dirs or [Vector(d).normalized() for d in
+                    ((1, 0, 0), (-1, 0, 0), (0, 1, 0), (0, -1, 0), (0, 0, 1), (0, 0, -1),
+                     (1, 1, 1), (1, 1, -1), (1, -1, 1), (1, -1, -1), (-1, 1, 1), (-1, 1, -1), (-1, -1, 1),
+                     (-1, -1, -1))]
+    pts = []
+    for d in dirs:
+        v = max(s.bm.verts, key=lambda v: v.co.dot(d))
+        if all((v.co - p).length > 1e-4 for p in pts):
+            pts.append(v.co.copy())
+    area = {}
+    for f in s.bm.faces:
+        area[f.material_index] = area.get(f.material_index, 0.0) + f.calc_area()
+    slot = M.ALL[max(area, key=area.get)]
+    bm = bmesh.new()
+    for p in pts:
+        bm.verts.new(p)
+    if len(pts) >= 4:
+        bmesh.ops.convex_hull(bm, input=bm.verts)
+        for f in [f for f in bm.faces if not f.is_valid]:
+            bm.faces.remove(f)
+    out = M.Shape(bm)
+    out.set_slot(slot)
+    return out
 
 
 def build_piece(pc, report):
@@ -246,6 +291,9 @@ def build_piece(pc, report):
         if custom is None:
             src = levels[-1] if i > 1 else high
             custom = src.copy().decimate(targets[i - 1])
+        if i == 3 and custom.tri_count() > max(2 * targets[2], targets[2] + 12):
+            custom.bm.free()
+            custom = impostor(high)
         levels.append(custom)
     lowest = levels[3]
     phys = phys_shape(pc, high, lowest, mn, mx)

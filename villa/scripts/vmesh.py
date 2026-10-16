@@ -781,3 +781,103 @@ def sharp_by_angle(me):
     attr.data.foreach_set("value", sharp)
     for p in me.polygons:
         p.use_smooth = True
+
+
+# ======================================================================== upholstery
+def pillow(poly, z0, z1, slot, r=0.05, crown=0.015, rings=None, seg=None, bottom_flat=True, levels=2):
+    """Tailored cushion from any 2D outline, modelled the way an upholsterer's pattern works:
+    a low cage (outline, holding loops r/2 from each edge, a crowned top panel) smoothed with
+    Catmull-Clark, so the boxing is taut, the edges round and the top domes softly.
+    (rings/seg are accepted for backward compatibility and ignored.)"""
+    poly = ccw(poly)
+    h = z1 - z0
+    r = min(r, h * 0.45)
+    e = r * 0.55
+    side = grow(poly, -r * 0.08)
+    cage = [pts3(grow(poly, -r * 0.9), z0),                 # underside panel edge
+            pts3(side, z0 + e),
+            pts3(poly, z0 + h * 0.5),                        # the welt line, full size
+            pts3(side, z1 - e),
+            pts3(grow(poly, -r * 0.9), z1)]                  # top panel edge
+    per = sum(math.dist(poly[i], poly[(i + 1) % len(poly)]) for i in range(len(poly)))
+    inset = min(0.55 * abs(area2d(poly)) / max(per, 1e-6), 0.25)
+    cage.append(pts3(grow(poly, -r * 0.9 - inset), z1 + crown))
+    s = loft(cage, slot, cap0=False, cap1=True)
+    # underside: one inset ring then the flat panel
+    under = pts3(grow(poly, -r * 0.9 - inset), z0 + (0 if bottom_flat else -crown * 0.5))
+    vs = [s.vert(p) for p in under]
+    first = [v for v in s.bm.verts][:len(poly)]
+    n = len(poly)
+    for i in range(n):
+        j = (i + 1) % n
+        s.face([first[j], first[i], vs[i], vs[j]], slot)
+    s.face(list(reversed(vs)), slot)
+    s.recalc()
+    s.smooth(levels)
+    return s
+
+
+def piping(poly, z, slot, radius=0.005, inset=0.0, n=6, closed=True):
+    """Welt cord along a seam (outline at height z)."""
+    pts = [(p[0], p[1], z) for p in (grow(poly, -inset) if closed else poly)]
+    return sweep(pts, radius, slot, n=n, closed=closed)
+
+
+def seam_line(poly, r, z_mid):
+    """Outline and height of a pillow()'s welt seam: the full outline at mid height (pass the
+    pillow's mid height (z0 + z1) / 2)."""
+    return ccw(poly), z_mid
+
+
+def tuft(s, points, depth=0.012, radius=0.05):
+    """Buttons pulled into the upholstery: vertices near each (x, y) on the top are pushed down
+    with a soft falloff (call before smooth())."""
+    for v in s.bm.verts:
+        for (x, y) in points:
+            d = math.hypot(v.co.x - x, v.co.y - y)
+            if d < radius and v.normal.z > 0.3:
+                v.co.z -= depth * (1 - (d / radius) ** 2) ** 2
+    return s
+
+
+def arc_poly(cx, cy, r0, r1, a0, a1, n=16, round_ends=0.0):
+    """Annular sector (curved sofa segment, curved counter): inner radius r0, outer r1, angles in
+    degrees. round_ends softens the two cut ends with that radius."""
+    a0, a1 = math.radians(a0), math.radians(a1)
+    outer = [(cx + r1 * math.cos(a0 + (a1 - a0) * i / n), cy + r1 * math.sin(a0 + (a1 - a0) * i / n))
+             for i in range(n + 1)]
+    inner = [(cx + r0 * math.cos(a1 - (a1 - a0) * i / n), cy + r0 * math.sin(a1 - (a1 - a0) * i / n))
+             for i in range(n + 1)]
+    poly = outer + inner
+    if round_ends > 0:
+        poly = soften(poly, round_ends)
+    return poly
+
+
+def soften(poly, r, seg=3):
+    """Rounds every sharp corner of a 2D outline with radius r (fillets)."""
+    poly = ccw(poly)
+    n = len(poly)
+    out = []
+    for i in range(n):
+        p = Vector(poly[i])
+        a = Vector(poly[i - 1])
+        b = Vector(poly[(i + 1) % n])
+        d1 = (a - p)
+        d2 = (b - p)
+        if d1.length < 1e-6 or d2.length < 1e-6:
+            continue
+        ang = d1.angle(d2)
+        if ang > math.radians(160):
+            out.append(tuple(p))
+            continue
+        d1.normalize()
+        d2.normalize()
+        t = min(r / math.tan(ang / 2), (Vector(poly[i - 1]) - p).length * 0.45, (Vector(poly[(i + 1) % n]) - p).length * 0.45)
+        p1 = p + d1 * t
+        p2 = p + d2 * t
+        for k in range(seg + 1):
+            u = k / seg
+            q = p1 * (1 - u) ** 2 + p * 2 * (1 - u) * u + p2 * u ** 2
+            out.append((q.x, q.y))
+    return out
