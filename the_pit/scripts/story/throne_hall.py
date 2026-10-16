@@ -424,18 +424,16 @@ def sabre(g, fr, c, ang, L, rnd):
     s = V((-d.y, d.x))
     c = V(c)
     pts = []
-    for k in range(6):
-        t = k / 5
+    for k in range(4):
+        t = k / 3
         p = c + d * (0.16 + L * t) + s * (0.04 * t * t)
         pts.append(fr.p(p.x, p.y, 0.035))
     g.sweep(pts, 0.012, 3, "Iron", caps=False)
-    # gilt hilt: guard, grip (leather), pommel, knuckle bow
+    # gilt hilt: guard, grip (leather), pommel
     gp = [fr.p(*(c + d * 0.16 + s * 0.06), 0.035), fr.p(*(c + d * 0.16 - s * 0.06), 0.035)]
-    g.cyl(gp[0], gp[1], 0.012, 5, "Bone")
-    g.cyl(fr.p(*(c + d * 0.15), 0.035), fr.p(*(c + d * 0.03), 0.035), 0.016, 5, "Cloth", caps=(False, False))
-    g.sweep([fr.p(*(c + d * 0.16 + s * 0.05), 0.035), fr.p(*(c + d * 0.09 + s * 0.065), 0.035),
-             fr.p(*(c + d * 0.0 + s * 0.03), 0.035)], 0.006, 3, "Bone")
-    g.cyl(fr.p(*(c + d * 0.03), 0.035), fr.p(*(c - d * 0.02), 0.035), 0.022, 6, "Bone", r1=0.012)
+    g.cyl(gp[0], gp[1], 0.012, 4, "Bone")
+    g.cyl(fr.p(*(c + d * 0.15), 0.035), fr.p(*(c + d * 0.03), 0.035), 0.016, 4, "Cloth", caps=(False, False))
+    g.cyl(fr.p(*(c + d * 0.03), 0.035), fr.p(*(c - d * 0.02), 0.035), 0.022, 5, "Bone", r1=0.012)
 
 
 @decorates("N_Back_E")

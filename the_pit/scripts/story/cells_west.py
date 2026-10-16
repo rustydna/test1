@@ -594,7 +594,7 @@ def c01_wall(g, lod):
     text(g, fr, "REFUSED", yc - 1.3, FL + 2.5, 0.085, "Iron", 0.004, rnd=rnd, jit=0.015)
     text(g, fr, "REFUSED", yc - 0.5, FL + 2.5, 0.085, "Iron", 0.004, rnd=rnd, jit=0.015)
     # 6. a few dark hand-stains at chest height
-    for _ in range(5):
+    for _ in range(3):
         y = yc + rnd.uniform(-2.3, 2.3)
         z = FL + rnd.uniform(1.1, 1.7)
         blot(g, fr, y, z, rnd.uniform(0.05, 0.09), rnd.uniform(0.06, 0.1), 7, "Floor", 0.002, rnd, 0.4)
@@ -1025,10 +1025,8 @@ def c03_partition(g, lod):
     yp = YP[3]
     # SOUTH face (inside C03): Tam Wicken's first verse, incised
     fr = south_face_fr(yp - PT)
-    verse = ["OH THE TOOTH BITES DEEP", "AND THE TOOTH BITES SLOW"]
     base_u, base_v = -6.9, FL + 1.6
-    text(g, fr, verse[0], base_u, base_v, 0.075, "Iron", EPS, rnd=rnd, jit=0.015)
-    text(g, fr, verse[1], base_u, base_v - 0.14, 0.075, "Iron", EPS, rnd=rnd, jit=0.015)
+    text(g, fr, "OH THE TOOTH BITES DEEP", base_u, base_v, 0.07, "Iron", EPS, rnd=rnd, jit=0.015)
     # Old holy-water niche with a candle stub: recess into the partition face
     cut_pocket(g, 1, yp - PT, -1, -9.95, -9.65, FL + 1.4, FL + 1.7, 0.1, "Stone", "Stone")
     # candle on the floor of the niche (inside the partition volume, inset 3 cm)
@@ -1039,9 +1037,9 @@ def c03_partition(g, lod):
         stroke(g, fr, [(u, FL + 1.4), (u + rnd.uniform(-0.01, 0.01), FL + 1.3), (u, FL + 1.15)], 0.012, "Bone", EPS * 2)
     # NORTH face (inside C04): Ducking record list, incised
     frN = north_face_fr(yp + PT)
-    recs = ["JORY 300", "HAL 140", "NED 90", "KIT 61  CHEATED"]
+    recs = ["JORY 300", "KIT 61 CHEAT"]
     for i, s in enumerate(recs):
-        text(g, frN, s, -8.5, FL + 2.0 - i * 0.14, 0.07, "Iron", EPS, rnd=rnd, jit=0.015)
+        text(g, frN, s, -8.5, FL + 2.0 - i * 0.14, 0.065, "Iron", EPS, rnd=rnd, jit=0.015)
 
 
 @decorates("C03_Arch")
