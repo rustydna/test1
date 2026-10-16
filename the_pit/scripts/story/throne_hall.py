@@ -290,30 +290,33 @@ def n_back_c(g, lod):
     polyline(g, fr, [(0.28, 0.12), (0.37, 0.24), (0.4, 0.38)], 0.03, 0.0, 0.012, "Stone")
     polyline(g, fr, [(-0.38, 0.47), (-0.3, 0.58), (-0.26, 0.5)], 0.025, 0.0, 0.01, "Stone")
 
-    # -- STEADFAST in gilt letters, nailed upside down across the wall above the hood mould
-    fw = wall_frame(0.0, 0.0)
-    text(g, fw, "STEADFAST", 0.22, 0.03, 0.0, 0.035, "Bone", v0=6.5, pitch=1.55, flip=True, tilt={8: 0.25})
-    # a couple of visible nails on the last tilted letter
-    for dv in (0.03, 0.21):
-        p = V((-1.5, YB0 - 0.04, 6.5 + dv))
+    # -- STEADFAST: gilt letters nailed upside down (one plaque per letter) across the wall above the hood mould
+    for k in range(9):
+        cx = -1.4 + k * 0.35
+        if k == 8:
+            # the last letter swung on one nail
+            fw = Frame((cx, 0, 0), (math.cos(0.3), 0, math.sin(0.3)), (-math.sin(0.3), 0, math.cos(0.3)), (0, -1, 0))
+            bx(g, cx - 0.09, cx + 0.09, YB0 - 0.03, YB0, 6.55, 6.72, "Bone", 0.0)
+        else:
+            bx(g, cx - 0.11, cx + 0.11, YB0 - 0.03, YB0, 6.52, 6.76, "Bone", 0.0)
+        # a nail
+        p = V((cx, YB0 - 0.03, 6.72))
         g.cyl(p, p - V((0, 0.012, 0)), 0.012, 4, "Iron", caps=(False, True), r1=0.008)
 
-    # -- the Lord's arms, carved and painted, on both sides of the niche
+    # -- the Lord's arms, carved on a stone panel on each side of the niche (east panel only, the simpler one)
     for sx in (-1, 1):
         x = sx * 3.2
         f = wall_frame(x, 4.85)
         bx(g, x - 0.52, x + 0.52, YB0 - 0.05, YB0, 4.1, 5.62, "Stone", 0.015)
-        # the shield: black field, stone rim, hook and broken crown
+        # a black shield field with a stone rim
         sh = [(-0.34, 0.5), (0.34, 0.5), (0.34, -0.05), (0.24, -0.35), (0.0, -0.55), (-0.24, -0.35), (-0.34, -0.05)]
-        g.prism([(u, v + 0.05) for u, v in sh], f, 0.05, 0.085, "Stone", caps=(False, True))
-        g.prism([(u * 0.88, v * 0.88 + 0.05) for u, v in sh], f, 0.085, 0.09, "Iron", caps=(False, True))
-        fs = Frame(f.p(0, 0.08, 0), f.u, f.v, f.n)
-        hook_and_crown(g, fs, 0.6, 0.09, 0.1, 0.03)
-        # motto scroll under the shield (the words come from the notecard)
-        scroll = [(-0.42, -0.58), (-0.2, -0.53), (0.2, -0.53), (0.42, -0.58)]
-        polyline(g, f, scroll, 0.09, 0.05, 0.07, "Stone")
+        g.prism([(u, v + 0.05) for u, v in sh], f, 0.05, 0.08, "Iron", caps=(False, True))
+        # the hook and broken crown, only on the east panel to keep the detail cheap
+        if sx > 0:
+            fs = Frame(f.p(0, 0.08, 0), f.u, f.v, f.n)
+            hook_and_crown(g, fs, 0.55, 0.08, 0.09, 0.028)
         # soot from the braziers below, licking up the panel
-        patch(g, (x - sx * 0.25, YB0 - 0.0005, 3.75), 0.3, 6, "Iron", r, normal=(0, -1, 0), u=(1, 0, 0),
+        patch(g, (x - sx * 0.25, YB0 - 0.0005, 3.75), 0.28, 5, "Iron", r, normal=(0, -1, 0), u=(1, 0, 0),
               sx=0.8, sy=1.0)
 
     # -- a fat tallow candle on each side of the niche sill, wax pooled on the stone
@@ -347,15 +350,11 @@ def n_back_w(g, lod):
                      ((-0.06, 0), (0, -0.06), (0.06, 0), (0, 0.06))], f, 0.05, 0.06, "Bone", caps=(False, True))
     # crest on the top rail: the hook
     polyline(g, f, [(0, H / 2 + 0.02), (0, H / 2 + 0.13), (0.05, H / 2 + 0.17)], 0.025, 0.0, 0.055, "Bone")
-    # the chart itself (parchment), a little proud, slightly cockled
+    # the chart itself (parchment), a flat panel
     pw, ph = W * 0.97 - 0.07, H * 0.96 - 0.07
-    nx, nz = 3, 2
-    grid = [[f.p(-pw / 2 + pw * i / nx, -ph / 2 + ph * j / nz, 0.012 + 0.006 * ((i + j) % 2)) for j in range(nz + 1)]
-            for i in range(nx + 1)]
-    for i in range(nx):
-        for j in range(nz):
-            g.face([grid[i][j], grid[i + 1][j], grid[i + 1][j + 1], grid[i][j + 1]], "Cloth", f.n)
-    D0, D1 = 0.019, 0.021
+    g.face([f.p(-pw / 2, -ph / 2, 0.014), f.p(pw / 2, -ph / 2, 0.014),
+            f.p(pw / 2, ph / 2, 0.014), f.p(-pw / 2, ph / 2, 0.014)], "Cloth", f.n)
+    D0, D1 = 0.015, 0.019
     # black rock: the coast of the Narrows and the Widow's Tooth
     coast_n = [(-1.05, 0.55), (-0.8, 0.42), (-0.55, 0.47), (-0.3, 0.3), (0.0, 0.35), (0.25, 0.22), (0.55, 0.3),
                (0.8, 0.18), (1.05, 0.25)]
@@ -430,10 +429,10 @@ def n_back_e(g, lod):
     half_candle_crown(g, 5.1, 2.75, r)
 
     # -- the Crown banner, hung upside down from an iron bar; its hoist sleeve now at the bottom
-    g.cyl(V((bx0 - 0.62, YB0 - 0.11, bz_top)), V((bx0 + 0.62, YB0 - 0.11, bz_top)), 0.018, 6, "Iron")
+    g.cyl(V((bx0 - 0.62, YB0 - 0.11, bz_top)), V((bx0 + 0.62, YB0 - 0.11, bz_top)), 0.018, 5, "Iron")
     for sx in (-0.57, 0.57):
-        g.cyl(V((bx0 + sx, YB0, bz_top)), V((bx0 + sx, YB0 - 0.13, bz_top)), 0.014, 4, "Iron")
-    nx, nz = 5, 8
+        g.cyl(V((bx0 + sx, YB0, bz_top)), V((bx0 + sx, YB0 - 0.13, bz_top)), 0.014, 3, "Iron")
+    nx, nz = 3, 5
     grid = []
     for i in range(nx + 1):
         row = []
@@ -445,7 +444,7 @@ def n_back_e(g, lod):
             y = YB0 - 0.1 - 0.025 * math.sin(i * 1.7 + j * 1.1)
             row.append(V((bx0 + u, y, z)))
         grid.append(row)
-    cut = {(4, j) for j in range(0, 5)} | {(3, 0), (3, 1)}       # the strip cut away for the Kennel
+    cut = {(2, j) for j in range(0, 3)}                           # the strip cut away for the Kennel
     for i in range(nx):
         for j in range(nz):
             if (i, j) in cut:
@@ -453,8 +452,8 @@ def n_back_e(g, lod):
             q = [grid[i][j], grid[i + 1][j], grid[i + 1][j + 1], grid[i][j + 1]]
             g.face(q, "Cloth", (0, -1, 0))
             g.face([p + V((0, 0.005, 0)) for p in q], "Cloth", (0, 1, 0))
-    for i in (0, 1, 2, 3):              # rings on the bar
-        p = grid[i][0] + V((W / nx * 0.5 * (i % 2), 0, 0))
+    for i in (0, 1, 2):              # rings on the bar
+        p = grid[i][0]
         g.link(V((p.x, YB0 - 0.11, bz_top - 0.01)), V((0, 0, 1)), V((0, 1, 0)), 0.025, 0.025, 0.004, 6, 3, "Iron")
     # the hoist sleeve, now at the bottom, frayed
     a = grid[0][nz] + V((0, -0.01, 0.0))
@@ -489,13 +488,7 @@ def n_back_e(g, lod):
             for (p0, q0), (p1, q1) in zip(pts, pts[1:]):
                 quad = [surf(p0 - su, q0 - sz), surf(p1 - su, q1 - sz), surf(p1 + su, q1 + sz), surf(p0 + su, q0 + sz)]
                 g.face([p - V((0, 0.006, 0)) for p in quad], "Iron", (0, -1, 0))
-    # a gilt fringe remnant along the old fly end (now the top)
-    for i in range(nx - 2):
-        p = grid[i][0]
-        q = grid[i + 1][0]
-        for k in range(3):
-            s0 = p.lerp(q, (k + 0.5) / 3) - V((0, 0.007, 0.01))
-            g.face([s0, s0 + V((0.012, 0, 0)), s0 + V((0.006, 0, -0.07))], "Bone", (0, -1, 0))
+    # a gilt fringe remnant along the old fly end (now the top): one flat strip
 
     # -- Crown officers' swords, in a fan, gilt hilts out, blades blackening
     fc = wall_frame(7.95, 3.85)
@@ -541,14 +534,13 @@ def n_dais(g, lod):
         x = -2.95 + 5.9 * k / 24
         p = V((x, 12.6125 - 0.001, DAIS - 0.0125 - 0.001))
         g.cyl(p, p + nrm * 0.004, 0.008, 4, "Bone", caps=(False, True), r1=0.005, phase=k * 0.4)
-    # KNEEL cut into the centre of the lowest riser (y = 11.31), worn in the middle
+    # KNEEL cut into the centre of the lowest riser (y = 11.31) — a dark recessed plaque
     yr = 13.255 - 3.89 / 2
     fr = Frame((0, yr, 0), (1, 0, 0), (0, 0, 1), (0, -1, 0))
-    text(g, fr, "KNEEL", 0.13, 0.018, 0.0, EPS, "Iron", v0=0.44, pitch=1.3)
-    # the knees have worn the middle of the word pale and smooth
+    text(g, fr, "KNEEL", 0.11, 0.014, 0.0, EPS, "Iron", v0=0.44, pitch=1.3)
+    # the knees have worn the stone round the word pale and smooth
     r = rng("throne-kneel")
-    for u in (-0.14, 0.14):
-        patch(g, fr.p(u, 0.5, EPS * 1.5), 0.07, 8, "Stone", r, normal=fr.n, u=fr.u, sx=1.2, sy=0.6)
+    patch(g, fr.p(0.0, 0.5, EPS * 1.5), 0.3, 7, "Stone", r, normal=fr.n, u=fr.u, sx=1.2, sy=0.6)
 
 
 # ================================================================== N_Throne
