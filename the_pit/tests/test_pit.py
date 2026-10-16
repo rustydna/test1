@@ -169,7 +169,7 @@ def footprint_within_half_parcel():
 @case
 def estimated_land_impact_under_target():
     li = REPORT["li_estimate"]["estimate"]
-    assert li <= 135, li  # target 150, with margin for the error of the estimate
+    assert li <= 140, li  # SL limit 150 (V4 brief: 140, a 10 LI margin for the error of the estimate)
 
 
 @case

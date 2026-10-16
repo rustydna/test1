@@ -56,7 +56,7 @@ float   FLIPBOOK_FPS = 12.0;
 // SL sorts mesh faces by material name: the flame is face 2 in both the English and the
 // Spanish upload (Bone Cloth FLAME Floor... / Hierro Hueso LLAMA Madera...)
 integer FLAME = 2;     // flipbook frames per second (each fire varies a little)
-list CANDLES = ["C01_Desk", "V_Table"];
+list CANDLES = ["C03_Partition", "C01_Desk", "C01_Props", "C02_Props", "V_Table", "N_Back_W", "N_Back_E", "N_Back_C", "N_Throne", "N_Props_W"];
 
 float   TICK = 0.2;
 integer PER_TICK = 4;

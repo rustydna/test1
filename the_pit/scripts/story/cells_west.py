@@ -735,7 +735,8 @@ def c01_brazier(g, lod):
     bz = V((-9.618, -10.336, 0.985))
     # Quench bucket (brine) to the west, outside the three brazier legs
     bc = V((bz.x - 0.65, bz.y + 0.35, FL))
-    vessel(g, bc, 0.13, 0.14, 0.28, 10, "Wood", fill="Water", fill_h=0.75, wall=0.012)
+    # (the brine is dark Iron: only the two water pieces carry the Water material)
+    vessel(g, bc, 0.13, 0.14, 0.28, 10, "Wood", fill="Iron", fill_h=0.75, wall=0.012)
     # iron bail across it
     g.cyl(bc + V((-0.14, 0, 0.26)), bc + V((0.14, 0, 0.26)), 0.006, 4, "Iron")
     # scorched leather apron draped over the south leg

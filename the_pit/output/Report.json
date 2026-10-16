@@ -16,7 +16,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 328,
+    "HIGH": 415,
     "MEDIUM": 24,
     "LOW": 6,
     "LOWEST": 6,
@@ -36,7 +36,7 @@
     0.4729,
     0.3695
    ],
-   "li_download_est": 0.454,
+   "li_download_est": 0.507,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -64,7 +64,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 548,
+    "HIGH": 798,
     "MEDIUM": 38,
     "LOW": 6,
     "LOWEST": 6,
@@ -84,7 +84,7 @@
     0.5545,
     0.2607
    ],
-   "li_download_est": 0.918,
+   "li_download_est": 1.15,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -112,7 +112,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 548,
+    "HIGH": 709,
     "MEDIUM": 38,
     "LOW": 6,
     "LOWEST": 6,
@@ -132,7 +132,7 @@
     0.5545,
     0.2607
    ],
-   "li_download_est": 0.918,
+   "li_download_est": 1.069,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -160,7 +160,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 548,
+    "HIGH": 686,
     "MEDIUM": 38,
     "LOW": 6,
     "LOWEST": 6,
@@ -180,7 +180,7 @@
     0.5545,
     0.2607
    ],
-   "li_download_est": 0.918,
+   "li_download_est": 1.044,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -208,7 +208,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 292,
+    "HIGH": 336,
     "MEDIUM": 24,
     "LOW": 6,
     "LOWEST": 6,
@@ -228,7 +228,7 @@
     0.4726,
     0.3699
    ],
-   "li_download_est": 0.42,
+   "li_download_est": 0.453,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -256,7 +256,7 @@
     5.41
    ],
    "triangles": {
-    "HIGH": 764,
+    "HIGH": 918,
     "MEDIUM": 62,
     "LOW": 10,
     "LOWEST": 10,
@@ -276,7 +276,7 @@
     0.3594,
     0.5208
    ],
-   "li_download_est": 0.873,
+   "li_download_est": 0.941,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -352,7 +352,7 @@
     5.41
    ],
    "triangles": {
-    "HIGH": 764,
+    "HIGH": 836,
     "MEDIUM": 62,
     "LOW": 10,
     "LOWEST": 10,
@@ -372,7 +372,7 @@
     0.3594,
     0.5208
    ],
-   "li_download_est": 0.873,
+   "li_download_est": 0.908,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -448,7 +448,7 @@
     5.41
    ],
    "triangles": {
-    "HIGH": 764,
+    "HIGH": 929,
     "MEDIUM": 62,
     "LOW": 10,
     "LOWEST": 10,
@@ -468,7 +468,7 @@
     0.3594,
     0.5208
    ],
-   "li_download_est": 0.873,
+   "li_download_est": 0.948,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -544,7 +544,7 @@
     5.41
    ],
    "triangles": {
-    "HIGH": 764,
+    "HIGH": 834,
     "MEDIUM": 62,
     "LOW": 10,
     "LOWEST": 10,
@@ -564,7 +564,7 @@
     0.3594,
     0.5208
    ],
-   "li_download_est": 0.873,
+   "li_download_est": 0.904,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -640,7 +640,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 328,
+    "HIGH": 630,
     "MEDIUM": 24,
     "LOW": 6,
     "LOWEST": 6,
@@ -660,7 +660,7 @@
     0.4729,
     0.3695
    ],
-   "li_download_est": 0.454,
+   "li_download_est": 0.639,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -688,7 +688,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 548,
+    "HIGH": 622,
     "MEDIUM": 38,
     "LOW": 6,
     "LOWEST": 6,
@@ -708,7 +708,7 @@
     0.5545,
     0.2607
    ],
-   "li_download_est": 0.918,
+   "li_download_est": 0.986,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -736,7 +736,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 548,
+    "HIGH": 672,
     "MEDIUM": 38,
     "LOW": 6,
     "LOWEST": 6,
@@ -756,7 +756,7 @@
     0.5545,
     0.2607
    ],
-   "li_download_est": 0.918,
+   "li_download_est": 1.035,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -784,7 +784,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 548,
+    "HIGH": 578,
     "MEDIUM": 38,
     "LOW": 6,
     "LOWEST": 6,
@@ -804,7 +804,7 @@
     0.5545,
     0.2607
    ],
-   "li_download_est": 0.918,
+   "li_download_est": 0.943,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -832,7 +832,7 @@
     3.7
    ],
    "triangles": {
-    "HIGH": 292,
+    "HIGH": 686,
     "MEDIUM": 24,
     "LOW": 6,
     "LOWEST": 6,
@@ -852,7 +852,7 @@
     0.4726,
     0.3699
    ],
-   "li_download_est": 0.42,
+   "li_download_est": 0.643,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -880,7 +880,7 @@
     5.41
    ],
    "triangles": {
-    "HIGH": 764,
+    "HIGH": 846,
     "MEDIUM": 62,
     "LOW": 10,
     "LOWEST": 10,
@@ -900,7 +900,7 @@
     0.3594,
     0.5208
    ],
-   "li_download_est": 0.873,
+   "li_download_est": 0.925,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -976,7 +976,7 @@
     5.41
    ],
    "triangles": {
-    "HIGH": 764,
+    "HIGH": 801,
     "MEDIUM": 62,
     "LOW": 10,
     "LOWEST": 10,
@@ -996,7 +996,7 @@
     0.3594,
     0.5208
    ],
-   "li_download_est": 0.873,
+   "li_download_est": 0.897,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1072,7 +1072,7 @@
     5.41
    ],
    "triangles": {
-    "HIGH": 764,
+    "HIGH": 797,
     "MEDIUM": 62,
     "LOW": 10,
     "LOWEST": 10,
@@ -1092,7 +1092,7 @@
     0.3594,
     0.5208
    ],
-   "li_download_est": 0.873,
+   "li_download_est": 0.894,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1168,7 +1168,7 @@
     5.41
    ],
    "triangles": {
-    "HIGH": 764,
+    "HIGH": 797,
     "MEDIUM": 62,
     "LOW": 10,
     "LOWEST": 10,
@@ -1188,7 +1188,7 @@
     0.3594,
     0.5208
    ],
-   "li_download_est": 0.873,
+   "li_download_est": 0.894,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1264,7 +1264,7 @@
     0.028
    ],
    "triangles": {
-    "HIGH": 539,
+    "HIGH": 896,
     "MEDIUM": 14,
     "LOW": 8,
     "LOWEST": 8,
@@ -1284,7 +1284,7 @@
     0.6435,
     0.142
    ],
-   "li_download_est": 0.48,
+   "li_download_est": 0.733,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1312,7 +1312,7 @@
     2.1
    ],
    "triangles": {
-    "HIGH": 11,
+    "HIGH": 292,
     "MEDIUM": 4,
     "LOW": 4,
     "LOWEST": 4,
@@ -1332,7 +1332,7 @@
     0.548,
     0.2693
    ],
-   "li_download_est": 0.07,
+   "li_download_est": 0.285,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1360,7 +1360,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 224,
+    "HIGH": 760,
     "MEDIUM": 18,
     "LOW": 12,
     "LOWEST": 12,
@@ -1380,7 +1380,7 @@
     0.6832,
     0.0891
    ],
-   "li_download_est": 0.39,
+   "li_download_est": 0.856,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1408,7 +1408,7 @@
     5.847
    ],
    "triangles": {
-    "HIGH": 734,
+    "HIGH": 1197,
     "MEDIUM": 18,
     "LOW": 8,
     "LOWEST": 8,
@@ -1428,7 +1428,7 @@
     0.6644,
     0.1142
    ],
-   "li_download_est": 0.765,
+   "li_download_est": 1.217,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1456,7 +1456,7 @@
     0.027
    ],
    "triangles": {
-    "HIGH": 539,
+    "HIGH": 723,
     "MEDIUM": 14,
     "LOW": 8,
     "LOWEST": 8,
@@ -1476,7 +1476,7 @@
     0.6435,
     0.142
    ],
-   "li_download_est": 0.493,
+   "li_download_est": 0.614,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1504,7 +1504,7 @@
     2.1
    ],
    "triangles": {
-    "HIGH": 11,
+    "HIGH": 14,
     "MEDIUM": 4,
     "LOW": 4,
     "LOWEST": 4,
@@ -1524,7 +1524,7 @@
     0.548,
     0.2693
    ],
-   "li_download_est": 0.07,
+   "li_download_est": 0.072,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1552,7 +1552,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 218,
+    "HIGH": 628,
     "MEDIUM": 16,
     "LOW": 12,
     "LOWEST": 12,
@@ -1572,7 +1572,7 @@
     0.6832,
     0.0891
    ],
-   "li_download_est": 0.346,
+   "li_download_est": 0.718,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1600,7 +1600,7 @@
     5.847
    ],
    "triangles": {
-    "HIGH": 734,
+    "HIGH": 981,
     "MEDIUM": 18,
     "LOW": 8,
     "LOWEST": 8,
@@ -1620,7 +1620,7 @@
     0.6644,
     0.1142
    ],
-   "li_download_est": 0.765,
+   "li_download_est": 0.998,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1648,7 +1648,7 @@
     0.029
    ],
    "triangles": {
-    "HIGH": 539,
+    "HIGH": 627,
     "MEDIUM": 14,
     "LOW": 8,
     "LOWEST": 8,
@@ -1668,7 +1668,7 @@
     0.6435,
     0.142
    ],
-   "li_download_est": 0.489,
+   "li_download_est": 0.552,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1696,7 +1696,7 @@
     2.1
    ],
    "triangles": {
-    "HIGH": 11,
+    "HIGH": 488,
     "MEDIUM": 4,
     "LOW": 4,
     "LOWEST": 4,
@@ -1708,7 +1708,7 @@
     "LOWEST": true,
     "PHYS": false
    },
-   "flame_tris": 0,
+   "flame_tris": 16,
    "radius_m": 4.64,
    "lod_weight": [
     0.0114,
@@ -1716,7 +1716,7 @@
     0.548,
     0.2693
    ],
-   "li_download_est": 0.07,
+   "li_download_est": 0.417,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1744,7 +1744,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 218,
+    "HIGH": 316,
     "MEDIUM": 16,
     "LOW": 12,
     "LOWEST": 12,
@@ -1764,7 +1764,7 @@
     0.6832,
     0.0891
    ],
-   "li_download_est": 0.346,
+   "li_download_est": 0.428,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1792,7 +1792,7 @@
     5.847
    ],
    "triangles": {
-    "HIGH": 734,
+    "HIGH": 912,
     "MEDIUM": 18,
     "LOW": 8,
     "LOWEST": 8,
@@ -1812,7 +1812,7 @@
     0.6644,
     0.1142
    ],
-   "li_download_est": 0.768,
+   "li_download_est": 0.945,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1840,7 +1840,7 @@
     0.029
    ],
    "triangles": {
-    "HIGH": 539,
+    "HIGH": 854,
     "MEDIUM": 14,
     "LOW": 8,
     "LOWEST": 8,
@@ -1860,7 +1860,7 @@
     0.6435,
     0.142
    ],
-   "li_download_est": 0.48,
+   "li_download_est": 0.685,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1888,7 +1888,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 57,
+    "HIGH": 302,
     "MEDIUM": 18,
     "LOW": 4,
     "LOWEST": 4,
@@ -1908,7 +1908,7 @@
     0.7248,
     0.0
    ],
-   "li_download_est": 0.197,
+   "li_download_est": 0.451,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1936,7 +1936,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 224,
+    "HIGH": 777,
     "MEDIUM": 18,
     "LOW": 12,
     "LOWEST": 12,
@@ -1956,7 +1956,7 @@
     0.6832,
     0.0891
    ],
-   "li_download_est": 0.39,
+   "li_download_est": 0.943,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -1984,7 +1984,7 @@
     5.847
    ],
    "triangles": {
-    "HIGH": 734,
+    "HIGH": 910,
     "MEDIUM": 18,
     "LOW": 8,
     "LOWEST": 8,
@@ -2004,7 +2004,7 @@
     0.6644,
     0.1142
    ],
-   "li_download_est": 0.768,
+   "li_download_est": 0.939,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2032,7 +2032,7 @@
     0.03
    ],
    "triangles": {
-    "HIGH": 829,
+    "HIGH": 832,
     "MEDIUM": 18,
     "LOW": 12,
     "LOWEST": 12,
@@ -2052,7 +2052,7 @@
     0.5899,
     0.0
    ],
-   "li_download_est": 1.186,
+   "li_download_est": 1.192,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2071,36 +2071,36 @@
    "fire": false,
    "size_m": [
     7.8,
-    0.6,
+    0.601,
     5.0
    ],
    "center": [
     7.7,
-    0.0,
+    0.001,
     2.1
    ],
    "triangles": {
-    "HIGH": 11,
-    "MEDIUM": 4,
+    "HIGH": 26,
+    "MEDIUM": 6,
     "LOW": 4,
     "LOWEST": 4,
-    "PHYS": 12
+    "PHYS": 14
    },
    "bbox_markers": {
-    "MEDIUM": false,
+    "MEDIUM": true,
     "LOW": true,
     "LOWEST": true,
-    "PHYS": false
+    "PHYS": true
    },
    "flame_tris": 0,
    "radius_m": 4.64,
    "lod_weight": [
     0.0114,
     0.1713,
-    0.548,
+    0.5481,
     0.2693
    ],
-   "li_download_est": 0.07,
+   "li_download_est": 0.086,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2128,7 +2128,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 382,
+    "HIGH": 709,
     "MEDIUM": 26,
     "LOW": 18,
     "LOWEST": 18,
@@ -2148,7 +2148,7 @@
     0.5511,
     0.0
    ],
-   "li_download_est": 1.519,
+   "li_download_est": 2.292,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2176,7 +2176,7 @@
     5.75
    ],
    "triangles": {
-    "HIGH": 930,
+    "HIGH": 997,
     "MEDIUM": 6,
     "LOW": 4,
     "LOWEST": 4,
@@ -2196,7 +2196,7 @@
     0.6165,
     0.0
    ],
-   "li_download_est": 2.067,
+   "li_download_est": 2.204,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2224,7 +2224,7 @@
     0.03
    ],
    "triangles": {
-    "HIGH": 539,
+    "HIGH": 572,
     "MEDIUM": 14,
     "LOW": 8,
     "LOWEST": 8,
@@ -2244,7 +2244,7 @@
     0.6435,
     0.1419
    ],
-   "li_download_est": 0.486,
+   "li_download_est": 0.524,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2272,7 +2272,7 @@
     2.1
    ],
    "triangles": {
-    "HIGH": 11,
+    "HIGH": 131,
     "MEDIUM": 4,
     "LOW": 4,
     "LOWEST": 4,
@@ -2292,7 +2292,7 @@
     0.548,
     0.2693
    ],
-   "li_download_est": 0.07,
+   "li_download_est": 0.187,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2320,7 +2320,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 218,
+    "HIGH": 255,
     "MEDIUM": 16,
     "LOW": 12,
     "LOWEST": 12,
@@ -2340,7 +2340,7 @@
     0.6832,
     0.0891
    ],
-   "li_download_est": 0.346,
+   "li_download_est": 0.389,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2368,8 +2368,8 @@
     5.847
    ],
    "triangles": {
-    "HIGH": 734,
-    "MEDIUM": 18,
+    "HIGH": 961,
+    "MEDIUM": 28,
     "LOW": 8,
     "LOWEST": 8,
     "PHYS": 14
@@ -2388,7 +2388,7 @@
     0.6644,
     0.1142
    ],
-   "li_download_est": 0.768,
+   "li_download_est": 1.22,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2416,7 +2416,7 @@
     0.03
    ],
    "triangles": {
-    "HIGH": 539,
+    "HIGH": 684,
     "MEDIUM": 14,
     "LOW": 8,
     "LOWEST": 8,
@@ -2436,7 +2436,7 @@
     0.6435,
     0.1419
    ],
-   "li_download_est": 0.487,
+   "li_download_est": 0.653,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2464,7 +2464,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 57,
+    "HIGH": 227,
     "MEDIUM": 18,
     "LOW": 4,
     "LOWEST": 4,
@@ -2484,7 +2484,7 @@
     0.7248,
     0.0
    ],
-   "li_download_est": 0.197,
+   "li_download_est": 0.449,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2512,7 +2512,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 224,
+    "HIGH": 254,
     "MEDIUM": 18,
     "LOW": 12,
     "LOWEST": 12,
@@ -2532,7 +2532,7 @@
     0.6832,
     0.0891
    ],
-   "li_download_est": 0.39,
+   "li_download_est": 0.421,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2560,8 +2560,8 @@
     5.847
    ],
    "triangles": {
-    "HIGH": 734,
-    "MEDIUM": 18,
+    "HIGH": 819,
+    "MEDIUM": 28,
     "LOW": 8,
     "LOWEST": 8,
     "PHYS": 14
@@ -2580,7 +2580,7 @@
     0.6644,
     0.1142
    ],
-   "li_download_est": 0.768,
+   "li_download_est": 1.054,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2608,9 +2608,9 @@
     1.147
    ],
    "triangles": {
-    "HIGH": 499,
-    "MEDIUM": 127,
-    "LOW": 44,
+    "HIGH": 921,
+    "MEDIUM": 231,
+    "LOW": 48,
     "LOWEST": 15,
     "PHYS": 12
    },
@@ -2628,7 +2628,7 @@
     0.0409,
     0.9455
    ],
-   "li_download_est": 0.821,
+   "li_download_est": 0.934,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2666,7 +2666,7 @@
     0.985
    ],
    "triangles": {
-    "HIGH": 1272,
+    "HIGH": 1425,
     "MEDIUM": 302,
     "LOW": 94,
     "LOWEST": 11,
@@ -2686,7 +2686,7 @@
     0.0374,
     0.9502
    ],
-   "li_download_est": 0.79,
+   "li_download_est": 0.822,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2714,7 +2714,7 @@
     1.65
    ],
    "triangles": {
-    "HIGH": 2147,
+    "HIGH": 2382,
     "MEDIUM": 182,
     "LOW": 12,
     "LOWEST": 12,
@@ -2726,7 +2726,7 @@
     "LOWEST": true,
     "PHYS": false
    },
-   "flame_tris": 0,
+   "flame_tris": 16,
    "radius_m": 2.57,
    "lod_weight": [
     0.0035,
@@ -2734,7 +2734,7 @@
     0.1679,
     0.7761
    ],
-   "li_download_est": 1.374,
+   "li_download_est": 1.43,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2762,9 +2762,9 @@
     1.182
    ],
    "triangles": {
-    "HIGH": 1417,
-    "MEDIUM": 354,
-    "LOW": 72,
+    "HIGH": 1464,
+    "MEDIUM": 366,
+    "LOW": 74,
     "LOWEST": 12,
     "PHYS": 12
    },
@@ -2782,7 +2782,7 @@
     0.0848,
     0.8869
    ],
-   "li_download_est": 1.671,
+   "li_download_est": 1.718,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2820,7 +2820,7 @@
     1.531
    ],
    "triangles": {
-    "HIGH": 1864,
+    "HIGH": 2251,
     "MEDIUM": 161,
     "LOW": 12,
     "LOWEST": 12,
@@ -2832,7 +2832,7 @@
     "LOWEST": true,
     "PHYS": false
    },
-   "flame_tris": 0,
+   "flame_tris": 16,
    "radius_m": 3.32,
    "lod_weight": [
     0.0058,
@@ -2840,7 +2840,7 @@
     0.2796,
     0.6272
    ],
-   "li_download_est": 1.905,
+   "li_download_est": 2.072,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2916,7 +2916,7 @@
     1.567
    ],
    "triangles": {
-    "HIGH": 542,
+    "HIGH": 839,
     "MEDIUM": 138,
     "LOW": 86,
     "LOWEST": 12,
@@ -2936,7 +2936,7 @@
     0.1158,
     0.8455
    ],
-   "li_download_est": 1.112,
+   "li_download_est": 1.154,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -2974,14 +2974,14 @@
     0.63
    ],
    "triangles": {
-    "HIGH": 305,
-    "MEDIUM": 300,
+    "HIGH": 422,
+    "MEDIUM": 302,
     "LOW": 42,
     "LOWEST": 12,
     "PHYS": 12
    },
    "bbox_markers": {
-    "MEDIUM": false,
+    "MEDIUM": true,
     "LOW": true,
     "LOWEST": true,
     "PHYS": false
@@ -2994,7 +2994,7 @@
     0.0279,
     0.9628
    ],
-   "li_download_est": 0.369,
+   "li_download_est": 0.365,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3032,9 +3032,9 @@
     2.007
    ],
    "triangles": {
-    "HIGH": 980,
+    "HIGH": 1109,
     "MEDIUM": 142,
-    "LOW": 50,
+    "LOW": 56,
     "LOWEST": 12,
     "PHYS": 12
    },
@@ -3052,7 +3052,7 @@
     0.1131,
     0.8492
    ],
-   "li_download_est": 0.995,
+   "li_download_est": 1.066,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3128,7 +3128,7 @@
     1.106
    ],
    "triangles": {
-    "HIGH": 323,
+    "HIGH": 430,
     "MEDIUM": 128,
     "LOW": 12,
     "LOWEST": 12,
@@ -3148,7 +3148,7 @@
     0.2383,
     0.6822
    ],
-   "li_download_est": 0.861,
+   "li_download_est": 0.902,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3217,7 +3217,7 @@
     2.05
    ],
    "triangles": {
-    "HIGH": 1688,
+    "HIGH": 1959,
     "MEDIUM": 162,
     "LOW": 12,
     "LOWEST": 12,
@@ -3237,7 +3237,7 @@
     0.1514,
     0.7981
    ],
-   "li_download_est": 1.048,
+   "li_download_est": 1.101,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3328,7 +3328,7 @@
     0.94
    ],
    "triangles": {
-    "HIGH": 2850,
+    "HIGH": 2957,
     "MEDIUM": 639,
     "LOW": 128,
     "LOWEST": 12,
@@ -3348,7 +3348,7 @@
     0.0423,
     0.9436
    ],
-   "li_download_est": 1.153,
+   "li_download_est": 1.159,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3376,8 +3376,8 @@
     0.95
    ],
    "triangles": {
-    "HIGH": 890,
-    "MEDIUM": 302,
+    "HIGH": 1071,
+    "MEDIUM": 301,
     "LOW": 39,
     "LOWEST": 12,
     "PHYS": 12
@@ -3396,7 +3396,7 @@
     0.0355,
     0.9527
    ],
-   "li_download_est": 0.538,
+   "li_download_est": 0.574,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3434,7 +3434,7 @@
     0.95
    ],
    "triangles": {
-    "HIGH": 890,
+    "HIGH": 911,
     "MEDIUM": 302,
     "LOW": 40,
     "LOWEST": 12,
@@ -3454,7 +3454,7 @@
     0.0355,
     0.9527
    ],
-   "li_download_est": 0.544,
+   "li_download_est": 0.547,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3492,7 +3492,7 @@
     0.95
    ],
    "triangles": {
-    "HIGH": 890,
+    "HIGH": 920,
     "MEDIUM": 302,
     "LOW": 40,
     "LOWEST": 12,
@@ -3550,7 +3550,7 @@
     0.921
    ],
    "triangles": {
-    "HIGH": 5537,
+    "HIGH": 5625,
     "MEDIUM": 178,
     "LOW": 12,
     "LOWEST": 12,
@@ -3570,7 +3570,7 @@
     0.212,
     0.7174
    ],
-   "li_download_est": 2.702,
+   "li_download_est": 2.734,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3598,7 +3598,7 @@
     0.519
    ],
    "triangles": {
-    "HIGH": 2771,
+    "HIGH": 2883,
     "MEDIUM": 128,
     "LOW": 12,
     "LOWEST": 12,
@@ -3618,7 +3618,7 @@
     0.224,
     0.7013
    ],
-   "li_download_est": 1.286,
+   "li_download_est": 1.321,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3694,7 +3694,7 @@
     4.213
    ],
    "triangles": {
-    "HIGH": 3175,
+    "HIGH": 3223,
     "MEDIUM": 162,
     "LOW": 12,
     "LOWEST": 12,
@@ -3714,7 +3714,7 @@
     0.2281,
     0.6959
    ],
-   "li_download_est": 2.057,
+   "li_download_est": 2.076,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3752,7 +3752,7 @@
     4.213
    ],
    "triangles": {
-    "HIGH": 4153,
+    "HIGH": 4398,
     "MEDIUM": 234,
     "LOW": 12,
     "LOWEST": 12,
@@ -3772,7 +3772,7 @@
     0.2281,
     0.6959
    ],
-   "li_download_est": 2.96,
+   "li_download_est": 3.067,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3810,9 +3810,9 @@
     1.181
    ],
    "triangles": {
-    "HIGH": 2295,
-    "MEDIUM": 574,
-    "LOW": 116,
+    "HIGH": 2341,
+    "MEDIUM": 586,
+    "LOW": 118,
     "LOWEST": 12,
     "PHYS": 12
    },
@@ -3830,7 +3830,7 @@
     0.0837,
     0.8884
    ],
-   "li_download_est": 2.077,
+   "li_download_est": 2.052,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3906,7 +3906,7 @@
     2.123
    ],
    "triangles": {
-    "HIGH": 1782,
+    "HIGH": 2640,
     "MEDIUM": 162,
     "LOW": 12,
     "LOWEST": 12,
@@ -3926,7 +3926,7 @@
     0.1344,
     0.8208
    ],
-   "li_download_est": 0.998,
+   "li_download_est": 1.201,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -3964,7 +3964,7 @@
     1.5
    ],
    "triangles": {
-    "HIGH": 1014,
+    "HIGH": 1108,
     "MEDIUM": 162,
     "LOW": 12,
     "LOWEST": 12,
@@ -3984,7 +3984,7 @@
     0.2627,
     0.6497
    ],
-   "li_download_est": 1.339,
+   "li_download_est": 1.385,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4060,7 +4060,7 @@
     0.02
    ],
    "triangles": {
-    "HIGH": 959,
+    "HIGH": 1351,
     "MEDIUM": 14,
     "LOW": 4,
     "LOWEST": 4,
@@ -4080,7 +4080,7 @@
     0.4436,
     0.4086
    ],
-   "li_download_est": 0.85,
+   "li_download_est": 1.114,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4108,7 +4108,7 @@
     0.021
    ],
    "triangles": {
-    "HIGH": 941,
+    "HIGH": 1240,
     "MEDIUM": 14,
     "LOW": 4,
     "LOWEST": 4,
@@ -4128,7 +4128,7 @@
     0.4436,
     0.4085
    ],
-   "li_download_est": 0.836,
+   "li_download_est": 1.038,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4156,7 +4156,7 @@
     0.018
    ],
    "triangles": {
-    "HIGH": 941,
+    "HIGH": 1170,
     "MEDIUM": 14,
     "LOW": 4,
     "LOWEST": 4,
@@ -4176,7 +4176,7 @@
     0.4435,
     0.4086
    ],
-   "li_download_est": 0.837,
+   "li_download_est": 0.976,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4204,7 +4204,7 @@
     0.02
    ],
    "triangles": {
-    "HIGH": 977,
+    "HIGH": 1171,
     "MEDIUM": 14,
     "LOW": 4,
     "LOWEST": 4,
@@ -4224,7 +4224,7 @@
     0.4436,
     0.4086
    ],
-   "li_download_est": 0.865,
+   "li_download_est": 0.983,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4293,7 +4293,7 @@
     6.225
    ],
    "triangles": {
-    "HIGH": 121,
+    "HIGH": 292,
     "MEDIUM": 38,
     "LOW": 8,
     "LOWEST": 8,
@@ -4313,7 +4313,7 @@
     0.277,
     0.6307
    ],
-   "li_download_est": 0.304,
+   "li_download_est": 0.381,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4341,7 +4341,7 @@
     6.225
    ],
    "triangles": {
-    "HIGH": 121,
+    "HIGH": 169,
     "MEDIUM": 38,
     "LOW": 8,
     "LOWEST": 8,
@@ -4361,7 +4361,7 @@
     0.277,
     0.6307
    ],
-   "li_download_est": 0.304,
+   "li_download_est": 0.328,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4389,7 +4389,7 @@
     6.225
    ],
    "triangles": {
-    "HIGH": 121,
+    "HIGH": 444,
     "MEDIUM": 38,
     "LOW": 8,
     "LOWEST": 8,
@@ -4409,7 +4409,7 @@
     0.277,
     0.6307
    ],
-   "li_download_est": 0.304,
+   "li_download_est": 0.418,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4437,7 +4437,7 @@
     6.225
    ],
    "triangles": {
-    "HIGH": 121,
+    "HIGH": 233,
     "MEDIUM": 38,
     "LOW": 8,
     "LOWEST": 8,
@@ -4457,7 +4457,7 @@
     0.277,
     0.6307
    ],
-   "li_download_est": 0.304,
+   "li_download_est": 0.36,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4485,8 +4485,8 @@
     6.225
    ],
    "triangles": {
-    "HIGH": 121,
-    "MEDIUM": 38,
+    "HIGH": 245,
+    "MEDIUM": 42,
     "LOW": 8,
     "LOWEST": 8,
     "PHYS": 12
@@ -4505,7 +4505,7 @@
     0.277,
     0.6307
    ],
-   "li_download_est": 0.304,
+   "li_download_est": 0.401,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -4533,8 +4533,8 @@
     4.903
    ],
    "triangles": {
-    "HIGH": 3729,
-    "MEDIUM": 751,
+    "HIGH": 4071,
+    "MEDIUM": 765,
     "LOW": 122,
     "LOWEST": 12,
     "PHYS": 12
@@ -4553,7 +4553,7 @@
     0.0955,
     0.8727
    ],
-   "li_download_est": 3.149,
+   "li_download_est": 3.243,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5205,7 +5205,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 159,
+    "HIGH": 254,
     "MEDIUM": 32,
     "LOW": 26,
     "LOWEST": 26,
@@ -5225,7 +5225,7 @@
     0.7496,
     0.0
    ],
-   "li_download_est": 1.304,
+   "li_download_est": 1.415,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5301,7 +5301,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 57,
+    "HIGH": 368,
     "MEDIUM": 18,
     "LOW": 6,
     "LOWEST": 6,
@@ -5321,7 +5321,7 @@
     0.7265,
     0.0
    ],
-   "li_download_est": 0.196,
+   "li_download_est": 0.511,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5349,7 +5349,7 @@
     5.1
    ],
    "triangles": {
-    "HIGH": 891,
+    "HIGH": 941,
     "MEDIUM": 46,
     "LOW": 10,
     "LOWEST": 10,
@@ -5369,7 +5369,7 @@
     0.6626,
     0.0
    ],
-   "li_download_est": 2.314,
+   "li_download_est": 2.404,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5397,7 +5397,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 159,
+    "HIGH": 279,
     "MEDIUM": 32,
     "LOW": 26,
     "LOWEST": 26,
@@ -5417,7 +5417,7 @@
     0.7496,
     0.0
    ],
-   "li_download_est": 1.304,
+   "li_download_est": 1.455,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5445,7 +5445,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 21,
+    "HIGH": 134,
     "MEDIUM": 14,
     "LOW": 14,
     "LOWEST": 14,
@@ -5465,7 +5465,7 @@
     0.5474,
     0.2702
    ],
-   "li_download_est": 0.08,
+   "li_download_est": 0.188,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5493,7 +5493,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 57,
+    "HIGH": 261,
     "MEDIUM": 18,
     "LOW": 6,
     "LOWEST": 6,
@@ -5513,7 +5513,7 @@
     0.7265,
     0.0
    ],
-   "li_download_est": 0.196,
+   "li_download_est": 0.466,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5541,7 +5541,7 @@
     5.1
    ],
    "triangles": {
-    "HIGH": 891,
+    "HIGH": 1106,
     "MEDIUM": 46,
     "LOW": 10,
     "LOWEST": 10,
@@ -5561,7 +5561,7 @@
     0.6626,
     0.0
    ],
-   "li_download_est": 2.314,
+   "li_download_est": 2.612,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5685,7 +5685,7 @@
     -0.0
    ],
    "triangles": {
-    "HIGH": 791,
+    "HIGH": 814,
     "MEDIUM": 4,
     "LOW": 4,
     "LOWEST": 4,
@@ -5705,7 +5705,7 @@
     0.4583,
     0.3889
    ],
-   "li_download_est": 0.705,
+   "li_download_est": 0.719,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5733,7 +5733,7 @@
     -0.0
    ],
    "triangles": {
-    "HIGH": 881,
+    "HIGH": 970,
     "MEDIUM": 4,
     "LOW": 4,
     "LOWEST": 4,
@@ -5753,7 +5753,7 @@
     0.498,
     0.336
    ],
-   "li_download_est": 0.841,
+   "li_download_est": 0.901,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5781,7 +5781,7 @@
     -0.0
    ],
    "triangles": {
-    "HIGH": 773,
+    "HIGH": 796,
     "MEDIUM": 4,
     "LOW": 4,
     "LOWEST": 4,
@@ -5801,7 +5801,7 @@
     0.4583,
     0.3889
    ],
-   "li_download_est": 0.691,
+   "li_download_est": 0.704,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5829,7 +5829,7 @@
     0.0
    ],
    "triangles": {
-    "HIGH": 330,
+    "HIGH": 548,
     "MEDIUM": 18,
     "LOW": 18,
     "LOWEST": 18,
@@ -5849,7 +5849,7 @@
     0.3347,
     0.5538
    ],
-   "li_download_est": 0.525,
+   "li_download_est": 0.634,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -5877,7 +5877,7 @@
     6.845
    ],
    "triangles": {
-    "HIGH": 1245,
+    "HIGH": 1437,
     "MEDIUM": 174,
     "LOW": 24,
     "LOWEST": 24,
@@ -5897,7 +5897,7 @@
     0.6404,
     0.1462
    ],
-   "li_download_est": 3.704,
+   "li_download_est": 3.9,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6069,7 +6069,7 @@
     2.315
    ],
    "triangles": {
-    "HIGH": 4849,
+    "HIGH": 5584,
     "MEDIUM": 215,
     "LOW": 12,
     "LOWEST": 12,
@@ -6089,7 +6089,7 @@
     0.2289,
     0.6948
    ],
-   "li_download_est": 3.313,
+   "li_download_est": 3.594,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6127,9 +6127,9 @@
     0.97
    ],
    "triangles": {
-    "HIGH": 676,
-    "MEDIUM": 167,
-    "LOW": 34,
+    "HIGH": 1104,
+    "MEDIUM": 270,
+    "LOW": 56,
     "LOWEST": 15,
     "PHYS": 12
    },
@@ -6147,7 +6147,7 @@
     0.0566,
     0.9245
    ],
-   "li_download_est": 0.869,
+   "li_download_est": 1.115,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6185,7 +6185,7 @@
     1.8
    ],
    "triangles": {
-    "HIGH": 974,
+    "HIGH": 1384,
     "MEDIUM": 242,
     "LOW": 12,
     "LOWEST": 12,
@@ -6205,7 +6205,7 @@
     0.2067,
     0.7244
    ],
-   "li_download_est": 2.006,
+   "li_download_est": 2.155,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6233,8 +6233,8 @@
     0.75
    ],
    "triangles": {
-    "HIGH": 934,
-    "MEDIUM": 301,
+    "HIGH": 1029,
+    "MEDIUM": 302,
     "LOW": 58,
     "LOWEST": 12,
     "PHYS": 12
@@ -6253,7 +6253,7 @@
     0.0349,
     0.9535
    ],
-   "li_download_est": 0.503,
+   "li_download_est": 0.52,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6271,7 +6271,7 @@
    "role": "",
    "fire": false,
    "size_m": [
-    1.4,
+    1.401,
     4.5,
     8.18
    ],
@@ -6281,17 +6281,17 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 23,
-    "MEDIUM": 16,
+    "HIGH": 127,
+    "MEDIUM": 18,
     "LOW": 16,
     "LOWEST": 16,
-    "PHYS": 24
+    "PHYS": 26
    },
    "bbox_markers": {
-    "MEDIUM": false,
+    "MEDIUM": true,
     "LOW": true,
     "LOWEST": true,
-    "PHYS": false
+    "PHYS": true
    },
    "flame_tris": 0,
    "radius_m": 4.72,
@@ -6301,7 +6301,7 @@
     0.5666,
     0.2445
    ],
-   "li_download_est": 0.097,
+   "li_download_est": 0.256,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6329,7 +6329,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 335,
+    "HIGH": 1042,
     "MEDIUM": 76,
     "LOW": 6,
     "LOWEST": 6,
@@ -6341,7 +6341,7 @@
     "LOWEST": true,
     "PHYS": true
    },
-   "flame_tris": 0,
+   "flame_tris": 38,
    "radius_m": 5.44,
    "lod_weight": [
     0.0157,
@@ -6349,7 +6349,7 @@
     0.749,
     0.0
    ],
-   "li_download_est": 1.351,
+   "li_download_est": 2.196,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6425,7 +6425,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 335,
+    "HIGH": 1221,
     "MEDIUM": 76,
     "LOW": 6,
     "LOWEST": 6,
@@ -6437,7 +6437,7 @@
     "LOWEST": true,
     "PHYS": true
    },
-   "flame_tris": 0,
+   "flame_tris": 38,
    "radius_m": 5.44,
    "lod_weight": [
     0.0157,
@@ -6445,7 +6445,7 @@
     0.749,
     0.0
    ],
-   "li_download_est": 1.351,
+   "li_download_est": 2.36,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6473,7 +6473,7 @@
     3.69
    ],
    "triangles": {
-    "HIGH": 971,
+    "HIGH": 1568,
     "MEDIUM": 50,
     "LOW": 20,
     "LOWEST": 20,
@@ -6485,7 +6485,7 @@
     "LOWEST": true,
     "PHYS": true
    },
-   "flame_tris": 0,
+   "flame_tris": 25,
    "radius_m": 6.1,
    "lod_weight": [
     0.0197,
@@ -6493,7 +6493,7 @@
     0.6844,
     0.0
    ],
-   "li_download_est": 2.109,
+   "li_download_est": 3.061,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6665,14 +6665,14 @@
     0.8
    ],
    "triangles": {
-    "HIGH": 167,
-    "MEDIUM": 32,
+    "HIGH": 447,
+    "MEDIUM": 34,
     "LOW": 10,
     "LOWEST": 10,
     "PHYS": 14
    },
    "bbox_markers": {
-    "MEDIUM": false,
+    "MEDIUM": true,
     "LOW": true,
     "LOWEST": true,
     "PHYS": true
@@ -6685,7 +6685,7 @@
     0.5706,
     0.2392
    ],
-   "li_download_est": 0.49,
+   "li_download_est": 0.815,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6713,7 +6713,7 @@
     2.993
    ],
    "triangles": {
-    "HIGH": 2337,
+    "HIGH": 3693,
     "MEDIUM": 569,
     "LOW": 120,
     "LOWEST": 12,
@@ -6725,7 +6725,7 @@
     "LOWEST": true,
     "PHYS": false
    },
-   "flame_tris": 0,
+   "flame_tris": 12,
    "radius_m": 2.08,
    "lod_weight": [
     0.0023,
@@ -6733,7 +6733,7 @@
     0.1105,
     0.8527
    ],
-   "li_download_est": 2.87,
+   "li_download_est": 3.06,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6771,7 +6771,7 @@
     1.437
    ],
    "triangles": {
-    "HIGH": 854,
+    "HIGH": 1439,
     "MEDIUM": 302,
     "LOW": 46,
     "LOWEST": 12,
@@ -6791,7 +6791,7 @@
     0.0181,
     0.9759
    ],
-   "li_download_est": 0.289,
+   "li_download_est": 0.313,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6829,9 +6829,9 @@
     2.33
    ],
    "triangles": {
-    "HIGH": 1075,
-    "MEDIUM": 269,
-    "LOW": 54,
+    "HIGH": 1240,
+    "MEDIUM": 277,
+    "LOW": 66,
     "LOWEST": 11,
     "PHYS": 14
    },
@@ -6849,7 +6849,7 @@
     0.0573,
     0.9237
    ],
-   "li_download_est": 0.627,
+   "li_download_est": 0.691,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6877,9 +6877,9 @@
     2.33
    ],
    "triangles": {
-    "HIGH": 1075,
-    "MEDIUM": 269,
-    "LOW": 54,
+    "HIGH": 1620,
+    "MEDIUM": 277,
+    "LOW": 82,
     "LOWEST": 11,
     "PHYS": 14
    },
@@ -6897,7 +6897,7 @@
     0.0573,
     0.9237
    ],
-   "li_download_est": 0.623,
+   "li_download_est": 0.759,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6925,7 +6925,7 @@
     1.6
    ],
    "triangles": {
-    "HIGH": 165,
+    "HIGH": 1137,
     "MEDIUM": 85,
     "LOW": 12,
     "LOWEST": 12,
@@ -6937,7 +6937,7 @@
     "LOWEST": true,
     "PHYS": false
    },
-   "flame_tris": 0,
+   "flame_tris": 25,
    "radius_m": 2.69,
    "lod_weight": [
     0.0038,
@@ -6945,7 +6945,7 @@
     0.1843,
     0.7543
    ],
-   "li_download_est": 0.456,
+   "li_download_est": 0.752,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -6973,7 +6973,7 @@
     1.6
    ],
    "triangles": {
-    "HIGH": 445,
+    "HIGH": 2237,
     "MEDIUM": 161,
     "LOW": 12,
     "LOWEST": 12,
@@ -6993,7 +6993,7 @@
     0.1354,
     0.8195
    ],
-   "li_download_est": 0.614,
+   "li_download_est": 0.978,
    "sl_faces": [
     "Stone",
     "Floor",
@@ -7009,15 +7009,15 @@
  "levels": {
   "HIGH": {
    "objects": 143,
-   "triangles": 113439
+   "triangles": 139098
   },
   "MEDIUM": {
    "objects": 143,
-   "triangles": 19272
+   "triangles": 19565
   },
   "LOW": {
    "objects": 143,
-   "triangles": 3814
+   "triangles": 3890
   },
   "LOWEST": {
    "objects": 143,
@@ -7025,14 +7025,14 @@
   },
   "PHYS": {
    "objects": 143,
-   "triangles": 2590
+   "triangles": 2594
   }
  },
  "warnings": [],
  "li_estimate": {
-  "download_total": 118.6,
+  "download_total": 135.5,
   "server_total": 71.5,
-  "estimate": 118.6,
+  "estimate": 135.5,
   "note": "Estimate using the viewer's streaming cost formula and an approximate compressed size. Physics is not estimated: with Prim/None assigned correctly it should not dominate. The real value is the one the viewer shows on upload (Calculate weights & fee button)."
  },
  "footprint": {
@@ -7050,5 +7050,5 @@
   "ThePit_LOD0.dae",
   "ThePit_PHYS.dae"
  ],
- "seconds": 9.6
+ "seconds": 15.7
 }

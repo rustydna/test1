@@ -56,8 +56,9 @@ def wall_frame(x, z, y=YB0):
     return Frame((x, y, z), (1, 0, 0), (0, 0, 1), (0, -1, 0))
 
 
-def seg(g, fr, a, b, w, d0, d1, mat, back=False):
-    """A stroke (raised bar) from a to b (frame u, v), width w, between depths d0 and d1."""
+def seg(g, fr, a, b, w, d0, d1, mat, back=False, flat=False):
+    """A stroke (raised bar) from a to b (frame u, v), width w, between depths d0 and d1.
+    flat: a single quad at depth d1 (ink, paint, shallow incisions: 2 triangles)."""
     a, b = V((a[0], a[1])), V((b[0], b[1]))
     t = b - a
     if t.length < 1e-6:
@@ -67,15 +68,18 @@ def seg(g, fr, a, b, w, d0, d1, mat, back=False):
     e = t * (w / 2)
     a, b = a - e, b + e
     poly = [tuple(a - s), tuple(b - s), tuple(b + s), tuple(a + s)]
+    if flat:
+        g.face([fr.p(u, v, d1) for u, v in poly], mat, fr.n)
+        return
     g.prism(poly, fr, d0, d1, mat, caps=(back, True))
 
 
-def polyline(g, fr, pts, w, d0, d1, mat):
+def polyline(g, fr, pts, w, d0, d1, mat, flat=False):
     for a, b in zip(pts, pts[1:]):
-        seg(g, fr, a, b, w, d0, d1, mat)
+        seg(g, fr, a, b, w, d0, d1, mat, flat=flat)
 
 
-def text(g, fr, s, h, w, d0, d1, mat, u0=None, v0=0.0, pitch=0.95, flip=False, skip=(), tilt=None):
+def text(g, fr, s, h, w, d0, d1, mat, u0=None, v0=0.0, pitch=0.95, flip=False, skip=(), tilt=None, flat=False):
     """Writes `s` centred on u = 0 (or from u0). flip: the whole row rotated 180 degrees (upside down)."""
     adv = h * pitch
     total = adv * len(s) - h * (pitch - 0.7)
@@ -95,7 +99,7 @@ def text(g, fr, s, h, w, d0, d1, mat, u0=None, v0=0.0, pitch=0.95, flip=False, s
                 if flip:
                     pu, pv = -pu, 2 * v0 - pv
                 pts.append((pu, pv))
-            polyline(g, fr, pts, w, d0, d1, mat)
+            polyline(g, fr, pts, w, d0, d1, mat, flat=flat)
 
 
 def strap(g, pts, up, width, thick, mat, caps=True):
@@ -143,8 +147,8 @@ def ering(g, c, rx, ry, h, n, mat, shrink=1.0):
     return lo, hi
 
 
-def candle(g, base, h, r, rnd, flame=True, drips=2, n=6, lit=True):
-    """Tallow candle (Bone) with wax runs and a small Flame tongue."""
+def candle(g, base, h, r, rnd, flame=True, drips=1, n=5, lit=True):
+    """Tallow candle (Bone) with wax runs and a small Flame tongue (cheap: about 45 triangles)."""
     base = V(base)
     top = base + V((0, 0, h))
     g.cyl(base, top, r, n, "Bone", caps=(False, True), r1=r * 0.93)
@@ -153,10 +157,9 @@ def candle(g, base, h, r, rnd, flame=True, drips=2, n=6, lit=True):
         d = V((math.cos(a), math.sin(a), 0))
         L = rnd.uniform(0.3, 0.8) * h
         g.sweep([top + d * (r * 0.9) - V((0, 0, 0.003)), top + d * (r * 1.05) - V((0, 0, L * 0.5)),
-                 top + d * (r * 1.0) - V((0, 0, L))], r * 0.22, 3, "Bone")
+                 top + d * (r * 1.0) - V((0, 0, L))], r * 0.22, 3, "Bone", caps=False)
     if flame and lit:
-        g.cyl(top, top + V((0, 0, 0.012)), 0.0025, 3, "Iron", caps=(False, False))
-        g.flame(top + V((0, 0, 0.008)), rnd.uniform(0.045, 0.06), r * 0.45, 4, "Flame", rnd,
+        g.flame(top + V((0, 0, 0.004)), rnd.uniform(0.045, 0.06), r * 0.45, 3, "Flame", rnd,
                 lean=V((rnd.uniform(-0.006, 0.006), rnd.uniform(-0.006, 0.006), 0)))
 
 
@@ -172,7 +175,7 @@ def long_bone(g, a, b, r, mat="Bone", gnawed=False):
         g.cyl(b - t * r * 1.6, b + t * r * 0.4, r * 1.1, 5, mat, r1=r * 1.7)
 
 
-def hook_and_crown(g, fr, s, d0, d1, w, mat_hook="Bone", mat_crown="Bone"):
+def hook_and_crown(g, fr, s, d0, d1, w, mat_hook="Bone", mat_crown="Bone", flat=False):
     """The Lord's sign in a frame: a hook through a broken crown, scale `s` (about 1 = 1 m tall)."""
     # the crown, broken in two
     for half, (du, dv, ang) in ((-1, (0.0, 0.0, 0.0)), (1, (0.03, -0.05, -0.22))):
@@ -182,14 +185,14 @@ def hook_and_crown(g, fr, s, d0, d1, w, mat_hook="Bone", mat_crown="Bone"):
             u, v = u * s, v * s
             return (u * ca - v * sa + du * s, u * sa + v * ca + dv * s)
         band = [(-0.36, -0.05), (-0.03, -0.05)] if half < 0 else [(0.03, -0.05), (0.36, -0.05)]
-        seg(g, fr, P(*band[0]), P(*band[1]), w * 1.6, d0, d1, mat_crown)
+        seg(g, fr, P(*band[0]), P(*band[1]), w * 1.6, d0, d1, mat_crown, flat=flat)
         tips = (-0.34, -0.17) if half < 0 else (0.17, 0.34)
         for tu in tips:
-            polyline(g, fr, [P(tu - 0.06, -0.03), P(tu, 0.16), P(tu + 0.06, -0.03)], w * 0.8, d0, d1, mat_crown)
+            polyline(g, fr, [P(tu - 0.06, -0.03), P(tu, 0.16), P(tu + 0.06, -0.03)], w * 0.8, d0, d1, mat_crown, flat=flat)
     # the hook: a bent shank with a barb, the eye reduced to a loop at the top
     hk = [(0.0, 0.56), (0.0, 0.1), (-0.03, -0.3), (-0.2, -0.38), (-0.3, -0.22)]
-    polyline(g, fr, [(u * s, v * s) for u, v in hk], w * 1.4, d0 + (d1 - d0) * 0.2, d1 + (d1 - d0) * 0.6, mat_hook)
-    polyline(g, fr, [(-0.3 * s, -0.22 * s), (-0.22 * s, -0.26 * s)], w, d0, d1 + (d1 - d0) * 0.6, mat_hook)
+    polyline(g, fr, [(u * s, v * s) for u, v in hk], w * 1.4, d0 + (d1 - d0) * 0.2, d1 + (d1 - d0) * 0.6, mat_hook, flat=flat)
+    polyline(g, fr, [(-0.3 * s, -0.22 * s), (-0.22 * s, -0.26 * s)], w, d0, d1 + (d1 - d0) * 0.6, mat_hook, flat=flat)
 
 
 # ------------------------------------------------------------------ banners (shared by N_Back_W / N_Back_E)
@@ -266,8 +269,7 @@ def half_candle_crown(g, x, z, rnd):
     bx(g, x - 0.04, x + 0.04, y0 - 0.012, YB0, z - 0.28, z - 0.14, "Iron")
     for u in (-0.18, 0.0, 0.18):
         p = V((x + u, y0 - 0.07, z + 0.014))
-        g.cyl(p, p + V((0, 0, 0.012)), 0.022, 6, "Iron", caps=(True, True))
-        candle(g, p + V((0, 0, 0.012)), rnd.uniform(0.1, 0.22), 0.016, rnd, drips=2)
+        candle(g, p, rnd.uniform(0.1, 0.22), 0.016, rnd)
         g.cyl(p + V((0, 0, -0.002)), p + V((0, 0, -rnd.uniform(0.04, 0.08))), 0.012, 3, "Bone",
               caps=(False, False), r1=0.002)
 
@@ -290,20 +292,19 @@ def n_back_c(g, lod):
     polyline(g, fr, [(0.28, 0.12), (0.37, 0.24), (0.4, 0.38)], 0.03, 0.0, 0.012, "Stone")
     polyline(g, fr, [(-0.38, 0.47), (-0.3, 0.58), (-0.26, 0.5)], 0.025, 0.0, 0.01, "Stone")
 
-    # -- STEADFAST: gilt letters nailed upside down (one plaque per letter) across the wall above the hood mould
+    # -- STEADFAST: gilt letters nailed upside down across the wall above the hood mould (thin gilt
+    #    strokes laid on the stone; the last letter, swung round on its one nail, hangs askew)
+    fw = wall_frame(0.0, 0.0)
+    text(g, fw, "STEADFAST", 0.24, 0.035, 0.0, 0.008, "Bone", v0=6.5, pitch=1.6, flip=True, tilt={8: 0.35},
+         flat=True)
+    adv = 0.24 * 1.6
+    start = -(adv * 9 - 0.24 * (1.6 - 0.7)) / 2
     for k in range(9):
-        cx = -1.4 + k * 0.35
-        if k == 8:
-            # the last letter swung on one nail
-            fw = Frame((cx, 0, 0), (math.cos(0.3), 0, math.sin(0.3)), (-math.sin(0.3), 0, math.cos(0.3)), (0, -1, 0))
-            bx(g, cx - 0.09, cx + 0.09, YB0 - 0.03, YB0, 6.55, 6.72, "Bone", 0.0)
-        else:
-            bx(g, cx - 0.11, cx + 0.11, YB0 - 0.03, YB0, 6.52, 6.76, "Bone", 0.0)
-        # a nail
-        p = V((cx, YB0 - 0.03, 6.72))
-        g.cyl(p, p - V((0, 0.012, 0)), 0.012, 4, "Iron", caps=(False, True), r1=0.008)
+        cx = -(start + adv * k + 0.35 * 0.24)
+        p = V((cx, YB0 - 0.008, 6.5 + 0.2))
+        g.cyl(p, p - V((0, 0.01, 0)), 0.01, 3, "Iron", caps=(False, False), r1=0.0)
 
-    # -- the Lord's arms, carved on a stone panel on each side of the niche (east panel only, the simpler one)
+    # -- the Lord's arms, carved on a stone panel on each side of the niche
     for sx in (-1, 1):
         x = sx * 3.2
         f = wall_frame(x, 4.85)
@@ -311,20 +312,16 @@ def n_back_c(g, lod):
         # a black shield field with a stone rim
         sh = [(-0.34, 0.5), (0.34, 0.5), (0.34, -0.05), (0.24, -0.35), (0.0, -0.55), (-0.24, -0.35), (-0.34, -0.05)]
         g.prism([(u, v + 0.05) for u, v in sh], f, 0.05, 0.08, "Iron", caps=(False, True))
-        # the hook and broken crown, only on the east panel to keep the detail cheap
-        if sx > 0:
-            fs = Frame(f.p(0, 0.08, 0), f.u, f.v, f.n)
-            hook_and_crown(g, fs, 0.55, 0.08, 0.09, 0.028)
-        # soot from the braziers below, licking up the panel
-        patch(g, (x - sx * 0.25, YB0 - 0.0005, 3.75), 0.28, 5, "Iron", r, normal=(0, -1, 0), u=(1, 0, 0),
-              sx=0.8, sy=1.0)
+        # the hook and broken crown, painted white and gilt on the black field
+        fs = Frame(f.p(0, 0.08, 0), f.u, f.v, f.n)
+        hook_and_crown(g, fs, 0.6, 0.08, 0.083, 0.03, flat=True)
 
     # -- a fat tallow candle on each side of the niche sill, wax pooled on the stone
     for sx in (-1, 1):
         b = V((sx * 1.3, YB0 + 0.3, DAIS))
         patch(g, b + V((0, 0, 0.002)), 0.16, 5, "Bone", r, sx=1.0, sy=0.7)
         g.cyl(b, b + V((0, 0, 0.04)), 0.1, 5, "Iron", caps=(False, True), r1=0.08)   # low stand
-        candle(g, b + V((0, 0, 0.04)), 0.42, 0.055, r, drips=3, n=5)
+        candle(g, b + V((0, 0, 0.04)), 0.42, 0.055, r, drips=3, n=6)
 
 
 # ================================================================== N_Back_W
@@ -360,8 +357,8 @@ def n_back_w(g, lod):
                (0.8, 0.18), (1.05, 0.25)]
     coast_s = [(-1.05, -0.45), (-0.7, -0.35), (-0.4, -0.5), (-0.1, -0.38), (0.2, -0.48), (0.5, -0.32),
                (0.75, -0.42), (1.05, -0.35)]
-    polyline(g, f, coast_n, 0.012, D0, D1, "Iron")
-    polyline(g, f, coast_s, 0.012, D0, D1, "Iron")
+    polyline(g, f, coast_n, 0.012, D0, D1, "Iron", flat=True)
+    polyline(g, f, coast_s, 0.012, D0, D1, "Iron", flat=True)
     tooth = (0.12, -0.02)
     g.prism([(tooth[0] + 0.05 * math.cos(a), tooth[1] + 0.035 * math.sin(a)) for a in
              [2 * math.pi * k / 5 for k in range(5)]], f, D0 - 0.002, D1, "Iron", caps=(False, True))
@@ -370,17 +367,17 @@ def n_back_w(g, lod):
         rr = 0.12 + 0.012 * k
         ring = [(tooth[0] + rr * math.cos(a + k), tooth[1] + rr * 0.8 * math.sin(a + k))
                 for a in [2 * math.pi * i / 10 for i in range(11)]]
-        polyline(g, f, ring, 0.006, D0, D1 + 0.001, "Iron")
+        polyline(g, f, ring, 0.006, D0, D1 + 0.001, "Iron", flat=True)
     # Crown patrol lines (red: rust) as dashes, wrecks as crosses, the Lord's ships as little gilt hooks
     for line in ([(-1.0, 0.1), (-0.1, 0.12)], [(0.4, -0.2), (1.0, -0.2)]):
         for (a, b) in zip(line, line[1:]):
             for t in (0.0, 0.4):
                 p = (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
                 q = (a[0] + (b[0] - a[0]) * (t + 0.25), a[1] + (b[1] - a[1]) * (t + 0.25))
-                seg(g, f, p, q, 0.01, D0, D1, "Iron")
+                seg(g, f, p, q, 0.01, D0, D1, "Iron", flat=True)
     for (u, v) in ((0.3, 0.12), (0.65, -0.05)):
-        seg(g, f, (u - 0.03, v - 0.03), (u + 0.03, v + 0.03), 0.008, D0, D1, "Iron")
-        seg(g, f, (u - 0.03, v + 0.03), (u + 0.03, v - 0.03), 0.008, D0, D1, "Iron")
+        seg(g, f, (u - 0.03, v - 0.03), (u + 0.03, v + 0.03), 0.008, D0, D1, "Iron", flat=True)
+        seg(g, f, (u - 0.03, v + 0.03), (u + 0.03, v - 0.03), 0.008, D0, D1, "Iron", flat=True)
     for (u, v) in ((-0.85, -0.05), (0.5, 0.05)):
         polyline(g, f, [(u, v + 0.05), (u, v - 0.02), (u - 0.025, v - 0.035), (u - 0.04, v - 0.01)], 0.008,
                  D0, D1 + 0.002, "Bone")
@@ -389,7 +386,7 @@ def n_back_w(g, lod):
     for a in range(8):
         L = 0.11 if a % 2 == 0 else 0.06
         ang = math.pi / 4 * a
-        seg(g, f, cr, (cr[0] + L * math.cos(ang), cr[1] + L * math.sin(ang)), 0.006, D0, D1, "Iron")
+        seg(g, f, cr, (cr[0] + L * math.cos(ang), cr[1] + L * math.sin(ang)), 0.006, D0, D1, "Iron", flat=True)
     # hung from a spike by a cord
     nail = V((cx, YB0 - 0.03, cz + H / 2 + 0.38))
     g.cyl(V((cx, YB0, nail.z)), nail, 0.012, 4, "Iron", caps=(False, True))
@@ -490,12 +487,12 @@ def n_back_e(g, lod):
                 g.face([p - V((0, 0.006, 0)) for p in quad], "Iron", (0, -1, 0))
     # a gilt fringe remnant along the old fly end (now the top): one flat strip
 
-    # -- Crown officers' swords, in a fan, gilt hilts out, blades blackening
+    # -- Crown officers' swords, a trophy round a boss, gilt hilts out, blades blackening
     fc = wall_frame(7.95, 3.85)
     g.prism([(0.1 * math.cos(a), 0.1 * math.sin(a)) for a in [2 * math.pi * k / 6 for k in range(6)]],
             fc, 0.0, 0.025, "Wood", caps=(False, True))
-    for k in range(4):
-        ang = math.pi + (k - 1.5) * 0.5
+    for k in range(4):                 # a saltire of four, hilts out to the corners
+        ang = math.pi / 4 + k * math.pi / 2
         hilt = (0.75 * math.cos(ang), 0.75 * math.sin(ang))
         sabre(g, fc, hilt, ang + math.pi, 0.48, r)
         p = fc.p(0.62 * math.cos(ang), 0.62 * math.sin(ang), 0.0)
@@ -520,7 +517,7 @@ def n_wall_w(g, lod):
         g.face([V((x, y, 0.41)), V((x, y + 0.015, 0.41)), V((x, y + 0.01, z1)), V((x, y, z1))], "Bone", (1, 0, 0))
     # FLOOD Y7 cut above the line at its north end
     fr = Frame((x, 0, 0), (0, -1, 0), (0, 0, 1), (1, 0, 0))
-    text(g, fr, "FLOOD Y7", 0.07, 0.009, 0.0, EPS, "Iron", u0=-14.95, v0=0.87, pitch=1.15)
+    text(g, fr, "FLOOD Y7", 0.07, 0.009, 0.0, EPS, "Iron", u0=-14.95, v0=0.87, pitch=1.15, flat=True)
 
 
 # ================================================================== N_Dais
@@ -534,13 +531,10 @@ def n_dais(g, lod):
         x = -2.95 + 5.9 * k / 24
         p = V((x, 12.6125 - 0.001, DAIS - 0.0125 - 0.001))
         g.cyl(p, p + nrm * 0.004, 0.008, 4, "Bone", caps=(False, True), r1=0.005, phase=k * 0.4)
-    # KNEEL cut into the centre of the lowest riser (y = 11.31) — a dark recessed plaque
+    # KNEEL cut into the centre of the lowest riser (y = 11.31)
     yr = 13.255 - 3.89 / 2
     fr = Frame((0, yr, 0), (1, 0, 0), (0, 0, 1), (0, -1, 0))
-    text(g, fr, "KNEEL", 0.11, 0.014, 0.0, EPS, "Iron", v0=0.44, pitch=1.3)
-    # the knees have worn the stone round the word pale and smooth
-    r = rng("throne-kneel")
-    patch(g, fr.p(0.0, 0.5, EPS * 1.5), 0.3, 7, "Stone", r, normal=fr.n, u=fr.u, sx=1.2, sy=0.6)
+    text(g, fr, "KNEEL", 0.12, 0.02, 0.0, EPS, "Iron", v0=0.44, pitch=1.3, flat=True)
 
 
 # ================================================================== N_Throne
@@ -593,7 +587,7 @@ def n_throne(g, lod):
                 bx(g, sx * 0.75 - 0.085, sx * 0.75 + 0.085, cy + 0.27, cy + 0.29, zz, zz + 0.025, "Wood")
     # 77 scratched small into the plinth's front
     fp = Frame((0, cy - 0.6, 0), (1, 0, 0), (0, 0, 1), (0, -1, 0))
-    text(g, fp, "77", 0.07, 0.008, 0.0, 0.0015, "Iron", v0=DAIS + 0.065)
+    text(g, fp, "77", 0.07, 0.008, 0.0, 0.0015, "Iron", v0=DAIS + 0.065, flat=True)
     # the Lord's cup on the plinth under his right hand, and the rings it leaves
     cup = V((0.8, cy - 0.5, DAIS + 0.2))
     g.cyl(cup, cup + V((0, 0, 0.012)), 0.04, 7, "Bone", caps=(False, True), r1=0.03)
@@ -642,7 +636,7 @@ def n_kneeling_stone(g, lod):
         u = -0.36
         while u < 0.3 and k < len(inits):
             s = inits[k]
-            text(g, fr, s, 0.035, 0.005, 0.0, 0.0008, "Iron", u0=u, v0=row_v - 0.0175, pitch=1.0)
+            text(g, fr, s, 0.035, 0.005, 0.0, 0.0008, "Iron", u0=u, v0=row_v - 0.0175, pitch=1.0, flat=True)
             u += 0.035 * len(s) + 0.05 + r.uniform(0, 0.03)
             k += 1
     # tally strokes in fives along the west end
