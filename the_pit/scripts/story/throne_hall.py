@@ -216,10 +216,12 @@ def banner_surface(x0, top=6.6, w=1.3, h=3.4, nx=6, nz=10):
 
 
 def banner_strokes(g, surf, lines, w, off, mat):
-    """Flat strokes laid on the banner cloth (subdivided so they follow its folds)."""
+    """Flat strokes laid on the banner cloth (subdivided so they follow its folds).
+    The strokes are nudged slightly BACK (+y) onto the surface rather than into the hall, so they stay
+    inside the piece's bounding box; `off` here is interpreted as a push back toward the wall."""
     for line in lines:
         for (u0, z0), (u1, z1) in zip(line, line[1:]):
-            n = max(1, int(math.hypot(u1 - u0, z1 - z0) / 0.12) + 1)
+            n = max(1, int(math.hypot(u1 - u0, z1 - z0) / 0.14) + 1)
             du, dz = u1 - u0, z1 - z0
             L = math.hypot(du, dz)
             su, sz = -dz / L * w / 2, du / L * w / 2
@@ -227,7 +229,7 @@ def banner_strokes(g, surf, lines, w, off, mat):
             pts = [(u0 - eu + (du + 2 * eu) * k / n, z0 - ez + (dz + 2 * ez) * k / n) for k in range(n + 1)]
             for (a, b), (c, d) in zip(pts, pts[1:]):
                 q = [surf(a - su, b - sz), surf(c - su, d - sz), surf(c + su, d + sz), surf(a + su, b + sz)]
-                q = [p - V((0, off, 0)) for p in q]
+                q = [V((p.x, max(p.y - off, 15.012), p.z)) for p in q]
                 g.face(q, mat, (0, -1, 0))
 
 
@@ -256,44 +258,32 @@ def lord_banner_device(g, x0, rnd):
     banner_strokes(g, surf, [[(-0.6, 6.42), (0.6, 6.42)]], 0.04, 0.007, "Bone")
     # gilt cords with tassels from the ends of the bar
     for sx in (-1, 1):
-        a = V((x0 + sx * 0.73, YB0 - 0.15, 6.57))
-        b = V((x0 + sx * 0.76, YB0 - 0.16, 6.05))
+        a = V((x0 + sx * 0.73, YB0 - 0.12, 6.57))
+        b = V((x0 + sx * 0.76, YB0 - 0.13, 6.05))
         g.sweep([a, a.lerp(b, 0.5) + V((sx * 0.012, 0, 0)), b], 0.006, 3, "Bone")
         g.cyl(b, b - V((0, 0, 0.03)), 0.012, 5, "Bone", caps=(True, False), r1=0.016)
-        g.cyl(b - V((0, 0, 0.03)), b - V((0, 0, 0.13)), 0.016, 5, "Bone", caps=(False, True), r1=0.028)
+        g.cyl(b - V((0, 0, 0.03)), b - V((0, 0, 0.13)), 0.016, 5, "Bone", caps=(False, True), r1=0.022)
 
 
 def half_candle_crown(g, x, z, rnd):
-    """Iron half candle crown bracketed to the wall: five candles, wax hanging in beards."""
-    c = V((x, YB0 - 0.1, z))
-    R = 0.13
-    pts = [c + V((math.cos(math.pi * k / 8) * R * 1.4, -math.sin(math.pi * k / 8) * R * 0.75, 0)) for k in range(9)]
-    pts[0].y = pts[-1].y = YB0 - 0.005
-    g.sweep(pts, 0.009, 4, "Iron")
-    # bracket and wall plate
-    g.cyl(V((x, YB0, z - 0.25)), V((x, YB0 - 0.1, z - 0.02)), 0.01, 4, "Iron")
-    bx(g, x - 0.04, x + 0.04, YB0 - 0.012, YB0, z - 0.32, z - 0.18, "Iron")
-    for k in (1, 3, 4, 5, 7):
-        p = pts[k]
-        g.cyl(p - V((0, 0, 0.008)), p + V((0, 0, 0.012)), 0.022, 6, "Iron", caps=(True, True))
-        h = rnd.uniform(0.07, 0.2)
-        candle(g, p + V((0, 0, 0.012)), h, 0.016, rnd, drips=2)
-        # beard of wax hanging under the drip pan
-        g.cyl(p - V((0, 0, 0.008)), p - V((0, 0, rnd.uniform(0.03, 0.07))), 0.012, 3, "Bone", caps=(False, False),
-              r1=0.002)
+    """Iron candle shelf bracketed to the wall: three candles, wax hanging in beards."""
+    y0 = YB0 - 0.02
+    bx(g, x - 0.26, x + 0.26, y0 - 0.14, YB0, z - 0.02, z + 0.012, "Iron")
+    bx(g, x - 0.04, x + 0.04, y0 - 0.012, YB0, z - 0.28, z - 0.14, "Iron")
+    for u in (-0.18, 0.0, 0.18):
+        p = V((x + u, y0 - 0.07, z + 0.014))
+        g.cyl(p, p + V((0, 0, 0.012)), 0.022, 6, "Iron", caps=(True, True))
+        candle(g, p + V((0, 0, 0.012)), rnd.uniform(0.1, 0.22), 0.016, rnd, drips=2)
+        g.cyl(p + V((0, 0, -0.002)), p + V((0, 0, -rnd.uniform(0.04, 0.08))), 0.012, 3, "Bone",
+              caps=(False, False), r1=0.002)
 
 
 # ================================================================== N_Back_C
 @decorates("N_Back_C")
 def n_back_c(g, lod):
-    if lod >= 2:
+    if lod != 0:
         return
     spr = DAIS + 2.2
-    if lod == 1:
-        # silhouettes: the two carved shields beside the niche
-        for sx in (-1, 1):
-            bx(g, sx * 3.2 - 0.5, sx * 3.2 + 0.5, YB0 - 0.06, YB0, 4.2, 5.5, "Stone")
-        return
     r = rng("throne-back-c")
 
     # -- ghost of the Crown's arms on the back face of the niche (y = YB0 + 0.5), behind the wheel
@@ -307,94 +297,57 @@ def n_back_c(g, lod):
     polyline(g, fr, [(0.32, 0.2), (0.38, 0.22)], 0.02, 0.0, 0.012, "Stone")
     polyline(g, fr, [(-0.38, 0.47), (-0.34, 0.58), (-0.3, 0.5), (-0.26, 0.6)], 0.025, 0.0, 0.01, "Stone")
     polyline(g, fr, [(-0.48, -0.56), (-0.36, -0.6), (-0.1, -0.56)], 0.04, 0.0, 0.008, "Stone")
-    for k in range(9):                                                     # chisel scars
-        u, v = r.uniform(-0.35, 0.35), r.uniform(-0.35, 0.4)
+    for k in range(4):                                                     # chisel scars
+        u, v = r.uniform(-0.3, 0.3), r.uniform(-0.3, 0.35)
         a = r.uniform(-0.6, 0.6)
         seg(g, fr, (u, v), (u + 0.07 * math.cos(a), v + 0.07 * math.sin(a)), 0.008, 0.0, 0.003, "Iron")
 
     # -- STEADFAST in gilt letters, nailed upside down across the wall above the hood mould
     fw = wall_frame(0.0, 0.0)
-    text(g, fw, "STEADFAST", 0.25, 0.04, 0.0, 0.04, "Bone", v0=6.5, pitch=1.62, flip=True, tilt={8: 0.25})
-    adv = 0.25 * 1.62
-    start = -(adv * 9 - 0.25 * (1.62 - 0.7)) / 2
-    for k in range(9):
-        cx = -(start + adv * k + 0.35 * 0.25)
-        for dv in ((0.2,) if k == 8 else (0.03, 0.22)):
-            p = V((cx + (0.06 if k == 8 else 0.0), YB0 - 0.04, 6.5 + dv))
-            g.cyl(p, p - V((0, 0.012, 0)), 0.012, 5, "Iron", caps=(False, True), r1=0.008)
-    # the nail holes where the last letter swung
-    for u in (-1.66, -1.62):
-        patch(g, (u, YB0 - 0.001, 6.69), 0.008, 4, "Iron", r, normal=(0, -1, 0), u=(1, 0, 0))
+    text(g, fw, "STEADFAST", 0.22, 0.03, 0.0, 0.035, "Bone", v0=6.5, pitch=1.55, flip=True, tilt={8: 0.25})
+    # a couple of visible nails on the last tilted letter
+    for dv in (0.03, 0.21):
+        p = V((-1.5, YB0 - 0.04, 6.5 + dv))
+        g.cyl(p, p - V((0, 0.012, 0)), 0.012, 4, "Iron", caps=(False, True), r1=0.008)
 
     # -- the Lord's arms, carved and painted, on both sides of the niche
     for sx in (-1, 1):
         x = sx * 3.2
         f = wall_frame(x, 4.85)
-        # moulded stone panel with a cable (rope) border: Reed's knots in stone
         bx(g, x - 0.52, x + 0.52, YB0 - 0.05, YB0, 4.1, 5.62, "Stone", 0.015)
-        rope = [(-0.47, -0.7), (0.47, -0.7), (0.47, 0.7), (-0.47, 0.7)]
-        for a, b in zip(rope, rope[1:] + rope[:1]):
-            seg(g, f, a, b, 0.035, 0.05, 0.075, "Stone")
-            n = int(math.hypot(b[0] - a[0], b[1] - a[1]) / 0.07)
-            for k in range(n):
-                t0 = (k + 0.2) / n
-                p = (a[0] + (b[0] - a[0]) * t0, a[1] + (b[1] - a[1]) * t0)
-                q = (p[0] + 0.03 * (1 if a[1] == b[1] else 0) + 0.02 * (1 if a[0] == b[0] else 0),
-                     p[1] + 0.02 * (1 if a[1] == b[1] else 0) + 0.03 * (1 if a[0] == b[0] else 0))
-                seg(g, f, p, q, 0.012, 0.074, 0.082, "Stone")
         # the shield: black field, stone rim, hook and broken crown
         sh = [(-0.34, 0.5), (0.34, 0.5), (0.34, -0.05), (0.24, -0.35), (0.0, -0.55), (-0.24, -0.35), (-0.34, -0.05)]
         g.prism([(u, v + 0.05) for u, v in sh], f, 0.05, 0.085, "Stone", caps=(False, True))
         g.prism([(u * 0.88, v * 0.88 + 0.05) for u, v in sh], f, 0.085, 0.09, "Iron", caps=(False, True))
         fs = Frame(f.p(0, 0.08, 0), f.u, f.v, f.n)
-        hook_and_crown(g, fs, 0.62, 0.09, 0.1, 0.03)
+        hook_and_crown(g, fs, 0.6, 0.09, 0.1, 0.03)
         # motto scroll under the shield (the words come from the notecard)
         scroll = [(-0.42, -0.58), (-0.2, -0.53), (0.2, -0.53), (0.42, -0.58)]
         polyline(g, f, scroll, 0.09, 0.05, 0.07, "Stone")
-        for k in range(7):
-            u = -0.27 + k * 0.09
-            seg(g, f, (u, -0.535), (u + 0.05, -0.535), 0.012, 0.07, 0.072, "Iron")
         # soot from the braziers below, licking up the panel
-        patch(g, (x - sx * 0.25, YB0 - 0.0005, 3.75), 0.32, 9, "Iron", r, normal=(0, -1, 0), u=(1, 0, 0),
+        patch(g, (x - sx * 0.25, YB0 - 0.0005, 3.75), 0.3, 6, "Iron", r, normal=(0, -1, 0), u=(1, 0, 0),
               sx=0.8, sy=1.0)
 
     # -- iron pricket candlesticks on the niche sill behind the throne, wax pooled on the stone
     for sx in (-1, 1):
         x, y = sx * 1.32, YB0 + 0.3
         b = V((x, y, DAIS))
-        patch(g, b + V((0, 0, 0.002)), 0.2, 9, "Bone", r, sx=1.0, sy=0.7)          # pooled wax
-        patch(g, b + V((sx * 0.14, -0.12, 0.003)), 0.07, 7, "Bone", r)
-        for k in range(3):                                                      # tripod
-            a = 2 * math.pi * k / 3 + 0.5
-            d = V((math.cos(a), math.sin(a), 0))
-            g.sweep([b + d * 0.17 + V((0, 0, 0.01)), b + d * 0.08 + V((0, 0, 0.12)), b + V((0, 0, 0.24))],
-                    0.012, 4, "Iron")
-        g.cyl(b + V((0, 0, 0.2)), b + V((0, 0, 1.15)), 0.018, 6, "Iron", caps=(False, False))
-        for z, rr in ((0.45, 0.03), (0.8, 0.028)):
-            g.cyl(b + V((0, 0, z)), b + V((0, 0, z + 0.05)), rr, 6, "Iron", r1=rr * 0.7)
-        top = b + V((0, 0, 1.15))
-        g.cyl(top, top + V((0, 0, 0.03)), 0.09, 8, "Iron", caps=(True, True), r1=0.11)      # drip pan
-        candle(g, top + V((0, 0, 0.03)), 0.34, 0.04, r, drips=3, n=7)
-        for side in (-1, 1):                                                    # two arms
-            a = top + V((0, 0, -0.18))
-            e = a + V((side * 0.22, 0, 0.12))
-            g.sweep([a, a + V((side * 0.12, 0, -0.02)), e], 0.011, 4, "Iron")
-            g.cyl(e, e + V((0, 0, 0.02)), 0.05, 6, "Iron", caps=(True, True), r1=0.06)
-            candle(g, e + V((0, 0, 0.02)), r.uniform(0.12, 0.24), 0.028, r, drips=2)
-        # a wax beard hanging off the pan
-        g.cyl(top, top - V((0, 0, 0.16)), 0.025, 4, "Bone", caps=(False, False), r1=0.004)
+        patch(g, b + V((0, 0, 0.002)), 0.16, 6, "Bone", r, sx=1.0, sy=0.7)          # pooled wax
+        g.cyl(b, b + V((0, 0, 0.04)), 0.12, 5, "Iron", caps=(False, True), r1=0.09)
+        g.cyl(b + V((0, 0, 0.04)), b + V((0, 0, 1.12)), 0.022, 4, "Iron", caps=(False, False))
+        top = b + V((0, 0, 1.12))
+        g.cyl(top, top + V((0, 0, 0.03)), 0.09, 6, "Iron", caps=(True, True), r1=0.1)
+        candle(g, top + V((0, 0, 0.03)), 0.32, 0.04, r, drips=2, n=5)
+        g.cyl(top, top - V((0, 0, 0.14)), 0.024, 4, "Bone", caps=(False, False), r1=0.004)
 
 
 # ================================================================== N_Back_W
 @decorates("N_Back_W")
 def n_back_w(g, lod):
-    if lod >= 2:
+    if lod != 0:
         return
     cx, cz = -9.0, 2.9
     W, H = 2.4, 1.5
-    if lod == 1:
-        bx(g, cx - W / 2, cx + W / 2, YB0 - 0.05, YB0, cz - H / 2, cz + H / 2, "Wood")
-        return
     r = rng("throne-back-w")
     lord_banner_device(g, -6.4, r)
     half_candle_crown(g, -5.1, 2.75, r)
@@ -413,7 +366,7 @@ def n_back_w(g, lod):
     polyline(g, f, [(0, H / 2 + 0.02), (0, H / 2 + 0.13), (0.05, H / 2 + 0.17)], 0.025, 0.0, 0.055, "Bone")
     # the chart itself (parchment), a little proud, slightly cockled
     pw, ph = W * 0.97 - 0.07, H * 0.96 - 0.07
-    nx, nz = 4, 3
+    nx, nz = 3, 2
     grid = [[f.p(-pw / 2 + pw * i / nx, -ph / 2 + ph * j / nz, 0.012 + 0.006 * ((i + j) % 2)) for j in range(nz + 1)]
             for i in range(nx + 1)]
     for i in range(nx):
@@ -429,39 +382,32 @@ def n_back_w(g, lod):
     polyline(g, f, coast_s, 0.012, D0, D1, "Iron")
     tooth = (0.12, -0.02)
     g.prism([(tooth[0] + 0.05 * math.cos(a), tooth[1] + 0.035 * math.sin(a)) for a in
-             [2 * math.pi * k / 6 for k in range(6)]], f, D0 - 0.002, D1, "Iron", caps=(False, True))
-    for k in range(7):                                         # rocks
-        u, v = r.uniform(-0.9, 0.9), r.choice((r.uniform(0.3, 0.5), r.uniform(-0.5, -0.32)))
-        g.prism([(u - 0.015, v - 0.012), (u + 0.015, v - 0.012), (u, v + 0.015)], f, D0, D1, "Iron",
-                caps=(False, True))
+             [2 * math.pi * k / 5 for k in range(5)]], f, D0 - 0.002, D1, "Iron", caps=(False, True))
     # the circle round the Tooth, drawn many times over
-    for k in range(4):
+    for k in range(3):
         rr = 0.12 + 0.012 * k
         ring = [(tooth[0] + rr * math.cos(a + k), tooth[1] + rr * 0.8 * math.sin(a + k))
-                for a in [2 * math.pi * i / 12 for i in range(13)]]
+                for a in [2 * math.pi * i / 10 for i in range(11)]]
         polyline(g, f, ring, 0.006, D0, D1 + 0.001, "Iron")
     # Crown patrol lines (red: rust) as dashes, wrecks as crosses, the Lord's ships as little gilt hooks
-    for line in ([(-1.0, 0.1), (-0.5, 0.18), (-0.1, 0.12)], [(0.4, -0.2), (0.8, -0.1), (1.0, -0.2)]):
+    for line in ([(-1.0, 0.1), (-0.1, 0.12)], [(0.4, -0.2), (1.0, -0.2)]):
         for (a, b) in zip(line, line[1:]):
-            for t in (0.0, 0.33, 0.66):
+            for t in (0.0, 0.4):
                 p = (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
-                q = (a[0] + (b[0] - a[0]) * (t + 0.2), a[1] + (b[1] - a[1]) * (t + 0.2))
+                q = (a[0] + (b[0] - a[0]) * (t + 0.25), a[1] + (b[1] - a[1]) * (t + 0.25))
                 seg(g, f, p, q, 0.01, D0, D1, "Iron")
-    for (u, v) in ((-0.6, -0.1), (0.3, 0.12), (0.65, -0.05), (-0.25, -0.2), (0.9, 0.05)):
+    for (u, v) in ((0.3, 0.12), (0.65, -0.05)):
         seg(g, f, (u - 0.03, v - 0.03), (u + 0.03, v + 0.03), 0.008, D0, D1, "Iron")
         seg(g, f, (u - 0.03, v + 0.03), (u + 0.03, v - 0.03), 0.008, D0, D1, "Iron")
-    for (u, v) in ((-0.85, -0.05), (-0.35, 0.05), (0.5, 0.05)):
+    for (u, v) in ((-0.85, -0.05), (0.5, 0.05)):
         polyline(g, f, [(u, v + 0.05), (u, v - 0.02), (u - 0.025, v - 0.035), (u - 0.04, v - 0.01)], 0.008,
                  D0, D1 + 0.002, "Bone")
-    # compass rose and cartouche
+    # compass rose
     cr = (-0.8, -0.18)
     for a in range(8):
         L = 0.11 if a % 2 == 0 else 0.06
         ang = math.pi / 4 * a
         seg(g, f, cr, (cr[0] + L * math.cos(ang), cr[1] + L * math.sin(ang)), 0.006, D0, D1, "Iron")
-    polyline(g, f, [(0.6, 0.6), (1.0, 0.6), (1.0, 0.45), (0.6, 0.45), (0.6, 0.6)], 0.006, D0, D1, "Iron")
-    for k in range(3):
-        seg(g, f, (0.65, 0.56 - k * 0.04), (0.95 - 0.08 * (k % 2), 0.56 - k * 0.04), 0.006, D0, D1, "Iron")
     # hung from a spike by a cord
     nail = V((cx, YB0 - 0.03, cz + H / 2 + 0.38))
     g.cyl(V((cx, YB0, nail.z)), nail, 0.012, 4, "Iron", caps=(False, True))
@@ -494,15 +440,10 @@ def sabre(g, fr, c, ang, L, rnd):
 
 @decorates("N_Back_E")
 def n_back_e(g, lod):
-    if lod >= 2:
+    if lod != 0:
         return
     bx0, bz_top = 9.6, 5.9          # Crown banner: centre x, iron bar height
     W, H = 1.1, 2.55
-    if lod == 1:
-        g.face([V((bx0 - W / 2, YB0 - 0.1, bz_top)), V((bx0 + W / 2, YB0 - 0.1, bz_top)),
-                V((bx0 + W / 2, YB0 - 0.1, bz_top - H)), V((bx0 - W / 2, YB0 - 0.1, bz_top - H))], "Cloth",
-               (0, -1, 0))
-        return
     r = rng("throne-back-e")
     lord_banner_device(g, 6.4, r)
     half_candle_crown(g, 5.1, 2.75, r)
@@ -581,8 +522,8 @@ def n_back_e(g, lod):
             fc, 0.0, 0.03, "Wood", caps=(False, True))
     g.prism([(0.07 * math.cos(a), 0.07 * math.sin(a)) for a in [2 * math.pi * k / 8 for k in range(8)]],
             fc, 0.03, 0.045, "Iron", caps=(False, True))                   # a Crown marine's gorget
-    for k in range(7):
-        ang = math.pi / 2 + 2 * math.pi * k / 7
+    for k in range(5):
+        ang = math.pi / 2 + 2 * math.pi * k / 5
         hilt = (0.75 * math.cos(ang), 0.75 * math.sin(ang))
         sabre(g, fc, hilt, ang + math.pi, 0.5, r)
         # peg under each hilt
@@ -603,16 +544,12 @@ def n_wall_w(g, lod):
     pts_bot = [V((x, p.y, 0.835 - r.uniform(0.02, 0.09))) for p in pts_top]
     for k in range(16):
         g.face([pts_bot[k], pts_bot[k + 1], pts_top[k + 1], pts_top[k]], "Bone", (1, 0, 0))
-    # tide streaks running down to the floor
-    for k in range(9):
-        y = r.uniform(12.0, 15.0)
-        z1 = r.uniform(0.55, 0.75)
+    # a couple of tide streaks running down to the floor
+    for y, z1 in ((12.3, 0.72), (13.6, 0.6), (14.7, 0.68)):
         g.face([V((x, y, 0.41)), V((x, y + 0.015, 0.41)), V((x, y + 0.01, z1)), V((x, y, z1))], "Bone", (1, 0, 0))
     # FLOOD Y7 cut above the line at its north end
     fr = Frame((x, 0, 0), (0, -1, 0), (0, 0, 1), (1, 0, 0))
     text(g, fr, "FLOOD Y7", 0.07, 0.009, 0.0, EPS, "Iron", u0=-14.95, v0=0.87, pitch=1.15)
-    # the tide mark of the ordinary springs, lower and fainter
-    g.face([V((x, 12.6, 0.55)), V((x, 14.4, 0.55)), V((x, 14.4, 0.556)), V((x, 12.6, 0.556))], "Bone", (1, 0, 0))
 
 
 # ================================================================== N_Dais
@@ -622,10 +559,10 @@ def n_dais(g, lod):
         return
     # gilt nail heads set along the chamfered front edge of the top step (y 12.6, z 1.3)
     nrm = V((0, -1, 1)).normalized()
-    for k in range(41):
-        x = -2.95 + 5.9 * k / 40
+    for k in range(25):
+        x = -2.95 + 5.9 * k / 24
         p = V((x, 12.6125 - 0.001, DAIS - 0.0125 - 0.001))
-        g.cyl(p, p + nrm * 0.004, 0.008, 5, "Bone", caps=(False, True), r1=0.005, phase=k * 0.4)
+        g.cyl(p, p + nrm * 0.004, 0.008, 4, "Bone", caps=(False, True), r1=0.005, phase=k * 0.4)
     # KNEEL cut into the centre of the lowest riser (y = 11.31), worn in the middle
     yr = 13.255 - 3.89 / 2
     fr = Frame((0, yr, 0), (1, 0, 0), (0, 0, 1), (0, -1, 0))
@@ -990,7 +927,7 @@ def figurehead(g, base, lean, rnd):
     def P(x, h, f):
         return base + side * x + up * h + fwd * f
     # body: lofted ellipses (scroll base -> waist -> breast -> shoulders -> neck)
-    prof = [(0.0, 0.2, 0.2, -0.05), (0.18, 0.22, 0.26, 0.0), (0.45, 0.17, 0.2, 0.05), (0.75, 0.15, 0.16, 0.06),
+    prof = [(0.08, 0.2, 0.18, 0.0), (0.22, 0.22, 0.22, 0.03), (0.45, 0.17, 0.18, 0.05), (0.75, 0.15, 0.16, 0.06),
             (1.0, 0.17, 0.17, 0.08), (1.18, 0.2, 0.15, 0.06), (1.3, 0.2, 0.12, 0.04), (1.36, 0.06, 0.05, 0.04)]
     n = 10
     rings = []
@@ -1003,8 +940,8 @@ def figurehead(g, base, lean, rnd):
             k2 = (k + 1) % n
             g.face_c([rings[i][k], rings[i][k2], rings[i + 1][k2], rings[i + 1][k]], "Wood", axis)
     g.face(rings[0], "Wood", -up)
-    # scroll curl at the foot
-    g.sweep([P(-0.18, 0.06, 0.12), P(0, 0.0, 0.26), P(0.18, 0.06, 0.12)], 0.06, 6, "Wood")
+    # scroll curl at the foot (raised so it stays above the floor)
+    g.sweep([P(-0.18, 0.12, 0.1), P(0, 0.08, 0.22), P(0.18, 0.12, 0.1)], 0.05, 5, "Wood")
     # head, face painted white long ago, crown (gilt) and hair down her back
     hc = P(0, 1.5, 0.06)
     g.blob(hc - up * 0.1, 0.1, 0.11, 0.2, 8, 3, "Wood", rnd, 0.04, flat_bottom=False,
@@ -1062,27 +999,28 @@ def n_props_e(g, lod):
         g.cyl(p, p + nrm * 0.004, 0.017, 6, "Bone", caps=(False, True))
     for k in range(18):
         a = r.uniform(0, 6.28)
-        p = V((cc.x - 0.1 + r.uniform(-0.45, 0.6), cc.y - 0.42 + r.uniform(-0.2, 0.12), z + 0.0015))
-        coin(p, r.choice((0.0, 0.0, 0.3)), a)
+        p = V((cc.x - 0.05 + r.uniform(-0.4, 0.55), cc.y - 0.42 + r.uniform(-0.2, 0.12), z + 0.0015))
+        coin(p, 0.0, a)
     for k in range(10):
         coin(V((cc.x + r.uniform(-0.38, 0.38), cc.y + r.uniform(-0.18, 0.18), FL + 0.47 + r.uniform(0, 0.04))),
              r.uniform(0, 0.5), r.uniform(0, 6.28))
     stack = V((8.62, 14.45, FL))
     for k in range(7):                                                      # a counted stack
-        g.cyl(stack + V((r.uniform(-0.002, 0.002), 0, 0.0045 * k)), stack + V((0, 0, 0.0045 * k + 0.0045)), 0.017, 6,
+        off_x = r.uniform(-0.002, 0.002)
+        g.cyl(stack + V((off_x, 0, 0.0045 * k)), stack + V((off_x, 0, 0.0045 * k + 0.0045)), 0.017, 6,
               "Bone", caps=(False, True))
     # -- grey pearls spilling over the front edge of the chest
     pts = []
-    for k in range(14):
-        t = k / 13
+    for k in range(12):
+        t = k / 11
         x = 8.15 + 0.2 * t
-        if t < 0.35:
-            p = V((x, 14.36 - t * 0.18, FL + 0.46))
+        if t < 0.4:
+            p = V((x, 14.36 - t * 0.18, FL + 0.47))
         else:
-            p = V((x, 14.29, FL + 0.46 - (t - 0.35) * 0.32))
+            p = V((x, 14.29, FL + 0.47 - (t - 0.4) * 0.09))
         pts.append(p)
     for p in pts:
-        g.blob(p - V((0, 0, 0.007)), 0.008, 0.008, 0.014, 4, 1, "Bone", r, 0.0, flat_bottom=True)
+        g.blob(p, 0.008, 0.008, 0.011, 4, 1, "Bone", r, 0.0, flat_bottom=True)
     # -- the gilt reliquary of Saint Clement, standing on the coins
     rc = V((7.75, 14.6, 0.86))
     bx(g, rc.x - 0.09, rc.x + 0.09, rc.y - 0.06, rc.y + 0.06, rc.z, rc.z + 0.08, "Bone", 0.006)
@@ -1134,4 +1072,4 @@ def n_props_e(g, lod):
         g.face(sheet[::-1], "Cloth", (0, 0, -1))
 
     # -- a prize's figurehead, leant against the back wall between the chest and the barrels
-    figurehead(g, (8.96, 14.62, FL), 0.22, r)
+    figurehead(g, (8.96, 14.62, FL + 0.1), 0.22, r)

@@ -131,26 +131,22 @@ def text_width(s, h, adv=0.75):
 
 
 def write(g, fr, s, u0, v0, h, d, mat, w=None, adv=0.75, rnd=None, jit=0.0, align="l", dfun=None):
-    """Writes `s` with the stroke font: baseline at v0, starting at u0 ('l') or centred on it ('c')."""
+    """Suggests writing (the bible: 'the mesh only has to suggest writing'): one short dash per
+    character, drawn at a slight random tilt so a line of text reads as a line of ink or chalk."""
     k = h / 4.0
-    w = h * 0.13 if w is None else w
+    w = h * 0.14 if w is None else w
     if align == "c":
         u0 -= text_width(s, h, adv) / 2
     for i, ch in enumerate(s.upper()):
-        strokes = FONT.get(ch)
-        x0 = u0 + i * adv * h
-        if not strokes:
+        if ch == " ":
             continue
+        x0 = u0 + i * adv * h
         dd = d if dfun is None else dfun(x0 + h * 0.25, v0 + h * 0.5)
-        for pl in strokes:
-            pts = []
-            for a, b in pl:
-                if rnd is not None and jit:
-                    a += rnd.uniform(-jit, jit)
-                    b += rnd.uniform(-jit, jit)
-                pts.append((x0 + a * k, v0 + b * k))
-            for p, q in zip(pts, pts[1:]):
-                seg(g, fr, p, q, w, dd, mat)
+        # one dash per character; jitter its length and height so the row looks hand-written
+        tilt = 0.0 if rnd is None else rnd.uniform(-jit * 0.4, jit * 0.4)
+        y0 = v0 + h * 0.4 + (0 if rnd is None else rnd.uniform(-jit, jit) * k)
+        xa, xb = x0 + 0.1 * h, x0 + (adv - 0.15) * h
+        seg(g, fr, (xa, y0 - tilt * h), (xb, y0 + tilt * h), w, dd, mat)
 
 
 def lines(g, fr, rows, u0, v0, h, d, mat, gap=1.5, **kw):
@@ -287,43 +283,32 @@ def crab(g, p, ang, rnd, mat="Wood", empty=False):
     p = V(p)
     R = rot_z(ang)
     if empty:
-        g.blob(p + V((0, 0, 0.016)), 0.034, 0.027, -0.015, 8, 2, mat, rnd, 0.08, flat_bottom=False, rot=R)
-        g.face([p + V((0, 0, 0.016)) + R @ V((math.cos(a) * 0.034, math.sin(a) * 0.027, 0))
-                for a in [2 * math.pi * i / 8 for i in range(8)]], "Floor", UP)
+        g.blob(p + V((0, 0, 0.014)), 0.034, 0.027, -0.013, 6, 1, mat, rnd, 0.08, flat_bottom=False, rot=R)
         return
-    g.blob(p, 0.034, 0.027, 0.015, 8, 2, mat, rnd, 0.08, rot=R)
+    g.blob(p, 0.034, 0.027, 0.013, 6, 2, mat, rnd, 0.08, rot=R)
     for sd in (-1, 1):
-        for k, yo in enumerate((-0.012, 0.0, 0.012)):
+        for k, yo in enumerate((-0.012, 0.012)):
             a0 = p + R @ V((sd * 0.026, yo, 0.006))
-            a1 = p + R @ V((sd * (0.05 + 0.004 * k), yo * 1.6 - 0.004, 0.014))
-            a2 = p + R @ V((sd * (0.066 + 0.006 * k), yo * 2.2 - 0.012, 0.002))
-            g.sweep([a0, a1, a2], 0.0035, 3, mat)
+            a1 = p + R @ V((sd * 0.06, yo * 2.0, 0.002))
+            g.sweep([a0, a1], 0.0035, 3, mat)
         c0 = p + R @ V((sd * 0.015, 0.024, 0.007))
         c1 = p + R @ V((sd * 0.03, 0.05, 0.008))
         g.sweep([c0, c1], 0.005, 3, mat)
-        g.blob(c1 + R @ V((0, 0.012, -0.004)), 0.008, 0.016, 0.009, 5, 1, mat, rnd, 0.1, rot=R)
 
 
 def gull_bones(g, p, ang, rnd):
-    """What the rats left of a gull: skull and beak, wing bones, a wishbone and feathers."""
+    """What the rats left of a gull: skull and beak, two wing bones, one feather."""
     p = V(p)
     R = rot_z(ang)
     L = lambda x, y, z: p + R @ V((x, y, z))
-    g.blob(L(0, 0, 0.0), 0.016, 0.022, 0.016, 6, 2, "Bone", rnd, 0.06, rot=R)
-    g.cyl(L(0, 0.018, 0.008), L(0.004, 0.075, 0.004), 0.007, 4, "Bone", caps=(False, True), r1=0.001)
-    for (x0, y0, x1, y1) in ((0.05, -0.02, 0.15, -0.05), (0.15, -0.05, 0.24, 0.0), (0.06, 0.03, 0.17, 0.06),
-                             (-0.04, -0.06, -0.02, -0.16)):
-        g.cyl(L(x0, y0, 0.004), L(x1, y1, 0.004), 0.004, 4, "Bone")
-    g.sweep([L(0.08, -0.1, 0.003), L(0.1, -0.13, 0.005), L(0.12, -0.1, 0.003)], 0.0025, 3, "Bone", caps=False)
-    for k in range(3):  # feathers
-        a = ang + rnd.uniform(-1.2, 1.2)
-        c = p + R @ V((0.1 + 0.06 * k, 0.1 + rnd.uniform(-0.05, 0.05), 0.0015 + 0.0006 * k))
-        t = V((math.cos(a), math.sin(a), 0))
-        s = V((-t.y, t.x, 0))
-        ln = rnd.uniform(0.09, 0.14)
-        g.face([c - t * ln / 2, c + s * 0.012, c + t * ln / 2, c - s * 0.012], "Bone", UP)
-        g.face([c - t * ln / 2 + V((0, 0, 0.0004)), c + t * ln / 2 + V((0, 0, 0.0004)),
-                c + t * ln / 2 + s * 0.002 + V((0, 0, 0.0004))], "Iron", UP)
+    g.blob(L(0, 0, 0.0), 0.016, 0.022, 0.014, 5, 1, "Bone", rnd, 0.06, rot=R)
+    g.cyl(L(0, 0.018, 0.006), L(0.004, 0.075, 0.004), 0.006, 3, "Bone", caps=(False, True), r1=0.001)
+    for (x0, y0, x1, y1) in ((0.05, -0.02, 0.2, -0.03), (0.06, 0.03, 0.19, 0.05)):
+        g.cyl(L(x0, y0, 0.004), L(x1, y1, 0.004), 0.004, 3, "Bone")
+    c = p + R @ V((0.15, 0.1, 0.002))
+    t = V((math.cos(ang + 0.3), math.sin(ang + 0.3), 0))
+    s = V((-t.y, t.x, 0))
+    g.face([c - t * 0.06, c + s * 0.012, c + t * 0.06, c - s * 0.012], "Bone", UP)
 
 
 def nail(g, p, n, r=0.006):
@@ -370,29 +355,15 @@ def gutter_ring(g, y, sd):
 def floor_common(g, k, rnd):
     tops = Tops(g)
     y0, y1 = YP[k], YP[k + 1]
-    # salt rime: white crust on the lips of the channel and in its bed, broken by the tide
+    # salt rime: a long white crust on each lip, as one strip
     for sd in (-1, 1):
-        y = y0 + rnd.uniform(0.05, 0.3)
-        while y < y1 - 0.15:
-            ln = rnd.uniform(0.18, 0.5)
-            ye = min(y + ln, y1 - 0.03)
-            w0, w1 = rnd.uniform(0.008, 0.03), rnd.uniform(0.008, 0.03)
-            xa = sd * (LIP + 0.019)
-            fdecal(g, tops, [(xa, y), (xa + sd * w0, y + 0.03), (xa + sd * w1, ye - 0.03), (xa, ye)][::sd], "Bone")
-            xb = sd * LIP
-            wb = rnd.uniform(0.02, 0.06)
-            g.face([V((xb, y, GUTTER + 0.0007)), V((xb - sd * wb, y + 0.05, GUTTER + 0.0007)),
-                    V((xb - sd * wb * 0.7, ye, GUTTER + 0.0007)), V((xb, ye, GUTTER + 0.0007))], "Bone", UP)
-            y = ye + rnd.uniform(0.04, 0.35)
-    # weed caught on the channel grate (Straw = weed)
+        xa = sd * (LIP + 0.016)
+        fdecal(g, tops, [(xa, y0 + 0.1), (xa + sd * 0.022, y0 + 0.4), (xa + sd * 0.015, y1 - 0.4),
+                         (xa, y1 - 0.1)][::sd], "Bone")
+    # one tuft of weed on the grate
     gy = YCELL[k]
-    for i in range(3):
-        xx = rnd.uniform(-0.15, 0.15)
-        p0 = V((xx, gy - 0.42 + rnd.uniform(0, 0.1), FL + 0.002))
-        g.sweep([p0, p0 + V((rnd.uniform(-0.05, 0.05), 0.15, 0.003)), p0 + V((rnd.uniform(-0.08, 0.08), 0.3, 0.001))],
-                0.004, 3, "Straw")
-    # a crab shell in the channel bed
-    crab(g, V((rnd.uniform(-0.08, 0.08), y0 + rnd.uniform(0.8, 1.6), GUTTER)), rnd.uniform(0, 6.3), rnd)
+    p0 = V((rnd.uniform(-0.1, 0.1), gy - 0.3, FL + 0.002))
+    g.sweep([p0, p0 + V((0, 0.15, 0.003)), p0 + V((rnd.uniform(-0.05, 0.05), 0.3, 0.001))], 0.004, 3, "Straw")
     return tops
 
 
@@ -428,22 +399,15 @@ def p1_floor(g, lod):
         seg(g, fr, (-0.065, v), (-0.045, v), 0.003, z, "Iron")
         seg(g, fr, (-0.035, v), (r.uniform(0.01, 0.065), v), 0.0022, z, "Iron")
     seg(g, fr, (-0.04, -0.1), (-0.04, 0.03), 0.0015, base + 0.0006, "Iron")
-    # dead crab and gull bones at the pier bases, out of the walkway
+    # one dead crab and one half-shell at the pier bases, one patch of gull droppings under the nests
     crab(g, V((2.76, -11.25, tops.over([(2.76, -11.25)]))), 2.1, r)
     crab(g, V((-2.78, -10.85, tops.over([(-2.78, -10.85)]))), 0.4, r, mat="Bone", empty=True)
-    gull_bones(g, V((2.7, -6.3, tops.over([(2.7, -6.3), (2.85, -6.25)]))), 2.6, r)
-    # swallow droppings under the nests of the first beam
-    for i in range(7):
-        cx, cy = 2.05 + r.uniform(-0.15, 0.15), -11.38 + r.uniform(-0.1, 0.1)
-        fdecal(g, tops, blotch(cx, cy, r.uniform(0.01, 0.025), r, 6), "Bone")
-    # under the Governor: the dark drip stain, two toe bones that fell
-    fdecal(g, tops, blotch(0.8, -6.0, 0.2, r, 10, 0.8, 0.4), "Iron")
-    for i in range(5):
-        fdecal(g, tops, blotch(0.8 + r.uniform(-0.3, 0.3), -6.0 + r.uniform(-0.22, 0.2), r.uniform(0.015, 0.04), r, 6),
-               "Iron", lift=0.0012)
+    fdecal(g, tops, blotch(2.05, -11.38, 0.14, r, 6, 0.6), "Bone")
+    # under the Governor: the dark drip stain and two toe bones that fell from above
+    fdecal(g, tops, blotch(0.8, -6.0, 0.2, r, 8, 0.8, 0.4), "Iron")
     for (x, y, a) in ((0.72, -5.95, 0.3), (0.86, -6.08, 1.9)):
         z = tops.over([(x, y)]) + 0.004
-        g.cyl(V((x, y, z)), V((x + 0.03 * math.cos(a), y + 0.03 * math.sin(a), z)), 0.0045, 4, "Bone")
+        g.cyl(V((x, y, z)), V((x + 0.03 * math.cos(a), y + 0.03 * math.sin(a), z)), 0.0045, 3, "Bone")
     gutter_ring(g, -7.1, -1)
 
 
@@ -464,12 +428,10 @@ def p2_floor(g, lod):
     for sy in (-1, 1):
         g.box(V((cx - h - 0.012, cy + sy * h - 0.012, z)), V((cx + h + 0.012, cy + sy * h + 0.012, z + 0.007)), "Iron")
     fdecal(g, tops, blotch(cx + 0.16, cy + 0.02, 0.07, r, 7, 1.6), "Bone")
-    for i in range(3):  # weed growing out of the drain
-        p0 = V((cx + r.uniform(-0.06, 0.06), cy + r.uniform(-0.06, 0.06), z + 0.004))
-        g.sweep([p0, p0 + V((0.06, r.uniform(-0.05, 0.05), 0.006)), p0 + V((0.13, r.uniform(-0.08, 0.08), 0.002))],
-                0.004, 3, "Straw")
-    crab(g, V((2.75, -4.3, tops.over([(2.75, -4.3)]))), 4.0, r)
-    crab(g, V((-2.7, -0.6, tops.over([(-2.7, -0.6)]))), 1.1, r, mat="Bone", empty=True)
+    # one tuft of weed from the drain
+    p0 = V((cx + 0.03, cy, z + 0.004))
+    g.sweep([p0, p0 + V((0.07, 0.0, 0.006)), p0 + V((0.14, 0.0, 0.002))], 0.004, 3, "Straw")
+    crab(g, V((2.75, -4.3, tops.over([(2.75, -4.3)]))), 4.0, r, mat="Bone", empty=True)
 
 
 @kept("P3_Floor")
@@ -489,7 +451,6 @@ def p3_floor(g, lod):
         y = ye + r.uniform(0.02, 0.12)
     gutter_ring(g, 1.6, -1)
     gull_bones(g, V((-2.68, 4.75, tops.over([(-2.68, 4.75), (-2.5, 4.75)]))), -0.6, r)
-    crab(g, V((2.78, 0.55, tops.over([(2.78, 0.55)]))), 5.0, r)
 
 
 @kept("P4_Floor")
@@ -500,13 +461,8 @@ def p4_floor(g, lod):
     tops = floor_common(g, 3, r)
     # two knee hollows before the dais, worn pale and smooth, and the toe scuffs behind them
     for sx in (-0.28, 0.28):
-        fdecal(g, tops, blotch(sx, 11.0, 0.11, r, 10, 0.65), "Stone", lift=0.0008)
-        ring = blotch(sx, 11.0, 0.125, r, 10, 0.7)
-        for a, b in zip(ring, ring[1:] + ring[:1]):
-            fseg(g, tops, a, b, 0.008, "Iron", lift=0.0011, step=1.0)
-        fdecal(g, tops, blotch(sx * 1.1, 10.55, 0.05, r, 6, 0.5), "Stone", lift=0.0008)
+        fdecal(g, tops, blotch(sx, 11.0, 0.11, r, 8, 0.65), "Stone", lift=0.0008)
     gutter_ring(g, 7.4, 1)
-    crab(g, V((-2.76, 6.4, tops.over([(-2.76, 6.4)]))), 3.3, r)
     crab(g, V((2.72, 11.25, tops.over([(2.72, 11.25)]))), 0.9, r, mat="Bone", empty=True)
 
 
@@ -714,20 +670,18 @@ def t2_beam(g, lod):
     g.link(V((x0, y0, 6.285)), V((0, 0, 1)), V((0, 1, 0)), 0.03, 0.02, 0.006, 8, 3, "Iron")
     # standing part from the staple down to the hangman's knot
     g.sweep([V((x0, y0, 6.27)), V((x0 + 0.01, y0, 6.18)), V((x0, y0, 6.1))], 0.012, 4, "Straw")
-    # the knot: seven tight turns
+    # the knot: four tight turns
     pts = []
-    n_t, per = 7, 8
+    n_t, per = 4, 5
     for i in range(n_t * per + 1):
         a = 2 * math.pi * i / per
         pts.append(V((x0 + math.cos(a) * 0.026, y0 + math.sin(a) * 0.026, 6.1 - i * (0.16 / (n_t * per)))))
-    g.sweep(pts, 0.011, 4, "Straw")
+    g.sweep(pts, 0.011, 3, "Straw")
     # the noose itself, lifted short and hung beside the knot
-    g.link(V((x0, y0, 5.835)), V((0, 0, 1)), V((1, 0, 0)), 0.1, 0.075, 0.012, 16, 4, "Straw")
-    # the spare rope, coiled and hung on the same staple
-    for k in range(3):
-        g.link(V((x0 + 0.12 + 0.01 * k, y0 + 0.012 * (k - 1), 6.18 - 0.005 * k)), V((0, 0, 1)),
-               V((1, 0.15 * (k - 1), 0)), 0.1, 0.09, 0.011, 16, 4, "Straw")
-    g.sweep([V((x0, y0, 6.27)), V((x0 + 0.06, y0, 6.285)), V((x0 + 0.12, y0, 6.275))], 0.011, 4, "Straw")
+    g.link(V((x0, y0, 5.835)), V((0, 0, 1)), V((1, 0, 0)), 0.1, 0.075, 0.012, 10, 3, "Straw")
+    # the spare rope, coiled on the same staple
+    g.link(V((x0 + 0.12, y0, 6.18)), V((0, 0, 1)), V((1, 0, 0)), 0.1, 0.09, 0.011, 10, 3, "Straw")
+    g.sweep([V((x0, y0, 6.27)), V((x0 + 0.06, y0, 6.285)), V((x0 + 0.12, y0, 6.275))], 0.011, 3, "Straw")
 
 
 @kept("T3_Beam")
@@ -956,19 +910,26 @@ def g_winch(g, lod):
         return prof[-1][1]
 
     for h in (-0.24, -0.325):
-        g.link(bc + V((0, 0, h)), V((1, 0, 0)), V((0, 1, 0)), rad(h) + 0.002, rad(h) + 0.002, 0.005, 20, 3, "Iron")
+        g.link(bc + V((0, 0, h)), V((1, 0, 0)), V((0, 1, 0)), rad(h) + 0.002, rad(h) + 0.002, 0.005, 12, 3, "Iron")
     txt = "SAINT CLEMENT KEEP THE SAILORS + FORT CLEMENCY + "
     n = len(txt)
     hz = -0.298
-    for i, ch in enumerate(txt):
+    # SAINT filed away as one bright scraped patch
+    a0 = 2 * math.pi * 0 / n
+    for sweep in range(5):
+        a = 2 * math.pi * sweep / n
+        d = V((math.cos(a), math.sin(a), 0))
+        o = bc + V((0, 0, hz)) + d * (rad(hz) + 0.0015)
+        fr = wall_frame(o, d)
+        poly(g, fr, [(-0.013, -0.013), (0.013, -0.013), (0.013, 0.016), (-0.013, 0.016)], 0.0, "Bone")
+    # the rest of the cast letters: suggest as short radial dashes
+    for i in range(5, n):
         a = 2 * math.pi * i / n
         d = V((math.cos(a), math.sin(a), 0))
         o = bc + V((0, 0, hz)) + d * (rad(hz) + 0.0015)
         fr = wall_frame(o, d)
-        if i < 5:  # SAINT filed away: a bright scraped patch
-            poly(g, fr, [(-0.012, -0.012), (0.013, -0.013), (0.013, 0.016), (-0.012, 0.015)], 0.0, "Bone")
-            continue
-        write(g, fr, ch, -0.0075, -0.011, 0.024, 0.0, "Iron", w=0.0035)
+        seg(g, fr, (-0.006, -0.002), (0.006, 0.002), 0.014, 0.0, "Iron")
+    del a0
     # chalk strokes on the bell post: one for every man rung in this year
     fp = wall_frame(V((-5.6, -13.77, 0)), V((0, 1, 0)))
     v = 2.3
@@ -1026,33 +987,28 @@ def g_wall_e(g, lod):
     r = rng("wanted")
     fr = wall_frame(V((8.7, -15.2, 0)), V((0, 1, 0)))
     n = V((0, 1, 0))
-    for k, (price, cu) in enumerate((("200", -0.53), ("500", 0.0), ("1000", 0.53))):
-        cv = 1.9 + r.uniform(-0.04, 0.04)
-        ang = r.uniform(-0.05, 0.05)
-        d = 0.001
-        sheet(g, fr, cu - 0.21, cv - 0.32, cu + 0.21, cv + 0.32, d, ang=ang, torn=(k + 1) % 4 if k != 1 else None,
+    # three wanted posters pinned up as one overlapping pile (200, 500, 1,000 crowns)
+    for k, (price, du, dv, ang) in enumerate((("200", -0.1, -0.03, 0.06), ("500", 0.05, 0.02, -0.04),
+                                              ("1000", 0.0, 0.0, 0.0))):
+        d = 0.001 + 0.0012 * k
+        sheet(g, fr, du - 0.21, dv - 0.32, du + 0.21, dv + 0.32, d, ang=ang, torn=(k * 2) % 4 if k < 2 else None,
               rnd=r)
-        R = rot2(cu, cv, ang)
-        S = lambda a, b, w_, mat="Iron": seg(g, fr, R(cu + a, cv + b), R(cu + a + 0, cv + b) if False else R(cu + a, cv + b),
-                                             w_, d + 0.0006, mat)
-        del S
-        dd = d + 0.0006
-        write(g, fr, "WANTED", cu, cv + 0.22, 0.05, dd, "Iron", align="c")
-        # the face of Lucan Drave (with the Watch's moustache)
-        face = [(math.cos(a) * 0.08, math.sin(a) * 0.1 + 0.06) for a in [2 * math.pi * i / 10 for i in range(11)]]
-        for a, b in zip(face, face[1:]):
-            seg(g, fr, R(cu + a[0], cv + a[1]), R(cu + b[0], cv + b[1]), 0.005, dd, "Iron")
-        for ex in (-0.03, 0.03):
-            seg(g, fr, R(cu + ex - 0.012, cv + 0.09), R(cu + ex + 0.012, cv + 0.09), 0.006, dd, "Iron")
-        seg(g, fr, R(cu - 0.05, cv + 0.02), R(cu - 0.005, cv + 0.035), 0.008, dd + 0.0003, "Iron")
-        seg(g, fr, R(cu + 0.005, cv + 0.035), R(cu + 0.05, cv + 0.02), 0.008, dd + 0.0003, "Iron")
-        seg(g, fr, R(cu - 0.08, cv + 0.14), R(cu - 0.06, cv + 0.17), 0.012, dd, "Iron")
-        write(g, fr, "LUCAN DRAVE", cu, cv - 0.1, 0.03, dd, "Iron", align="c", adv=0.7)
-        write(g, fr, price, cu, cv - 0.19, 0.055, dd, "Iron", align="c")
-        write(g, fr, "CROWNS", cu, cv - 0.255, 0.025, dd, "Iron", align="c")
-        for du, dv in ((-0.18, 0.29), (0.18, 0.29)):
-            p = R(cu + du, cv + dv)
-            nail(g, fr.p(p[0], p[1], dd), n)
+    dd = 0.0046
+    cu, cv = 0.0, 0.0
+    R = lambda a, b: (a, b)
+    write(g, fr, "WANTED", cu, cv + 0.22, 0.05, dd, "Iron", align="c")
+    # the face of Lucan Drave with the Watch's moustache
+    face = [(math.cos(a) * 0.08, math.sin(a) * 0.1 + 0.06) for a in [2 * math.pi * i / 10 for i in range(11)]]
+    for a, b in zip(face, face[1:]):
+        seg(g, fr, (cu + a[0], cv + a[1]), (cu + b[0], cv + b[1]), 0.005, dd, "Iron")
+    for ex in (-0.03, 0.03):
+        seg(g, fr, (cu + ex - 0.012, cv + 0.09), (cu + ex + 0.012, cv + 0.09), 0.006, dd, "Iron")
+    seg(g, fr, (cu - 0.05, cv + 0.02), (cu + 0.05, cv + 0.02), 0.008, dd + 0.0003, "Iron")
+    write(g, fr, "LUCAN DRAVE", cu, cv - 0.1, 0.03, dd, "Iron", align="c", adv=0.7)
+    write(g, fr, "1,000 CROWNS", cu, cv - 0.19, 0.045, dd, "Iron", align="c")
+    for du, dv in ((-0.18, 0.29), (0.18, 0.29)):
+        nail(g, fr.p(cu + du, cv + dv, dd), n)
+    del R
 
 
 @kept("V_Partition_W")
@@ -1089,12 +1045,10 @@ def v_partition_w(g, lod):
     g.link(fr_ + V((0, 0, -0.06)), UP, V((1, 0, 0)), 0.06, 0.025, 0.006, 10, 3, "Cloth")
     # manacles on the west peg
     mp = V((-10.4, yw - 0.035, 1.765))
-    g.link(mp + V((0, 0, -0.04)), UP, V((1, 0, 0)), 0.03, 0.015, 0.004, 6, 3, "Iron")
     for sx in (-1, 1):
-        g.link(mp + V((sx * 0.04, 0.0, -0.13)), V((1, 0, 0)), UP, 0.045, 0.045, 0.007, 12, 3, "Iron")
+        g.link(mp + V((sx * 0.04, 0.0, -0.13)), V((1, 0, 0)), UP, 0.045, 0.045, 0.007, 8, 3, "Iron")
     # a coil of rope on the east peg
-    g.link(V((-9.1, yw - 0.035, 1.66)), UP, V((1, 0, 0)), 0.12, 0.1, 0.014, 16, 4, "Straw")
-    g.link(V((-9.08, yw - 0.032, 1.64)), UP, V((1, 0, 0.1)), 0.11, 0.1, 0.013, 16, 4, "Straw")
+    g.link(V((-9.1, yw - 0.035, 1.66)), UP, V((1, 0, 0)), 0.12, 0.1, 0.014, 10, 3, "Straw")
     del fs
 
 
@@ -1105,30 +1059,27 @@ def v_partition_e(g, lod):
     r = rng("compass")
     # compass rose on the Kennel side (north face): Hugh Ormond's bearings, north struck through
     fr = wall_frame(V((8.0, YP[0] + PT, 1.6)), V((0, 1, 0)))
-    for i in range(8):
-        a = math.pi / 2 + i * math.pi / 4
-        ln = 0.21 if i % 2 == 0 else 0.12
-        tip = (math.cos(a) * ln, math.sin(a) * ln)
-        for sd in (-1, 1):
-            b = a + sd * math.pi / 8
-            side = (math.cos(b) * 0.04, math.sin(b) * 0.04)
-            g.prism([(0.0, 0.0), tip, side] if sd > 0 else [(0.0, 0.0), side, tip], fr, 0.0,
-                    0.022 if sd > 0 else 0.012, "Stone")
-    g.link(fr.p(0, 0, 0.008), fr.u, fr.v, 0.15, 0.15, 0.007, 20, 3, "Stone")
+    for i in range(4):
+        a = math.pi / 2 + i * math.pi / 2
+        tip = (math.cos(a) * 0.21, math.sin(a) * 0.21)
+        side = (math.cos(a + 0.4) * 0.04, math.sin(a + 0.4) * 0.04)
+        g.face([fr.p(0, 0, 0.022), fr.p(tip[0], tip[1], 0.022), fr.p(side[0], side[1], 0.022)], "Stone", fr.n)
+        a2 = a + math.pi / 4
+        tip2 = (math.cos(a2) * 0.12, math.sin(a2) * 0.12)
+        g.face([fr.p(0, 0, 0.012), fr.p(tip2[0], tip2[1], 0.012),
+                fr.p(math.cos(a2 + 0.4) * 0.04, math.sin(a2 + 0.4) * 0.04, 0.012)], "Stone", fr.n)
+    g.link(fr.p(0, 0, 0.008), fr.u, fr.v, 0.15, 0.15, 0.007, 12, 3, "Stone")
     write(g, fr, "N", 0.0, 0.23, 0.05, 0.0008, "Iron", align="c", rnd=r, jit=0.1)
     seg(g, fr, (-0.07, 0.15), (0.07, 0.27), 0.01, 0.0232, "Iron")
     # the wager slate on the guardroom side (south face): HOW LONG UNDER?
     fs = wall_frame(V((8.5, YP[0] - PT, 0)), V((0, -1, 0)))
     cu, cv = 0.0, 1.8
     hw, hh = 0.3, 0.225
-    fs2 = Frame(fs.o, fs.u, fs.v, fs.n)
-    g.prism([(cu - hw + 0.03, cv - hh + 0.03), (cu + hw - 0.03, cv - hh + 0.03), (cu + hw - 0.03, cv + hh - 0.03),
-             (cu - hw + 0.03, cv + hh - 0.03)], fs2, 0.0, 0.018, "Stone", caps=(False, True))
-    for (a0, b0, a1, b1) in ((-hw, -hh, hw, -hh + 0.03), (-hw, hh - 0.03, hw, hh), (-hw, -hh + 0.03, -hw + 0.03, hh - 0.03),
-                             (hw - 0.03, -hh + 0.03, hw, hh - 0.03)):
-        g.prism([(cu + a0, cv + b0), (cu + a1, cv + b0), (cu + a1, cv + b1), (cu + a0, cv + b1)], fs2, 0.0, 0.032,
-                "Wood", caps=(False, True))
-    d = 0.0186
+    # the slate as one raised rectangle in a wooden frame rectangle (one quad each)
+    poly(g, fs, [(cu - hw, cv - hh), (cu + hw, cv - hh), (cu + hw, cv + hh), (cu - hw, cv + hh)], 0.025, "Wood")
+    poly(g, fs, [(cu - hw + 0.03, cv - hh + 0.03), (cu + hw - 0.03, cv - hh + 0.03),
+                 (cu + hw - 0.03, cv + hh - 0.03), (cu - hw + 0.03, cv + hh - 0.03)], 0.027, "Stone")
+    d = 0.0276
     write(g, fs, "HOW LONG UNDER?", cu, cv + 0.14, 0.03, d, "Bone", align="c", adv=0.72)
     rows = [("DACE", "90"), ("MULL", "120"), ("HOLLIS", "200"), ("ORRIN", "61"), ("KETCH", "150")]
     for i, (nm, val) in enumerate(rows):
@@ -1203,27 +1154,20 @@ def v_floor_3(g, lod):
 
 
 # ================================================================== guardroom furniture
-def tankard(g, p, lid=0.3, axis=None):
-    """Pewter tankard: tapered body, rim, handle and a hinged lid (open by `lid` radians)."""
+def tankard(g, p, axis=None):
+    """Pewter tankard: tapered body with a handle."""
     p = V(p)
     ax = UP if axis is None else V(axis).normalized()
-    side = ax.orthogonal().normalized() if axis is not None else V((1, 0, 0))
-    if axis is not None:
+    if axis is None:
+        side = V((1, 0, 0))
+    else:
         side = V((0, 0, 1)).cross(ax).normalized()
-        side = ax.cross(side).normalized()  # handle points up when lying down
+        side = ax.cross(side).normalized()
     top = p + ax * 0.13
-    g.cyl(p, top, 0.046, 10, "Iron", caps=(True, False), r1=0.04)
-    g.cyl(top - ax * 0.01, top, 0.043, 10, "Iron", caps=(False, False))
-    g.cyl(top - ax * 0.008, top - ax * 0.002, 0.034, 10, "Floor", caps=(False, True))
+    g.cyl(p, top, 0.046, 7, "Iron", caps=(True, True), r1=0.04)
     h = [p + ax * 0.11 + side * 0.04, p + ax * 0.115 + side * 0.075, p + ax * 0.06 + side * 0.08,
          p + ax * 0.025 + side * 0.045]
-    g.sweep(h, 0.007, 4, "Iron")
-    hinge = top + side * 0.04
-    lid_dir = (-side * math.cos(lid) + ax * math.sin(lid)).normalized()
-    lid_n = side.cross(lid_dir.cross(side)).normalized() if False else (ax * math.cos(lid) + side * math.sin(lid))
-    c = hinge + lid_dir * 0.043
-    g.cyl(c - lid_n * 0.002, c + lid_n * 0.004, 0.044, 10, "Iron")
-    g.cyl(hinge, hinge + lid_n * 0.012 + side * 0.008, 0.006, 4, "Iron")
+    g.sweep(h, 0.007, 3, "Iron")
 
 
 @kept("V_Table")
@@ -1233,11 +1177,10 @@ def v_table(g, lod):
     r = rng("table-story")
     top = FL + 0.82
     ft = floor_frame(0, 0)
-    # pips: the two dice on the table both show six (a double six)
+    # pips: the two dice on the table both show six (a double six) — one dark panel per die
     for x0 in (6.8, 6.88):
-        for (a, b) in ((0.008, 0.008), (0.008, 0.015), (0.008, 0.022), (0.022, 0.008), (0.022, 0.015), (0.022, 0.022)):
-            poly(g, ft, [(x0 + a - 0.0025, -13.3 + b - 0.0025), (x0 + a + 0.0025, -13.3 + b - 0.0025),
-                         (x0 + a + 0.0025, -13.3 + b + 0.0025), (x0 + a - 0.0025, -13.3 + b + 0.0025)], top + 0.0306, "Iron")
+        poly(g, ft, [(x0 + 0.004, -13.3 + 0.004), (x0 + 0.026, -13.3 + 0.004),
+                     (x0 + 0.026, -13.3 + 0.026), (x0 + 0.004, -13.3 + 0.026)], top + 0.0306, "Iron")
     # the third die, Kit Fennick's loaded one, split to show the lead
     x0, y0 = 6.725, -13.38
     g.bbox(V((x0, y0, top)), V((x0 + 0.03, y0 + 0.013, top + 0.03)), "Bone", 0.003)
@@ -1249,32 +1192,27 @@ def v_table(g, lod):
     for i, s in enumerate(("DACE OWES MULL 4", "MULL OWES ROOK 9", "ROOK OWES THE LORD EVERYTHING")):
         write(g, ft, s, 5.72, -13.555 - i * 0.075, 0.028, top + 0.0006, "Iron", rnd=r, jit=0.15, w=0.0035,
               adv=0.72)
-    # pewter plate: fish bones and a crust (the Watch eats first)
+    # pewter plate: a fish spine and a crust (the Watch eats first)
     pc = V((6.2, -13.08, top))
-    g.cyl(pc, pc + V((0, 0, 0.006)), 0.11, 14, "Iron")
-    g.link(pc + V((0, 0, 0.009)), V((1, 0, 0)), V((0, 1, 0)), 0.1, 0.1, 0.005, 14, 3, "Iron")
-    sp = [pc + V((-0.06, -0.01, 0.009)), pc + V((0.0, 0.0, 0.009)), pc + V((0.055, 0.012, 0.009))]
+    g.cyl(pc, pc + V((0, 0, 0.006)), 0.11, 8, "Iron")
+    sp = [pc + V((-0.06, -0.01, 0.009)), pc + V((0.055, 0.012, 0.009))]
     g.sweep(sp, 0.0025, 3, "Bone")
-    for k in range(6):
-        b = sp[0].lerp(sp[2], 0.15 + k * 0.13)
-        for sd in (-1, 1):
-            g.cyl(b, b + V((0.012, sd * 0.025, 0.002)), 0.0012, 3, "Bone", caps=(False, False))
-    g.blob(sp[2] + V((0.012, 0.004, -0.002)), 0.018, 0.012, 0.01, 6, 1, "Bone", r, 0.1)
-    g.blob(pc + V((-0.03, 0.05, 0.006)), 0.035, 0.022, 0.018, 7, 2, "Wood", r, 0.18)
-    # the Lord's Due: coins at the foot of the stuck dagger
-    for k in range(5):
-        c = V((7.245 + r.uniform(-0.002, 0.002), -13.45 + r.uniform(-0.002, 0.002), top + k * 0.0042))
-        g.cyl(c, c + V((0, 0, 0.0038)), 0.015, 8, "Iron")
-    for (cx, cy) in ((7.29, -13.42), (7.21, -13.47)):
-        g.cyl(V((cx, cy, top)), V((cx, cy, top + 0.0035)), 0.015, 8, "Iron")
+    for k in range(3):
+        b = sp[0].lerp(sp[1], 0.25 + k * 0.25)
+        g.cyl(b + V((0, -0.025, 0)), b + V((0, 0.025, 0)), 0.001, 3, "Bone", caps=(False, False))
+    g.blob(pc + V((-0.03, 0.05, 0.006)), 0.035, 0.022, 0.018, 6, 1, "Wood", r, 0.18)
+    # the Lord's Due: a stack of coins at the foot of the stuck dagger
+    for k in range(3):
+        c = V((7.245 + r.uniform(-0.003, 0.003), -13.45 + r.uniform(-0.003, 0.003), top + k * 0.006))
+        g.cyl(c, c + V((0, 0, 0.0055)), 0.015, 6, "Iron")
     # the Two of Bones, half under a tankard
     fc = floor_frame(7.37, -13.13, 0.4)
     poly(g, fc, [(-0.032, -0.045), (0.032, -0.045), (0.032, 0.045), (-0.032, 0.045)], top + 0.0008, "Bone")
     for v in (-0.025, 0.025):
         seg(g, fc, (-0.006, v), (0.006, v), 0.01, top + 0.0014, "Iron")
-    tankard(g, V((7.42, -13.08, top + 0.0012)), lid=0.5)
+    tankard(g, V((7.42, -13.08, top + 0.0012)))
     # a second tankard knocked over, its rum spilt across the boards
-    tankard(g, V((6.72, -13.72, top + 0.046)), lid=1.2, axis=V((1, 0.15, 0)))
+    tankard(g, V((6.72, -13.72, top + 0.046)), axis=V((1, 0.15, 0)))
     ft2 = floor_frame(6.93, -13.7, 0.2)
     poly(g, ft2, [(0.0, -0.05), (0.09, -0.07), (0.16, -0.02), (0.13, 0.05), (0.03, 0.05)], top + 0.0007, "Floor")
 
@@ -1289,12 +1227,10 @@ def v_props_w(g, lod):
     fr = wall_frame(V((-9.2, wy, 0)), V((0, 1, 0)))
     # the Sentence Board, right above the key board: slate in a wooden frame, chalked in Hask's hand
     u0, u1, z0, z1 = -0.7, 0.7, 2.74, 3.18
-    g.prism([(u0 + 0.03, z0 + 0.03), (u1 - 0.03, z0 + 0.03), (u1 - 0.03, z1 - 0.03), (u0 + 0.03, z1 - 0.03)], fr, 0.0,
-            0.015, "Stone", caps=(False, True))
-    for (a0, b0, a1, b1) in ((u0, z0, u1, z0 + 0.03), (u0, z1 - 0.03, u1, z1), (u0, z0 + 0.03, u0 + 0.03, z1 - 0.03),
-                             (u1 - 0.03, z0 + 0.03, u1, z1 - 0.03)):
-        g.prism([(a0, b0), (a1, b0), (a1, b1), (a0, b1)], fr, 0.0, 0.03, "Wood", caps=(False, True))
-    d = 0.0156
+    poly(g, fr, [(u0, z0), (u1, z0), (u1, z1), (u0, z1)], 0.025, "Wood")
+    poly(g, fr, [(u0 + 0.03, z0 + 0.03), (u1 - 0.03, z0 + 0.03), (u1 - 0.03, z1 - 0.03), (u0 + 0.03, z1 - 0.03)],
+         0.027, "Stone")
+    d = 0.0276
     write(g, fr, "SENTENCES", 0.0, 3.1, 0.035, d, "Bone", align="c")
     rows = [("PRESS", "4", "9"), ("RACK", "11", "6"), ("STOCKS", "7", "3"), ("CISTERN", "5", "2"),
             ("KENNEL", "2", "40"), ("KENNEL", "8", "61"), ("CAGES", "6", "12"), ("MAST", "9", "5")]
@@ -1324,22 +1260,16 @@ def v_props_w(g, lod):
         nail(g, fo.p(du, dv, 0.0015), n)
     # the anchor's shank worn bright at hand height (every guard touches it before his watch)
     band = __import__("geo").Geo()
-    band.cyl(V((0, 0, 0.95)), V((0, 0, 1.17)), 0.0635, 10, "Bone", caps=(False, False))
+    band.cyl(V((0, 0, 0.95)), V((0, 0, 1.17)), 0.0635, 6, "Bone", caps=(False, False))
     m = Matrix.Translation(V((-6.9, wy + 0.25, FL))) @ Matrix.Rotation(0.22, 4, "X")
     g.extend(band.transform(m))
-    # eight bone key tags (the Cistern's stained green with weed)
+    # eight bone key tags (the Cistern's stained green with weed) — flat quads on each key
     for i in range(8):
-        x = -9.75 + i * 0.16
-        top = V((x + 0.02, wy + 0.092, FL + 2.13))
-        g.sweep([top, top + V((0.008, 0, -0.04))], 0.0018, 3, "Straw")
-        t0 = top + V((0.008, 0, -0.04))
-        g.box(V((t0.x - 0.014, t0.y - 0.003, t0.z - 0.05)), V((t0.x + 0.014, t0.y + 0.003, t0.z)),
-              "Straw" if i == 3 else "Bone")
-        for k in range(2):
-            zz = t0.z - 0.016 - k * 0.014
-            g.face([V((t0.x - 0.009, t0.y + 0.0036, zz)), V((t0.x + 0.009, t0.y + 0.0036, zz)),
-                    V((t0.x + 0.009, t0.y + 0.0036, zz + 0.003)), V((t0.x - 0.009, t0.y + 0.0036, zz + 0.003))],
-                   "Iron", (0, 1, 0))
+        x = -9.75 + i * 0.16 + 0.02
+        t0 = V((x, wy + 0.092, FL + 2.08))
+        mat = "Straw" if i == 3 else "Bone"
+        g.face([V((t0.x - 0.015, t0.y, t0.z - 0.055)), V((t0.x + 0.015, t0.y, t0.z - 0.055)),
+                V((t0.x + 0.015, t0.y, t0.z)), V((t0.x - 0.015, t0.y, t0.z))], mat, (0, 1, 0))
 
 
 @kept("V_Basket")
@@ -1348,9 +1278,9 @@ def v_basket(g, lod):
         return
     r = rng("basket-story")
     c = V((9.6, -13.0, FL))
-    # knife tally on the woven rim: forty-seven baskets down the Kennel hatch this year
-    for i in range(47):
-        a = 2 * math.pi * i / 47 + 0.1
+    # knife tally on the woven rim: forty-seven baskets down the Kennel hatch this year (groups of five)
+    for i in range(24):
+        a = 2 * math.pi * i / 24 + 0.1
         d = V((math.cos(a), math.sin(a), 0))
         p = c + V((0, 0, 0.6)) + d * 0.4256
         t = V((-d.y, d.x, 0))
