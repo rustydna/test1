@@ -50,8 +50,10 @@ class Piece:
         self.phys_spec, self.lods, self.meta = phys, lods, meta
 
 
-def linkset(name, root, label=""):
-    LINKSETS[name] = {"root": root, "label": label}
+def linkset(name, root, label="", role="house", **meta):
+    """Declares a linkset. role: "site" (always rezzed, e.g. the Villa Core and its plot) or
+    "house" (one switchable variant). The land impact test adds the site to every house."""
+    LINKSETS[name] = {"root": root, "label": label, "role": role, "meta": meta}
 
 
 def piece(ls, name, kind="structure", phys="hull", lods=None, **meta):
@@ -376,6 +378,7 @@ def build(only=None, export=True, save=False, verbose=True):
             "li_estimate": round(max(li, len(ps) * 0.5), 1),
             "size_m": [round(c, 2) for c in (mx - mn)], "min": [round(c, 2) for c in mn],
             "triangles_high": sum(p["triangles"]["HIGH"] for p in ps), "files": files}
+    report["roles"] = {n: LINKSETS.get(n, {}).get("role", "house") for n in report["linksets"]}
     report["seconds"] = round(time.time() - t0, 1)
     if save:
         bpy.context.preferences.filepaths.save_version = 0
