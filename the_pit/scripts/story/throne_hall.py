@@ -571,7 +571,7 @@ def n_throne(g, lod):
         for k in range(n):
             y = cy - 0.51 + 0.86 * k / 15
             p = V((sx * 0.62, y, DAIS + 1.02))
-            g.cyl(p, p + V((0, 0, 0.004)), 0.011, 5, "Bone", caps=(False, True), r1=0.007)
+            g.cyl(p, p + V((0, 0, 0.004)), 0.011, 4, "Bone", caps=(False, True), r1=0.007)
     # carved scroll terminals on the arm fronts
     for sx in (-1, 1):
         x = sx * 0.62
@@ -822,9 +822,9 @@ def n_props_w(g, lod):
         for i in range(4):
             j = (i + 1) % 4
             g.face_c([pg[i], pg[j], hi[j], hi[i]], "Cloth", (pg[0] + pg[2]) / 2 + desk.n * 0.01)
-        for k in range(9):                                         # lines of the Lord's tally
-            v = 0.14 - k * 0.035
-            L = 0.2 if k % 4 else 0.12
+        for k in range(5):                                         # lines of the Lord's tally
+            v = 0.14 - k * 0.06
+            L = 0.2 if k % 2 else 0.12
             a_ = desk.p(su * 0.03 if su > 0 else -0.03 - L, v, 0.0302)
             b_ = desk.p(su * 0.03 + L if su > 0 else -0.03, v, 0.0302)
             g.face([a_, b_, b_ - desk.v * 0.006, a_ - desk.v * 0.006], "Iron", desk.n)
