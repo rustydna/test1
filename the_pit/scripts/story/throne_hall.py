@@ -316,17 +316,12 @@ def n_back_c(g, lod):
         patch(g, (x - sx * 0.25, YB0 - 0.0005, 3.75), 0.3, 6, "Iron", r, normal=(0, -1, 0), u=(1, 0, 0),
               sx=0.8, sy=1.0)
 
-    # -- iron pricket candlesticks on the niche sill behind the throne, wax pooled on the stone
+    # -- a fat tallow candle on each side of the niche sill, wax pooled on the stone
     for sx in (-1, 1):
-        x, y = sx * 1.32, YB0 + 0.3
-        b = V((x, y, DAIS))
-        patch(g, b + V((0, 0, 0.002)), 0.16, 6, "Bone", r, sx=1.0, sy=0.7)          # pooled wax
-        g.cyl(b, b + V((0, 0, 0.04)), 0.12, 5, "Iron", caps=(False, True), r1=0.09)
-        g.cyl(b + V((0, 0, 0.04)), b + V((0, 0, 1.12)), 0.022, 4, "Iron", caps=(False, False))
-        top = b + V((0, 0, 1.12))
-        g.cyl(top, top + V((0, 0, 0.03)), 0.09, 6, "Iron", caps=(True, True), r1=0.1)
-        candle(g, top + V((0, 0, 0.03)), 0.32, 0.04, r, drips=2, n=5)
-        g.cyl(top, top - V((0, 0, 0.14)), 0.024, 4, "Bone", caps=(False, False), r1=0.004)
+        b = V((sx * 1.3, YB0 + 0.3, DAIS))
+        patch(g, b + V((0, 0, 0.002)), 0.16, 5, "Bone", r, sx=1.0, sy=0.7)
+        g.cyl(b, b + V((0, 0, 0.04)), 0.1, 5, "Iron", caps=(False, True), r1=0.08)   # low stand
+        candle(g, b + V((0, 0, 0.04)), 0.42, 0.055, r, drips=3, n=5)
 
 
 # ================================================================== N_Back_W
