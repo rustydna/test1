@@ -381,6 +381,7 @@ menu(key k, string tag)
     {
         b = ["Raise", "Lower"];
         if (opt("bell")) b += ["Ring bell"];
+        if (opt("notes")) b += ["Read"];
     }
     else if (!lk)
     {
@@ -406,6 +407,7 @@ act(key k, string t, string mode, string b)
     string q = who(k);
     integer dl = door_link(t);
     list e = lock_state(t);
+    if (b == "Read") { llMessageLinked(LINK_SET, 9500, "read|G_Winch", k); return; }
     if (b == "Open" && !locked(t)) { move(t, TRUE); narrate(dl, k, q + " opens " + room(t) + "."); }
     else if (b == "Close") { move(t, FALSE); narrate(dl, k, q + " closes " + room(t) + "."); }
     else if (b == "Raise") { move("R", TRUE); narrate(dl, k, q + " heaves on the winch: the portcullis creaks upwards."); }

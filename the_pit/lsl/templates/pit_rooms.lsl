@@ -184,9 +184,9 @@ menu(key k, integer l)
         t = "THE KENNEL\n" + llLinksetDataRead("dog:" + PIECE);
         b = ["Name dog", "Bark", "Remove name"];
     }
-    else if (PIECE == "C05_Bowls") { t = "KENNEL BOWLS"; b = ["Slop", "Water"]; }
+    else if (PIECE == "C05_Bowls") { t = "KENNEL BOWLS"; b = ["Slop", "Water", "Read"]; }
     else if (PIECE == "V_Table") { t = "THE GUARD TABLE"; b = ["Dice", "Toast", "Read"]; }
-    else if (PIECE == "V_Basket") { t = "LAUNDRY BASKET\nThe dirty underwear of the guards and the slaves."; b = ["Throw clothes"]; }
+    else if (PIECE == "V_Basket") { t = "LAUNDRY BASKET\nThe dirty underwear of the guards and the slaves."; b = ["Throw clothes", "Read"]; }
     else if (PIECE == "N_Kneeling_Stone") { t = "KNEELING STONE\nBefore the throne: " + who(oc); b = ["Present"]; }
     session(k, l, "main");
     llDialog(k, t, b, CH);
