@@ -174,7 +174,7 @@ def long_bone(g, a, b, r, mat="Bone", gnawed=False):
 
 def hook_and_crown(g, fr, s, d0, d1, w, mat_hook="Bone", mat_crown="Bone"):
     """The Lord's sign in a frame: a hook through a broken crown, scale `s` (about 1 = 1 m tall)."""
-    # the crown, broken in two: band and points, the right half dropped and tilted
+    # the crown, broken in two
     for half, (du, dv, ang) in ((-1, (0.0, 0.0, 0.0)), (1, (0.03, -0.05, -0.22))):
         ca, sa = math.cos(ang), math.sin(ang)
 
@@ -186,16 +186,10 @@ def hook_and_crown(g, fr, s, d0, d1, w, mat_hook="Bone", mat_crown="Bone"):
         tips = (-0.34, -0.17) if half < 0 else (0.17, 0.34)
         for tu in tips:
             polyline(g, fr, [P(tu - 0.06, -0.03), P(tu, 0.16), P(tu + 0.06, -0.03)], w * 0.8, d0, d1, mat_crown)
-        # the jagged break
-        seg(g, fr, P(half * 0.03, -0.05), P(half * 0.05, 0.05), w * 0.6, d0, d1, mat_crown)
-    # the hook: shank from the top, through the crown, curling up at the bottom with a barb
-    hk = [(0.0, 0.48), (0.0, 0.1), (0.0, -0.2), (-0.03, -0.32), (-0.12, -0.39), (-0.24, -0.36), (-0.3, -0.26),
-          (-0.29, -0.15)]
+    # the hook: a bent shank with a barb, the eye reduced to a loop at the top
+    hk = [(0.0, 0.56), (0.0, 0.1), (-0.03, -0.3), (-0.2, -0.38), (-0.3, -0.22)]
     polyline(g, fr, [(u * s, v * s) for u, v in hk], w * 1.4, d0 + (d1 - d0) * 0.2, d1 + (d1 - d0) * 0.6, mat_hook)
-    polyline(g, fr, [(-0.29 * s, -0.15 * s), (-0.22 * s, -0.2 * s)], w, d0, d1 + (d1 - d0) * 0.6, mat_hook)
-    # the eye at the top
-    eye = [(0.0, 0.48), (0.06, 0.52), (0.06, 0.6), (0.0, 0.64), (-0.06, 0.6), (-0.06, 0.52), (0.0, 0.48)]
-    polyline(g, fr, [(u * s, v * s) for u, v in eye], w, d0, d1 + (d1 - d0) * 0.6, mat_hook)
+    polyline(g, fr, [(-0.3 * s, -0.22 * s), (-0.22 * s, -0.26 * s)], w, d0, d1 + (d1 - d0) * 0.6, mat_hook)
 
 
 # ------------------------------------------------------------------ banners (shared by N_Back_W / N_Back_E)
@@ -289,18 +283,12 @@ def n_back_c(g, lod):
     # -- ghost of the Crown's arms on the back face of the niche (y = YB0 + 0.5), behind the wheel
     fr = Frame((0, YB0 + 0.5, 4.1), (1, 0, 0), (0, 0, 1), (0, -1, 0))
     shield = [(-0.42, 0.45), (0.42, 0.45), (0.42, 0.0), (0.3, -0.3), (0.0, -0.5), (-0.3, -0.3), (-0.42, 0.0)]
-    g.face([fr.p(u, v, 0.0015) for u, v in shield], "Floor", fr.n)    # chiselled, rougher, darker
+    g.face([fr.p(u, v, 0.0015) for u, v in shield], "Floor", fr.n)        # chiselled, rougher, darker
     for a, b in zip(shield, shield[1:] + shield[:1]):
-        seg(g, fr, a, b, 0.02, 0.0, 0.004, "Stone")                        # the raw edge of the cut
-    # what the chisel missed: a wing tip of the gull, the corner of the crown, the King's motto scroll
+        seg(g, fr, a, b, 0.02, 0.0, 0.004, "Stone")
+    # what the chisel missed: a wing tip of the gull and a corner of the crown
     polyline(g, fr, [(0.28, 0.12), (0.37, 0.24), (0.4, 0.38)], 0.03, 0.0, 0.012, "Stone")
-    polyline(g, fr, [(0.32, 0.2), (0.38, 0.22)], 0.02, 0.0, 0.012, "Stone")
-    polyline(g, fr, [(-0.38, 0.47), (-0.34, 0.58), (-0.3, 0.5), (-0.26, 0.6)], 0.025, 0.0, 0.01, "Stone")
-    polyline(g, fr, [(-0.48, -0.56), (-0.36, -0.6), (-0.1, -0.56)], 0.04, 0.0, 0.008, "Stone")
-    for k in range(4):                                                     # chisel scars
-        u, v = r.uniform(-0.3, 0.3), r.uniform(-0.3, 0.35)
-        a = r.uniform(-0.6, 0.6)
-        seg(g, fr, (u, v), (u + 0.07 * math.cos(a), v + 0.07 * math.sin(a)), 0.008, 0.0, 0.003, "Iron")
+    polyline(g, fr, [(-0.38, 0.47), (-0.3, 0.58), (-0.26, 0.5)], 0.025, 0.0, 0.01, "Stone")
 
     # -- STEADFAST in gilt letters, nailed upside down across the wall above the hood mould
     fw = wall_frame(0.0, 0.0)
@@ -514,19 +502,16 @@ def n_back_e(g, lod):
             s0 = p.lerp(q, (k + 0.5) / 3) - V((0, 0.007, 0.01))
             g.face([s0, s0 + V((0.012, 0, 0)), s0 + V((0.006, 0, -0.07))], "Bone", (0, -1, 0))
 
-    # -- Crown officers' swords, a sunburst of them, gilt hilts out, blades blackening
+    # -- Crown officers' swords, in a fan, gilt hilts out, blades blackening
     fc = wall_frame(7.95, 3.85)
-    g.prism([(0.11 * math.cos(a), 0.11 * math.sin(a)) for a in [2 * math.pi * k / 8 for k in range(8)]],
-            fc, 0.0, 0.03, "Wood", caps=(False, True))
-    g.prism([(0.07 * math.cos(a), 0.07 * math.sin(a)) for a in [2 * math.pi * k / 8 for k in range(8)]],
-            fc, 0.03, 0.045, "Iron", caps=(False, True))                   # a Crown marine's gorget
-    for k in range(5):
-        ang = math.pi / 2 + 2 * math.pi * k / 5
+    g.prism([(0.1 * math.cos(a), 0.1 * math.sin(a)) for a in [2 * math.pi * k / 6 for k in range(6)]],
+            fc, 0.0, 0.025, "Wood", caps=(False, True))
+    for k in range(4):
+        ang = math.pi + (k - 1.5) * 0.5
         hilt = (0.75 * math.cos(ang), 0.75 * math.sin(ang))
-        sabre(g, fc, hilt, ang + math.pi, 0.5, r)
-        # peg under each hilt
+        sabre(g, fc, hilt, ang + math.pi, 0.48, r)
         p = fc.p(0.62 * math.cos(ang), 0.62 * math.sin(ang), 0.0)
-        g.cyl(p, p + fc.n * 0.05, 0.01, 4, "Wood", caps=(False, True))
+        g.cyl(p, p + fc.n * 0.05, 0.01, 3, "Wood", caps=(False, True))
 
 
 # ================================================================== N_Wall_W
