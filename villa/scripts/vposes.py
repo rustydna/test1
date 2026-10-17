@@ -63,7 +63,7 @@ from poses import (  # noqa: E402
     ARM, BVH_NAME, CHILDREN, END, HAND_RELAXED, INCHES, LEG, MAX_PELVIS_OFFSET, NAMES, OFF, PARENT,
     QI, ROOT_Z, SIDE, TOE, Builder, Mesh, add, angle, cross, dot, euler_xzy, f2u, fk, length, mul, norm,
     perp, q_bvh_to_sl, q_sl_to_bvh, qangle, qaxis, qconj, qdiff, qmul, qnorm, qrot, qx, qy, qz,
-    read_anim, sl_to_bvh, sub, u2f)
+    qarc, read_anim, signed_twist, sl_to_bvh, sub, swing_twist, u2f)
 
 OUT = os.path.join(VILLA, "output", "animations")
 PREV = os.path.join(OUT, "previews")
@@ -310,15 +310,155 @@ class VBuilder(Builder):
                 hi = mid
         return target_fn(lo)
 
-    def thigh_rest(self, s, frac, above=0.085, inward=0.0):
-        """A wrist target resting on the top of thigh `s`, `frac` of the way from hip to knee."""
-        hp, kn, _ = LEG[s]
-        W, P = self.scene_fk()
-        p = lerp(P[hp], P[kn], frac)
-        d = norm(sub(P[kn], P[hp]))
-        up = perp((0, 0, 1), d)
-        side = norm(cross(up, d))          # to the avatar's left for a forward thigh
-        return add(add(p, mul(up, above)), mul(side, -SIDE[s] * inward))
+    # --- placement helpers (LOCAL ground coordinates unless the name says scene) ----------------
+    def drop(self, names, z):
+        """Shift the pelvis vertically so the lowest surface of the named capsules is at local z."""
+        low = min(min(c[1][2], c[2][2]) - c[3] for c in body_caps(*self.fk()) if c[0] in names)
+        x, y, oz = self.pelvis_pos
+        self.pelvis_pos = (x, y, oz + z - low)
+
+    def lowest_local(self, names):
+        return min(min(c[1][2], c[2][2]) - c[3] for c in body_caps(*self.fk()) if c[0] in names)
+
+    def limb_surface(self, kind, side, frac, around=0.0, ref=(0.0, 0.0, 1.0)):
+        """Point on the skin of a limb capsule (thigh, shin, uarm, farm), `frac` from its upper joint,
+        and the outward normal there.  The normal is `ref` made perpendicular to the limb, turned
+        `around` degrees about the limb toward the avatar's left (+) / right (-).  Returns
+        (point, normal, limb direction)."""
+        j0, j1, r = {"thigh": (LEG[side][0], LEG[side][1], 0.07), "shin": (LEG[side][1], LEG[side][2], 0.05),
+                     "uarm": (ARM[side][1], ARM[side][2], 0.045), "farm": (ARM[side][2], ARM[side][3], 0.037)}[kind]
+        _, P = self.fk()
+        d = norm(sub(P[j1], P[j0]))
+        up = perp(ref, d)
+        left = norm(cross(up, d))
+        if dot(left, (0, 1, 0)) < 0 and abs(d[2]) < 0.9:
+            left = mul(left, -1)
+        a = math.radians(around)
+        n = norm(add(mul(up, math.cos(a)), mul(left, math.sin(a))))
+        return add(lerp(P[j0], P[j1], frac), mul(n, r)), n, d
+
+    def body_point(self, joint, off, normal):
+        """Local point and normal from a joint-frame offset and normal."""
+        W, P = self.fk()
+        return add(P[joint], qrot(W[joint], off)), qrot(W[joint], normal)
+
+    def hand_back(self, side):
+        """(point on the back of the hand, its normal, finger direction) in local coordinates."""
+        W, P = self.fk()
+        wr = ARM[side][3]
+        k = SIDE[side]
+        n = qrot(W[wr], (0, 0, 1))
+        c = add(P[wr], qrot(W[wr], (0.0, 0.065 * k, -0.005)))
+        return add(c, mul(n, 0.025)), n, qrot(W[wr], (0, k, 0))
+
+    def arm_pen(self, side, others=(), props=()):
+        """Excess penetration (m, summed) of this arm into the own body, `others` (scene capsules of
+        a partner) and solid `props` (scene), beyond the check tolerances minus a small margin."""
+        names = {f"uarm_{side}", f"farm_{side}", f"hand_{side}"}
+        caps = self.caps()
+        pen = 0.0
+        for a in caps:
+            if a[0] not in names:
+                continue
+            for c in caps:
+                if c[0] in names:
+                    continue
+                rule = self_pair_rule(a[0], c[0])
+                if rule is None:
+                    continue
+                ta, tb, tol = rule
+                pa, pb = trim_seg(a[1], a[2], ta), trim_seg(c[1], c[2], tb)
+                pen += max(0.0, a[3] + c[3] - seg_dist(pa[0], pa[1], pb[0], pb[1])[0] - tol + 0.008)
+            for c in others:
+                pen += max(0.0, a[3] + c[3] - seg_dist(a[1], a[2], c[1], c[2])[0] - 0.022)
+            if props:
+                pts, r = samples(a, 0.03)
+                for pr in props:
+                    if pr.kind != "water":
+                        pen += max(0.0, max(r - pr.sdf(p) for p in pts) - TOL[pr.kind] + 0.008)
+        return pen
+
+    def place_arm(self, side, wrist, pole, hand=None, palm=None, spread=90, others=(), props=(), flex=0.0,
+                  dev=0.02):
+        """Two-bone IK to `wrist` (local) choosing, among poles turned up to `spread` deg about the
+        shoulder-wrist line, the one with the least skin twist (shoulder and forearm roll), wrist
+        bend and penetration of the arm into the body, the partner and the furniture."""
+        _, sh, el, wr = ARM[side]
+        keep, nt = dict(self.loc), len(self.targets)
+        axis = norm(sub(wrist, self.pos(sh)))
+        best = None
+        for a in range(-int(spread), int(spread) + 1, 5):
+            pl = qrot(qaxis(axis, a), pole)
+            self.loc = dict(keep)
+            del self.targets[nt:]
+            self._arm(side, wrist, pl, None, None, None, hand, palm, flex)
+            ut = signed_twist(self.loc[sh], norm(OFF[el]))
+            fr = signed_twist(self.loc[el], norm(OFF[wr]))
+            wb = qangle(self.loc[wr])
+            pen = self.arm_pen(side, others, props)
+            cost = (ut * ut + fr * fr + dev * a * a + 4e6 * pen * pen + 8 * max(0.0, wb - 50) ** 2
+                    + 30 * max(0.0, abs(ut) - 80) ** 2 + 30 * max(0.0, abs(fr) - 80) ** 2)
+            if best is None or cost < best[0]:
+                best = (cost, a, pl, ut, fr, pen)
+        self.loc = dict(keep)
+        del self.targets[nt:]
+        self._arm(side, wrist, best[2], None, None, None, hand, palm, flex)
+        self.notes.append(f"{side} arm pole turned {best[1]:+d} deg (shoulder roll {best[3]:.0f}, forearm roll "
+                          f"{best[4]:.0f}, residual penetration {best[5] * 100:.1f} cm)")
+
+    def palm_on(self, side, pt, normal, fingers, back=False, pole=None, spread=90, others=(), props=(),
+                lift=0.0, dev=0.02):
+        """Rest the palm (or with back=True the back of the hand) on a surface: pt = the skin / surface
+        point under the middle of the hand, normal = out of that surface, fingers = where they point."""
+        n = norm(normal)
+        h = perp(fingers, n)
+        wrist = add(add(pt, mul(h, -0.065)), mul(n, 0.031 + lift))
+        k = SIDE[side]
+        self.place_arm(side, wrist, pole or (-0.4, 0.9 * k, -0.5), hand=h, palm=n if back else mul(n, -1),
+                       spread=spread, others=others, props=props, dev=dev)
+        return wrist
+
+    def palm_reach(self, side, fn, fmax=1.0, fmin=0.0, slack=0.95, **kw):
+        """palm_on at the largest f in [fmin, fmax] whose wrist the arm reaches with the elbow still
+        bent (shoulder-wrist <= slack * arm length); fn(f) -> (point, normal, fingers)."""
+        sh = self.pos(ARM[side][1])
+        lim = slack * (length(OFF[ARM[side][2]]) + length(OFF[ARM[side][3]]))
+
+        def wrist(f):
+            pt, n, h = fn(f)
+            n = norm(n)
+            h = perp(h, n)
+            return add(add(pt, mul(h, -0.065)), mul(n, 0.031 + kw.get("lift", 0.0)))
+
+        lo, hi = fmin, fmax
+        if length(sub(wrist(hi), sh)) > lim:
+            for _ in range(30):
+                mid = (lo + hi) / 2
+                if length(sub(wrist(mid), sh)) <= lim:
+                    lo = mid
+                else:
+                    hi = mid
+            hi = lo
+        pt, n, h = fn(hi)
+        self.palm_on(side, pt, n, h, **kw)
+        return hi
+
+    def foot_on(self, side, ball, plantar, pole, iters=6):
+        """Ankle IK so that the sole under the ball of the foot (mFoot) rests on `ball` (local) with
+        the foot plantar-flexed `plantar` deg from the shin's normal."""
+        an = LEG[side][2]
+        target = add(ball, (-0.112, 0.0, 0.067))
+        for _ in range(iters):
+            self.leg(side, ankle=target, pole=pole, foot=plantar)
+            W, P = self.fk()
+            got = add(P[an], qrot(W[an], (0.112, 0.0, -0.067)))
+            target = add(target, sub(ball, got))
+        self.leg(side, ankle=target, pole=pole, foot=plantar)
+
+    def leg_knee(self, side, knee, shin, foot="flat", pole=(1, 0, 0)):
+        """Leg by the direction to a knee point (local) and a world shin direction."""
+        hp = LEG[side][0]
+        self.leg(side, thigh=sub(knee, self.pos(hp)), shin=shin, pole=pole, foot=foot)
 
 
 class Anchor:
@@ -336,9 +476,11 @@ class Scene:
         self.views = "seated"
         self.buoyant = False
         self.notes = []
-        self.keys = None          # animated: function(actor, t) for t in [0, 1)
+        self.keys = None          # animated: function(scene) filling actor.anim_keys
         self.duration = DURATION
         self.nkeys = 2
+        self.water_z = None       # scene z of the water surface (pool poses)
+        self.pair_note = ""
 
     def actor(self, name, place=(0.0, 0.0, 0.0, 0.0)):
         a = VBuilder(name, place)
@@ -357,6 +499,7 @@ class Scene:
         self.props.append(Prop("cyl", kind, color, label, a=tuple(a), b=tuple(b), r=r))
 
     def water(self, z, lo, hi):
+        self.water_z = z
         self.props.append(Prop("box", "water", "water", "water", c=((lo[0] + hi[0]) / 2, (lo[1] + hi[1]) / 2, z - 0.005),
                                h=((hi[0] - lo[0]) / 2, (hi[1] - lo[1]) / 2, 0.005), q=QI))
 
@@ -373,89 +516,253 @@ def pose(fn):
 
 
 # ---------------------------------------------------------------------------------------------
-# shared furniture builders (scene coordinates; x = the way the avatar faces)
+# shared furniture (scene coordinates; x = the way the avatar faces).  Sizes follow the villa's
+# furniture: the Orbit sofa of furniture/reference.py (seat 0.43 m, back leaning 12 deg, 0.50 m over
+# the seat, 0.26 m thick, seat ~0.6 m deep) and the heights given for the other pieces.
 # ---------------------------------------------------------------------------------------------
-def sofa(s, seat_top, back_x, y0, y1, floor_z, recline=14.0, depth=0.66, back_h=0.50, arm_y=None):
+SOFA_RECLINE, SOFA_DEPTH, SOFA_BACK_H, SOFA_BACK_T = 12.0, 0.60, 0.50, 0.26
+SOFA_DOC = ("sofa (Orbit): seat top 0.43 m, 0.60 m deep, back cushion leaning 12 deg, its top 0.50 m over "
+            "the seat")
+
+
+def sofa(s, seat_top, back_x, y0, y1, floor_z, recline=SOFA_RECLINE, depth=SOFA_DEPTH, back_h=SOFA_BACK_H,
+         t=SOFA_BACK_T):
     """Upholstered seat (top seat_top) whose back cushion's front face meets the seat at back_x."""
-    s.box((back_x - 0.02, y0, seat_top - 0.19), (back_x + depth, y1, seat_top), "soft", "fabric", "seat cushion")
-    s.box((back_x - 0.2, y0 - 0.02, floor_z + 0.06), (back_x + depth - 0.02, y1 + 0.02, seat_top - 0.19), "hard", "wood", "plinth")
+    s.box((back_x - 0.03, y0, seat_top - 0.19), (back_x + depth, y1, seat_top), "soft", "fabric", "seat cushion")
+    s.box((back_x - 0.25, y0 - 0.02, floor_z + 0.07), (back_x + depth - 0.03, y1 + 0.02, seat_top - 0.19), "hard",
+          "wood", "plinth")
     q = qy(-recline)
-    t = 0.22
     c = sub((back_x, (y0 + y1) / 2, seat_top), qrot(q, (t / 2, 0.0, -back_h / 2)))
     s.obox(c, (t, y1 - y0, back_h), q, "soft", "fabric", "back cushion")
-    if arm_y is not None:
-        for y in arm_y:
-            s.box((back_x - 0.1, y - 0.1, seat_top - 0.19), (back_x + depth, y + 0.1, seat_top + 0.18), "soft", "fabric", "arm")
+    s.floor(floor_z, (back_x - 0.35, y0 - 0.1), (back_x + 1.4, y1 + 0.1))
+
+
+def back_top(back_x, seat_top, recline, back_h, t):
+    """Middle of the top face of a reclined back cushion (its front face meets the seat at back_x)
+    and the normal of that face."""
+    q = qy(-recline)
+    up, out = qrot(q, (0, 0, 1)), qrot(q, (1, 0, 0))
+    front_top = add((back_x, 0.0, seat_top), mul(up, back_h))
+    return sub(front_top, mul(out, t / 2)), up
+
+
+def thigh_palm(b, sd, frac=0.55, inward=16, turn=14, leg=None, **kw):
+    """Rest the hand of side sd on the top of a thigh (its own unless `leg`), fingers along it and
+    turned inward, as far toward `frac` as the arm reaches."""
+    k = SIDE[sd]
+    lg = leg or sd
+
+    def fn(f):
+        pt, n, d = b.limb_surface("thigh", lg, f, around=-k * inward)
+        return pt, n, rotz_v(d, -k * turn)
+    return b.palm_reach(sd, fn, frac, 0.1, **kw)
 
 
 # ---------------------------------------------------------------------------------------------
 # the single poses
 # ---------------------------------------------------------------------------------------------
 @pose
-def villa_sit_upright(s):
-    """Dining chair (seat 0.46 m): upright and elegant, knees together, feet together with the right
-    one slightly back, hands resting on the thighs."""
-    s.furniture = "dining chair, seat top 0.46 m"
-    b = s.actor("villa_sit_upright")
-    b.pelvis(pitch=4)
-    b.spine("mTorso", pitch=-3)
-    b.spine("mChest", pitch=-2)
-    b.spine("mNeck", pitch=4)
-    b.spine("mHead", pitch=1, yaw=5, lean=-1)
+def villa_sit_relaxed(s):
+    """Sofa (seat 0.43 m): leaning back into the cushions, the left arm resting along the top of the
+    back, the right hand on the thigh, knees relaxed apart, head turned a little to the left."""
+    s.furniture = SOFA_DOC
+    b = s.actor("villa_sit_relaxed")
+    b.pelvis(pitch=-16, lean=1)
+    b.spine("mTorso", pitch=-2)
+    b.spine("mChest", pitch=3, lean=2, yaw=4)
+    b.spine("mNeck", pitch=8, yaw=6)
+    b.spine("mHead", pitch=5, yaw=10, lean=-3)
     seat = b.lowest(["pelvis"]) + SINK_SOFT
-    fl = seat - SEAT["chair"]
-    hx = b.spos("mHipLeft")[0]
-    b.leg("L", ankle=(hx + 0.53, 0.055, fl + SOLE), pole=(1, -0.12, 0.2), foot=(1.0, 0.06, 0.0))
-    b.leg("R", ankle=(hx + 0.45, -0.07, fl + SOLE), pole=(1, 0.12, 0.2), foot=(1.0, -0.02, 0.0))
-    for sd in "LR":
-        k = SIDE[sd]
-        b.collar(sd, elev=-5, fwd=5)
-        t = b.reach(sd, lambda f: b.thigh_rest(sd, f, inward=0.025), 0.42, 0.9)
-        b.arm(sd, wrist=t, pole=(-0.3, 0.9 * k, -0.4), hand=(1.0, -0.3 * k, -0.25), palm=(-0.15, 0.1 * k, -1.0),
-              spread=40)
-    px = b.spos("mPelvis")[0]
-    s.box((px - 0.24, -0.24, seat - 0.06), (px + 0.26, 0.24, seat), "soft", "fabric", "seat")
-    s.box((px - 0.30, -0.22, seat), (px - 0.25, 0.22, seat + 0.48), "hard", "wood", "back")
-    s.floor(fl, (px - 0.5, -0.5), (px + 0.9, 0.5))
-    s.anchor = Anchor((b.spos("mPelvis")[0] - 0.03, 0.0, seat), SEAT["chair"], "seat top under the sit bones")
+    fl = seat - SEAT["sofa"]
+    back_x = b.back_plane_x(seat, SOFA_RECLINE)
+    hx = b.pos("mHipLeft")[0]
+    b.leg("L", ankle=(hx + 0.60, 0.25, fl + SOLE), pole=(1, 0.35, 0.1), foot="flat")
+    b.leg("R", ankle=(hx + 0.54, -0.17, fl + SOLE), pole=(1, -0.3, 0.1), foot="flat")
+    b.collar("L", elev=10, fwd=-6)
+    b.collar("R", elev=-4, fwd=4)
+    sofa(s, seat, back_x, -0.75, 0.95, fl)
+    top, n = back_top(back_x, seat, SOFA_RECLINE, SOFA_BACK_H, SOFA_BACK_T)
+    sh = b.pos("mShoulderLeft")
+    b.palm_on("L", (top[0], sh[1] + 0.40, top[2]), n, (0.1, 1.0, 0.0), props=s.props, spread=120)
+    thigh_palm(b, "R", 0.55, props=s.props)
+    s.anchor = Anchor((back_x, 0.0, seat), SEAT["sofa"], "seat top at the foot of the back cushion")
+    s.notes.append(f"pelvis joint {b.pos('mPelvis')[0] - back_x:.2f} m in front of the back cushion's foot")
 
 
 @pose
-def villa_sit_relaxed(s):
-    """Sofa (seat 0.43 m): leaning back into the cushions, left arm resting along the top of the
-    backrest, right hand on the thigh, knees relaxed apart."""
-    s.furniture = "sofa, seat top 0.43 m, back reclined 14 deg, back top 0.50 m over the seat"
-    b = s.actor("villa_sit_relaxed")
-    b.pelvis(pitch=-15, lean=1)
-    b.spine("mTorso", pitch=-3)
-    b.spine("mChest", pitch=3, lean=3, yaw=4)
-    b.spine("mNeck", pitch=8, yaw=6)
-    b.spine("mHead", pitch=5, yaw=10, lean=-4)
+def villa_sit_crossed(s):
+    """Sofa (seat 0.43 m): sitting back, the right leg crossed over the left at the knee, the left hand on
+    the crossed knee and the right hand resting on it."""
+    s.furniture = SOFA_DOC
+    b = s.actor("villa_sit_crossed")
+    b.pelvis(pitch=-6, lean=6, yaw=18)
+    b.spine("mTorso", pitch=1, lean=-3, yaw=-7)
+    b.spine("mChest", pitch=3, yaw=-7, lean=-3)
+    b.spine("mNeck", pitch=6, yaw=-3)
+    b.spine("mHead", pitch=3, yaw=4, lean=3)
     seat = b.lowest(["pelvis"]) + SINK_SOFT
     fl = seat - SEAT["sofa"]
-    back_x = b.back_plane_x(seat, 14)
-    hx = b.spos("mHipLeft")[0]
-    b.leg("L", ankle=(hx + 0.62, 0.24, fl + SOLE), pole=(1, 0.35, 0.1), foot=(1.0, 0.25, 0.0))
-    b.leg("R", ankle=(hx + 0.56, -0.17, fl + SOLE), pole=(1, -0.3, 0.1), foot=(1.0, -0.2, 0.0))
-    b.collar("L", elev=12, fwd=-8)
-    b.collar("R", elev=-4, fwd=4)
-    W, P = b.fk()
-    back_top = seat + 0.50
-    top_x = back_x - 0.50 * math.tan(math.radians(14)) - 0.10
-    sh = P["mShoulderLeft"]
-    el = (top_x + 0.04, sh[1] + 0.20, back_top + 0.04)
-    b.arm("L", elbow=el, fore=(-0.5, 0.85, -0.15), pole=(-0.2, 0.0, -1.0), palm=(0.0, 0.1, -1.0))
-    b.loc["mWristLeft"] = qmul(b.loc["mWristLeft"], qx(-25))
-    t = b.reach("R", lambda f: b.thigh_rest("R", f, inward=0.01), 0.45, 0.9)
-    b.arm("R", wrist=t, pole=(-0.4, -1.0, -0.3), hand=(0.9, 0.25, -0.3), palm=(-0.2, 0.15, -1.0), spread=40)
-    depth = min(0.66, min(b.spos("mKneeLeft")[0], b.spos("mKneeRight")[0]) - 0.10 - back_x)
-    sofa(s, seat, back_x, -0.75, 0.85, fl, depth=depth)
-    s.floor(fl, (back_x - 0.3, -0.8), (back_x + 1.5, 0.9))
-    s.anchor = Anchor((b.spos("mPelvis")[0] - 0.03, 0.0, seat), SEAT["sofa"], "seat top under the sit bones")
-    s.notes.append(f"seat depth (back cushion face to front edge) {depth:.2f} m")
-    s.notes.append(f"back cushion face (at seat level) {b.spos('mPelvis')[0] - back_x:.2f} m behind the pelvis joint")
+    back_x = b.back_plane_x(seat, SOFA_RECLINE)
+    hl, hr = b.pos("mHipLeft"), b.pos("mHipRight")
+    over = (0.0, 0.05, 0.125)            # right knee joint over the left one
+    best = None
+    for i in range(21):                  # place the left foot so the right thigh just reaches over the left knee
+        ax = hl[0] + 0.42 + 0.01 * i
+        b.leg("L", ankle=(ax, 0.08, fl + SOLE), pole=(1, -0.05, 0.3), foot="flat")
+        err = abs(length(sub(add(b.pos("mKneeLeft"), over), hr)) - length(OFF["mKneeRight"]))
+        if best is None or err < best[0]:
+            best = (err, ax)
+    b.leg("L", ankle=(best[1], 0.08, fl + SOLE), pole=(1, -0.05, 0.3), foot="flat")
+    kl = b.pos("mKneeLeft")
+    b.leg_knee("R", add(kl, over), shin=(0.30, 0.40, -0.86), foot=30)
+    b.collar("L", elev=-3, fwd=10)
+    b.collar("R", elev=-3, fwd=8)
+    sofa(s, seat, back_x, -0.75, 0.95, fl)
+    b.palm_reach("L", lambda f: b.limb_surface("thigh", "R", f)[:2] + ((0.25, -1.0, 0.0),), 0.9, 0.4,
+                 props=s.props)
+    pt, n, f = b.hand_back("L")
+    b.palm_on("R", pt, n, (0.4, 1.0, 0.0), props=s.props)
+    s.anchor = Anchor((back_x, 0.0, seat), SEAT["sofa"], "seat top at the foot of the back cushion")
 
 
+@pose
+def villa_sit_curl(s):
+    """Sofa (seat 0.43 m): curled up cosily, both feet tucked up on the seat beside the right hip
+    (side sit), leaning back and to the left, the left arm along the top of the back, the head tilted
+    toward it, the right hand on the right thigh."""
+    s.furniture = SOFA_DOC
+    b = s.actor("villa_sit_curl")
+    yaw = 22.0
+    b.pelvis(pitch=-12, lean=17, yaw=yaw)
+    b.spine("mTorso", pitch=-2, lean=-8, yaw=-4)
+    b.spine("mChest", pitch=3, lean=-7, yaw=-8)
+    b.spine("mNeck", pitch=6, yaw=-6, lean=-2)
+    b.spine("mHead", pitch=4, yaw=-8, lean=9)
+    seat = b.lowest(["pelvis"]) + SINK_SOFT
+    fl = seat - SEAT["sofa"]
+    back_x = b.back_plane_x(seat, SOFA_RECLINE)
+    pel = b.pos("mPelvis")
+
+    def H(x, y, z):
+        """pelvis-heading offset from the pelvis joint -> local point"""
+        v = rotz_v((x, y, 0.0), yaw)
+        return (pel[0] + v[0], pel[1] + v[1], z)
+
+    lie = seat + 0.05
+    b.leg("L", ankle=H(0.44, -0.12, lie), pole=sub(H(0.47, 0.27, lie + 0.07), b.pos("mHipLeft")), foot=35)
+    b.leg("R", ankle=H(0.0, -0.43, lie), pole=sub(H(0.40, -0.40, lie + 0.02), b.pos("mHipRight")), foot=50)
+    b.collar("L", elev=10, fwd=-6)
+    b.collar("R", elev=-4, fwd=6)
+    sofa(s, seat, back_x, -0.95, 0.95, fl)
+    top, n = back_top(back_x, seat, SOFA_RECLINE, SOFA_BACK_H, SOFA_BACK_T)
+    sh = b.pos("mShoulderLeft")
+    b.palm_on("L", (top[0], sh[1] + 0.40, top[2]), n, (0.1, 1.0, 0.0), props=s.props, spread=120)
+    thigh_palm(b, "R", 0.4, inward=0, turn=0, props=s.props)
+    s.anchor = Anchor((back_x, 0.0, seat), SEAT["sofa"], "seat top at the foot of the back cushion")
+
+
+@pose
+def villa_sit_upright(s):
+    """Dining chair (seat 0.46 m): upright and elegant, knees together, the right foot a little behind
+    the left, hands resting on the thighs."""
+    s.furniture = "dining chair: upholstered seat top 0.46 m, 0.46 m deep, back 0.45 m over the seat leaning 6 deg"
+    b = s.actor("villa_sit_upright")
+    b.pelvis(pitch=3)
+    b.spine("mTorso", pitch=-2)
+    b.spine("mChest", pitch=-2)
+    b.spine("mNeck", pitch=5)
+    b.spine("mHead", pitch=2, yaw=5, lean=-1)
+    seat = b.lowest(["pelvis"]) + SINK_SOFT
+    fl = seat - SEAT["chair"]
+    back_x = b.back_plane_x(seat, 6.0, sink=0.0)
+    hx = b.pos("mHipLeft")[0]
+    b.leg("L", ankle=(hx + 0.50, 0.06, fl + SOLE), pole=(1, -0.1, 0.25), foot="flat")
+    b.leg("R", ankle=(hx + 0.42, -0.065, fl + SOLE), pole=(1, 0.1, 0.25), foot="flat")
+    s.box((back_x - 0.01, -0.24, seat - 0.06), (back_x + 0.46, 0.24, seat), "soft", "fabric", "seat pad")
+    s.box((back_x - 0.03, -0.25, seat - 0.10), (back_x + 0.47, 0.25, seat - 0.06), "hard", "wood", "seat shell")
+    q = qy(-6.0)
+    s.obox(sub((back_x, 0.0, seat), qrot(q, (0.025, 0.0, -0.225))), (0.05, 0.46, 0.45), q, "hard", "wood", "back")
+    for x in (back_x + 0.02, back_x + 0.43):
+        for y in (-0.21, 0.21):
+            s.cyl((x, y, fl), (x, y, seat - 0.10), 0.018, "hard", "wood", "leg")
+    s.floor(fl, (back_x - 0.4, -0.5), (back_x + 1.0, 0.5))
+    for sd in "LR":
+        b.collar(sd, elev=-4, fwd=6)
+        thigh_palm(b, sd, 0.58, props=s.props)
+    s.anchor = Anchor((back_x, 0.0, seat), SEAT["chair"], "seat top at the foot of the back")
+
+
+@pose
+def villa_sit_stool(s):
+    """Bar stool (seat 0.75 m, footrest ring 0.25 m): upright and easy, both feet on the footrest ring,
+    the left one a little further round, hands resting on the thighs."""
+    s.furniture = "bar stool: round seat top 0.75 m (r 0.19 m), footrest ring at 0.25 m (r 0.26 m)"
+    b = s.actor("villa_sit_stool")
+    b.pelvis(pitch=5)
+    b.spine("mTorso", pitch=2)
+    b.spine("mChest", pitch=-1)
+    b.spine("mNeck", pitch=3)
+    b.spine("mHead", pitch=0, yaw=-6)
+    seat = b.lowest(["pelvis"]) + SINK_SOFT
+    fl = seat - SEAT["stool"]
+    cx = b.pos("mPelvis")[0] - 0.01
+    ring_z, R = fl + SEAT["stool_footrest"], 0.26
+    s.cyl((cx, 0, seat - 0.07), (cx, 0, seat), 0.19, "soft", "fabric", "seat")
+    s.cyl((cx, 0, fl + 0.02), (cx, 0, seat - 0.07), 0.035, "hard", "metal", "column")
+    s.cyl((cx, 0, fl), (cx, 0, fl + 0.02), 0.24, "hard", "metal", "base")
+    n = 16
+    for i in range(n):
+        a0, a1 = 2 * math.pi * i / n, 2 * math.pi * (i + 1) / n
+        s.cyl((cx + R * math.cos(a0), R * math.sin(a0), ring_z), (cx + R * math.cos(a1), R * math.sin(a1), ring_z),
+              0.012, "hard", "metal", "footrest ring")
+    s.floor(fl, (cx - 0.5, -0.5), (cx + 0.7, 0.5))
+    for sd, a, pf in (("L", 28.0, 22.0), ("R", -18.0, 14.0)):
+        k = SIDE[sd]
+        ball = (cx + R * math.cos(math.radians(a)), R * math.sin(math.radians(a)), ring_z + 0.012)
+        b.foot_on(sd, ball, pf, pole=(1, 0.3 * k, 0.3))
+    for sd in "LR":
+        b.collar(sd, elev=-4, fwd=6)
+        thigh_palm(b, sd, 0.6, props=s.props)
+    s.anchor = Anchor((cx, 0.0, seat), SEAT["stool"], "centre of the seat top")
+
+
+@pose
+def villa_lounge(s):
+    """Chaise longue (seat 0.46 m, back reclined 40 deg): reclining, legs stretched out along the seat,
+    the right knee slightly bent, the right hand on the belly, the left hand resting on the cushion."""
+    s.furniture = ("chaise longue: seat top 0.46 m, 1.30 m long, 0.76 m wide, back reclined 40 deg from vertical, "
+                   "left arm bolster 0.13 m over the seat")
+    b = s.actor("villa_lounge")
+    rec = 40.0
+    b.pelvis(pitch=-36)
+    b.spine("mTorso", pitch=-3)
+    b.spine("mChest", pitch=1)
+    b.spine("mNeck", pitch=16)
+    b.spine("mHead", pitch=10, yaw=8, lean=-3)
+    seat = b.lowest(["pelvis"]) + SINK_SOFT
+    fl = seat - 0.46
+    back_x = b.back_plane_x(seat, rec)
+    hl, hr = b.pos("mHipLeft"), b.pos("mHipRight")
+    b.leg("L", ankle=(hl[0] + 0.95, 0.17, seat + 0.06), pole=(0.1, 0.3, 1.0), foot=(0.45, 0.25, 0.86))
+    b.leg("R", ankle=(hr[0] + 0.88, -0.13, seat + 0.07), pole=(0.25, -0.25, 1.0), foot="flat")
+    s.box((back_x - 0.03, -0.38, seat - 0.14), (back_x + 1.30, 0.38, seat), "soft", "fabric", "seat cushion")
+    s.box((back_x - 0.45, -0.38, fl + 0.06), (back_x + 1.27, 0.38, seat - 0.14), "hard", "wood", "frame")
+    q = qy(-rec)
+    s.obox(sub((back_x, 0.0, seat), qrot(q, (0.07, 0.0, -0.40))), (0.14, 0.76, 0.80), q, "soft", "fabric",
+           "back cushion")
+    arm_y, arm_z = 0.45, seat + 0.13
+    s.cyl((back_x - 0.15, arm_y, arm_z), (back_x + 0.55, arm_y, arm_z), 0.09, "soft", "fabric", "arm bolster")
+    s.floor(fl, (back_x - 0.6, -0.6), (back_x + 1.5, 0.6))
+    b.collar("L", elev=-2, fwd=4)
+    b.collar("R", elev=-2, fwd=8)
+    pt, n = b.body_point("mTorso", (0.095, -0.01, 0.07), (1, 0, 0))
+    b.palm_on("R", pt, n, qrot(b.fk()[0]["mTorso"], (0.0, 1.0, 0.25)), props=s.props)
+    b.palm_reach("L", lambda f: ((back_x + f, arm_y - 0.02, arm_z + 0.09), (0, 0, 1), (1.0, -0.15, -0.2)), 0.5,
+                 0.0, props=s.props)
+    s.anchor = Anchor((back_x, 0.0, seat), 0.46, "seat top at the foot of the back cushion")
+
+
+#@@POSES2@@
 # ---------------------------------------------------------------------------------------------
 # build, write, read back, check
 # ---------------------------------------------------------------------------------------------

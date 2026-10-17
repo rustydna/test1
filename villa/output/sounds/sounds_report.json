@@ -11,11 +11,27 @@
   "standout_max_db": 4.0,
   "self_similarity_max": 0.35
  },
- "runtime_s": 2.6,
+ "runtime_s": 11.7,
  "built": [
-  "villa_garden"
+  "villa_arrival",
+  "villa_chimes",
+  "villa_click",
+  "villa_curtain",
+  "villa_door_slide",
+  "villa_door_soft",
+  "villa_fire",
+  "villa_garden",
+  "villa_ignite",
+  "villa_lounge",
+  "villa_night",
+  "villa_pool_lap",
+  "villa_rain_glass",
+  "villa_spa_jets",
+  "villa_spillway",
+  "villa_splash",
+  "villa_surf"
  ],
- "jobs": 1,
+ "jobs": 4,
  "summary": {
   "count": 17,
   "loops": 10,
@@ -93,7 +109,7 @@
    "loop": true,
    "description": "Gentle water lapping at the pool's overflow edge: irregular small waves slapping the lip, hollow gutter 'clop', bubbles, droplets, soft gurgle and trickle (9.8 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.32
+   "build_s": 1.33
   },
   "villa_spillway": {
    "channels": 1,
@@ -163,7 +179,7 @@
    "loop": true,
    "description": "Infinity edge: a thin water sheet falling softly into the catch trough - sheet hush, dense bubble chorus, low plunge (9.6 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.35
+   "build_s": 1.53
   },
   "villa_spa_jets": {
    "channels": 1,
@@ -233,7 +249,7 @@
    "loop": true,
    "description": "Spa jets: pulsing underwater jets, dense rising bubbles, bubbles bursting and churning at the surface (8 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.54
+   "build_s": 1.52
   },
   "villa_fire": {
    "channels": 1,
@@ -303,7 +319,7 @@
    "loop": true,
    "description": "Refined fireplace: the flame's slow breathing roar, soft crackle and ember ticks, no sap pops (9.5 s loop)",
    "limiter_db": 3.47,
-   "build_s": 1.58
+   "build_s": 1.56
   },
   "villa_rain_glass": {
    "channels": 1,
@@ -373,7 +389,7 @@
    "loop": true,
    "description": "Rain on the glass roof, heard from the lounge: drops of every size tapping the panes, soft splashes, muffled rain on the garden outside, a drip from the eaves (9.8 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.48
+   "build_s": 1.26
   },
   "villa_surf": {
    "channels": 1,
@@ -443,7 +459,7 @@
    "loop": true,
    "description": "Distant ocean surf below the villa: overlapping breakers along the shore at 140-320 m (air absorption), continuous roar, soft low thumps (9.9 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.48
+   "build_s": 1.11
   },
   "villa_night": {
    "channels": 1,
@@ -513,7 +529,7 @@
    "loop": true,
    "description": "Warm summer night in the garden: three field crickets chirping at their own pace, a distant chorus of tree crickets, a faint far cicada, the softest breeze (9.6 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.6
+   "build_s": 1.07
   },
   "villa_garden": {
    "channels": 1,
@@ -522,19 +538,19 @@
    "comptype": "NONE",
    "frames": 436590,
    "seconds": 9.9,
-   "peak_dbfs": -10.37,
-   "true_peak_dbfs": -10.32,
-   "dc_offset": 1.08e-08,
+   "peak_dbfs": -9.69,
+   "true_peak_dbfs": -9.66,
+   "dc_offset": -1.67e-08,
    "clipped_samples": 0,
-   "rms_dbfs": -28.74,
+   "rms_dbfs": -28.29,
    "lufs": -24.0,
-   "seam_first": -816,
-   "seam_last": -1215,
-   "seam_step": 0.01218,
-   "seam_curvature": 0.0137,
-   "p995_step": 0.08127,
-   "p995_curvature": 0.05591,
-   "seam_click_rank": 0.619,
+   "seam_first": 163,
+   "seam_last": -137,
+   "seam_step": 0.009155,
+   "seam_curvature": 0.001984,
+   "p995_step": 0.0694,
+   "p995_curvature": 0.04312,
+   "seam_click_rank": 0.503,
    "checks": {
     "format_16bit_mono_44k1": true,
     "under_10s": true,
@@ -554,36 +570,36 @@
    },
    "ok": true,
    "band_db": {
-    "sub": -26.8,
-    "low": -16.9,
-    "lowmid": -16.2,
-    "mid": -2.8,
-    "high": -3.7,
-    "air": -30.4
+    "sub": -27.9,
+    "low": -18.0,
+    "lowmid": -17.3,
+    "mid": -1.2,
+    "high": -6.7,
+    "air": -34.1
    },
-   "centroid_hz": 3693,
-   "hf_share_db": -30.4,
-   "hf_frame_max_db": -17.9,
-   "hf_frame_max_at_s": 7.427,
-   "hf_tonal_db": 6.7,
-   "events": 17,
+   "centroid_hz": 3045,
+   "hf_share_db": -34.1,
+   "hf_frame_max_db": -18.2,
+   "hf_frame_max_at_s": 7.953,
+   "hf_tonal_db": 11.4,
+   "events": 15,
    "top_events_s": [
-    4.87,
-    5.07,
-    2.99
+    7.31,
+    7.6,
+    4.65
    ],
-   "standout_db": 0.7,
-   "event_crest_db": 20.0,
-   "short_term_max_lufs": -17.6,
-   "self_similarity": 0.234,
-   "self_similarity_lag_s": 3.4,
+   "standout_db": 1.1,
+   "event_crest_db": 16.4,
+   "short_term_max_lufs": -17.3,
+   "self_similarity": 0.278,
+   "self_similarity_lag_s": 3.31,
    "lufs_target": -24.0,
    "name": "villa_garden",
    "file": "output/sounds/villa_garden.wav",
    "loop": true,
-   "description": "Morning garden: a blackbird, a robin, finch calls and a distant wren trill, sparse and never the same phrase twice; leaves in a light breeze (9.9 s loop)",
+   "description": "Morning garden: a blackbird's mellow fluting, a robin's warble and finch calls, sparse (leaves rustling between the calls) and never the same phrase twice (9.9 s loop)",
    "limiter_db": 0.0,
-   "build_s": 0.96
+   "build_s": 0.88
   },
   "villa_chimes": {
    "channels": 1,
@@ -653,7 +669,7 @@
    "loop": true,
    "description": "Tuned aluminium wind chimes, E-flat major pentatonic (Eb4 F4 G4 Bb4 C5 Eb5): sparse gusts, free-free tube partials with slowly beating doublets, a soft breeze (9.9 s loop)",
    "limiter_db": 0.0,
-   "build_s": 2.76
+   "build_s": 1.68
   },
   "villa_lounge": {
    "channels": 1,
@@ -722,7 +738,7 @@
    "loop": true,
    "description": "Original warm chill-lounge loop, 100 BPM, 4 bars in E-flat: Ebmaj9 - Cm9 - Abmaj9 - Bb9sus4; analogue pad, electric piano melody, round bass, soft shaker (9.6 s loop)",
    "limiter_db": 0.0,
-   "build_s": 8.38,
+   "build_s": 4.04,
    "bpm": 100.0,
    "bars": 4,
    "beats": 16,
@@ -785,7 +801,7 @@
    "loop": false,
    "description": "Heavy glass sliding door on a magnetic track: lock release, smooth linear-motor glide (brush seals, moving air, the pane's mass), magnetic soft stop into the gasket, latch",
    "limiter_db": 0.0,
-   "build_s": 0.16
+   "build_s": 0.17
   },
   "villa_door_soft": {
    "channels": 1,
@@ -902,7 +918,7 @@
    "loop": false,
    "description": "Motorised curtain: relay tick, quiet geared motor whirr ramping up, runners gliding in the track, heavy drapes swishing as the pleats gather, soft stop and settle",
    "limiter_db": 0.0,
-   "build_s": 0.44
+   "build_s": 0.2
   },
   "villa_click": {
    "channels": 1,
@@ -959,7 +975,7 @@
    "loop": false,
    "description": "Premium light switch / menu tick: rocker leaving its detent, crisp damped snap and a low 'thock' from the plate",
    "limiter_db": 0.0,
-   "build_s": 0.06
+   "build_s": 0.03
   },
   "villa_splash": {
    "channels": 1,
@@ -1018,7 +1034,7 @@
    "loop": false,
    "description": "Someone slipping into the pool: water parting, soft body entry and 'gloop', light spray, droplets falling back, bubbles from hair and swimsuit, ripples lapping the edge",
    "limiter_db": 0.0,
-   "build_s": 0.4
+   "build_s": 0.2
   },
   "villa_ignite": {
    "channels": 1,
@@ -1077,7 +1093,7 @@
    "loop": false,
    "description": "Gas fireplace ignition: two soft igniter ticks, valve thunk and gas hiss, the burner lighting with a low 'whoomp', flames spreading and settling to a gentle roar",
    "limiter_db": 0.0,
-   "build_s": 0.39
+   "build_s": 0.19
   },
   "villa_arrival": {
    "channels": 1,
@@ -1135,7 +1151,7 @@
    "loop": false,
    "description": "Arrival chime: two soft tuned tone bars (G5 then E-flat5) struck by felt-tipped plungers, resonator bloom, in the stone foyer",
    "limiter_db": 0.0,
-   "build_s": 0.41
+   "build_s": 0.18
   }
  }
 }

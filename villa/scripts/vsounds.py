@@ -668,8 +668,8 @@ def night(n, rng):
 
 
 @sound("villa_garden", 9.9, loop=True, lufs=-24.0,
-       desc="Morning garden: a blackbird, a robin, finch calls and a distant wren trill, sparse and "
-            "never the same phrase twice; leaves in a light breeze (9.9 s loop)")
+       desc="Morning garden: a blackbird's mellow fluting, a robin's warble and finch calls, sparse "
+            "(leaves rustling between the calls) and never the same phrase twice (9.9 s loop)")
 def garden(n, rng):
     dur = n / SR
     makers = [blackbird, robin, finch, blackbird, wren_trill, robin, finch]
@@ -680,11 +680,15 @@ def garden(n, rng):
         d = rng.uniform(10, 30)
         y = shape(y, lambda f: air(f, d))
         env = np.sqrt(np.convolve(y * y, np.ones(ns(0.02)) / ns(0.02), "same"))
-        calls.append(rng.uniform(0.75, 1.0) * y / env.max())
-    free = dur - sum(len(c) for c in calls) / SR
-    while free < 0.6 * len(calls):                       # sparse: >= 0.6 s of leaves per call
-        calls.pop()
-        free = dur - sum(len(c) for c in calls) / SR
+        calls.append((mk, rng.uniform(0.75, 1.0) * y / env.max()))
+    free = lambda: dur - sum(len(c) for _, c in calls) / SR
+    while free() < 0.6 * len(calls):                         # sparse: >= 0.6 s of leaves per call;
+        for mk in (wren_trill, finch, robin, blackbird):     # the thin high calls give way first,
+            i = [k for k, (m, _) in enumerate(calls) if m is mk]   # the mellow blackbird stays
+            if i:
+                calls.pop(i[-1])
+                break
+    calls, free = [c for _, c in calls], free()
     gaps = free * rng.dirichlet(np.full(len(calls), 3.0))
     x = np.zeros(n)
     t = rng.uniform(0, dur)
