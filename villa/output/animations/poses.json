@@ -151,8 +151,7 @@
     "keys": 2,
     "duration_s": 1.0
    },
-   "ok": true,
-   "blender_bvh_import_max_err_m": 4e-05
+   "ok": true
   },
   "limbs_deg": {
    "L upper arm roll": 55.2,
@@ -340,8 +339,7 @@
     "keys": 2,
     "duration_s": 1.0
    },
-   "ok": true,
-   "blender_bvh_import_max_err_m": 3e-05
+   "ok": true
   },
   "limbs_deg": {
    "L upper arm roll": 0.9,
@@ -893,8 +891,7 @@
     "keys": 2,
     "duration_s": 1.0
    },
-   "ok": true,
-   "blender_bvh_import_max_err_m": 3e-05
+   "ok": true
   },
   "limbs_deg": {
    "L upper arm roll": 43.7,

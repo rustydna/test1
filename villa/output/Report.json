@@ -1,0 +1,6940 @@
+{
+ "linksets": {
+  "Villa_Core": {
+   "pieces": 32,
+   "root": "Core_Totem",
+   "label": "Villa Core",
+   "li_download_est": 89.6,
+   "li_server": 16.0,
+   "li_estimate": 89.6,
+   "size_m": [
+    36.06,
+    36.06,
+    4.61
+   ],
+   "min": [
+    -18.03,
+    -18.03,
+    -1.45
+   ],
+   "triangles_high": 64941,
+   "files": [
+    "Villa_Core.dae",
+    "Villa_Core_LOD2.dae",
+    "Villa_Core_LOD1.dae",
+    "Villa_Core_LOD0.dae",
+    "Villa_Core_PHYS.dae"
+   ]
+  },
+  "Nautilus": {
+   "pieces": 48,
+   "root": "Nautilus_Floor",
+   "label": "Nautilus - white shell",
+   "li_download_est": 135.5,
+   "li_server": 24.0,
+   "li_estimate": 135.5,
+   "size_m": [
+    27.44,
+    17.44,
+    4.94
+   ],
+   "min": [
+    -13.72,
+    -1.72,
+    0.0
+   ],
+   "triangles_high": 142889,
+   "files": [
+    "Nautilus.dae",
+    "Nautilus_LOD2.dae",
+    "Nautilus_LOD1.dae",
+    "Nautilus_LOD0.dae",
+    "Nautilus_PHYS.dae"
+   ]
+  },
+  "Dune": {
+   "pieces": 49,
+   "root": "Dune_Floor",
+   "label": "Dune - sand courtyard house",
+   "li_download_est": 118.9,
+   "li_server": 24.5,
+   "li_estimate": 118.9,
+   "size_m": [
+    27.8,
+    17.8,
+    4.34
+   ],
+   "min": [
+    -13.9,
+    -1.9,
+    0.0
+   ],
+   "triangles_high": 168275,
+   "files": [
+    "Dune.dae",
+    "Dune_LOD2.dae",
+    "Dune_LOD1.dae",
+    "Dune_LOD0.dae",
+    "Dune_PHYS.dae"
+   ]
+  },
+  "Nocturne": {
+   "pieces": 39,
+   "root": "Nocturne_Floor",
+   "label": "Nocturne - night dome",
+   "li_download_est": 113.9,
+   "li_server": 19.5,
+   "li_estimate": 113.9,
+   "size_m": [
+    27.44,
+    17.44,
+    6.03
+   ],
+   "min": [
+    -13.72,
+    -1.72,
+    0.0
+   ],
+   "triangles_high": 109962,
+   "files": [
+    "Nocturne.dae",
+    "Nocturne_LOD2.dae",
+    "Nocturne_LOD1.dae",
+    "Nocturne_LOD0.dae",
+    "Nocturne_PHYS.dae"
+   ]
+  }
+ },
+ "pieces": [
+  {
+   "name": "Core_Totem",
+   "linkset": "Villa_Core",
+   "kind": "core",
+   "size_m": [
+    1.1,
+    0.9,
+    1.58
+   ],
+   "center": [
+    15.4,
+    -3.6,
+    0.79
+   ],
+   "radius_m": 1.06,
+   "triangles": {
+    "HIGH": 2621,
+    "MEDIUM": 474,
+    "LOW": 120,
+    "LOWEST": 40,
+    "PHYS": 34
+   },
+   "lod_weight": [
+    0.001,
+    0.009,
+    0.029,
+    0.962
+   ],
+   "li_est": 3.561,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "hull"
+  },
+  {
+   "name": "Site_Deck",
+   "linkset": "Villa_Core",
+   "kind": "structure",
+   "size_m": [
+    36.06,
+    36.06,
+    1.2
+   ],
+   "center": [
+    0.0,
+    0.0,
+    -0.6
+   ],
+   "radius_m": 25.51,
+   "triangles": {
+    "HIGH": 1098,
+    "MEDIUM": 86,
+    "LOW": 26,
+    "LOWEST": 22,
+    "PHYS": 62
+   },
+   "lod_weight": [
+    0.345,
+    0.655,
+    0.0,
+    0.0
+   ],
+   "li_est": 22.617,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 9,
+   "phys": "custom"
+  },
+  {
+   "name": "Site_Coping",
+   "linkset": "Villa_Core",
+   "kind": "structure",
+   "size_m": [
+    19.481,
+    5.88,
+    0.17
+   ],
+   "center": [
+    0.801,
+    -13.1,
+    0.035
+   ],
+   "radius_m": 10.18,
+   "triangles": {
+    "HIGH": 1159,
+    "MEDIUM": 62,
+    "LOW": 60,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.055,
+    0.823,
+    0.122,
+    0.0
+   ],
+   "li_est": 6.61,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Site_Pool",
+   "linkset": "Villa_Core",
+   "kind": "structure",
+   "size_m": [
+    15.01,
+    5.01,
+    1.45
+   ],
+   "center": [
+    -1.0,
+    -13.1,
+    -0.725
+   ],
+   "radius_m": 7.95,
+   "triangles": {
+    "HIGH": 1988,
+    "MEDIUM": 94,
+    "LOW": 70,
+    "LOWEST": 24,
+    "PHYS": 108
+   },
+   "lod_weight": [
+    0.033,
+    0.502,
+    0.465,
+    0.0
+   ],
+   "li_est": 9.826,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 4,
+   "phys": "custom"
+  },
+  {
+   "name": "Site_Spa",
+   "linkset": "Villa_Core",
+   "kind": "structure",
+   "size_m": [
+    3.41,
+    3.41,
+    0.8
+   ],
+   "center": [
+    8.4,
+    -12.6,
+    -0.4
+   ],
+   "radius_m": 2.44,
+   "triangles": {
+    "HIGH": 1204,
+    "MEDIUM": 252,
+    "LOW": 100,
+    "LOWEST": 24,
+    "PHYS": 38
+   },
+   "lod_weight": [
+    0.003,
+    0.047,
+    0.152,
+    0.797
+   ],
+   "li_est": 2.798,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Site_Water",
+   "linkset": "Villa_Core",
+   "kind": "water",
+   "size_m": [
+    18.6,
+    5.0,
+    0.06
+   ],
+   "center": [
+    0.8,
+    -13.1,
+    -0.05
+   ],
+   "radius_m": 9.63,
+   "triangles": {
+    "HIGH": 108,
+    "MEDIUM": 108,
+    "LOW": 108,
+    "LOWEST": 12,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.049,
+    0.737,
+    0.214,
+    0.0
+   ],
+   "li_est": 4.2,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "none"
+  },
+  {
+   "name": "Site_Lounger_1",
+   "linkset": "Villa_Core",
+   "kind": "furniture",
+   "size_m": [
+    0.72,
+    1.969,
+    0.802
+   ],
+   "center": [
+    -7.0,
+    -8.317,
+    0.401
+   ],
+   "radius_m": 1.12,
+   "triangles": {
+    "HIGH": 510,
+    "MEDIUM": 202,
+    "LOW": 52,
+    "LOWEST": 16,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.001,
+    0.01,
+    0.032,
+    0.957
+   ],
+   "li_est": 1.161,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.517,
+     0.019
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge"
+    ]
+   }
+  },
+  {
+   "name": "Site_Side_1",
+   "linkset": "Villa_Core",
+   "kind": "deco",
+   "size_m": [
+    0.4,
+    0.4,
+    0.42
+   ],
+   "center": [
+    -5.75,
+    -7.6,
+    0.21
+   ],
+   "radius_m": 0.35,
+   "triangles": {
+    "HIGH": 450,
+    "MEDIUM": 176,
+    "LOW": 46,
+    "LOWEST": 12,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.199,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Lounger_2",
+   "linkset": "Villa_Core",
+   "kind": "furniture",
+   "size_m": [
+    0.72,
+    1.969,
+    0.802
+   ],
+   "center": [
+    -4.5,
+    -8.317,
+    0.401
+   ],
+   "radius_m": 1.12,
+   "triangles": {
+    "HIGH": 510,
+    "MEDIUM": 202,
+    "LOW": 52,
+    "LOWEST": 16,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.001,
+    0.01,
+    0.032,
+    0.957
+   ],
+   "li_est": 1.161,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.517,
+     0.019
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge"
+    ]
+   }
+  },
+  {
+   "name": "Site_Lounger_3",
+   "linkset": "Villa_Core",
+   "kind": "furniture",
+   "size_m": [
+    0.72,
+    1.969,
+    0.802
+   ],
+   "center": [
+    -2.0,
+    -8.317,
+    0.401
+   ],
+   "radius_m": 1.12,
+   "triangles": {
+    "HIGH": 510,
+    "MEDIUM": 202,
+    "LOW": 52,
+    "LOWEST": 16,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.001,
+    0.01,
+    0.032,
+    0.957
+   ],
+   "li_est": 1.16,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.517,
+     0.019
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge"
+    ]
+   }
+  },
+  {
+   "name": "Site_Side_3",
+   "linkset": "Villa_Core",
+   "kind": "deco",
+   "size_m": [
+    0.4,
+    0.4,
+    0.42
+   ],
+   "center": [
+    -0.75,
+    -7.6,
+    0.21
+   ],
+   "radius_m": 0.35,
+   "triangles": {
+    "HIGH": 450,
+    "MEDIUM": 176,
+    "LOW": 46,
+    "LOWEST": 12,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.2,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Lounger_4",
+   "linkset": "Villa_Core",
+   "kind": "furniture",
+   "size_m": [
+    0.72,
+    1.969,
+    0.802
+   ],
+   "center": [
+    0.5,
+    -8.317,
+    0.401
+   ],
+   "radius_m": 1.12,
+   "triangles": {
+    "HIGH": 510,
+    "MEDIUM": 202,
+    "LOW": 52,
+    "LOWEST": 16,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.001,
+    0.01,
+    0.032,
+    0.957
+   ],
+   "li_est": 1.155,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.517,
+     0.019
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge"
+    ]
+   }
+  },
+  {
+   "name": "Site_Daybed",
+   "linkset": "Villa_Core",
+   "kind": "furniture",
+   "size_m": [
+    2.5,
+    2.5,
+    0.85
+   ],
+   "center": [
+    12.6,
+    -8.0,
+    0.425
+   ],
+   "radius_m": 1.82,
+   "triangles": {
+    "HIGH": 14006,
+    "MEDIUM": 152,
+    "LOW": 38,
+    "LOWEST": 10,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.002,
+    0.026,
+    0.084,
+    0.888
+   ],
+   "li_est": 1.333,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     0.55,
+     0.035
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_curl",
+     "villa_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Site_Lounge_Sofa",
+   "linkset": "Villa_Core",
+   "kind": "furniture",
+   "size_m": [
+    4.675,
+    2.008,
+    0.93
+   ],
+   "center": [
+    -12.4,
+    -9.852,
+    0.465
+   ],
+   "radius_m": 2.59,
+   "triangles": {
+    "HIGH": 14004,
+    "MEDIUM": 172,
+    "LOW": 142,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.004,
+    0.053,
+    0.17,
+    0.773
+   ],
+   "li_est": 5.205,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.602,
+     -0.035
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Site_Firebowl",
+   "linkset": "Villa_Core",
+   "kind": "light",
+   "size_m": [
+    1.2,
+    1.2,
+    0.4
+   ],
+   "center": [
+    -12.4,
+    -11.4,
+    0.2
+   ],
+   "radius_m": 0.87,
+   "triangles": {
+    "HIGH": 710,
+    "MEDIUM": 282,
+    "LOW": 72,
+    "LOWEST": 18,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.0,
+    0.006,
+    0.019,
+    0.974
+   ],
+   "li_est": 1.09,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Site_Rug",
+   "linkset": "Villa_Core",
+   "kind": "deco",
+   "size_m": [
+    5.6,
+    4.8,
+    0.02
+   ],
+   "center": [
+    -12.4,
+    -11.6,
+    0.01
+   ],
+   "radius_m": 3.69,
+   "triangles": {
+    "HIGH": 387,
+    "MEDIUM": 78,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.007,
+    0.108,
+    0.346,
+    0.539
+   ],
+   "li_est": 0.73,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Olive_1",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    2.799,
+    2.777,
+    3.203
+   ],
+   "center": [
+    -15.806,
+    -15.619,
+    1.561
+   ],
+   "radius_m": 2.54,
+   "triangles": {
+    "HIGH": 3497,
+    "MEDIUM": 130,
+    "LOW": 34,
+    "LOWEST": 18,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.003,
+    0.051,
+    0.164,
+    0.781
+   ],
+   "li_est": 2.437,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Olive_2",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    2.828,
+    2.78,
+    3.203
+   ],
+   "center": [
+    15.99,
+    -15.359,
+    1.561
+   ],
+   "radius_m": 2.55,
+   "triangles": {
+    "HIGH": 3497,
+    "MEDIUM": 128,
+    "LOW": 32,
+    "LOWEST": 18,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.003,
+    0.052,
+    0.165,
+    0.78
+   ],
+   "li_est": 2.406,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Olive_3",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    2.852,
+    2.773,
+    3.203
+   ],
+   "center": [
+    -16.372,
+    2.941,
+    1.561
+   ],
+   "radius_m": 2.55,
+   "triangles": {
+    "HIGH": 3497,
+    "MEDIUM": 126,
+    "LOW": 32,
+    "LOWEST": 18,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.003,
+    0.052,
+    0.166,
+    0.779
+   ],
+   "li_est": 2.401,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Olive_4",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    2.887,
+    2.753,
+    3.203
+   ],
+   "center": [
+    16.348,
+    12.083,
+    1.561
+   ],
+   "radius_m": 2.56,
+   "triangles": {
+    "HIGH": 3497,
+    "MEDIUM": 126,
+    "LOW": 32,
+    "LOWEST": 18,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.003,
+    0.052,
+    0.166,
+    0.778
+   ],
+   "li_est": 2.389,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Plant_1",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    1.329,
+    1.147,
+    1.305
+   ],
+   "center": [
+    -16.253,
+    -6.087,
+    0.652
+   ],
+   "radius_m": 1.09,
+   "triangles": {
+    "HIGH": 1582,
+    "MEDIUM": 380,
+    "LOW": 96,
+    "LOWEST": 26,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.01,
+    0.03,
+    0.959
+   ],
+   "li_est": 2.587,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Plant_2",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    1.274,
+    1.316,
+    1.447
+   ],
+   "center": [
+    16.556,
+    -10.561,
+    0.723
+   ],
+   "radius_m": 1.17,
+   "triangles": {
+    "HIGH": 1582,
+    "MEDIUM": 368,
+    "LOW": 92,
+    "LOWEST": 26,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.035,
+    0.954
+   ],
+   "li_est": 2.622,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Plant_3",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    0.99,
+    1.495,
+    1.583
+   ],
+   "center": [
+    -16.414,
+    9.038,
+    0.792
+   ],
+   "radius_m": 1.2,
+   "triangles": {
+    "HIGH": 1582,
+    "MEDIUM": 364,
+    "LOW": 92,
+    "LOWEST": 26,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 2.655,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Plant_4",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    1.027,
+    1.373,
+    1.305
+   ],
+   "center": [
+    -16.421,
+    15.419,
+    0.653
+   ],
+   "radius_m": 1.08,
+   "triangles": {
+    "HIGH": 1582,
+    "MEDIUM": 382,
+    "LOW": 96,
+    "LOWEST": 26,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.009,
+    0.03,
+    0.961
+   ],
+   "li_est": 2.565,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Plant_5",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    1.221,
+    1.457,
+    1.447
+   ],
+   "center": [
+    16.413,
+    4.465,
+    0.723
+   ],
+   "radius_m": 1.19,
+   "triangles": {
+    "HIGH": 1582,
+    "MEDIUM": 364,
+    "LOW": 92,
+    "LOWEST": 26,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 2.647,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Plant_6",
+   "linkset": "Villa_Core",
+   "kind": "plant",
+   "size_m": [
+    1.349,
+    1.326,
+    1.586
+   ],
+   "center": [
+    16.148,
+    15.48,
+    0.793
+   ],
+   "radius_m": 1.23,
+   "triangles": {
+    "HIGH": 1582,
+    "MEDIUM": 358,
+    "LOW": 90,
+    "LOWEST": 26,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.012,
+    0.039,
+    0.948
+   ],
+   "li_est": 2.661,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Bollard_1",
+   "linkset": "Villa_Core",
+   "kind": "light",
+   "size_m": [
+    0.14,
+    0.14,
+    0.7
+   ],
+   "center": [
+    -16.9,
+    -12.0,
+    0.35
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 206,
+    "MEDIUM": 82,
+    "LOW": 24,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.161,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": false,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Bollard_2",
+   "linkset": "Villa_Core",
+   "kind": "light",
+   "size_m": [
+    0.14,
+    0.14,
+    0.7
+   ],
+   "center": [
+    -16.9,
+    6.0,
+    0.35
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 206,
+    "MEDIUM": 82,
+    "LOW": 24,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.233,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": false,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Bollard_3",
+   "linkset": "Villa_Core",
+   "kind": "light",
+   "size_m": [
+    0.14,
+    0.14,
+    0.7
+   ],
+   "center": [
+    16.9,
+    -6.0,
+    0.35
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 206,
+    "MEDIUM": 82,
+    "LOW": 24,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.233,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": false,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Bollard_4",
+   "linkset": "Villa_Core",
+   "kind": "light",
+   "size_m": [
+    0.14,
+    0.14,
+    0.7
+   ],
+   "center": [
+    16.9,
+    8.5,
+    0.35
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 206,
+    "MEDIUM": 82,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.162,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Bollard_5",
+   "linkset": "Villa_Core",
+   "kind": "light",
+   "size_m": [
+    0.14,
+    0.14,
+    0.7
+   ],
+   "center": [
+    -9.0,
+    -16.9,
+    0.35
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 206,
+    "MEDIUM": 82,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.234,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Site_Bollard_6",
+   "linkset": "Villa_Core",
+   "kind": "light",
+   "size_m": [
+    0.14,
+    0.14,
+    0.7
+   ],
+   "center": [
+    9.0,
+    -16.9,
+    0.35
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 206,
+    "MEDIUM": 82,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.162,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Floor",
+   "linkset": "Nautilus",
+   "kind": "structure",
+   "size_m": [
+    27.441,
+    17.44,
+    0.45
+   ],
+   "center": [
+    0.0,
+    7.0,
+    0.225
+   ],
+   "radius_m": 16.26,
+   "triangles": {
+    "HIGH": 889,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 278
+   },
+   "lod_weight": [
+    0.14,
+    0.86,
+    0.0,
+    0.0
+   ],
+   "li_est": 8.971,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Nautilus_Wall_N",
+   "linkset": "Nautilus",
+   "kind": "structure",
+   "size_m": [
+    24.961,
+    4.884,
+    3.05
+   ],
+   "center": [
+    0.0,
+    12.537,
+    1.975
+   ],
+   "radius_m": 12.81,
+   "triangles": {
+    "HIGH": 894,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 170
+   },
+   "lod_weight": [
+    0.087,
+    0.913,
+    0.0,
+    0.0
+   ],
+   "li_est": 7.565,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 5,
+   "phys": "custom"
+  },
+  {
+   "name": "Nautilus_Wall_W",
+   "linkset": "Nautilus",
+   "kind": "structure",
+   "size_m": [
+    1.231,
+    7.337,
+    3.05
+   ],
+   "center": [
+    -12.363,
+    6.556,
+    1.975
+   ],
+   "radius_m": 4.02,
+   "triangles": {
+    "HIGH": 131,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 62
+   },
+   "lod_weight": [
+    0.009,
+    0.128,
+    0.411,
+    0.452
+   ],
+   "li_est": 0.641,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Nautilus_Wall_E",
+   "linkset": "Nautilus",
+   "kind": "structure",
+   "size_m": [
+    1.231,
+    7.337,
+    3.05
+   ],
+   "center": [
+    12.364,
+    6.556,
+    1.975
+   ],
+   "radius_m": 4.02,
+   "triangles": {
+    "HIGH": 1059,
+    "MEDIUM": 110,
+    "LOW": 28,
+    "LOWEST": 10,
+    "PHYS": 518
+   },
+   "lod_weight": [
+    0.009,
+    0.128,
+    0.411,
+    0.452
+   ],
+   "li_est": 1.691,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Nautilus_Glass_S",
+   "linkset": "Nautilus",
+   "kind": "glass",
+   "size_m": [
+    23.851,
+    3.861,
+    3.04
+   ],
+   "center": [
+    0.0,
+    1.078,
+    1.95
+   ],
+   "radius_m": 12.18,
+   "triangles": {
+    "HIGH": 612,
+    "MEDIUM": 62,
+    "LOW": 28,
+    "LOWEST": 20,
+    "PHYS": 434
+   },
+   "lod_weight": [
+    0.079,
+    0.921,
+    0.0,
+    0.0
+   ],
+   "li_est": 7.56,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 4,
+   "phys": "custom"
+  },
+  {
+   "name": "Nautilus_Door_S",
+   "linkset": "Nautilus",
+   "kind": "door",
+   "size_m": [
+    2.57,
+    0.097,
+    2.97
+   ],
+   "center": [
+    0.0,
+    -0.714,
+    1.935
+   ],
+   "radius_m": 1.96,
+   "triangles": {
+    "HIGH": 64,
+    "MEDIUM": 58,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.002,
+    0.031,
+    0.098,
+    0.869
+   ],
+   "li_est": 0.392,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "box"
+  },
+  {
+   "name": "Nautilus_Door_E",
+   "linkset": "Nautilus",
+   "kind": "door",
+   "size_m": [
+    0.133,
+    1.44,
+    2.12
+   ],
+   "center": [
+    12.754,
+    7.0,
+    1.52
+   ],
+   "radius_m": 1.28,
+   "triangles": {
+    "HIGH": 73,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.001,
+    0.013,
+    0.042,
+    0.944
+   ],
+   "li_est": 0.189,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "box"
+  },
+  {
+   "name": "Nautilus_Roof",
+   "linkset": "Nautilus",
+   "kind": "structure",
+   "size_m": [
+    27.1,
+    17.1,
+    1.553
+   ],
+   "center": [
+    0.0,
+    7.0,
+    4.164
+   ],
+   "radius_m": 16.04,
+   "triangles": {
+    "HIGH": 2734,
+    "MEDIUM": 284,
+    "LOW": 156,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.136,
+    0.864,
+    0.0,
+    0.0
+   ],
+   "li_est": 34.569,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 9,
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Partition",
+   "linkset": "Nautilus",
+   "kind": "structure",
+   "size_m": [
+    9.017,
+    0.565,
+    2.45
+   ],
+   "center": [
+    -7.698,
+    9.417,
+    1.675
+   ],
+   "radius_m": 4.68,
+   "triangles": {
+    "HIGH": 270,
+    "MEDIUM": 82,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 74
+   },
+   "lod_weight": [
+    0.012,
+    0.174,
+    0.557,
+    0.257
+   ],
+   "li_est": 1.383,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.2,
+   "phys": "custom"
+  },
+  {
+   "name": "Nautilus_Bath_Screen",
+   "linkset": "Nautilus",
+   "kind": "glass",
+   "size_m": [
+    8.48,
+    0.377,
+    2.19
+   ],
+   "center": [
+    7.2,
+    10.749,
+    1.525
+   ],
+   "radius_m": 4.38,
+   "triangles": {
+    "HIGH": 294,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.01,
+    0.153,
+    0.489,
+    0.349
+   ],
+   "li_est": 2.312,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.8,
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Sofa",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    4.696,
+    1.986,
+    0.93
+   ],
+   "center": [
+    -6.5,
+    6.809,
+    0.915
+   ],
+   "radius_m": 2.59,
+   "triangles": {
+    "HIGH": 14004,
+    "MEDIUM": 172,
+    "LOW": 144,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.004,
+    0.053,
+    0.171,
+    0.772
+   ],
+   "li_est": 5.136,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.611,
+     -0.035
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Coffee_Table",
+   "linkset": "Nautilus",
+   "kind": "deco",
+   "size_m": [
+    1.4,
+    1.0,
+    0.34
+   ],
+   "center": [
+    -6.5,
+    5.4,
+    0.62
+   ],
+   "radius_m": 0.88,
+   "triangles": {
+    "HIGH": 1086,
+    "MEDIUM": 274,
+    "LOW": 70,
+    "LOWEST": 18,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.006,
+    0.02,
+    0.974
+   ],
+   "li_est": 0.854,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Rug",
+   "linkset": "Nautilus",
+   "kind": "deco",
+   "size_m": [
+    5.8,
+    5.0,
+    0.02
+   ],
+   "center": [
+    -6.5,
+    5.8,
+    0.46
+   ],
+   "radius_m": 3.83,
+   "triangles": {
+    "HIGH": 387,
+    "MEDIUM": 72,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.008,
+    0.117,
+    0.373,
+    0.503
+   ],
+   "li_est": 0.671,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Books",
+   "linkset": "Nautilus",
+   "kind": "deco",
+   "size_m": [
+    0.342,
+    0.284,
+    0.156
+   ],
+   "center": [
+    -6.75,
+    5.35,
+    0.868
+   ],
+   "radius_m": 0.24,
+   "triangles": {
+    "HIGH": 181,
+    "MEDIUM": 72,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.0,
+    0.001,
+    0.998
+   ],
+   "li_est": 0.23,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Vase",
+   "linkset": "Nautilus",
+   "kind": "deco",
+   "size_m": [
+    0.22,
+    0.22,
+    0.36
+   ],
+   "center": [
+    -6.15,
+    5.5,
+    0.97
+   ],
+   "radius_m": 0.24,
+   "triangles": {
+    "HIGH": 455,
+    "MEDIUM": 180,
+    "LOW": 46,
+    "LOWEST": 12,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.0,
+    0.001,
+    0.998
+   ],
+   "li_est": 0.181,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Chair_1",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.824,
+    0.84,
+    0.943
+   ],
+   "center": [
+    -9.083,
+    3.588,
+    0.921
+   ],
+   "radius_m": 0.75,
+   "triangles": {
+    "HIGH": 7237,
+    "MEDIUM": 548,
+    "LOW": 138,
+    "LOWEST": 36,
+    "PHYS": 38
+   },
+   "lod_weight": [
+    0.0,
+    0.005,
+    0.014,
+    0.981
+   ],
+   "li_est": 2.633,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.087,
+     -0.048,
+     -0.011
+    ],
+    "yaw": 150.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Chair_2",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.824,
+    0.84,
+    0.943
+   ],
+   "center": [
+    -3.918,
+    3.592,
+    0.921
+   ],
+   "radius_m": 0.75,
+   "triangles": {
+    "HIGH": 7237,
+    "MEDIUM": 548,
+    "LOW": 138,
+    "LOWEST": 36,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.0,
+    0.005,
+    0.014,
+    0.981
+   ],
+   "li_est": 2.562,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.086,
+     -0.052,
+     -0.011
+    ],
+    "yaw": 30.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Arc_Lamp",
+   "linkset": "Nautilus",
+   "kind": "light",
+   "size_m": [
+    1.55,
+    2.016,
+    2.22
+   ],
+   "center": [
+    -2.825,
+    6.792,
+    1.56
+   ],
+   "radius_m": 1.69,
+   "triangles": {
+    "HIGH": 961,
+    "MEDIUM": 196,
+    "LOW": 50,
+    "LOWEST": 12,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.002,
+    0.023,
+    0.072,
+    0.903
+   ],
+   "li_est": 1.03,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Fireplace",
+   "linkset": "Nautilus",
+   "kind": "light",
+   "size_m": [
+    1.5,
+    1.5,
+    3.6
+   ],
+   "center": [
+    -10.4,
+    4.3,
+    2.25
+   ],
+   "radius_m": 2.09,
+   "triangles": {
+    "HIGH": 1578,
+    "MEDIUM": 142,
+    "LOW": 36,
+    "LOWEST": 22,
+    "PHYS": 22
+   },
+   "lod_weight": [
+    0.002,
+    0.035,
+    0.111,
+    0.852
+   ],
+   "li_est": 1.088,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Dining_Table",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    2.6,
+    1.1,
+    0.759
+   ],
+   "center": [
+    6.5,
+    4.6,
+    0.831
+   ],
+   "radius_m": 1.46,
+   "triangles": {
+    "HIGH": 2162,
+    "MEDIUM": 430,
+    "LOW": 108,
+    "LOWEST": 28,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.001,
+    0.017,
+    0.054,
+    0.928
+   ],
+   "li_est": 2.328,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Dining_Chair_1",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.474,
+    0.532,
+    0.847
+   ],
+   "center": [
+    5.75,
+    3.841,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.676,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     -0.131,
+     0.059
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Dining_Chair_2",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.474,
+    0.532,
+    0.847
+   ],
+   "center": [
+    7.25,
+    3.841,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 26
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.749,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     -0.131,
+     0.059
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Dining_Chair_3",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.474,
+    0.532,
+    0.847
+   ],
+   "center": [
+    5.75,
+    5.359,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.748,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.131,
+     0.059
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Dining_Chair_4",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.474,
+    0.532,
+    0.847
+   ],
+   "center": [
+    7.25,
+    5.359,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.713,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.131,
+     0.059
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Dining_Chair_5",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.532,
+    0.474,
+    0.847
+   ],
+   "center": [
+    4.841,
+    4.6,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.678,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.131,
+     0.0,
+     0.059
+    ],
+    "yaw": 0.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Dining_Chair_6",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.532,
+    0.474,
+    0.847
+   ],
+   "center": [
+    8.159,
+    4.6,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.572,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.131,
+     0.0,
+     0.059
+    ],
+    "yaw": 180.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Dining_Light",
+   "linkset": "Nautilus",
+   "kind": "light",
+   "size_m": [
+    1.57,
+    1.57,
+    0.675
+   ],
+   "center": [
+    6.5,
+    4.6,
+    3.095
+   ],
+   "radius_m": 1.16,
+   "triangles": {
+    "HIGH": 1846,
+    "MEDIUM": 238,
+    "LOW": 106,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.034,
+    0.954
+   ],
+   "li_est": 1.132,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Island",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    3.4,
+    1.1,
+    1.292
+   ],
+   "center": [
+    6.5,
+    8.9,
+    1.096
+   ],
+   "radius_m": 1.9,
+   "triangles": {
+    "HIGH": 1802,
+    "MEDIUM": 344,
+    "LOW": 126,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.002,
+    0.029,
+    0.092,
+    0.878
+   ],
+   "li_est": 2.531,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Stool_1",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    5.6,
+    7.95,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 38,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 3.385,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     0.385
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Stool_2",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    6.5,
+    7.95,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 40,
+    "PHYS": 36
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 3.485,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     0.385
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Stool_3",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    7.4,
+    7.95,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 38,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 2.957,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     0.0,
+     0.385
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Island_Light_1",
+   "linkset": "Nautilus",
+   "kind": "light",
+   "size_m": [
+    0.34,
+    0.34,
+    1.206
+   ],
+   "center": [
+    5.5,
+    8.9,
+    2.847
+   ],
+   "radius_m": 0.65,
+   "triangles": {
+    "HIGH": 774,
+    "MEDIUM": 296,
+    "LOW": 74,
+    "LOWEST": 20,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.011,
+    0.986
+   ],
+   "li_est": 1.295,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Island_Light_2",
+   "linkset": "Nautilus",
+   "kind": "light",
+   "size_m": [
+    0.34,
+    0.34,
+    1.206
+   ],
+   "center": [
+    6.5,
+    8.9,
+    2.847
+   ],
+   "radius_m": 0.65,
+   "triangles": {
+    "HIGH": 774,
+    "MEDIUM": 296,
+    "LOW": 74,
+    "LOWEST": 20,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.011,
+    0.986
+   ],
+   "li_est": 1.296,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Island_Light_3",
+   "linkset": "Nautilus",
+   "kind": "light",
+   "size_m": [
+    0.34,
+    0.34,
+    1.206
+   ],
+   "center": [
+    7.5,
+    8.9,
+    2.847
+   ],
+   "radius_m": 0.65,
+   "triangles": {
+    "HIGH": 774,
+    "MEDIUM": 296,
+    "LOW": 74,
+    "LOWEST": 20,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.011,
+    0.986
+   ],
+   "li_est": 1.369,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Bed",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    2.489,
+    2.406,
+    1.3
+   ],
+   "center": [
+    -6.5,
+    12.303,
+    1.1
+   ],
+   "radius_m": 1.85,
+   "triangles": {
+    "HIGH": 14004,
+    "MEDIUM": 142,
+    "LOW": 36,
+    "LOWEST": 14,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.002,
+    0.027,
+    0.087,
+    0.884
+   ],
+   "li_est": 2.249,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.45,
+     0.647,
+     -0.05
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Pillow_1",
+   "linkset": "Nautilus",
+   "kind": "seat",
+   "size_m": [
+    0.596,
+    0.416,
+    0.155
+   ],
+   "center": [
+    -6.98,
+    13.07,
+    1.047
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 380,
+    "LOW": 96,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.004,
+    0.995
+   ],
+   "li_est": 0.672,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.1,
+     0.003
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Pillow_2",
+   "linkset": "Nautilus",
+   "kind": "seat",
+   "size_m": [
+    0.596,
+    0.416,
+    0.155
+   ],
+   "center": [
+    -6.02,
+    13.07,
+    1.047
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 380,
+    "LOW": 96,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.004,
+    0.995
+   ],
+   "li_est": 0.672,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     0.1,
+     0.003
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Nautilus_Nightstand_1",
+   "linkset": "Nautilus",
+   "kind": "deco",
+   "size_m": [
+    0.58,
+    0.45,
+    0.53
+   ],
+   "center": [
+    -7.95,
+    13.1,
+    0.715
+   ],
+   "radius_m": 0.45,
+   "triangles": {
+    "HIGH": 304,
+    "MEDIUM": 122,
+    "LOW": 32,
+    "LOWEST": 10,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.005,
+    0.993
+   ],
+   "li_est": 0.4,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Bed_Lamp_1",
+   "linkset": "Nautilus",
+   "kind": "light",
+   "size_m": [
+    0.26,
+    0.26,
+    0.53
+   ],
+   "center": [
+    -7.95,
+    13.1,
+    1.245
+   ],
+   "radius_m": 0.32,
+   "triangles": {
+    "HIGH": 558,
+    "MEDIUM": 222,
+    "LOW": 56,
+    "LOWEST": 14,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.581,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Nightstand_2",
+   "linkset": "Nautilus",
+   "kind": "deco",
+   "size_m": [
+    0.58,
+    0.45,
+    0.53
+   ],
+   "center": [
+    -5.05,
+    13.1,
+    0.715
+   ],
+   "radius_m": 0.45,
+   "triangles": {
+    "HIGH": 304,
+    "MEDIUM": 122,
+    "LOW": 32,
+    "LOWEST": 10,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.005,
+    0.993
+   ],
+   "li_est": 0.4,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Bed_Lamp_2",
+   "linkset": "Nautilus",
+   "kind": "light",
+   "size_m": [
+    0.26,
+    0.26,
+    0.53
+   ],
+   "center": [
+    -5.05,
+    13.1,
+    1.245
+   ],
+   "radius_m": 0.32,
+   "triangles": {
+    "HIGH": 558,
+    "MEDIUM": 222,
+    "LOW": 56,
+    "LOWEST": 14,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.509,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Bed_Rug",
+   "linkset": "Nautilus",
+   "kind": "deco",
+   "size_m": [
+    3.2,
+    2.4,
+    0.02
+   ],
+   "center": [
+    -6.5,
+    11.65,
+    0.46
+   ],
+   "radius_m": 2.0,
+   "triangles": {
+    "HIGH": 195,
+    "MEDIUM": 74,
+    "LOW": 24,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.002,
+    0.032,
+    0.102,
+    0.864
+   ],
+   "li_est": 0.231,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Bathtub",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    1.776,
+    0.838,
+    0.551
+   ],
+   "center": [
+    8.6,
+    12.4,
+    0.726
+   ],
+   "radius_m": 1.02,
+   "triangles": {
+    "HIGH": 2407,
+    "MEDIUM": 516,
+    "LOW": 130,
+    "LOWEST": 34,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.001,
+    0.008,
+    0.026,
+    0.965
+   ],
+   "li_est": 1.88,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Vanity",
+   "linkset": "Nautilus",
+   "kind": "furniture",
+   "size_m": [
+    1.82,
+    0.58,
+    1.433
+   ],
+   "center": [
+    4.9,
+    13.7,
+    1.656
+   ],
+   "radius_m": 1.19,
+   "triangles": {
+    "HIGH": 2226,
+    "MEDIUM": 484,
+    "LOW": 122,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 1.352,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nautilus_Plant_1",
+   "linkset": "Nautilus",
+   "kind": "plant",
+   "size_m": [
+    1.014,
+    1.219,
+    1.325
+   ],
+   "center": [
+    -12.045,
+    2.922,
+    1.112
+   ],
+   "radius_m": 1.03,
+   "triangles": {
+    "HIGH": 1702,
+    "MEDIUM": 388,
+    "LOW": 98,
+    "LOWEST": 28,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.008,
+    0.027,
+    0.964
+   ],
+   "li_est": 2.801,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Plant_2",
+   "linkset": "Nautilus",
+   "kind": "plant",
+   "size_m": [
+    1.254,
+    1.813,
+    1.505
+   ],
+   "center": [
+    12.016,
+    3.372,
+    1.203
+   ],
+   "radius_m": 1.33,
+   "triangles": {
+    "HIGH": 1702,
+    "MEDIUM": 340,
+    "LOW": 86,
+    "LOWEST": 28,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.014,
+    0.045,
+    0.94
+   ],
+   "li_est": 2.988,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Plant_3",
+   "linkset": "Nautilus",
+   "kind": "plant",
+   "size_m": [
+    1.2,
+    1.155,
+    1.327
+   ],
+   "center": [
+    -1.523,
+    13.411,
+    1.113
+   ],
+   "radius_m": 1.06,
+   "triangles": {
+    "HIGH": 1702,
+    "MEDIUM": 384,
+    "LOW": 96,
+    "LOWEST": 28,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.009,
+    0.029,
+    0.962
+   ],
+   "li_est": 2.813,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nautilus_Sculpture",
+   "linkset": "Nautilus",
+   "kind": "deco",
+   "size_m": [
+    0.506,
+    0.36,
+    0.848
+   ],
+   "center": [
+    1.302,
+    3.8,
+    0.874
+   ],
+   "radius_m": 0.53,
+   "triangles": {
+    "HIGH": 817,
+    "MEDIUM": 306,
+    "LOW": 78,
+    "LOWEST": 30,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.007,
+    0.991
+   ],
+   "li_est": 2.351,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Floor",
+   "linkset": "Dune",
+   "kind": "structure",
+   "size_m": [
+    27.441,
+    17.44,
+    0.45
+   ],
+   "center": [
+    0.0,
+    7.0,
+    0.225
+   ],
+   "radius_m": 16.26,
+   "triangles": {
+    "HIGH": 889,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 278
+   },
+   "lod_weight": [
+    0.14,
+    0.86,
+    0.0,
+    0.0
+   ],
+   "li_est": 8.971,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Dune_Wall_N",
+   "linkset": "Dune",
+   "kind": "structure",
+   "size_m": [
+    24.961,
+    4.884,
+    3.05
+   ],
+   "center": [
+    0.0,
+    12.537,
+    1.975
+   ],
+   "radius_m": 12.81,
+   "triangles": {
+    "HIGH": 894,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 170
+   },
+   "lod_weight": [
+    0.087,
+    0.913,
+    0.0,
+    0.0
+   ],
+   "li_est": 7.565,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 5,
+   "phys": "custom"
+  },
+  {
+   "name": "Dune_Wall_W",
+   "linkset": "Dune",
+   "kind": "structure",
+   "size_m": [
+    1.231,
+    7.337,
+    3.05
+   ],
+   "center": [
+    -12.363,
+    6.556,
+    1.975
+   ],
+   "radius_m": 4.02,
+   "triangles": {
+    "HIGH": 131,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 62
+   },
+   "lod_weight": [
+    0.009,
+    0.128,
+    0.411,
+    0.452
+   ],
+   "li_est": 0.641,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Dune_Wall_E",
+   "linkset": "Dune",
+   "kind": "structure",
+   "size_m": [
+    1.231,
+    7.337,
+    3.05
+   ],
+   "center": [
+    12.364,
+    6.556,
+    1.975
+   ],
+   "radius_m": 4.02,
+   "triangles": {
+    "HIGH": 1059,
+    "MEDIUM": 110,
+    "LOW": 28,
+    "LOWEST": 10,
+    "PHYS": 518
+   },
+   "lod_weight": [
+    0.009,
+    0.128,
+    0.411,
+    0.452
+   ],
+   "li_est": 1.691,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Dune_Glass_S",
+   "linkset": "Dune",
+   "kind": "glass",
+   "size_m": [
+    23.851,
+    3.861,
+    3.04
+   ],
+   "center": [
+    0.0,
+    1.078,
+    1.95
+   ],
+   "radius_m": 12.18,
+   "triangles": {
+    "HIGH": 612,
+    "MEDIUM": 62,
+    "LOW": 28,
+    "LOWEST": 20,
+    "PHYS": 434
+   },
+   "lod_weight": [
+    0.079,
+    0.921,
+    0.0,
+    0.0
+   ],
+   "li_est": 7.56,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 4,
+   "phys": "custom"
+  },
+  {
+   "name": "Dune_Door_S",
+   "linkset": "Dune",
+   "kind": "door",
+   "size_m": [
+    2.57,
+    0.097,
+    2.97
+   ],
+   "center": [
+    0.0,
+    -0.714,
+    1.935
+   ],
+   "radius_m": 1.96,
+   "triangles": {
+    "HIGH": 64,
+    "MEDIUM": 58,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.002,
+    0.031,
+    0.098,
+    0.869
+   ],
+   "li_est": 0.392,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "box"
+  },
+  {
+   "name": "Dune_Door_E",
+   "linkset": "Dune",
+   "kind": "door",
+   "size_m": [
+    0.133,
+    1.44,
+    2.12
+   ],
+   "center": [
+    12.754,
+    7.0,
+    1.52
+   ],
+   "radius_m": 1.28,
+   "triangles": {
+    "HIGH": 73,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.001,
+    0.013,
+    0.042,
+    0.944
+   ],
+   "li_est": 0.189,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "box"
+  },
+  {
+   "name": "Dune_Roof",
+   "linkset": "Dune",
+   "kind": "structure",
+   "size_m": [
+    27.8,
+    17.8,
+    0.95
+   ],
+   "center": [
+    0.0,
+    7.0,
+    3.865
+   ],
+   "radius_m": 16.51,
+   "triangles": {
+    "HIGH": 1066,
+    "MEDIUM": 148,
+    "LOW": 140,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.144,
+    0.856,
+    0.0,
+    0.0
+   ],
+   "li_est": 16.396,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 9,
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Courtyard",
+   "linkset": "Dune",
+   "kind": "plant",
+   "size_m": [
+    5.4,
+    4.32,
+    3.603
+   ],
+   "center": [
+    1.5,
+    7.2,
+    2.211
+   ],
+   "radius_m": 3.9,
+   "triangles": {
+    "HIGH": 3972,
+    "MEDIUM": 74,
+    "LOW": 26,
+    "LOWEST": 20,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.008,
+    0.121,
+    0.387,
+    0.485
+   ],
+   "li_est": 3.735,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Partition",
+   "linkset": "Dune",
+   "kind": "structure",
+   "size_m": [
+    9.017,
+    0.565,
+    2.45
+   ],
+   "center": [
+    -7.698,
+    9.417,
+    1.675
+   ],
+   "radius_m": 4.68,
+   "triangles": {
+    "HIGH": 270,
+    "MEDIUM": 82,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 74
+   },
+   "lod_weight": [
+    0.012,
+    0.174,
+    0.557,
+    0.257
+   ],
+   "li_est": 1.383,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.2,
+   "phys": "custom"
+  },
+  {
+   "name": "Dune_Bath_Screen",
+   "linkset": "Dune",
+   "kind": "glass",
+   "size_m": [
+    8.48,
+    0.377,
+    2.19
+   ],
+   "center": [
+    7.2,
+    10.749,
+    1.525
+   ],
+   "radius_m": 4.38,
+   "triangles": {
+    "HIGH": 294,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.01,
+    0.153,
+    0.489,
+    0.349
+   ],
+   "li_est": 2.312,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.8,
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Sofa",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    3.2,
+    0.974,
+    0.91
+   ],
+   "center": [
+    -6.5,
+    6.212,
+    0.905
+   ],
+   "radius_m": 1.73,
+   "triangles": {
+    "HIGH": 14004,
+    "MEDIUM": 180,
+    "LOW": 46,
+    "LOWEST": 18,
+    "PHYS": 34
+   },
+   "lod_weight": [
+    0.002,
+    0.024,
+    0.076,
+    0.898
+   ],
+   "li_est": 2.819,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Sofa_Seat_1",
+   "linkset": "Dune",
+   "kind": "seat",
+   "size_m": [
+    0.912,
+    0.642,
+    0.21
+   ],
+   "center": [
+    -7.42,
+    6.1,
+    0.795
+   ],
+   "radius_m": 0.57,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 354,
+    "LOW": 90,
+    "LOWEST": 30,
+    "PHYS": 26
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.008,
+    0.989
+   ],
+   "li_est": 1.833,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.32,
+     0.085
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Sofa_Seat_2",
+   "linkset": "Dune",
+   "kind": "seat",
+   "size_m": [
+    0.912,
+    0.642,
+    0.21
+   ],
+   "center": [
+    -6.5,
+    6.1,
+    0.795
+   ],
+   "radius_m": 0.57,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 354,
+    "LOW": 90,
+    "LOWEST": 34,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.008,
+    0.989
+   ],
+   "li_est": 2.351,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.32,
+     0.085
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Sofa_Seat_3",
+   "linkset": "Dune",
+   "kind": "seat",
+   "size_m": [
+    0.912,
+    0.642,
+    0.21
+   ],
+   "center": [
+    -5.58,
+    6.1,
+    0.795
+   ],
+   "radius_m": 0.57,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 354,
+    "LOW": 90,
+    "LOWEST": 36,
+    "PHYS": 26
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.008,
+    0.989
+   ],
+   "li_est": 2.339,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     0.32,
+     0.085
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Coffee_Table",
+   "linkset": "Dune",
+   "kind": "deco",
+   "size_m": [
+    1.6,
+    0.9,
+    0.34
+   ],
+   "center": [
+    -6.5,
+    4.85,
+    0.62
+   ],
+   "radius_m": 0.93,
+   "triangles": {
+    "HIGH": 1086,
+    "MEDIUM": 268,
+    "LOW": 68,
+    "LOWEST": 18,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.007,
+    0.022,
+    0.97
+   ],
+   "li_est": 0.95,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Rug",
+   "linkset": "Dune",
+   "kind": "deco",
+   "size_m": [
+    4.4,
+    3.2,
+    0.02
+   ],
+   "center": [
+    -6.5,
+    5.2,
+    0.46
+   ],
+   "radius_m": 2.72,
+   "triangles": {
+    "HIGH": 227,
+    "MEDIUM": 88,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.004,
+    0.059,
+    0.188,
+    0.749
+   ],
+   "li_est": 0.432,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Books",
+   "linkset": "Dune",
+   "kind": "deco",
+   "size_m": [
+    0.342,
+    0.284,
+    0.126
+   ],
+   "center": [
+    -6.2,
+    4.85,
+    0.853
+   ],
+   "radius_m": 0.23,
+   "triangles": {
+    "HIGH": 137,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.0,
+    0.001,
+    0.998
+   ],
+   "li_est": 0.085,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Chair_1",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.818,
+    0.835,
+    0.943
+   ],
+   "center": [
+    -8.681,
+    3.599,
+    0.921
+   ],
+   "radius_m": 0.75,
+   "triangles": {
+    "HIGH": 7237,
+    "MEDIUM": 546,
+    "LOW": 138,
+    "LOWEST": 36,
+    "PHYS": 38
+   },
+   "lod_weight": [
+    0.0,
+    0.004,
+    0.014,
+    0.981
+   ],
+   "li_est": 2.35,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.094,
+     0.042,
+     -0.011
+    ],
+    "yaw": 200.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Chair_2",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.818,
+    0.835,
+    0.943
+   ],
+   "center": [
+    -4.319,
+    3.614,
+    0.921
+   ],
+   "radius_m": 0.75,
+   "triangles": {
+    "HIGH": 7237,
+    "MEDIUM": 548,
+    "LOW": 138,
+    "LOWEST": 36,
+    "PHYS": 38
+   },
+   "lod_weight": [
+    0.0,
+    0.004,
+    0.014,
+    0.981
+   ],
+   "li_est": 2.421,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.094,
+     0.027,
+     -0.011
+    ],
+    "yaw": 340.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Arc_Lamp",
+   "linkset": "Dune",
+   "kind": "light",
+   "size_m": [
+    2.104,
+    1.409,
+    2.22
+   ],
+   "center": [
+    -3.247,
+    6.295,
+    1.56
+   ],
+   "radius_m": 1.68,
+   "triangles": {
+    "HIGH": 961,
+    "MEDIUM": 196,
+    "LOW": 50,
+    "LOWEST": 12,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.002,
+    0.023,
+    0.072,
+    0.904
+   ],
+   "li_est": 0.932,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Dining_Table",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    2.6,
+    1.1,
+    0.759
+   ],
+   "center": [
+    7.0,
+    4.4,
+    0.831
+   ],
+   "radius_m": 1.46,
+   "triangles": {
+    "HIGH": 2162,
+    "MEDIUM": 430,
+    "LOW": 108,
+    "LOWEST": 28,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.001,
+    0.017,
+    0.054,
+    0.928
+   ],
+   "li_est": 2.332,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Dining_Chair_1",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.474,
+    0.532,
+    0.847
+   ],
+   "center": [
+    6.25,
+    3.641,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.535,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     -0.131,
+     0.059
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Dining_Chair_2",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.474,
+    0.532,
+    0.847
+   ],
+   "center": [
+    7.75,
+    3.641,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 26
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.748,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     -0.131,
+     0.059
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Dining_Chair_3",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.474,
+    0.532,
+    0.847
+   ],
+   "center": [
+    6.25,
+    5.159,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.535,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.131,
+     0.059
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Dining_Chair_4",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.474,
+    0.532,
+    0.847
+   ],
+   "center": [
+    7.75,
+    5.159,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.5,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.131,
+     0.059
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Dining_Chair_5",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.532,
+    0.474,
+    0.847
+   ],
+   "center": [
+    5.341,
+    4.4,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 26
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.642,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.131,
+     -0.0,
+     0.059
+    ],
+    "yaw": 0.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Dining_Chair_6",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.532,
+    0.474,
+    0.847
+   ],
+   "center": [
+    8.659,
+    4.4,
+    0.871
+   ],
+   "radius_m": 0.55,
+   "triangles": {
+    "HIGH": 5590,
+    "MEDIUM": 594,
+    "LOW": 150,
+    "LOWEST": 38,
+    "PHYS": 34
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.99
+   ],
+   "li_est": 2.57,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.131,
+     -0.0,
+     0.059
+    ],
+    "yaw": 180.0,
+    "poses": [
+     "villa_sit_upright",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Dining_Light",
+   "linkset": "Dune",
+   "kind": "light",
+   "size_m": [
+    1.57,
+    1.57,
+    0.675
+   ],
+   "center": [
+    7.0,
+    4.4,
+    3.095
+   ],
+   "radius_m": 1.16,
+   "triangles": {
+    "HIGH": 1846,
+    "MEDIUM": 238,
+    "LOW": 92,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.034,
+    0.954
+   ],
+   "li_est": 1.121,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Island",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    3.4,
+    1.1,
+    1.292
+   ],
+   "center": [
+    7.0,
+    8.9,
+    1.096
+   ],
+   "radius_m": 1.9,
+   "triangles": {
+    "HIGH": 1802,
+    "MEDIUM": 344,
+    "LOW": 126,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.002,
+    0.029,
+    0.092,
+    0.878
+   ],
+   "li_est": 2.531,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Stool_1",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    6.1,
+    7.95,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 38,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 2.781,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     0.385
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Stool_2",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    7.0,
+    7.95,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 38,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 2.886,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     0.385
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Stool_3",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    7.9,
+    7.95,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 42,
+    "PHYS": 36
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 3.367,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     0.385
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Island_Light_1",
+   "linkset": "Dune",
+   "kind": "light",
+   "size_m": [
+    0.34,
+    0.34,
+    1.206
+   ],
+   "center": [
+    6.0,
+    8.9,
+    2.847
+   ],
+   "radius_m": 0.65,
+   "triangles": {
+    "HIGH": 774,
+    "MEDIUM": 296,
+    "LOW": 74,
+    "LOWEST": 20,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.011,
+    0.986
+   ],
+   "li_est": 1.227,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Island_Light_2",
+   "linkset": "Dune",
+   "kind": "light",
+   "size_m": [
+    0.34,
+    0.34,
+    1.206
+   ],
+   "center": [
+    7.0,
+    8.9,
+    2.847
+   ],
+   "radius_m": 0.65,
+   "triangles": {
+    "HIGH": 774,
+    "MEDIUM": 296,
+    "LOW": 74,
+    "LOWEST": 20,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.011,
+    0.986
+   ],
+   "li_est": 1.367,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Island_Light_3",
+   "linkset": "Dune",
+   "kind": "light",
+   "size_m": [
+    0.34,
+    0.34,
+    1.206
+   ],
+   "center": [
+    8.0,
+    8.9,
+    2.847
+   ],
+   "radius_m": 0.65,
+   "triangles": {
+    "HIGH": 774,
+    "MEDIUM": 296,
+    "LOW": 74,
+    "LOWEST": 20,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.011,
+    0.986
+   ],
+   "li_est": 1.369,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Bed",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    2.489,
+    2.406,
+    1.3
+   ],
+   "center": [
+    -6.5,
+    12.303,
+    1.1
+   ],
+   "radius_m": 1.85,
+   "triangles": {
+    "HIGH": 14004,
+    "MEDIUM": 142,
+    "LOW": 36,
+    "LOWEST": 14,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.002,
+    0.027,
+    0.087,
+    0.884
+   ],
+   "li_est": 2.249,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.45,
+     0.647,
+     -0.05
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Pillow_1",
+   "linkset": "Dune",
+   "kind": "seat",
+   "size_m": [
+    0.596,
+    0.416,
+    0.155
+   ],
+   "center": [
+    -6.98,
+    13.07,
+    1.047
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 380,
+    "LOW": 96,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.004,
+    0.995
+   ],
+   "li_est": 0.672,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.1,
+     0.003
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Pillow_2",
+   "linkset": "Dune",
+   "kind": "seat",
+   "size_m": [
+    0.596,
+    0.416,
+    0.155
+   ],
+   "center": [
+    -6.02,
+    13.07,
+    1.047
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 380,
+    "LOW": 96,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.004,
+    0.995
+   ],
+   "li_est": 0.672,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     0.1,
+     0.003
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Dune_Nightstand_1",
+   "linkset": "Dune",
+   "kind": "deco",
+   "size_m": [
+    0.58,
+    0.45,
+    0.53
+   ],
+   "center": [
+    -7.95,
+    13.1,
+    0.715
+   ],
+   "radius_m": 0.45,
+   "triangles": {
+    "HIGH": 304,
+    "MEDIUM": 122,
+    "LOW": 32,
+    "LOWEST": 10,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.005,
+    0.993
+   ],
+   "li_est": 0.4,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Bed_Lamp_1",
+   "linkset": "Dune",
+   "kind": "light",
+   "size_m": [
+    0.26,
+    0.26,
+    0.53
+   ],
+   "center": [
+    -7.95,
+    13.1,
+    1.245
+   ],
+   "radius_m": 0.32,
+   "triangles": {
+    "HIGH": 558,
+    "MEDIUM": 222,
+    "LOW": 56,
+    "LOWEST": 14,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.581,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Nightstand_2",
+   "linkset": "Dune",
+   "kind": "deco",
+   "size_m": [
+    0.58,
+    0.45,
+    0.53
+   ],
+   "center": [
+    -5.05,
+    13.1,
+    0.715
+   ],
+   "radius_m": 0.45,
+   "triangles": {
+    "HIGH": 304,
+    "MEDIUM": 122,
+    "LOW": 32,
+    "LOWEST": 10,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.005,
+    0.993
+   ],
+   "li_est": 0.4,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Bed_Lamp_2",
+   "linkset": "Dune",
+   "kind": "light",
+   "size_m": [
+    0.26,
+    0.26,
+    0.53
+   ],
+   "center": [
+    -5.05,
+    13.1,
+    1.245
+   ],
+   "radius_m": 0.32,
+   "triangles": {
+    "HIGH": 558,
+    "MEDIUM": 222,
+    "LOW": 56,
+    "LOWEST": 14,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.509,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Bed_Rug",
+   "linkset": "Dune",
+   "kind": "deco",
+   "size_m": [
+    3.2,
+    2.4,
+    0.02
+   ],
+   "center": [
+    -6.5,
+    11.65,
+    0.46
+   ],
+   "radius_m": 2.0,
+   "triangles": {
+    "HIGH": 195,
+    "MEDIUM": 74,
+    "LOW": 24,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.002,
+    0.032,
+    0.102,
+    0.864
+   ],
+   "li_est": 0.231,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Bathtub",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    1.776,
+    0.838,
+    0.551
+   ],
+   "center": [
+    8.6,
+    12.4,
+    0.726
+   ],
+   "radius_m": 1.02,
+   "triangles": {
+    "HIGH": 2407,
+    "MEDIUM": 516,
+    "LOW": 130,
+    "LOWEST": 34,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.001,
+    0.008,
+    0.026,
+    0.965
+   ],
+   "li_est": 1.88,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Vanity",
+   "linkset": "Dune",
+   "kind": "furniture",
+   "size_m": [
+    1.82,
+    0.58,
+    1.433
+   ],
+   "center": [
+    4.9,
+    13.7,
+    1.656
+   ],
+   "radius_m": 1.19,
+   "triangles": {
+    "HIGH": 2226,
+    "MEDIUM": 484,
+    "LOW": 122,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 1.352,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Dune_Plant_1",
+   "linkset": "Dune",
+   "kind": "plant",
+   "size_m": [
+    1.014,
+    1.219,
+    1.325
+   ],
+   "center": [
+    -12.045,
+    2.922,
+    1.112
+   ],
+   "radius_m": 1.03,
+   "triangles": {
+    "HIGH": 1702,
+    "MEDIUM": 388,
+    "LOW": 98,
+    "LOWEST": 28,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.008,
+    0.027,
+    0.964
+   ],
+   "li_est": 2.801,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Plant_2",
+   "linkset": "Dune",
+   "kind": "plant",
+   "size_m": [
+    1.254,
+    1.813,
+    1.505
+   ],
+   "center": [
+    12.016,
+    3.372,
+    1.203
+   ],
+   "radius_m": 1.33,
+   "triangles": {
+    "HIGH": 1702,
+    "MEDIUM": 340,
+    "LOW": 86,
+    "LOWEST": 28,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.014,
+    0.045,
+    0.94
+   ],
+   "li_est": 2.988,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Dune_Sculpture",
+   "linkset": "Dune",
+   "kind": "deco",
+   "size_m": [
+    0.506,
+    0.36,
+    0.848
+   ],
+   "center": [
+    -2.298,
+    4.2,
+    0.874
+   ],
+   "radius_m": 0.53,
+   "triangles": {
+    "HIGH": 817,
+    "MEDIUM": 306,
+    "LOW": 78,
+    "LOWEST": 30,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.007,
+    0.991
+   ],
+   "li_est": 2.351,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Floor",
+   "linkset": "Nocturne",
+   "kind": "structure",
+   "size_m": [
+    27.441,
+    17.44,
+    0.45
+   ],
+   "center": [
+    0.0,
+    7.0,
+    0.225
+   ],
+   "radius_m": 16.26,
+   "triangles": {
+    "HIGH": 889,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 278
+   },
+   "lod_weight": [
+    0.14,
+    0.86,
+    0.0,
+    0.0
+   ],
+   "li_est": 8.971,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Nocturne_Wall_N",
+   "linkset": "Nocturne",
+   "kind": "structure",
+   "size_m": [
+    24.961,
+    4.884,
+    3.05
+   ],
+   "center": [
+    0.0,
+    12.537,
+    1.975
+   ],
+   "radius_m": 12.81,
+   "triangles": {
+    "HIGH": 894,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 170
+   },
+   "lod_weight": [
+    0.087,
+    0.913,
+    0.0,
+    0.0
+   ],
+   "li_est": 7.565,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 5,
+   "phys": "custom"
+  },
+  {
+   "name": "Nocturne_Wall_W",
+   "linkset": "Nocturne",
+   "kind": "structure",
+   "size_m": [
+    1.231,
+    7.337,
+    3.05
+   ],
+   "center": [
+    -12.363,
+    6.556,
+    1.975
+   ],
+   "radius_m": 4.02,
+   "triangles": {
+    "HIGH": 131,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 62
+   },
+   "lod_weight": [
+    0.009,
+    0.128,
+    0.411,
+    0.452
+   ],
+   "li_est": 0.641,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Nocturne_Wall_E",
+   "linkset": "Nocturne",
+   "kind": "structure",
+   "size_m": [
+    1.231,
+    7.337,
+    3.05
+   ],
+   "center": [
+    12.364,
+    6.556,
+    1.975
+   ],
+   "radius_m": 4.02,
+   "triangles": {
+    "HIGH": 1059,
+    "MEDIUM": 110,
+    "LOW": 28,
+    "LOWEST": 10,
+    "PHYS": 518
+   },
+   "lod_weight": [
+    0.009,
+    0.128,
+    0.411,
+    0.452
+   ],
+   "li_est": 1.691,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Nocturne_Glass_S",
+   "linkset": "Nocturne",
+   "kind": "glass",
+   "size_m": [
+    23.851,
+    3.861,
+    3.04
+   ],
+   "center": [
+    0.0,
+    1.078,
+    1.95
+   ],
+   "radius_m": 12.18,
+   "triangles": {
+    "HIGH": 612,
+    "MEDIUM": 62,
+    "LOW": 28,
+    "LOWEST": 20,
+    "PHYS": 434
+   },
+   "lod_weight": [
+    0.079,
+    0.921,
+    0.0,
+    0.0
+   ],
+   "li_est": 7.56,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 4,
+   "phys": "custom"
+  },
+  {
+   "name": "Nocturne_Door_S",
+   "linkset": "Nocturne",
+   "kind": "door",
+   "size_m": [
+    2.57,
+    0.097,
+    2.97
+   ],
+   "center": [
+    0.0,
+    -0.714,
+    1.935
+   ],
+   "radius_m": 1.96,
+   "triangles": {
+    "HIGH": 64,
+    "MEDIUM": 58,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.002,
+    0.031,
+    0.098,
+    0.869
+   ],
+   "li_est": 0.392,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "box"
+  },
+  {
+   "name": "Nocturne_Door_E",
+   "linkset": "Nocturne",
+   "kind": "door",
+   "size_m": [
+    0.133,
+    1.44,
+    2.12
+   ],
+   "center": [
+    12.754,
+    7.0,
+    1.52
+   ],
+   "radius_m": 1.28,
+   "triangles": {
+    "HIGH": 73,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.001,
+    0.013,
+    0.042,
+    0.944
+   ],
+   "li_est": 0.189,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "box"
+  },
+  {
+   "name": "Nocturne_Roof",
+   "linkset": "Nocturne",
+   "kind": "structure",
+   "size_m": [
+    27.1,
+    17.1,
+    2.655
+   ],
+   "center": [
+    0.0,
+    7.0,
+    4.698
+   ],
+   "radius_m": 16.08,
+   "triangles": {
+    "HIGH": 2734,
+    "MEDIUM": 212,
+    "LOW": 158,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.137,
+    0.863,
+    0.0,
+    0.0
+   ],
+   "li_est": 30.279,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 9,
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Partition",
+   "linkset": "Nocturne",
+   "kind": "structure",
+   "size_m": [
+    9.017,
+    0.565,
+    2.45
+   ],
+   "center": [
+    -7.698,
+    9.417,
+    1.675
+   ],
+   "radius_m": 4.68,
+   "triangles": {
+    "HIGH": 270,
+    "MEDIUM": 82,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 74
+   },
+   "lod_weight": [
+    0.012,
+    0.174,
+    0.557,
+    0.257
+   ],
+   "li_est": 1.383,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.2,
+   "phys": "custom"
+  },
+  {
+   "name": "Nocturne_Bath_Screen",
+   "linkset": "Nocturne",
+   "kind": "glass",
+   "size_m": [
+    8.48,
+    0.377,
+    2.19
+   ],
+   "center": [
+    7.2,
+    10.749,
+    1.525
+   ],
+   "radius_m": 4.38,
+   "triangles": {
+    "HIGH": 294,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.01,
+    0.153,
+    0.489,
+    0.349
+   ],
+   "li_est": 2.312,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.8,
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Sofa",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    4.696,
+    1.986,
+    0.93
+   ],
+   "center": [
+    -6.0,
+    6.608,
+    0.915
+   ],
+   "radius_m": 2.59,
+   "triangles": {
+    "HIGH": 14004,
+    "MEDIUM": 156,
+    "LOW": 150,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.004,
+    0.053,
+    0.171,
+    0.772
+   ],
+   "li_est": 5.088,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.612,
+     -0.035
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Coffee_Table",
+   "linkset": "Nocturne",
+   "kind": "deco",
+   "size_m": [
+    1.4,
+    1.0,
+    0.34
+   ],
+   "center": [
+    -6.0,
+    5.2,
+    0.62
+   ],
+   "radius_m": 0.88,
+   "triangles": {
+    "HIGH": 1086,
+    "MEDIUM": 274,
+    "LOW": 70,
+    "LOWEST": 18,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.006,
+    0.02,
+    0.974
+   ],
+   "li_est": 0.794,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Rug",
+   "linkset": "Nocturne",
+   "kind": "deco",
+   "size_m": [
+    5.8,
+    5.0,
+    0.02
+   ],
+   "center": [
+    -6.0,
+    5.6,
+    0.46
+   ],
+   "radius_m": 3.83,
+   "triangles": {
+    "HIGH": 387,
+    "MEDIUM": 72,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.008,
+    0.117,
+    0.373,
+    0.503
+   ],
+   "li_est": 0.669,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Books",
+   "linkset": "Nocturne",
+   "kind": "deco",
+   "size_m": [
+    0.342,
+    0.284,
+    0.156
+   ],
+   "center": [
+    -6.25,
+    5.15,
+    0.868
+   ],
+   "radius_m": 0.24,
+   "triangles": {
+    "HIGH": 181,
+    "MEDIUM": 72,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.0,
+    0.001,
+    0.998
+   ],
+   "li_est": 0.23,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Vase",
+   "linkset": "Nocturne",
+   "kind": "deco",
+   "size_m": [
+    0.22,
+    0.22,
+    0.36
+   ],
+   "center": [
+    -5.65,
+    5.3,
+    0.97
+   ],
+   "radius_m": 0.24,
+   "triangles": {
+    "HIGH": 455,
+    "MEDIUM": 180,
+    "LOW": 46,
+    "LOWEST": 12,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.0,
+    0.001,
+    0.998
+   ],
+   "li_est": 0.181,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Chair_1",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    0.824,
+    0.84,
+    0.943
+   ],
+   "center": [
+    -8.583,
+    3.388,
+    0.921
+   ],
+   "radius_m": 0.75,
+   "triangles": {
+    "HIGH": 7237,
+    "MEDIUM": 548,
+    "LOW": 138,
+    "LOWEST": 36,
+    "PHYS": 36
+   },
+   "lod_weight": [
+    0.0,
+    0.005,
+    0.014,
+    0.981
+   ],
+   "li_est": 2.424,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.087,
+     -0.048,
+     -0.011
+    ],
+    "yaw": 150.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Chair_2",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    0.824,
+    0.84,
+    0.943
+   ],
+   "center": [
+    -3.418,
+    3.392,
+    0.921
+   ],
+   "radius_m": 0.75,
+   "triangles": {
+    "HIGH": 7237,
+    "MEDIUM": 548,
+    "LOW": 138,
+    "LOWEST": 36,
+    "PHYS": 38
+   },
+   "lod_weight": [
+    0.0,
+    0.005,
+    0.014,
+    0.981
+   ],
+   "li_est": 2.348,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.086,
+     -0.052,
+     -0.011
+    ],
+    "yaw": 30.0,
+    "poses": [
+     "villa_sit_relaxed",
+     "villa_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Arc_Lamp",
+   "linkset": "Nocturne",
+   "kind": "light",
+   "size_m": [
+    1.55,
+    2.016,
+    2.22
+   ],
+   "center": [
+    -2.325,
+    6.592,
+    1.56
+   ],
+   "radius_m": 1.69,
+   "triangles": {
+    "HIGH": 961,
+    "MEDIUM": 196,
+    "LOW": 50,
+    "LOWEST": 14,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.023,
+    0.072,
+    0.903
+   ],
+   "li_est": 1.298,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Fireplace",
+   "linkset": "Nocturne",
+   "kind": "light",
+   "size_m": [
+    1.5,
+    1.5,
+    3.6
+   ],
+   "center": [
+    -10.6,
+    4.6,
+    2.25
+   ],
+   "radius_m": 2.09,
+   "triangles": {
+    "HIGH": 1578,
+    "MEDIUM": 142,
+    "LOW": 36,
+    "LOWEST": 22,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.002,
+    0.035,
+    0.111,
+    0.852
+   ],
+   "li_est": 2.283,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Bar",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    5.002,
+    2.037,
+    1.1
+   ],
+   "center": [
+    7.6,
+    7.924,
+    1.0
+   ],
+   "radius_m": 2.76,
+   "triangles": {
+    "HIGH": 1373,
+    "MEDIUM": 224,
+    "LOW": 56,
+    "LOWEST": 14,
+    "PHYS": 22
+   },
+   "lod_weight": [
+    0.004,
+    0.06,
+    0.193,
+    0.742
+   ],
+   "li_est": 2.425,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Stool_1",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    5.408,
+    7.408,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 48,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 4.162,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     -0.0,
+     0.385
+    ],
+    "yaw": 225.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Stool_2",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    6.798,
+    6.606,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 38,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 2.887,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     0.385
+    ],
+    "yaw": 255.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Stool_3",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    8.402,
+    6.606,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 40,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 3.412,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     0.385
+    ],
+    "yaw": 285.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Stool_4",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    0.42,
+    0.42,
+    0.79
+   ],
+   "center": [
+    9.792,
+    7.408,
+    0.845
+   ],
+   "radius_m": 0.49,
+   "triangles": {
+    "HIGH": 5526,
+    "MEDIUM": 602,
+    "LOW": 152,
+    "LOWEST": 38,
+    "PHYS": 28
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.006,
+    0.992
+   ],
+   "li_est": 3.311,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     -0.0,
+     0.385
+    ],
+    "yaw": 315.0,
+    "poses": [
+     "villa_sit_stool"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Bar_Light",
+   "linkset": "Nocturne",
+   "kind": "light",
+   "size_m": [
+    2.27,
+    2.27,
+    0.426
+   ],
+   "center": [
+    7.6,
+    9.6,
+    3.22
+   ],
+   "radius_m": 1.62,
+   "triangles": {
+    "HIGH": 1846,
+    "MEDIUM": 186,
+    "LOW": 80,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.021,
+    0.067,
+    0.911
+   ],
+   "li_est": 1.5,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Bed",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    2.489,
+    2.406,
+    1.3
+   ],
+   "center": [
+    -6.5,
+    12.303,
+    1.1
+   ],
+   "radius_m": 1.85,
+   "triangles": {
+    "HIGH": 14004,
+    "MEDIUM": 142,
+    "LOW": 36,
+    "LOWEST": 14,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.002,
+    0.027,
+    0.087,
+    0.884
+   ],
+   "li_est": 2.249,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.45,
+     0.647,
+     -0.05
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Pillow_1",
+   "linkset": "Nocturne",
+   "kind": "seat",
+   "size_m": [
+    0.596,
+    0.416,
+    0.155
+   ],
+   "center": [
+    -6.98,
+    13.07,
+    1.047
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 380,
+    "LOW": 96,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.004,
+    0.995
+   ],
+   "li_est": 0.672,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     0.1,
+     0.003
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Pillow_2",
+   "linkset": "Nocturne",
+   "kind": "seat",
+   "size_m": [
+    0.596,
+    0.416,
+    0.155
+   ],
+   "center": [
+    -6.02,
+    13.07,
+    1.047
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 9007,
+    "MEDIUM": 380,
+    "LOW": 96,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.004,
+    0.995
+   ],
+   "li_est": 0.672,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     0.1,
+     0.003
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "villa_lounge",
+     "villa_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Nocturne_Nightstand_1",
+   "linkset": "Nocturne",
+   "kind": "deco",
+   "size_m": [
+    0.58,
+    0.45,
+    0.53
+   ],
+   "center": [
+    -7.95,
+    13.1,
+    0.715
+   ],
+   "radius_m": 0.45,
+   "triangles": {
+    "HIGH": 304,
+    "MEDIUM": 122,
+    "LOW": 32,
+    "LOWEST": 10,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.005,
+    0.993
+   ],
+   "li_est": 0.4,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Bed_Lamp_1",
+   "linkset": "Nocturne",
+   "kind": "light",
+   "size_m": [
+    0.26,
+    0.26,
+    0.53
+   ],
+   "center": [
+    -7.95,
+    13.1,
+    1.245
+   ],
+   "radius_m": 0.32,
+   "triangles": {
+    "HIGH": 558,
+    "MEDIUM": 222,
+    "LOW": 56,
+    "LOWEST": 14,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.581,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Nightstand_2",
+   "linkset": "Nocturne",
+   "kind": "deco",
+   "size_m": [
+    0.58,
+    0.45,
+    0.53
+   ],
+   "center": [
+    -5.05,
+    13.1,
+    0.715
+   ],
+   "radius_m": 0.45,
+   "triangles": {
+    "HIGH": 304,
+    "MEDIUM": 122,
+    "LOW": 32,
+    "LOWEST": 10,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.005,
+    0.993
+   ],
+   "li_est": 0.4,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Bed_Lamp_2",
+   "linkset": "Nocturne",
+   "kind": "light",
+   "size_m": [
+    0.26,
+    0.26,
+    0.53
+   ],
+   "center": [
+    -5.05,
+    13.1,
+    1.245
+   ],
+   "radius_m": 0.32,
+   "triangles": {
+    "HIGH": 558,
+    "MEDIUM": 222,
+    "LOW": 56,
+    "LOWEST": 14,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.509,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Bed_Rug",
+   "linkset": "Nocturne",
+   "kind": "deco",
+   "size_m": [
+    3.2,
+    2.4,
+    0.02
+   ],
+   "center": [
+    -6.5,
+    11.65,
+    0.46
+   ],
+   "radius_m": 2.0,
+   "triangles": {
+    "HIGH": 195,
+    "MEDIUM": 74,
+    "LOW": 24,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.002,
+    0.032,
+    0.102,
+    0.864
+   ],
+   "li_est": 0.231,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Bathtub",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    1.776,
+    0.838,
+    0.551
+   ],
+   "center": [
+    8.6,
+    12.4,
+    0.726
+   ],
+   "radius_m": 1.02,
+   "triangles": {
+    "HIGH": 2407,
+    "MEDIUM": 516,
+    "LOW": 130,
+    "LOWEST": 34,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.001,
+    0.008,
+    0.026,
+    0.965
+   ],
+   "li_est": 1.88,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Vanity",
+   "linkset": "Nocturne",
+   "kind": "furniture",
+   "size_m": [
+    1.82,
+    0.58,
+    1.433
+   ],
+   "center": [
+    4.9,
+    13.7,
+    1.656
+   ],
+   "radius_m": 1.19,
+   "triangles": {
+    "HIGH": 2226,
+    "MEDIUM": 484,
+    "LOW": 122,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 1.352,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Nocturne_Plant_1",
+   "linkset": "Nocturne",
+   "kind": "plant",
+   "size_m": [
+    1.014,
+    1.219,
+    1.325
+   ],
+   "center": [
+    -12.045,
+    2.922,
+    1.112
+   ],
+   "radius_m": 1.03,
+   "triangles": {
+    "HIGH": 1702,
+    "MEDIUM": 388,
+    "LOW": 98,
+    "LOWEST": 28,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.008,
+    0.027,
+    0.964
+   ],
+   "li_est": 2.801,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Plant_2",
+   "linkset": "Nocturne",
+   "kind": "plant",
+   "size_m": [
+    1.254,
+    1.813,
+    1.505
+   ],
+   "center": [
+    12.216,
+    3.572,
+    1.203
+   ],
+   "radius_m": 1.33,
+   "triangles": {
+    "HIGH": 1702,
+    "MEDIUM": 340,
+    "LOW": 86,
+    "LOWEST": 28,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.014,
+    0.045,
+    0.94
+   ],
+   "li_est": 2.982,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Plant_3",
+   "linkset": "Nocturne",
+   "kind": "plant",
+   "size_m": [
+    1.2,
+    1.155,
+    1.327
+   ],
+   "center": [
+    -1.523,
+    13.411,
+    1.113
+   ],
+   "radius_m": 1.06,
+   "triangles": {
+    "HIGH": 1702,
+    "MEDIUM": 384,
+    "LOW": 96,
+    "LOWEST": 28,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.009,
+    0.029,
+    0.962
+   ],
+   "li_est": 2.813,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none"
+  },
+  {
+   "name": "Nocturne_Sculpture",
+   "linkset": "Nocturne",
+   "kind": "deco",
+   "size_m": [
+    0.506,
+    0.36,
+    0.848
+   ],
+   "center": [
+    0.002,
+    3.2,
+    0.874
+   ],
+   "radius_m": 0.53,
+   "triangles": {
+    "HIGH": 817,
+    "MEDIUM": 306,
+    "LOW": 78,
+    "LOWEST": 30,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.007,
+    0.991
+   ],
+   "li_est": 2.351,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  }
+ ],
+ "warnings": [],
+ "roles": {
+  "Villa_Core": "site",
+  "Nautilus": "house",
+  "Dune": "house",
+  "Nocturne": "house"
+ },
+ "seconds": 97.4
+}

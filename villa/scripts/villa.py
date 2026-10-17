@@ -13,7 +13,7 @@ sys.path.insert(0, HERE)
 
 # module names under villa/scripts/ (packages or files); missing ones are skipped while the
 # villa is under construction, and listed in MISSING
-MODULES = ["site", "houses", "furniture.catalogue"]
+MODULES = ["vsite", "houses"]
 MISSING = []
 
 for _m in MODULES:

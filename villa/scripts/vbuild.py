@@ -32,7 +32,7 @@ ROOT = os.path.dirname(HERE)
 OUT = os.path.join(ROOT, "output")
 LEVELS = ["HIGH", "MEDIUM", "LOW", "LOWEST"]
 SUFFIX = {"HIGH": "", "MEDIUM": "_LOD2", "LOW": "_LOD1", "LOWEST": "_LOD0", "PHYS": "_PHYS"}
-KINDS = ("structure", "glass", "door", "furniture", "light", "deco", "water", "plant", "core")
+KINDS = ("structure", "glass", "door", "furniture", "light", "deco", "water", "plant", "core", "probe", "seat")
 MARK = 0.004
 PREVIEW = {   # viewport / DAE colours (the real look comes from the PBR materials in SL)
     "a_plaster": (0.86, 0.84, 0.80), "b_floor": (0.62, 0.58, 0.52), "c_wood": (0.45, 0.30, 0.18),
@@ -217,6 +217,7 @@ def streaming_cost(radius, lod_bytes):
     return sum(a * b for a, b in zip(w, tris)) / 250000.0 * 15000.0, w
 
 
+HIGH_CAP = {"furniture": 14000, "seat": 9000, "deco": 6000, "plant": 6000, "light": 6000, "door": 4000}
 LI_PER_TRI = 0.04          # ~ land impact of one triangle at full LOD weight (16-byte verts, zlib)
 LI_TARGET = {"structure": 5.0, "glass": 2.0, "door": 1.0, "furniture": 1.6, "light": 0.8, "deco": 0.8,
              "water": 1.5, "plant": 1.2, "core": 1.5}
@@ -283,6 +284,9 @@ def build_piece(pc, report):
         report["warnings"].append(f"{pc.name}: empty HIGH")
         return None
     high.recalc()
+    cap = HIGH_CAP.get(pc.kind)
+    if cap and high.tri_count() > cap:      # keep viewers fast: rich but not wasteful
+        high.decimate(cap)
     mn, mx = high.bounds()
     size = mx - mn
     radius = size.length / 2
@@ -347,7 +351,13 @@ def build(only=None, export=True, save=False, verbose=True):
                  "size_m": [round(c, 3) for c in (mx - mn)], "center": [round(c, 3) for c in origin],
                  "radius_m": round(radius, 2), "triangles": tris, "lod_weight": [round(x, 3) for x in w],
                  "li_est": round(cost, 3), "markers": markers}
-        entry.update({k: v for k, v in pc.meta.items() if isinstance(v, (int, float, str, list, dict, bool))})
+        entry.update({k: v for k, v in pc.meta.items() if isinstance(v, (int, float, str, list, dict, bool))
+                      and k != "seat"})
+        entry["phys"] = pc.phys_spec if isinstance(pc.phys_spec, str) else "custom"
+        if "seat" in pc.meta:          # (x, y, z, yaw_deg, pose...) in site coordinates -> offset from the piece
+            x, y, z, yaw, *poses = pc.meta["seat"]
+            entry["seat"] = {"offset": [round(x - origin.x, 3), round(y - origin.y, 3), round(z - origin.z, 3)],
+                             "yaw": yaw, "poses": poses}
         report["pieces"].append(entry)
         for lv in LEVELS:
             levels[LEVELS.index(lv)].bm.free()
