@@ -39,8 +39,9 @@ Analysis checks (on top of format, length, peak, DC, clipping, seam/edges):
     click is white: ~ -2 dB; a soft natural transient is below -12 dB), and tonal whistles above
     8 kHz standing out of the local spectrum;
   * loops: no single event marking the repetition (loudest event vs the third loudest, short-term
-    K-weighted loudness), and for the event-based ambiences that must not repeat within the loop
-    (garden, chimes) the spectro-temporal self-similarity at any lag >= 0.6 s.
+    K-weighted loudness), and for every ambience (all loops but the lounge music, whose bars
+    repeat by design) no repetition inside the loop: the highest peak of the spectro-temporal
+    self-similarity at lags >= 0.6 s.
 """
 
 import argparse
@@ -250,14 +251,14 @@ def lap_event(rng, a, cavity=True):
     cavity 'clop', entrained bubbles, a few droplets falling off the lip, the gurgling backwash."""
     L = ns(1.4)
     t = np.arange(L) / SR
-    att, dec = rng.uniform(0.035, 0.08), rng.uniform(0.1, 0.22)
+    att, dec = rng.uniform(0.05, 0.12), rng.uniform(0.12, 0.25)
     env = smoothstep(t / att) * np.exp(-np.maximum(t - att, 0.0) / dec)
     y = 0.5 * noise(L, rng, lambda f: band(f, 140, 2200, 1, 2) * tilt(f, -2.0)) * env
-    if cavity:
+    if cavity:                                               # a soft 'clop': long contact, no click
         f1 = rng.uniform(170.0, 300.0)
         f2 = f1 * rng.uniform(2.1, 2.6)
-        y += 0.6 * peak1(modes([f1, f2], [LN1000 * 5 / (np.pi * f1), LN1000 * 6 / (np.pi * f2)],
-                                [1.0, 0.4], 1.4, tau=0.006, t_off=att * 0.6))
+        y += rng.uniform(0.25, 0.5) * peak1(modes([f1, f2], [LN1000 * 5 / (np.pi * f1), LN1000 * 6 / (np.pi * f2)],
+                                                  [1.0, 0.4], 1.4, tau=rng.uniform(0.01, 0.018), t_off=att * 0.6))
     for _ in range(rng.poisson(10)):
         r = loguniform(rng, 1.5e-3, 6e-3)
         amp = 0.25 * (r / 6e-3) ** 0.5 * loguniform(rng, 0.3, 1.0)
@@ -287,7 +288,7 @@ def soft_crackle(n, rng, clusters=3.0, ticks=20.0, settles=0.35, loop=True):
 
     for _ in range(rng.poisson(clusters * dur)):            # fibre cascades: "crk-k-k"
         t0 = rng.uniform(0, dur)
-        A = min(0.15 + 0.12 * rng.pareto(2.5), 0.45)
+        A = min(0.15 + 0.08 * rng.pareto(2.5), 0.3)
         m = 1 + rng.geometric(0.3)
         for j, tj in enumerate(t0 + np.cumsum(rng.exponential(0.006, m))):
             a = A * rng.uniform(0.3, 1.0) * 0.85 ** j
@@ -308,8 +309,9 @@ def soft_crackle(n, rng, clusters=3.0, ticks=20.0, settles=0.35, loop=True):
 
 
 def cricket_chirp(fc, npulse, pd, gap):
-    """Field cricket chirp: npulse syllables (one closing stroke of the wing each), a nearly pure
-    tone from the harp resonance, gliding down slightly as the file slows, growing in level."""
+    """Field cricket chirp: npulse syllables (one closing stroke of the wing each), a pure tone
+    from the harp resonance, gliding down slightly as the file slows, growing in level. No
+    harmonics: the 2nd (~9 kHz) would whistle above 8 kHz, and at garden distance it is gone."""
     L = ns(npulse * (pd + gap) + 0.01)
     y = np.zeros(L)
     m = ns(pd)
@@ -318,7 +320,7 @@ def cricket_chirp(fc, npulse, pd, gap):
         f = fc * (1 - 0.03 * u)
         ph = TWO_PI * np.cumsum(f) / SR
         env = np.sin(np.pi * u) ** 1.5 * (0.75 + 0.25 * i / max(1, npulse - 1))
-        addw(y, env * (np.sin(ph) + 0.08 * np.sin(2 * ph)), ns(i * (pd + gap)))
+        addw(y, env * np.sin(ph), ns(i * (pd + gap)))
     return y
 
 
@@ -446,10 +448,12 @@ SOUNDS = {}
 
 
 def sound(name, seconds, loop=False, lufs=None, limit_db=0.0, hold_ms=1.5, fade_out=None, zoom=None,
-          unique=False, desc=""):
+          unique=None, desc=""):
     """Register a sound. Loops: lufs = loudness target. One-shots: peak -1 dBFS (limit_db shaves
-    peaks first). unique: the loop must not repeat itself within (self-similarity check)."""
+    peaks first). unique (default: every loop): the loop must not repeat itself within
+    (self-similarity check)."""
     assert name.startswith("villa_")
+    unique = loop if unique is None else unique
 
     def deco(fn):
         SOUNDS[name] = dict(fn=fn, seconds=seconds, loop=loop, lufs=lufs, limit_db=limit_db, hold_ms=hold_ms,
@@ -466,8 +470,10 @@ def sound(name, seconds, loop=False, lufs=None, limit_db=0.0, hold_ms=1.5, fade_
 def pool_lap(n, rng):
     dur = n / SR
     x = np.zeros(n)
-    for t0 in spread_times(rng, 7, dur, 0.3):
-        addw(x, lap_event(rng, rng.uniform(0.65, 1.0)), ns(t0), True)
+    for t0 in spread_times(rng, 6, dur, 0.5):                # wave groups: uneven swell
+        addw(x, lap_event(rng, rng.uniform(0.5, 1.0)), ns(t0), True)
+        if rng.random() < 0.5:                               # the backwash of the same wave
+            addw(x, lap_event(rng, rng.uniform(0.25, 0.45)), ns(t0 + rng.uniform(0.3, 0.6)), True)
     for _ in range(rng.poisson(5)):                          # reflected ripples, smaller
         addw(x, lap_event(rng, rng.uniform(0.2, 0.4), cavity=False), ns(rng.uniform(0, dur)), True)
     tr = np.zeros(n)
@@ -536,7 +542,7 @@ def fire(n, rng):
     roar *= np.exp(0.3 * lfo(n, 0.12, 0.45, rng))           # the flame breathing
     roar = filt(roar, bq("lp", 4000.0, 0.6), loop=True)
     cr = soft_crackle(n, rng, clusters=3.0, ticks=20.0, settles=0.35)
-    x = unit(roar) + 1.1 * unit(cr)
+    x = unit(roar) + 0.8 * unit(cr)
     return room(x, "living", 2.5, tail=0.3, early=0.4, loop=True)
 
 
@@ -560,7 +566,7 @@ def rain_glass(n, rng):
     pane_of = rng.integers(0, 6, len(tt))
     glass = np.zeros(n)
     for p in range(6):                                       # 3 panes x 2 impact regions
-        h = body_ir(*random_modes(rng, 36, 140.0, 5200.0, q=(25, 90), tilt_db=-2.0), 0.35)
+        h = body_ir(*random_modes(rng, 36, 220.0, 5200.0, q=(25, 90), tilt_db=-1.0), 0.35)
         exc = np.zeros(n)
         for lo, hi in ((0, 0.25e-3), (0.25e-3, 0.4e-3), (0.4e-3, 1.0)):
             sel = (pane_of == p) & (tau_c >= lo) & (tau_c < hi)
@@ -576,7 +582,7 @@ def rain_glass(n, rng):
         addw(drips, drop_plink(loguniform(rng, 700, 1500), rng.uniform(0.5, 0.9), rng.uniform(0.012, 0.022),
                                rng.uniform(0.6, 1.0), click=0.0), ns(t0), True)
     drips = filt(drips, bq("lp", 2200.0, 0.6), loop=True)
-    x = unit(glass) + 0.25 * unit(splash) + 0.45 * unit(bed) + 0.12 * unit(drips)
+    x = unit(glass) + 0.3 * unit(splash) + 0.35 * unit(bed) + 0.12 * unit(drips)
     x = room(x, "glasshouse", 2.0, tail=0.5, loop=True)
     return filt(x, bq("lp", 6500.0, 0.6), loop=True)
 
@@ -657,11 +663,11 @@ def night(n, rng):
     cic = noise(n, rng, lambda f: band(f, 4200, 5600, 3, 3)) * (0.5 - 0.5 * np.cos(TWO_PI * fb * t)) ** 4
     cic = shape(cic, lambda f: air(f, 60.0), loop=True) * np.exp(0.4 * lfo(n, 0.05, 0.2, rng))
     breeze = noise(n, rng, lambda f: band(f, 80, 1500, 1, 2) * tilt(f, -3.0)) * np.exp(0.4 * lfo(n, 0.04, 0.25, rng))
-    x = unit(crickets) + 0.5 * unit(chorus) + 0.12 * unit(cic) + 0.35 * unit(breeze)
+    x = unit(crickets) + 0.3 * unit(chorus) + 0.12 * unit(cic) + 0.4 * unit(breeze)
     return outdoors(x, "garden", 12.0, loop=True)
 
 
-@sound("villa_garden", 9.9, loop=True, lufs=-24.0, unique=True,
+@sound("villa_garden", 9.9, loop=True, lufs=-24.0,
        desc="Morning garden: a blackbird, a robin, finch calls and a distant wren trill, sparse and "
             "never the same phrase twice; leaves in a light breeze (9.9 s loop)")
 def garden(n, rng):
@@ -690,7 +696,7 @@ def garden(n, rng):
     return outdoors(x, "garden", 15.0, loop=True)
 
 
-@sound("villa_chimes", 9.9, loop=True, lufs=-24.0, unique=True,
+@sound("villa_chimes", 9.9, loop=True, lufs=-24.0,
        desc="Tuned aluminium wind chimes, E-flat major pentatonic (Eb4 F4 G4 Bb4 C5 Eb5): sparse "
             "gusts, free-free tube partials with slowly beating doublets, a soft breeze (9.9 s loop)")
 def chimes(n, rng):
@@ -750,7 +756,7 @@ LOUNGE_BASS = [(0, 0.0, 39, 1.4, 0.8), (0, 2.5, 34, 0.4, 0.55), (0, 3.0, 39, 0.9
                (3, 0.0, 34, 1.8, 0.8), (3, 2.5, 34, 0.4, 0.5), (3, 3.5, 38, 0.5, 0.55)]
 
 
-@sound("villa_lounge", 9.6, loop=True, lufs=-24.0,
+@sound("villa_lounge", 9.6, loop=True, lufs=-24.0, unique=False,
        desc="Original warm chill-lounge loop, 100 BPM, 4 bars in E-flat: Ebmaj9 - Cm9 - Abmaj9 - "
             "Bb9sus4; analogue pad, electric piano melody, round bass, soft shaker (9.6 s loop)")
 def lounge(n, rng):
@@ -847,15 +853,25 @@ def curtain(n, rng):
     bumps = np.zeros(n)
     for tj in S.thinning_times(rng, lambda tt: 8.0 * np.interp(tt, t, s), 0.0, 3.6, 8.0):
         addw(bumps, rng.uniform(0.3, 1.0) * burst(0.03, 0.006, rng, lambda f: band(f, 300, 1500, 1, 2), attack=0.002), ns(tj))
-    fabric = noise(n, rng, lambda f: band(f, 200, 5000, 1, 2) * tilt(f, -3.0)) * s ** 1.2
+    drape = lambda f: band(f, 200, 3000, 1, 3) * tilt(f, -3.0)     # heavy lined fabric: no sizzle
+    fabric = noise(n, rng, drape) * s ** 1.2
     fabric *= 0.7 + 0.3 * np.exp(0.6 * lfo(n, 1.5, 4.0, rng)) / 1.2
-    x += 0.04 * unit(motor) + 0.05 * unit(roll) + 0.03 * peak1(bumps) + 0.12 * unit(fabric)
+    pleats = np.zeros(n)                                     # each pleat folding onto the stack: 'fff'
+    for tj in S.thinning_times(rng, lambda tt: 3.0 * np.interp(tt, t, s), 0.2, 3.5, 3.0):
+        L = ns(0.4)
+        u = np.arange(L) / SR
+        a_, d_ = rng.uniform(0.03, 0.08), rng.uniform(0.07, 0.16)
+        e = smoothstep(u / a_) * np.exp(-np.maximum(u - a_, 0.0) / d_)
+        addw(pleats, rng.uniform(0.5, 1.0) * e * noise(L, rng, drape), ns(tj))
+    x += (0.04 * unit(motor) + 0.05 * unit(roll) + 0.03 * peak1(bumps) + 0.08 * unit(fabric)
+          + 0.07 * unit(pleats))
     t_stop = 3.6
     addw(x, 0.3 * peak1(modes(*random_modes(rng, 6, 120, 700, q=(6, 12)), 0.3, tau=0.004)), ns(t_stop))
     L = ns(0.6)
     tt = np.arange(L) / SR
     settle = noise(L, rng, lambda f: band(f, 300, 3000, 1, 2)) * smoothstep(tt / 0.02) * np.exp(-tt / 0.15)
     addw(x, 0.1 * settle, ns(t_stop))
+    x = filt(x, bq("lp", 6500.0, 0.6))
     return fit(room(x, "living", 3.5, tail=0.4), n)
 
 
@@ -919,9 +935,11 @@ def ignite(n, rng):
         tick = 0.5 * peak1(modes(loguniform(rng, 2500, 4500, 3), [0.01] * 3, [1.0] * 3, 0.05, tau=0.0002))
         b = burst(0.004, 0.00025, rng, lambda f: band(f, 1500, 6000, 1, 2))
         tick[:len(b)] += peak1(b)
-        addw(x, 0.22 * peak1(filt(tick, bq("lp", 6000.0, 0.6))), ns(tk))
+        addw(x, 0.22 * peak1(filt(tick, bq("lp", 5000.0, 0.6), bq("lp", 7000.0, 0.6))), ns(tk))
     addw(x, 0.2 * peak1(modes(*random_modes(rng, 6, 180, 900, q=(8, 14)), 0.2, tau=0.0015)), ns(0.36))
-    hiss = noise(n, rng, lambda f: band(f, 1200, 6000, 2, 2)) * smoothstep((t - 0.36) / 0.05)
+    # gas through the valve: a soft, rounded hiss (steep above 4 kHz - a bright 2nd-order hiss
+    # alone, before the flame covers it, reads as digital noise)
+    hiss = noise(n, rng, lambda f: band(f, 900, 4000, 2, 4) * tilt(f, -1.5)) * smoothstep((t - 0.36) / 0.05)
     x += 0.035 * hiss * (1 - 0.6 * smoothstep((t - 0.6) / 0.4))
     ti = 0.6
     pulse = np.where((t >= ti) & (t < ti + 0.07), np.sin(np.pi * (t - ti) / 0.07) ** 2, 0.0)
@@ -1068,9 +1086,12 @@ def welch_db(x, loop, nfft=4096):
     return np.fft.rfftfreq(nfft, 1.0 / SR), 10 * np.log10(p + 1e-20)
 
 
-def self_similarity(x, min_lag=0.6, nfft=2048, hop=512):
-    """Max over lags >= min_lag of the circular correlation of the z-scored log band energies
-    (18 bands, 100 Hz - 9 kHz): 1 = the loop contains an exact repetition of itself."""
+def self_similarity(x, min_lag=0.6, nfft=2048, hop=512, nbhd=0.25):
+    """Repetition inside the loop: the highest peak, at lags >= min_lag, of the circular
+    autocorrelation of the z-scored log band energies (18 bands, 100 Hz - 9 kHz). 1 = the loop
+    contains an exact repetition of itself. Only local maxima (the highest point within +-nbhd s)
+    count: a sound that merely evolves slowly (long chime decays, a bird phrase still going on)
+    stays correlated at short lags without repeating anything. No peak at all -> 0."""
     n = len(x)
     win = 0.5 - 0.5 * np.cos(TWO_PI * np.arange(nfft) / nfft)
     xp = np.concatenate([x, x[:nfft]])
@@ -1086,9 +1107,14 @@ def self_similarity(x, min_lag=0.6, nfft=2048, hop=512):
     ac = np.fft.irfft(np.abs(np.fft.rfft(Z, axis=0)) ** 2, T, axis=0).mean(axis=1) / T
     ac /= ac[0]
     l0 = int(np.ceil(min_lag * SR / hop))
+    k = max(1, int(round(nbhd * SR / hop)))
+    acp = np.concatenate([ac[-k:], ac, ac[:k]])              # circular: lag T-1 neighbours lag 0
     lags = np.arange(l0, T // 2 + 1)
-    i = lags[np.argmax(ac[lags])]
-    return float(ac[i]), i * hop / SR
+    peaks = [i for i in lags if ac[i] >= acp[i:i + 2 * k + 1].max()]
+    if not peaks:
+        return 0.0, 0.0
+    i = max(peaks, key=lambda j: ac[j])
+    return max(0.0, float(ac[i])), i * hop / SR
 
 
 def hf_analysis(x, loop):

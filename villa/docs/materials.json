@@ -63,9 +63,9 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     213,
-     193,
-     163
+     220,
+     204,
+     177
     ]
    },
    {
@@ -117,9 +117,9 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     80,
-     52,
-     35
+     78,
+     51,
+     34
     ]
    },
    {
@@ -131,8 +131,8 @@
     "emissive": false,
     "swatch_rgb": [
      168,
-     130,
-     86
+     131,
+     87
     ]
    },
    {
@@ -171,9 +171,9 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     233,
-     231,
-     226
+     232,
+     229,
+     225
     ]
    },
    {
@@ -184,9 +184,9 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     197,
-     171,
-     136
+     209,
+     185,
+     152
     ]
    },
    {
@@ -210,9 +210,9 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     198,
-     168,
-     126
+     200,
+     171,
+     130
     ]
    }
   ],
@@ -225,9 +225,9 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     194,
-     189,
-     178
+     204,
+     199,
+     187
     ]
    },
    {
@@ -251,9 +251,9 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     205,
-     200,
-     193
+     204,
+     199,
+     191
     ]
    },
    {
@@ -400,9 +400,9 @@
     "alpha": "OPAQUE",
     "emissive": true,
     "swatch_rgb": [
-     246,
-     217,
-     179
+     249,
+     221,
+     184
     ]
    },
    {
@@ -413,8 +413,8 @@
     "alpha": "OPAQUE",
     "emissive": true,
     "swatch_rgb": [
-     54,
-     17,
+     43,
+     16,
      5
     ]
    },
@@ -441,9 +441,9 @@
     "alpha": "BLEND",
     "emissive": false,
     "swatch_rgb": [
-     83,
-     198,
-     202
+     84,
+     201,
+     205
     ]
    },
    {
@@ -456,7 +456,7 @@
     "swatch_rgb": [
      23,
      86,
-     128
+     129
     ]
    },
    {

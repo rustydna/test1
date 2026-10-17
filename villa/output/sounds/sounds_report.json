@@ -11,37 +11,20 @@
   "standout_max_db": 4.0,
   "self_similarity_max": 0.35
  },
- "runtime_s": 11.1,
+ "runtime_s": 3.2,
  "built": [
-  "villa_arrival",
-  "villa_chimes",
-  "villa_click",
-  "villa_curtain",
-  "villa_door_slide",
-  "villa_door_soft",
   "villa_fire",
-  "villa_garden",
-  "villa_ignite",
-  "villa_lounge",
   "villa_night",
-  "villa_pool_lap",
-  "villa_rain_glass",
-  "villa_spa_jets",
-  "villa_spillway",
-  "villa_splash",
-  "villa_surf"
+  "villa_pool_lap"
  ],
- "jobs": 4,
+ "jobs": 3,
  "summary": {
   "count": 17,
   "loops": 10,
   "one_shots": 7,
   "total_seconds": 116.35,
-  "all_ok": false,
-  "failed": [
-   "villa_night",
-   "villa_ignite"
-  ]
+  "all_ok": true,
+  "failed": []
  },
  "sounds": {
   "villa_pool_lap": {
@@ -51,19 +34,19 @@
    "comptype": "NONE",
    "frames": 432180,
    "seconds": 9.8,
-   "peak_dbfs": -5.02,
-   "true_peak_dbfs": -5.02,
-   "dc_offset": 2.08e-08,
+   "peak_dbfs": -6.37,
+   "true_peak_dbfs": -6.36,
+   "dc_offset": 4.68e-08,
    "clipped_samples": 0,
-   "rms_dbfs": -23.79,
+   "rms_dbfs": -23.96,
    "lufs": -24.0,
-   "seam_first": 1148,
-   "seam_last": 1154,
-   "seam_step": -0.0001831,
-   "seam_curvature": 0.00116,
-   "p995_step": 0.0397,
-   "p995_curvature": 0.01508,
-   "seam_click_rank": 0.474,
+   "seam_first": -1241,
+   "seam_last": -1224,
+   "seam_step": -0.0005188,
+   "seam_curvature": 0.002014,
+   "p995_step": 0.03879,
+   "p995_curvature": 0.01456,
+   "seam_click_rank": 0.392,
    "checks": {
     "format_16bit_mono_44k1": true,
     "under_10s": true,
@@ -76,42 +59,43 @@
     "peak_le_-1dBFS": true,
     "loudness_on_target": true,
     "no_standout_event": true,
+    "not_repetitive": true,
     "hf_share_ok": true,
     "no_hf_spikes": true,
     "no_hf_whistles": true
    },
    "ok": true,
    "band_db": {
-    "sub": -23.6,
-    "low": -7.4,
-    "lowmid": -2.7,
-    "mid": -5.6,
-    "high": -24.4,
-    "air": -41.8
+    "sub": -22.4,
+    "low": -7.6,
+    "lowmid": -2.8,
+    "mid": -5.3,
+    "high": -23.8,
+    "air": -41.4
    },
-   "centroid_hz": 788,
-   "hf_share_db": -41.8,
-   "hf_frame_max_db": -27.0,
-   "hf_frame_max_at_s": 4.879,
-   "hf_tonal_db": 2.5,
+   "centroid_hz": 823,
+   "hf_share_db": -41.4,
+   "hf_frame_max_db": -26.9,
+   "hf_frame_max_at_s": 0.56,
+   "hf_tonal_db": 2.7,
    "events": 18,
    "top_events_s": [
-    0.77,
-    9.26,
-    2.43
+    2.69,
+    1.4,
+    4.17
    ],
-   "standout_db": 0.2,
-   "event_crest_db": 9.2,
-   "short_term_max_lufs": -17.1,
-   "self_similarity": 0.534,
-   "self_similarity_lag_s": 4.24,
+   "standout_db": 0.4,
+   "event_crest_db": 8.3,
+   "short_term_max_lufs": -17.4,
+   "self_similarity": 0.227,
+   "self_similarity_lag_s": 3.47,
    "lufs_target": -24.0,
    "name": "villa_pool_lap",
    "file": "output/sounds/villa_pool_lap.wav",
    "loop": true,
    "description": "Gentle water lapping at the pool's overflow edge: irregular small waves slapping the lip, hollow gutter 'clop', bubbles, droplets, soft gurgle and trickle (9.8 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.05
+   "build_s": 1.3
   },
   "villa_spillway": {
    "channels": 1,
@@ -180,7 +164,7 @@
    "loop": true,
    "description": "Infinity edge: a thin water sheet falling softly into the catch trough - sheet hush, dense bubble chorus, low plunge (9.6 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.33
+   "build_s": 1.93
   },
   "villa_spa_jets": {
    "channels": 1,
@@ -249,7 +233,7 @@
    "loop": true,
    "description": "Spa jets: pulsing underwater jets, dense rising bubbles, bubbles bursting and churning at the surface (8 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.33
+   "build_s": 1.83
   },
   "villa_fire": {
    "channels": 1,
@@ -258,19 +242,19 @@
    "comptype": "NONE",
    "frames": 418950,
    "seconds": 9.5,
-   "peak_dbfs": -1.14,
-   "true_peak_dbfs": -1.14,
-   "dc_offset": -3.06e-09,
+   "peak_dbfs": -1.06,
+   "true_peak_dbfs": -1.06,
+   "dc_offset": -9.47e-10,
    "clipped_samples": 0,
-   "rms_dbfs": -20.14,
+   "rms_dbfs": -19.54,
    "lufs": -20.0,
-   "seam_first": 676,
-   "seam_last": 641,
-   "seam_step": 0.001068,
-   "seam_curvature": 0.006592,
-   "p995_step": 0.1195,
-   "p995_curvature": 0.0543,
-   "seam_click_rank": 0.605,
+   "seam_first": 1190,
+   "seam_last": 1108,
+   "seam_step": 0.002502,
+   "seam_curvature": 0.005524,
+   "p995_step": 0.1072,
+   "p995_curvature": 0.04825,
+   "seam_click_rank": 0.567,
    "checks": {
     "format_16bit_mono_44k1": true,
     "under_10s": true,
@@ -283,42 +267,43 @@
     "peak_le_-1dBFS": true,
     "loudness_on_target": true,
     "no_standout_event": true,
+    "not_repetitive": true,
     "hf_share_ok": true,
     "no_hf_spikes": true,
     "no_hf_whistles": true
    },
    "ok": true,
    "band_db": {
-    "sub": -11.2,
-    "low": -3.9,
-    "lowmid": -8.2,
-    "mid": -4.6,
-    "high": -17.7,
-    "air": -34.4
+    "sub": -10.2,
+    "low": -2.9,
+    "lowmid": -8.6,
+    "mid": -6.2,
+    "high": -19.6,
+    "air": -36.6
    },
-   "centroid_hz": 945,
-   "hf_share_db": -34.4,
-   "hf_frame_max_db": -18.5,
+   "centroid_hz": 696,
+   "hf_share_db": -36.6,
+   "hf_frame_max_db": -18.7,
    "hf_frame_max_at_s": 0.299,
-   "hf_tonal_db": 6.1,
+   "hf_tonal_db": 3.8,
    "events": 21,
    "top_events_s": [
     7.57,
     0.68,
     6.91
    ],
-   "standout_db": 1.1,
-   "event_crest_db": 13.2,
-   "short_term_max_lufs": -9.6,
-   "self_similarity": 0.135,
-   "self_similarity_lag_s": 0.6,
+   "standout_db": 1.0,
+   "event_crest_db": 12.0,
+   "short_term_max_lufs": -10.3,
+   "self_similarity": 0.115,
+   "self_similarity_lag_s": 1.87,
    "lufs_target": -20.0,
    "name": "villa_fire",
    "file": "output/sounds/villa_fire.wav",
    "loop": true,
    "description": "Refined fireplace: the flame's slow breathing roar, soft crackle and ember ticks, no sap pops (9.5 s loop)",
-   "limiter_db": 4.66,
-   "build_s": 1.71
+   "limiter_db": 3.47,
+   "build_s": 1.65
   },
   "villa_rain_glass": {
    "channels": 1,
@@ -327,19 +312,19 @@
    "comptype": "NONE",
    "frames": 432180,
    "seconds": 9.8,
-   "peak_dbfs": -3.72,
-   "true_peak_dbfs": -3.7,
-   "dc_offset": -1.4e-08,
+   "peak_dbfs": -4.08,
+   "true_peak_dbfs": -4.06,
+   "dc_offset": 1.27e-09,
    "clipped_samples": 0,
-   "rms_dbfs": -19.17,
+   "rms_dbfs": -19.46,
    "lufs": -20.0,
-   "seam_first": -2176,
-   "seam_last": -1808,
-   "seam_step": -0.01123,
-   "seam_curvature": 0.006714,
-   "p995_step": 0.03708,
-   "p995_curvature": 0.02072,
-   "seam_click_rank": 0.08,
+   "seam_first": -111,
+   "seam_last": 227,
+   "seam_step": -0.01031,
+   "seam_curvature": 0.00769,
+   "p995_step": 0.04639,
+   "p995_curvature": 0.02481,
+   "seam_click_rank": 0.049,
    "checks": {
     "format_16bit_mono_44k1": true,
     "under_10s": true,
@@ -352,42 +337,43 @@
     "peak_le_-1dBFS": true,
     "loudness_on_target": true,
     "no_standout_event": true,
+    "not_repetitive": true,
     "hf_share_ok": true,
     "no_hf_spikes": true,
     "no_hf_whistles": true
    },
    "ok": true,
    "band_db": {
-    "sub": -17.7,
-    "low": -2.8,
-    "lowmid": -4.1,
-    "mid": -12.0,
-    "high": -22.7,
-    "air": -38.7
+    "sub": -19.5,
+    "low": -5.3,
+    "lowmid": -2.4,
+    "mid": -9.7,
+    "high": -20.7,
+    "air": -37.0
    },
-   "centroid_hz": 394,
-   "hf_share_db": -38.7,
-   "hf_frame_max_db": -23.1,
+   "centroid_hz": 558,
+   "hf_share_db": -37.0,
+   "hf_frame_max_db": -21.7,
    "hf_frame_max_at_s": 9.633,
-   "hf_tonal_db": 6.3,
-   "events": 22,
+   "hf_tonal_db": 6.2,
+   "events": 28,
    "top_events_s": [
-    1.2,
-    2.16,
-    4.91
+    1.65,
+    1.94,
+    1.2
    ],
-   "standout_db": 1.3,
-   "event_crest_db": 5.7,
-   "short_term_max_lufs": -14.8,
-   "self_similarity": 0.14,
-   "self_similarity_lag_s": 0.63,
+   "standout_db": 0.2,
+   "event_crest_db": 5.5,
+   "short_term_max_lufs": -15.2,
+   "self_similarity": 0.118,
+   "self_similarity_lag_s": 3.23,
    "lufs_target": -20.0,
    "name": "villa_rain_glass",
    "file": "output/sounds/villa_rain_glass.wav",
    "loop": true,
    "description": "Rain on the glass roof, heard from the lounge: drops of every size tapping the panes, soft splashes, muffled rain on the garden outside, a drip from the eaves (9.8 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.03
+   "build_s": 1.49
   },
   "villa_surf": {
    "channels": 1,
@@ -456,7 +442,7 @@
    "loop": true,
    "description": "Distant ocean surf below the villa: overlapping breakers along the shore at 140-320 m (air absorption), continuous roar, soft low thumps (9.9 s loop)",
    "limiter_db": 0.0,
-   "build_s": 0.89
+   "build_s": 1.06
   },
   "villa_night": {
    "channels": 1,
@@ -465,19 +451,19 @@
    "comptype": "NONE",
    "frames": 423360,
    "seconds": 9.6,
-   "peak_dbfs": -9.19,
-   "true_peak_dbfs": -9.19,
-   "dc_offset": 1.34e-08,
+   "peak_dbfs": -9.24,
+   "true_peak_dbfs": -9.2,
+   "dc_offset": 1.88e-08,
    "clipped_samples": 0,
    "rms_dbfs": -26.76,
    "lufs": -24.0,
-   "seam_first": -991,
-   "seam_last": -735,
-   "seam_step": -0.007812,
-   "seam_curvature": 0.003693,
-   "p995_step": 0.08823,
-   "p995_curvature": 0.05701,
-   "seam_click_rank": 0.038,
+   "seam_first": -983,
+   "seam_last": -716,
+   "seam_step": -0.008148,
+   "seam_curvature": 0.003387,
+   "p995_step": 0.08704,
+   "p995_curvature": 0.05453,
+   "seam_click_rank": 0.037,
    "checks": {
     "format_16bit_mono_44k1": true,
     "under_10s": true,
@@ -490,24 +476,25 @@
     "peak_le_-1dBFS": true,
     "loudness_on_target": true,
     "no_standout_event": true,
+    "not_repetitive": true,
     "hf_share_ok": true,
     "no_hf_spikes": true,
-    "no_hf_whistles": false
+    "no_hf_whistles": true
    },
-   "ok": false,
+   "ok": true,
    "band_db": {
     "sub": -17.7,
     "low": -13.7,
     "lowmid": -12.5,
     "mid": -6.2,
     "high": -1.9,
-    "air": -26.2
+    "air": -36.1
    },
-   "centroid_hz": 3636,
-   "hf_share_db": -26.2,
-   "hf_frame_max_db": -16.3,
-   "hf_frame_max_at_s": 5.297,
-   "hf_tonal_db": 19.5,
+   "centroid_hz": 3628,
+   "hf_share_db": -36.1,
+   "hf_frame_max_db": -20.6,
+   "hf_frame_max_at_s": 6.258,
+   "hf_tonal_db": 2.2,
    "events": 26,
    "top_events_s": [
     3.59,
@@ -517,15 +504,15 @@
    "standout_db": 0.4,
    "event_crest_db": 4.5,
    "short_term_max_lufs": -19.7,
-   "self_similarity": 0.386,
-   "self_similarity_lag_s": 0.78,
+   "self_similarity": 0.0,
+   "self_similarity_lag_s": 2.53,
    "lufs_target": -24.0,
    "name": "villa_night",
    "file": "output/sounds/villa_night.wav",
    "loop": true,
    "description": "Warm summer night in the garden: three field crickets chirping at their own pace, a distant chorus of tree crickets, a faint far cicada, the softest breeze (9.6 s loop)",
    "limiter_db": 0.0,
-   "build_s": 0.99
+   "build_s": 1.41
   },
   "villa_garden": {
    "channels": 1,
@@ -595,7 +582,7 @@
    "loop": true,
    "description": "Morning garden: a blackbird, a robin, finch calls and a distant wren trill, sparse and never the same phrase twice; leaves in a light breeze (9.9 s loop)",
    "limiter_db": 0.0,
-   "build_s": 0.76
+   "build_s": 1.16
   },
   "villa_chimes": {
    "channels": 1,
@@ -665,7 +652,7 @@
    "loop": true,
    "description": "Tuned aluminium wind chimes, E-flat major pentatonic (Eb4 F4 G4 Bb4 C5 Eb5): sparse gusts, free-free tube partials with slowly beating doublets, a soft breeze (9.9 s loop)",
    "limiter_db": 0.0,
-   "build_s": 1.51
+   "build_s": 1.78
   },
   "villa_lounge": {
    "channels": 1,
@@ -734,7 +721,7 @@
    "loop": true,
    "description": "Original warm chill-lounge loop, 100 BPM, 4 bars in E-flat: Ebmaj9 - Cm9 - Abmaj9 - Bb9sus4; analogue pad, electric piano melody, round bass, soft shaker (9.6 s loop)",
    "limiter_db": 0.0,
-   "build_s": 3.85,
+   "build_s": 4.28,
    "bpm": 100.0,
    "bars": 4,
    "beats": 16,
@@ -797,7 +784,7 @@
    "loop": false,
    "description": "Heavy glass sliding door on a magnetic track: lock release, smooth linear-motor glide (brush seals, moving air, the pane's mass), magnetic soft stop into the gasket, latch",
    "limiter_db": 0.0,
-   "build_s": 0.15
+   "build_s": 0.45
   },
   "villa_door_soft": {
    "channels": 1,
@@ -855,7 +842,7 @@
    "loop": false,
    "description": "Heavy door closing under a hydraulic damper: gliding air, damper hiss, soft thud into the gasket, room air puff, quiet magnetic latch",
    "limiter_db": 0.0,
-   "build_s": 0.08
+   "build_s": 0.16
   },
   "villa_curtain": {
    "channels": 1,
@@ -865,14 +852,14 @@
    "frames": 185220,
    "seconds": 4.2,
    "peak_dbfs": -1.0,
-   "true_peak_dbfs": -0.87,
-   "dc_offset": -1.81e-09,
+   "true_peak_dbfs": -1.0,
+   "dc_offset": 6.2e-08,
    "clipped_samples": 0,
-   "rms_dbfs": -15.3,
-   "lufs": -13.9,
+   "rms_dbfs": -16.95,
+   "lufs": -16.0,
    "first_sample": 0,
    "last_sample": 0,
-   "tail_rms_dbfs": -96.7,
+   "tail_rms_dbfs": -96.5,
    "checks": {
     "format_16bit_mono_44k1": true,
     "under_10s": true,
@@ -888,33 +875,33 @@
    },
    "ok": true,
    "band_db": {
-    "sub": -19.1,
-    "low": -8.7,
-    "lowmid": -4.4,
-    "mid": -3.8,
-    "high": -12.2,
-    "air": -23.4
+    "sub": -18.3,
+    "low": -7.8,
+    "lowmid": -4.0,
+    "mid": -3.9,
+    "high": -19.9,
+    "air": -40.3
    },
-   "centroid_hz": 1443,
-   "hf_share_db": -23.4,
-   "hf_frame_max_db": -16.5,
-   "hf_frame_max_at_s": 1.051,
-   "hf_tonal_db": 9.0,
-   "events": 6,
+   "centroid_hz": 1068,
+   "hf_share_db": -40.3,
+   "hf_frame_max_db": -27.6,
+   "hf_frame_max_at_s": 3.692,
+   "hf_tonal_db": 5.7,
+   "events": 7,
    "top_events_s": [
-    2.62,
-    1.52,
-    2.97
+    2.32,
+    1.57,
+    2.9
    ],
    "standout_db": 0.3,
-   "event_crest_db": 2.4,
-   "short_term_max_lufs": -11.2,
+   "event_crest_db": 5.0,
+   "short_term_max_lufs": -11.7,
    "name": "villa_curtain",
    "file": "output/sounds/villa_curtain.wav",
    "loop": false,
    "description": "Motorised curtain: relay tick, quiet geared motor whirr ramping up, runners gliding in the track, heavy drapes swishing as the pleats gather, soft stop and settle",
    "limiter_db": 0.0,
-   "build_s": 0.18
+   "build_s": 0.29
   },
   "villa_click": {
    "channels": 1,
@@ -971,7 +958,7 @@
    "loop": false,
    "description": "Premium light switch / menu tick: rocker leaving its detent, crisp damped snap and a low 'thock' from the plate",
    "limiter_db": 0.0,
-   "build_s": 0.03
+   "build_s": 0.32
   },
   "villa_splash": {
    "channels": 1,
@@ -1030,7 +1017,7 @@
    "loop": false,
    "description": "Someone slipping into the pool: water parting, soft body entry and 'gloop', light spray, droplets falling back, bubbles from hair and swimsuit, ripples lapping the edge",
    "limiter_db": 0.0,
-   "build_s": 0.23
+   "build_s": 0.38
   },
   "villa_ignite": {
    "channels": 1,
@@ -1040,10 +1027,10 @@
    "frames": 149940,
    "seconds": 3.4,
    "peak_dbfs": -1.0,
-   "true_peak_dbfs": -0.96,
-   "dc_offset": 6.78e-08,
+   "true_peak_dbfs": -0.94,
+   "dc_offset": 9.36e-09,
    "clipped_samples": 0,
-   "rms_dbfs": -19.28,
+   "rms_dbfs": -19.26,
    "lufs": -20.1,
    "first_sample": 0,
    "last_sample": 0,
@@ -1058,30 +1045,30 @@
     "starts_at_zero": true,
     "ends_at_zero": true,
     "hf_share_ok": true,
-    "no_hf_spikes": false,
+    "no_hf_spikes": true,
     "no_hf_whistles": true
    },
-   "ok": false,
+   "ok": true,
    "band_db": {
     "sub": -9.2,
     "low": -1.7,
     "lowmid": -8.5,
-    "mid": -12.1,
-    "high": -22.0,
-    "air": -30.0
+    "mid": -11.9,
+    "high": -24.3,
+    "air": -37.7
    },
-   "centroid_hz": 281,
-   "hf_share_db": -30.0,
-   "hf_frame_max_db": -7.9,
-   "hf_frame_max_at_s": 0.543,
-   "hf_tonal_db": 5.6,
-   "events": 7,
+   "centroid_hz": 267,
+   "hf_share_db": -37.7,
+   "hf_frame_max_db": -22.3,
+   "hf_frame_max_at_s": 0.238,
+   "hf_tonal_db": -99.0,
+   "events": 6,
    "top_events_s": [
     1.15,
     1.4,
     0.7
    ],
-   "standout_db": 3.3,
+   "standout_db": 3.4,
    "event_crest_db": 10.4,
    "short_term_max_lufs": -13.1,
    "name": "villa_ignite",
@@ -1089,7 +1076,7 @@
    "loop": false,
    "description": "Gas fireplace ignition: two soft igniter ticks, valve thunk and gas hiss, the burner lighting with a low 'whoomp', flames spreading and settling to a gentle roar",
    "limiter_db": 0.0,
-   "build_s": 0.17
+   "build_s": 0.27
   },
   "villa_arrival": {
    "channels": 1,
@@ -1147,7 +1134,7 @@
    "loop": false,
    "description": "Arrival chime: two soft tuned tone bars (G5 then E-flat5) struck by felt-tipped plungers, resonator bloom, in the stone foyer",
    "limiter_db": 0.0,
-   "build_s": 0.17
+   "build_s": 0.3
   }
  }
 }

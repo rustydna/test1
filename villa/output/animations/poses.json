@@ -348,8 +348,7 @@
     "keys": 2,
     "duration_s": 1.0
    },
-   "ok": false,
-   "blender_bvh_import_max_err_m": 5e-05
+   "ok": false
   },
   "limbs_deg": {
    "L upper arm roll": 152.7,

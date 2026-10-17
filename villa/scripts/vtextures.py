@@ -205,11 +205,6 @@ def _wrap(x):
     return (x + 0.5) % 1.0 - 0.5
 
 
-def _hash(i, j=0):
-    x = np.sin(np.asarray(i, dtype=float) * 12.9898 + np.asarray(j, dtype=float) * 78.233) * 43758.5453
-    return x - np.floor(x)
-
-
 def window(cx, cy, rx, ry=None):
     """Wrapped pixel window around (cx, cy) px: index usable on any N x N array, and the
     offsets dx (1 x w), dy (h x 1) of every pixel centre from (cx, cy)."""
@@ -395,7 +390,7 @@ def plaster_sand(rng):
 def plaster_concrete(rng):
     """Soft grey board-formed concrete: 16 boards (~12.5 cm) per 2 m, each a touch different
     in tone with a faint grain imprint, very fine horizontal lines at the board joints, fine
-    sand and the odd tiny pore."""
+    sand, the odd tiny pore and faint filled form-tie plugs on a 67 cm grid."""
     px = T / N
     nb = 16
     w = rng.uniform(0.85, 1.15, nb)
@@ -412,57 +407,79 @@ def plaster_concrete(rng):
     mott = nm(rng, 0.25, 0.02, 1.2)
     sand = nm(rng, 0.004, px, 0.2)
     bug = _s(nm(rng, 0.02, px * 1.2, 0.3), 3.1, 3.7)
+    # Form-tie plugs: 3 x 3 per repeat, in the middle of a board, flush mortar with a hairline ring.
+    tie = np.zeros((N, N))
+    ring = np.zeros((N, N))
+    r = 0.012 / px
+    for i in range(3):
+        for j in range(3):
+            cy_v = (j + 0.5) / 3
+            k = int(np.clip(np.searchsorted(edges, (cy_v + off) % 1.0, side="right") - 1, 0, nb - 1))
+            cy = ((0.5 * (edges[k] + edges[k + 1]) - off) % 1.0) * N
+            cx = ((i + 0.5) / 3 + 0.04 * (j - 1)) * N
+            idx, dx, dy = window(cx, cy, r * 2)
+            dd = np.sqrt(dx * dx + dy * dy)
+            stamp_max(tie, idx, _s(r - dd, -0.5, 0.8))
+            stamp_max(ring, idx, np.exp(-((dd - r) / 0.7) ** 2))
     color = _rgb((0.618, 0.608, 0.588))
     color = _mul(color, 1.0 + 0.045 * (tab[row, 0] - 0.5) + 0.015 * cloud + 0.012 * mott
-                 + 0.006 * grain * (0.5 + tab[row, 1]) + 0.018 * sand - 0.07 * line - 0.3 * bug)
+                 + 0.006 * grain * (0.5 + tab[row, 1]) + 0.018 * sand - 0.07 * line - 0.3 * bug
+                 - 0.02 * tie - 0.035 * ring)
     h = (0.0002 * fin + 0.00001 * grain * (0.5 + tab[row, 1]) + 0.00002 * sand + (tab[row, 2] - 0.5) * 0.0004
-         + 0.0006 * nm(rng, 1.0, 0.2, 1.8) - 0.0012 * bug)
-    rough = 0.76 + 0.02 * cloud + 0.015 * mott + 0.02 * sand + 0.03 * (tab[row, 3] - 0.5) - 0.04 * fin + 0.1 * bug
+         + 0.0006 * nm(rng, 1.0, 0.2, 1.8) - 0.0012 * bug - 0.0002 * tie - 0.0002 * ring)
+    rough = (0.76 + 0.02 * cloud + 0.015 * mott + 0.02 * sand + 0.03 * (tab[row, 3] - 0.5) - 0.04 * fin
+             + 0.1 * bug - 0.03 * tie)
     return dict(color=color, h=h, rough=rough, metal=0.0, depth=0.0005, cavity=0.1)
 
 
 # ---------------------------------------------------------------------------
-def travertine_body(rng, light, dark, fill, band_amt, pore_amt, warm):
-    """Vein-cut travertine (bands along U): layered tones, lens-shaped pores aligned with the
-    bands (most filled), a few open pin pits. Returns color, height, rough modifiers."""
+def travertine_body(rng, light, dark, fill_dark, fill_light, band_amt, pore_amt, warm):
+    """Vein-cut travertine: soft wavy bands that fade in and out (low contrast, no thin
+    continuous lines), scattered lens-shaped pores and voids along the bedding, filled
+    flush, some a little darker and some a little lighter; a few tiny open pits.
+    Returns color, height, rough modifiers."""
     px = T / N
-    b1 = nm(rng, 0.5, 0.005, 0.95, aniso=22)
-    b2 = nm(rng, 0.8, 0.02, 1.2, aniso=10)
-    wv = 0.006 * nm(rng, 1.6, 0.3, 1.6) + 0.0012 * nm(rng, 0.3, 0.05, 1.4)
-    b1 = sample(b1, 0, wv)
-    b2 = sample(b2, 0, wv)
-    color = _mix(light, dark, _s(b1, -1.3, 2.2) * band_amt)
-    color = _mix(color, warm, _s(b2, -0.2, 1.8) * 0.4)
-    color = _mul(color, 1.0 + 0.012 * nm(rng, 0.01, px, 0.4) + 0.012 * nm(rng, 1.0, 0.2, 1.4))
-    porous = _s(sample(nm(rng, 0.4, 0.02, 1.2, aniso=12), 0, wv), -0.4, 1.4)
-    pn = sample(nm(rng, 0.05, px * 1.4, 0.6, aniso=7), 0, wv)
-    pores = _s(pn + 1.2 * porous * pore_amt, 2.0, 2.4)
-    pits = _s(nm(rng, 0.02, px, 0.3, aniso=2.5) + 0.6 * porous, 3.3, 3.8)
-    pore_c = _mul(fill, 0.92 + 0.16 * _s(nm(rng, 0.02, px * 2, 0.5), -1, 1))
-    color = _mix(color, pore_c, pores * 0.85)
-    color = _mul(color, 1.0 - 0.15 * _s(blur(pores, 1.0), 0.05, 0.6) * (1 - pores))   # pore rims
-    color = _mix(color, _mul(dark, 0.55), pits * 0.8)
-    h = -0.00008 * pores - 0.0004 * pits + 0.00002 * b1
-    rough_add = 0.06 * pores + 0.25 * pits
+    wv = 0.010 * nm(rng, 1.6, 0.2, 1.7) + 0.002 * nm(rng, 0.3, 0.06, 1.5)
+    bands = sample(nm(rng, 0.45, 0.025, 1.3, aniso=6.5), 0, wv)
+    fade = _s(nm(rng, 0.9, 0.15, 1.6), -0.9, 0.9)
+    cloud = nm(rng, 1.0, 0.06, 1.5)
+    tone = bands * (0.35 + 0.65 * fade)
+    color = _mix(light, dark, _s(tone, -1.0, 2.6) * band_amt)
+    color = _mix(color, warm, _s(sample(nm(rng, 0.7, 0.05, 1.4, aniso=4), 0, wv), 0.0, 2.0) * 0.35)
+    color = _mul(color, 1.0 + 0.015 * cloud + 0.01 * nm(rng, 0.006, px, 0.4))
+    porous = _s(sample(nm(rng, 0.5, 0.04, 1.4, aniso=5), 0, wv) + 0.4 * fade, -0.3, 1.4) * pore_amt
+    pa = sample(nm(rng, 0.04, px * 1.5, 0.7, aniso=4.5), 0, wv)
+    pb = sample(nm(rng, 0.08, 0.004, 0.9, aniso=5), 0, wv)
+    pores_d = _s(pa + 1.3 * porous, 2.25, 2.6)                    # small pores, filled a touch darker
+    pores_l = _s(pb + 1.0 * porous, 2.5, 2.8) * (1 - pores_d)      # larger voids, filled lighter
+    pits = _s(nm(rng, 0.02, px, 0.3, aniso=2.5) + 0.6 * porous, 3.4, 3.9)
+    fd = _mul(fill_dark, 0.96 + 0.08 * _s(nm(rng, 0.02, px * 2, 0.5), -1, 1))
+    color = _mix(color, fd, pores_d * 0.8)
+    color = _mix(color, fill_light, pores_l * 0.75)
+    color = _mul(color, 1.0 - 0.07 * _s(blur(pores_l + pores_d, 1.2), 0.05, 0.6) * (1 - pores_l - pores_d))
+    color = _mix(color, _mul(dark, 0.7), pits * 0.6)
+    h = -0.00006 * (pores_d + pores_l) - 0.0003 * pits + 0.00001 * tone
+    rough_add = 0.05 * (pores_d + pores_l) + 0.2 * pits
     return color, h, rough_add
 
 
 def floor_travertine(rng):
-    """Large-format ivory travertine, 4 tiles of 0.8 m per 1.6 m repeat, hairline joints, honed."""
-    color, hb, radd = travertine_body(rng, _rgb((0.865, 0.800, 0.690)), _rgb((0.745, 0.655, 0.535)),
-                                      _rgb((0.84, 0.78, 0.68)), 0.8, 0.7, _rgb((0.85, 0.74, 0.58)))
+    """Large-format ivory travertine, 4 tiles of 0.8 m per 1.6 m repeat, hairline joints, honed,
+    a slight tone change from tile to tile."""
+    color, hb, radd = travertine_body(rng, _rgb((0.872, 0.815, 0.715)), _rgb((0.800, 0.722, 0.605)),
+                                      _rgb((0.79, 0.715, 0.60)), _rgb((0.90, 0.855, 0.775)), 0.95, 0.85,
+                                      _rgb((0.86, 0.77, 0.63)))
     lu, lv, ident, du, dv = tiles(2, 2, 0.13, 0.31)
     trng = np.random.default_rng(rng.integers(1 << 30))
     color, hb, radd = tile_shuffle([color, hb, radd], ident, 4, trng)
-    shade = 1.0 + 0.035 * (trng.random(4) - 0.5) * 2
+    shade = 1.0 + np.array([0.025, -0.02, 0.0, 0.035])[trng.permutation(4)]
     color = _mul(color, shade[ident])
     d = np.minimum(du, dv)
     hj, face = joint_profile(d, 0.0009, 0.0012, 0.0006)
-    grout = (0.80, 0.745, 0.655)
-    color = _mix(grout, color, face)
-    color = _mul(color, 1.0 - 0.08 * (1 - _s(d, 0.0009, 0.003)))
+    color = _mix((0.80, 0.75, 0.665), color, face)
+    color = _mul(color, 1.0 - 0.06 * (1 - _s(d, 0.0009, 0.003)))
     h = hb * face + hj
-    rough = 0.45 + 0.03 * nm(rng, 0.8, 0.1, 1.2) + radd
+    rough = 0.45 + 0.025 * nm(rng, 0.8, 0.1, 1.2) + radd
     rough = _mix(0.7, rough, face)
     return dict(color=color, h=h, rough=rough, metal=0.0, depth=0.0006, cavity=0.1)
 
@@ -884,30 +901,36 @@ def stone_nero(rng):
 
 
 def stone_travertine(rng):
-    """Classic Roman travertine slab (no joints): warmer, stronger banding, filled pores, honed."""
-    color, hb, radd = travertine_body(rng, _rgb((0.835, 0.745, 0.610)), _rgb((0.660, 0.545, 0.405)),
-                                      _rgb((0.80, 0.72, 0.60)), 1.0, 1.0, _rgb((0.80, 0.66, 0.48)))
-    rough = 0.44 + 0.03 * nm(rng, 0.8, 0.1, 1.2) + radd
+    """Classic Roman travertine slab (no joints): warm beige, soft fading bands, scattered
+    filled pores; honed."""
+    color, hb, radd = travertine_body(rng, _rgb((0.845, 0.760, 0.632)), _rgb((0.745, 0.640, 0.505)),
+                                      _rgb((0.74, 0.645, 0.52)), _rgb((0.88, 0.815, 0.715)), 1.0, 1.0,
+                                      _rgb((0.83, 0.70, 0.53)))
+    rough = 0.44 + 0.025 * nm(rng, 0.8, 0.1, 1.2) + radd
     return dict(color=color, h=hb, rough=rough, metal=0.0, depth=0.0004, cavity=0.08)
 
 
 def stone_sandstone(rng):
-    """Fine buff sandstone: calm granular stone with faint straight bedding, soft clouding
-    and a few darker mineral grains; sawn and honed."""
+    """Fine buff sandstone: granular (sand grains, a few darker mineral grains), soft broad
+    cross-bedding sets at low contrast, gentle iron clouding; sawn and honed."""
     px = T / N
-    wv = 0.004 * nm(rng, 1.6, 0.3, 1.6)
-    lam = sample(noise(rng, 6, 300, 1.0, aniso=7), 0, wv)
-    fine = sample(noise(rng, 20, N / 2, 0.7, aniso=5), 0, wv)
-    grain = nm(rng, 0.003, px, 0.15)
-    cloud = nm(rng, 1.2, 0.08, 1.6)
-    color = _rgb((0.780, 0.662, 0.498))
-    color = _mix(color, (0.825, 0.725, 0.575), _s(cloud, -0.3, 1.8) * 0.45)
-    color = _mix(color, (0.745, 0.60, 0.43), _s(nm(rng, 0.9, 0.08, 1.5), 0.8, 2.4) * 0.3)     # iron clouding
-    color = _mul(color, 1.0 + 0.02 * lam + 0.01 * fine + 0.03 * grain)
-    color = _mix(color, (0.45, 0.38, 0.30), _s(grain, 2.7, 3.5) * 0.5)                      # dark grains
-    h = 0.00001 * lam + 0.00004 * grain + 0.0002 * nm(rng, 0.6, 0.1, 1.6)
-    rough = 0.80 + 0.03 * grain - 0.01 * lam
-    return dict(color=color, h=h, rough=rough, metal=0.0, depth=0.0002, cavity=0.05)
+    grain = nm(rng, 0.0025, px, 0.1)
+    grain2 = nm(rng, 0.006, 0.002, 0.5)
+    bed_a = nm(rng, 0.12, 0.012, 1.2, aniso=3.5, ang=0.0)
+    bed_b = nm(rng, 0.12, 0.012, 1.2, aniso=3.5, ang=0.22)
+    bed_c = nm(rng, 0.12, 0.012, 1.2, aniso=3.5, ang=-0.15)
+    sel = nm(rng, 0.6, 0.15, 1.6)
+    bed = _mix(_mix(bed_a, bed_b, _s(sel, 0.2, 0.7)), bed_c, _s(-sel, 0.4, 0.9))
+    cloud = nm(rng, 1.2, 0.1, 1.6)
+    color = _rgb((0.785, 0.668, 0.505))
+    color = _mix(color, (0.825, 0.722, 0.572), _s(cloud, -0.3, 1.8) * 0.4)
+    color = _mix(color, (0.75, 0.61, 0.44), _s(nm(rng, 0.9, 0.08, 1.5), 0.9, 2.4) * 0.25)     # iron clouding
+    color = _mul(color, 1.0 + 0.016 * bed + 0.035 * grain + 0.02 * grain2)
+    color = _mix(color, (0.46, 0.39, 0.31), _s(grain, 2.8, 3.5) * 0.45)                     # dark grains
+    color = _mix(color, (0.90, 0.84, 0.74), _s(grain2, 2.6, 3.4) * 0.3)                     # quartz glints
+    h = 0.000006 * bed + 0.00005 * grain + 0.00003 * grain2 + 0.0002 * nm(rng, 0.6, 0.1, 1.6)
+    rough = 0.80 + 0.035 * grain - 0.01 * bed
+    return dict(color=color, h=h, rough=rough, metal=0.0, depth=0.0002, cavity=0.06)
 
 
 def fabric_boucle(rng):
@@ -918,7 +941,7 @@ def fabric_boucle(rng):
     ground = 0.00035 * _s(nm(rng, 0.006, px * 2, 0.7), -1.5, 1.5)
     h = ground.copy()
     tone = np.zeros((N, N))
-    for cells, hs in ((62, 1.0), (74, 0.9), (54, 1.05)):
+    for cells, hs in ((62, 1.0), (74, 0.9), (54, 1.05), (86, 0.85)):
         uo, vo = rng.random(2)
         wu = (U + uo + 0.001 * noise(rng, 4, 60, 1.2)) % 1.0
         wv = (V + vo + 0.001 * noise(rng, 4, 60, 1.2)) % 1.0
@@ -930,7 +953,7 @@ def fabric_boucle(rng):
         th = rng.uniform(0, math.pi, nc)
         cut = rng.uniform(-1.0, -0.1, nc)
         phi = rng.uniform(0, 2 * math.pi, nc)
-        hh = rng.uniform(0.7, 1.0, nc) * hs * (rng.random(nc) < 0.8)
+        hh = rng.uniform(0.7, 1.0, nc) * hs * (rng.random(nc) < 0.9)
         tn = rng.normal(0, 1, nc)
         c, s = np.cos(th)[idc], np.sin(th)[idc]
         a = ru * c + rv * s
@@ -990,21 +1013,20 @@ def fabric_linen(rng):
 
 
 def fabric_velvet(rng):
-    """Velvet: almost no relief, the look is in the pile: soft clouds where the pile lies a
-    little differently read lighter/glossier or darker/matte (roughness ~0.6-0.9)."""
+    """Velvet: a uniform dense pile. The base colour is nearly flat; the velvet look is in the
+    roughness: very soft directional crush where the pile lies differently (~0.62-0.88)."""
     px = T / N
-    lay = 0.7 * warped(rng, 0.2, 0.02, 1.6, 0.05) + 0.5 * nm(rng, 0.5, 0.08, 1.5)
-    lay = (lay - lay.mean()) / lay.std()
-    brush = np.zeros((N, N))
-    for _ in range(4):
+    lay = np.zeros((N, N))
+    for _ in range(5):
         ang = rng.uniform(0, math.pi)
-        plate = _s(nm(rng, 0.25, 0.03, 1.6, aniso=2.0, ang=ang), rng.uniform(-0.5, 0.8), 1.6)
-        brush = brush + (nm(rng, 0.04, 0.003, 0.7, aniso=6, ang=ang) - brush) * plate * 0.6
+        lay = lay + nm(rng, 0.25, 0.02, 1.5, aniso=3.0, ang=ang) * rng.uniform(0.5, 1.0)
+    lay = (lay - lay.mean()) / lay.std()
+    crush = _s(lay, -1.2, 1.6)
     pile = nm(rng, 0.003, px, 0.2)
-    color = _rgb((0.805, 0.785, 0.755))
-    color = _mul(color, 1.0 + 0.028 * lay + 0.005 * brush + 0.01 * pile)
-    h = 0.00001 * brush + 0.000015 * lay + 0.000008 * pile
-    rough = np.clip(0.75 - 0.07 * lay - 0.015 * brush + 0.015 * pile, 0.58, 0.92)
+    color = _rgb((0.800, 0.780, 0.750))
+    color = _mul(color, 1.0 + 0.006 * lay + 0.006 * pile)
+    h = 0.00001 * lay + 0.000006 * pile
+    rough = np.clip(0.86 - 0.22 * crush + 0.015 * pile, 0.6, 0.9)
     return dict(color=color, h=h, rough=rough, metal=0.0, depth=0.0001, cavity=0.0)
 
 
@@ -1132,9 +1154,9 @@ def glow_white(rng):
 def glow_opal(rng):
     """Opal (milk) lamp glass: glossy, softly graded luminous clouds."""
     cl = warped(rng, 0.8, 0.05, 1.6, 0.06)
-    g = _s(cl, -2.6, 2.6)
+    g = _s(cl, -3.2, 3.2)
     color = _mix(_rgb((0.955, 0.945, 0.925)), (0.985, 0.975, 0.96), g)
-    em = _mix(_rgb((0.93, 0.80, 0.63)), (1.0, 0.905, 0.77), g)
+    em = _mix(_rgb((0.95, 0.83, 0.67)), (1.0, 0.905, 0.77), g)
     return dict(color=color, h=0.0001 * nm(rng, 0.5, 0.1, 1.5), rough=0.12 + 0.02 * g, metal=0.0,
                 depth=None, cavity=0.0, emissive=em)
 
@@ -1248,11 +1270,11 @@ LIB = {
     ],
     "water": [
         dict(id="turquoise", label="Tropical turquoise", gen=water_gen((0.36, 0.80, 0.80), (0.20, 0.66, 0.72), 1.0, 0.07),
-             alpha=0.62, double=True),
+             alpha=0.62, double=True, res=512),
         dict(id="lagoon", label="Deep lagoon", gen=water_gen((0.10, 0.36, 0.52), (0.06, 0.25, 0.42), 1.0, 0.045),
-             alpha=0.70, double=True),
+             alpha=0.70, double=True, res=512),
         dict(id="infinity", label="Black mirror", gen=water_gen((0.035, 0.050, 0.060), (0.025, 0.035, 0.045), 0.5, 0.0),
-             alpha=0.75, double=True),
+             alpha=0.75, double=True, res=512),
     ],
 }
 DEFAULT = {"a_plaster": "white", "b_floor": "travertine", "c_wood": "walnut", "d_stone": "calacatta",
@@ -1612,6 +1634,8 @@ def main():
     os.makedirs(TEX_DIR, exist_ok=True)
     os.makedirs(GLB_DIR, exist_ok=True)
     todo = [(s, v) for s, v in entries() if not filters or any(f in f"{s}__{v['id']}" for f in filters)]
+    if not todo:
+        sys.exit(f"no variant matches {filters}; stems look like 'd_stone__calacatta'")
     if not filters:      # full run: clear stale outputs of this script first
         for f in os.listdir(GLB_DIR):
             if f.startswith("villa_") and f.endswith(".glb"):
