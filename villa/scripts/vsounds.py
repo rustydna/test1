@@ -385,7 +385,7 @@ def finch(rng):
     """A few bright call chips, irregularly spaced."""
     sy = [("chip", rng.uniform(3000, 4200), rng.uniform(0.03, 0.05), rng.uniform(0.09, 0.25), rng.uniform(0.7, 1.0))
           for _ in range(rng.integers(2, 5))]
-    return bird_phrase(rng, sy, (1.0, 0.15, 0.04))
+    return bird_phrase(rng, sy, (1.0, 0.08, 0.02))
 
 
 def wren_trill(rng):
@@ -682,7 +682,7 @@ def garden(n, rng):
         env = np.sqrt(np.convolve(y * y, np.ones(ns(0.02)) / ns(0.02), "same"))
         calls.append(rng.uniform(0.75, 1.0) * y / env.max())
     free = dur - sum(len(c) for c in calls) / SR
-    while free < 0.25 * len(calls):
+    while free < 0.6 * len(calls):                       # sparse: >= 0.6 s of leaves per call
         calls.pop()
         free = dur - sum(len(c) for c in calls) / SR
     gaps = free * rng.dirichlet(np.full(len(calls), 3.0))
