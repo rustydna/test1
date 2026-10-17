@@ -1,0 +1,388 @@
+{
+ "villa_sit_upright": {
+  "doc": "Dining chair (seat 0.46 m): upright and elegant, knees together, feet together with the right one slightly back, hands resting on the thighs.",
+  "furniture": "dining chair, seat top 0.46 m",
+  "hand_pose": 1,
+  "priority": 4,
+  "loop": true,
+  "duration_s": 1.0,
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "anim_bytes": 790,
+  "sit_target": {
+   "anchor": "seat top under the sit bones",
+   "anchor_height_m": 0.46,
+   "root_over_anchor_m": [
+    0.03,
+    0.0,
+    0.113
+   ],
+   "offset_m": [
+    0.03,
+    0.0,
+    0.223
+   ],
+   "rot_z_deg": 0.0,
+   "lsl": "llSitTarget(<0.030, 0.000, 0.223>, llEuler2Rot(<0.0, 0.0, 0.0> * DEG_TO_RAD));"
+  },
+  "contacts_scene_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    1.067
+   ],
+   "head": [
+    0.004,
+    0.0,
+    1.756
+   ],
+   "wrists": [
+    [
+     0.027,
+     0.102,
+     1.109
+    ],
+    [
+     0.027,
+     -0.104,
+     1.109
+    ]
+   ],
+   "elbows": [
+    [
+     -0.025,
+     0.216,
+     1.271
+    ],
+    [
+     -0.025,
+     -0.217,
+     1.272
+    ]
+   ],
+   "knees": [
+    [
+     0.521,
+     0.067,
+     1.028
+    ],
+    [
+     0.521,
+     -0.069,
+     1.028
+    ]
+   ],
+   "ankles": [
+    [
+     0.561,
+     0.055,
+     0.561
+    ],
+    [
+     0.481,
+     -0.07,
+     0.561
+    ]
+   ],
+   "soles": [
+    [
+     0.591,
+     0.05,
+     0.494
+    ],
+    [
+     0.511,
+     -0.066,
+     0.494
+    ]
+   ]
+  },
+  "checks": {
+   "self_clip": [
+    "pelvis / farm_L 3.2 cm",
+    "pelvis / farm_R 3.2 cm",
+    "belly_l / farm_L 8.0 cm",
+    "belly_l / hand_L 6.1 cm",
+    "belly_r / farm_R 7.8 cm",
+    "belly_r / hand_R 6.0 cm",
+    "hand_L / thigh_L 2.8 cm",
+    "hand_R / thigh_R 2.8 cm"
+   ],
+   "furniture_clip": [],
+   "partner_clip": [],
+   "touching": [
+    "foot_L on floor",
+    "foot_R on floor",
+    "pelvis on seat",
+    "thigh_L on seat",
+    "thigh_R on seat",
+    "toes_L on floor",
+    "toes_R on floor"
+   ],
+   "self_touch": [
+    "chest_l/uarm_L",
+    "chest_r/uarm_R",
+    "farm_L/thigh_L",
+    "farm_R/thigh_R",
+    "pelvis/hand_L",
+    "pelvis/hand_R",
+    "thigh_L/thigh_R"
+   ],
+   "weight": {
+    "com": [
+     0.111,
+     -0.001,
+     1.202
+    ],
+    "support_points": 63,
+    "com_inside_support_margin_m": 0.117,
+    "ok": true
+   },
+   "joint_limits": [],
+   "target_miss_m": {
+    "L ankle": 0.0,
+    "R ankle": 0.0,
+    "L wrist": 0.0,
+    "R wrist": 0.0
+   },
+   "roundtrip": {
+    "anim_max_err_deg": 0.0033,
+    "bvh_vs_anim_max_err_deg": 0.0033,
+    "pelvis_max_err_m": 0.0,
+    "keys": 2,
+    "duration_s": 1.0
+   },
+   "ok": false,
+   "blender_bvh_import_max_err_m": 3e-05
+  },
+  "limbs_deg": {
+   "L upper arm roll": 67.2,
+   "L elbow bend": 48.9,
+   "L forearm roll": 57.8,
+   "L wrist bend": 54.8,
+   "L wrist roll": 0.0,
+   "L knee bend": 85.4,
+   "L thigh roll": 12.4,
+   "L shin roll": 5.1,
+   "L ankle": 8.5,
+   "R upper arm roll": -67.2,
+   "R elbow bend": 49.1,
+   "R forearm roll": -57.6,
+   "R wrist bend": 54.8,
+   "R wrist roll": 0.0,
+   "R knee bend": 95.4,
+   "R thigh roll": -13.0,
+   "R shin roll": -6.2,
+   "R ankle": -1.3,
+   "L hip flexion": 94.5,
+   "L hip abduction": -7.0,
+   "R hip flexion": 94.5,
+   "R hip abduction": -6.9,
+   "mTorso bend": 3.0,
+   "mChest bend": 2.0,
+   "mNeck bend": 4.0,
+   "mHead bend": 5.2
+  },
+  "notes": [
+   "L arm pole turned +0 deg (shoulder roll 67, forearm roll 58)",
+   "R arm pole turned +0 deg (shoulder roll -67, forearm roll -58)"
+  ]
+ },
+ "villa_sit_relaxed": {
+  "doc": "Sofa (seat 0.43 m): leaning back into the cushions, left arm resting along the top of the backrest, right hand on the thigh, knees relaxed apart.",
+  "furniture": "sofa, seat top 0.43 m, back reclined 14 deg, back top 0.50 m over the seat",
+  "hand_pose": 1,
+  "priority": 4,
+  "loop": true,
+  "duration_s": 1.0,
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "anim_bytes": 790,
+  "sit_target": {
+   "anchor": "seat top under the sit bones",
+   "anchor_height_m": 0.43,
+   "root_over_anchor_m": [
+    0.03,
+    0.0,
+    0.123
+   ],
+   "offset_m": [
+    0.03,
+    0.0,
+    0.203
+   ],
+   "rot_z_deg": 0.0,
+   "lsl": "llSitTarget(<0.030, 0.000, 0.203>, llEuler2Rot(<0.0, 0.0, 0.0> * DEG_TO_RAD));"
+  },
+  "contacts_scene_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    1.067
+   ],
+   "head": [
+    -0.172,
+    0.039,
+    1.727
+   ],
+   "wrists": [
+    [
+     -0.384,
+     0.58,
+     1.453
+    ],
+    [
+     0.046,
+     -0.12,
+     1.123
+    ]
+   ],
+   "elbows": [
+    [
+     -0.281,
+     0.406,
+     1.484
+    ],
+    [
+     -0.078,
+     -0.193,
+     1.269
+    ]
+   ],
+   "knees": [
+    [
+     0.513,
+     0.279,
+     1.024
+    ],
+    [
+     0.519,
+     -0.259,
+     1.034
+    ]
+   ],
+   "ankles": [
+    [
+     0.664,
+     0.24,
+     0.581
+    ],
+    [
+     0.604,
+     -0.17,
+     0.581
+    ]
+   ],
+   "soles": [
+    [
+     0.696,
+     0.237,
+     0.515
+    ],
+    [
+     0.636,
+     -0.162,
+     0.516
+    ]
+   ]
+  },
+  "checks": {
+   "self_clip": [
+    "belly_r / farm_R 4.5 cm",
+    "belly_r / hand_R 2.5 cm",
+    "hand_R / thigh_R 2.2 cm"
+   ],
+   "furniture_clip": [],
+   "partner_clip": [],
+   "touching": [
+    "belly_l on back cushion",
+    "belly_r on back cushion",
+    "chest_l on back cushion",
+    "chest_r on back cushion",
+    "foot_L on floor",
+    "foot_R on floor",
+    "hand_L on back cushion",
+    "pelvis on back cushion",
+    "pelvis on seat cushion",
+    "thigh_L on seat cushion",
+    "toes_L on floor",
+    "toes_R on floor"
+   ],
+   "self_touch": [
+    "belly_r/uarm_R",
+    "chest_r/uarm_R",
+    "farm_R/thigh_R",
+    "pelvis/farm_R",
+    "pelvis/hand_R"
+   ],
+   "weight": {
+    "com": [
+     0.058,
+     0.021,
+     1.205
+    ],
+    "support_points": 77,
+    "com_inside_support_margin_m": 0.103,
+    "ok": true
+   },
+   "joint_limits": [
+    "L upper arm roll 152.7",
+    "L forearm roll -141.2"
+   ],
+   "target_miss_m": {
+    "L ankle": 0.0,
+    "R ankle": 0.0,
+    "L elbow": 0.031,
+    "R wrist": 0.0
+   },
+   "roundtrip": {
+    "anim_max_err_deg": 0.0029,
+    "bvh_vs_anim_max_err_deg": 0.0029,
+    "pelvis_max_err_m": 0.0,
+    "keys": 2,
+    "duration_s": 1.0
+   },
+   "ok": false,
+   "blender_bvh_import_max_err_m": 5e-05
+  },
+  "limbs_deg": {
+   "L upper arm roll": 152.7,
+   "L elbow bend": 10.5,
+   "L forearm roll": -141.2,
+   "L wrist bend": 25.0,
+   "L wrist roll": 0.0,
+   "L knee bend": 72.5,
+   "L thigh roll": -20.1,
+   "L shin roll": 4.1,
+   "L ankle": 20.5,
+   "R upper arm roll": -44.7,
+   "R elbow bend": 39.3,
+   "R forearm roll": -42.4,
+   "R wrist bend": 30.1,
+   "R wrist roll": 0.0,
+   "R knee bend": 82.3,
+   "R thigh roll": 21.8,
+   "R shin roll": -5.0,
+   "R ankle": 11.8,
+   "L hip flexion": 74.0,
+   "L hip abduction": 18.3,
+   "R hip flexion": 74.2,
+   "R hip abduction": 15.0,
+   "mTorso bend": 3.0,
+   "mChest bend": 5.9,
+   "mNeck bend": 10.0,
+   "mHead bend": 11.7
+  },
+  "notes": [
+   "seat depth (back cushion face to front edge) 0.50 m",
+   "back cushion face (at seat level) 0.08 m behind the pelvis joint",
+   "R arm pole turned +10 deg (shoulder roll -45, forearm roll -42)"
+  ]
+ }
+}

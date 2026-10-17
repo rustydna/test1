@@ -1,0 +1,488 @@
+{
+ "slots": {
+  "a_plaster": [
+   {
+    "id": "white",
+    "name": "villa_a_plaster_white",
+    "label": "White microcement",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     220,
+     218,
+     213
+    ]
+   },
+   {
+    "id": "sand",
+    "name": "villa_a_plaster_sand",
+    "label": "Sand lime plaster",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     200,
+     175,
+     141
+    ]
+   },
+   {
+    "id": "concrete",
+    "name": "villa_a_plaster_concrete",
+    "label": "Soft concrete",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     156,
+     154,
+     149
+    ]
+   },
+   {
+    "id": "charcoal",
+    "name": "villa_a_plaster_charcoal",
+    "label": "Charcoal microcement",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     44,
+     43,
+     41
+    ]
+   }
+  ],
+  "b_floor": [
+   {
+    "id": "travertine",
+    "name": "villa_b_floor_travertine",
+    "label": "Travertine tiles",
+    "tile_m": 1.6,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     213,
+     193,
+     163
+    ]
+   },
+   {
+    "id": "oak",
+    "name": "villa_b_floor_oak",
+    "label": "Smoked oak planks",
+    "tile_m": 1.6,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     90,
+     67,
+     48
+    ]
+   },
+   {
+    "id": "terrazzo",
+    "name": "villa_b_floor_terrazzo",
+    "label": "Warm terrazzo",
+    "tile_m": 1.6,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     214,
+     198,
+     182
+    ]
+   },
+   {
+    "id": "basalt",
+    "name": "villa_b_floor_basalt",
+    "label": "Honed basalt",
+    "tile_m": 1.6,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     58,
+     58,
+     56
+    ]
+   }
+  ],
+  "c_wood": [
+   {
+    "id": "walnut",
+    "name": "villa_c_wood_walnut",
+    "label": "Walnut",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     80,
+     52,
+     35
+    ]
+   },
+   {
+    "id": "oak",
+    "name": "villa_c_wood_oak",
+    "label": "Natural oak",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     168,
+     130,
+     86
+    ]
+   },
+   {
+    "id": "teak",
+    "name": "villa_c_wood_teak",
+    "label": "Teak",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     137,
+     92,
+     52
+    ]
+   },
+   {
+    "id": "ebony",
+    "name": "villa_c_wood_ebony",
+    "label": "Ebonised ash",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     23,
+     21,
+     19
+    ]
+   }
+  ],
+  "d_stone": [
+   {
+    "id": "calacatta",
+    "name": "villa_d_stone_calacatta",
+    "label": "Calacatta gold",
+    "tile_m": 1.6,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     233,
+     231,
+     226
+    ]
+   },
+   {
+    "id": "travertine",
+    "name": "villa_d_stone_travertine",
+    "label": "Roman travertine",
+    "tile_m": 1.6,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     197,
+     171,
+     136
+    ]
+   },
+   {
+    "id": "nero",
+    "name": "villa_d_stone_nero",
+    "label": "Nero Marquina",
+    "tile_m": 1.6,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     17,
+     17,
+     18
+    ]
+   },
+   {
+    "id": "sandstone",
+    "name": "villa_d_stone_sandstone",
+    "label": "Sandstone",
+    "tile_m": 1.6,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     198,
+     168,
+     126
+    ]
+   }
+  ],
+  "e_fabric": [
+   {
+    "id": "boucle",
+    "name": "villa_e_fabric_boucle",
+    "label": "Boucle",
+    "tile_m": 0.5,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     194,
+     189,
+     178
+    ]
+   },
+   {
+    "id": "linen",
+    "name": "villa_e_fabric_linen",
+    "label": "Linen",
+    "tile_m": 0.5,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     206,
+     198,
+     182
+    ]
+   },
+   {
+    "id": "velvet",
+    "name": "villa_e_fabric_velvet",
+    "label": "Velvet",
+    "tile_m": 0.5,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     205,
+     200,
+     193
+    ]
+   },
+   {
+    "id": "wool",
+    "name": "villa_e_fabric_wool",
+    "label": "Knitted wool",
+    "tile_m": 0.5,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     210,
+     202,
+     188
+    ]
+   }
+  ],
+  "f_metal": [
+   {
+    "id": "brass",
+    "name": "villa_f_metal_brass",
+    "label": "Brushed brass",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     213,
+     176,
+     110
+    ]
+   },
+   {
+    "id": "bronze",
+    "name": "villa_f_metal_bronze",
+    "label": "Champagne bronze",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     204,
+     180,
+     145
+    ]
+   },
+   {
+    "id": "black",
+    "name": "villa_f_metal_black",
+    "label": "Satin black steel",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     55,
+     54,
+     52
+    ]
+   },
+   {
+    "id": "chrome",
+    "name": "villa_f_metal_chrome",
+    "label": "Polished chrome",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     208,
+     208,
+     210
+    ]
+   }
+  ],
+  "g_glass": [
+   {
+    "id": "clear",
+    "name": "villa_g_glass_clear",
+    "label": "Clear glass",
+    "tile_m": 2.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     240,
+     246,
+     246
+    ]
+   },
+   {
+    "id": "smoked",
+    "name": "villa_g_glass_smoked",
+    "label": "Smoked grey",
+    "tile_m": 2.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     77,
+     79,
+     80
+    ]
+   },
+   {
+    "id": "bronze",
+    "name": "villa_g_glass_bronze",
+    "label": "Bronze tint",
+    "tile_m": 2.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     133,
+     102,
+     69
+    ]
+   },
+   {
+    "id": "fluted",
+    "name": "villa_g_glass_fluted",
+    "label": "Fluted frosted",
+    "tile_m": 2.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     237,
+     241,
+     241
+    ]
+   }
+  ],
+  "h_glow": [
+   {
+    "id": "led",
+    "name": "villa_h_glow_led",
+    "label": "Warm LED",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     254,
+     226,
+     187
+    ]
+   },
+   {
+    "id": "opal",
+    "name": "villa_h_glow_opal",
+    "label": "Opal glass",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     246,
+     217,
+     179
+    ]
+   },
+   {
+    "id": "ember",
+    "name": "villa_h_glow_ember",
+    "label": "Ember bed",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     54,
+     17,
+     5
+    ]
+   },
+   {
+    "id": "white",
+    "name": "villa_h_glow_white",
+    "label": "White light (tint)",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     255,
+     255,
+     255
+    ]
+   }
+  ],
+  "water": [
+   {
+    "id": "turquoise",
+    "name": "villa_water_turquoise",
+    "label": "Tropical turquoise",
+    "tile_m": 3.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     83,
+     198,
+     202
+    ]
+   },
+   {
+    "id": "lagoon",
+    "name": "villa_water_lagoon",
+    "label": "Deep lagoon",
+    "tile_m": 3.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     23,
+     86,
+     128
+    ]
+   },
+   {
+    "id": "infinity",
+    "name": "villa_water_infinity",
+    "label": "Black mirror",
+    "tile_m": 3.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     8,
+     12,
+     14
+    ]
+   }
+  ]
+ },
+ "default": {
+  "a_plaster": "white",
+  "b_floor": "travertine",
+  "c_wood": "walnut",
+  "d_stone": "calacatta",
+  "e_fabric": "boucle",
+  "f_metal": "brass",
+  "g_glass": "clear",
+  "h_glow": "led",
+  "water": "turquoise"
+ }
+}
