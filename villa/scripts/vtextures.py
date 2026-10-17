@@ -911,24 +911,26 @@ def stone_sandstone(rng):
 
 
 def fabric_boucle(rng):
-    """Boucle: a dense pile of round yarn loops and curls (3-6 mm) of soft ivory yarn."""
+    """Boucle: round yarn loops and curls (4-6 mm) standing on a dense nubby ground of soft
+    ivory yarn."""
     px = T / N
-    yarn = 0.0006
-    h = 0.00015 * nm(rng, 0.008, px * 1.5, 0.6)
+    yarn = 0.00055
+    ground = 0.00035 * _s(nm(rng, 0.006, px * 2, 0.7), -1.5, 1.5)
+    h = ground.copy()
     tone = np.zeros((N, N))
-    for cells, hs in ((80, 1.0), (96, 0.85), (68, 1.1), (110, 0.8)):
+    for cells, hs in ((62, 1.0), (74, 0.9), (54, 1.05)):
         uo, vo = rng.random(2)
-        wu = (U + uo + 0.0015 * noise(rng, 4, 60, 1.2)) % 1.0
-        wv = (V + vo + 0.0015 * noise(rng, 4, 60, 1.2)) % 1.0
-        _, _, idc, ru, rv = voronoi(rng, cells, wu, wv, 0.7)
+        wu = (U + uo + 0.001 * noise(rng, 4, 60, 1.2)) % 1.0
+        wv = (V + vo + 0.001 * noise(rng, 4, 60, 1.2)) % 1.0
+        _, _, idc, ru, rv = voronoi(rng, cells, wu, wv, 0.6)
         nc = cells * cells
         cell_m = T / cells
-        r0 = rng.uniform(0.20, 0.34, nc)
-        ratio = rng.uniform(0.6, 1.0, nc)
+        r0 = rng.uniform(0.22, 0.31, nc)
+        ratio = rng.uniform(0.7, 1.0, nc)
         th = rng.uniform(0, math.pi, nc)
-        cut = rng.uniform(-1.0, 0.1, nc)
+        cut = rng.uniform(-1.0, -0.1, nc)
         phi = rng.uniform(0, 2 * math.pi, nc)
-        hh = rng.uniform(0.6, 1.0, nc) * hs
+        hh = rng.uniform(0.7, 1.0, nc) * hs * (rng.random(nc) < 0.8)
         tn = rng.normal(0, 1, nc)
         c, s = np.cos(th)[idc], np.sin(th)[idc]
         a = ru * c + rv * s
@@ -936,19 +938,19 @@ def fabric_boucle(rng):
         rho = np.sqrt(a * a + b * b)
         prof = np.sqrt(np.clip(1 - ((rho - r0[idc]) / (yarn / cell_m)) ** 2, 0, 1))
         ang = np.arctan2(b, a)
-        arc = _s(np.cos(ang - phi[idc]) - cut[idc], 0.0, 0.5)
-        lh = prof * arc * hh[idc] * 0.0012 * (0.75 + 0.25 * np.cos(ang - phi[idc])) + 0.0003 * prof * arc
+        arc = _s(np.cos(ang - phi[idc]) - cut[idc], 0.0, 0.6)
+        lh = prof * arc * hh[idc] * 0.0011 * (0.7 + 0.3 * np.cos(ang - phi[idc])) + 0.0004 * prof * arc * hh[idc]
         m = lh > h
         tone = np.where(m, tn[idc], tone)
         h = np.maximum(h, lh)
-    h = blur(h, 1.0)
+    h = blur(h, 0.45)
     fuzz = nm(rng, 0.004, px * 1.5, 0.3)
-    hn = _s(h, 0.0001, 0.0013)
+    hn = _s(h, 0.0002, 0.0013)
     color = _rgb((0.895, 0.870, 0.820))
-    color = _mul(color, 0.91 + 0.09 * hn + 0.012 * tone + 0.008 * fuzz)
+    color = _mul(color, 0.88 + 0.12 * hn + 0.012 * tone + 0.008 * fuzz)
     color = _mix(color, (0.85, 0.80, 0.71), _s(nm(rng, 0.05, 0.004, 1.0), 1.0, 2.2) * 0.3)   # oatmeal fleck
     rough = 0.93 - 0.03 * hn + 0.015 * fuzz
-    return dict(color=color, h=h, rough=rough, metal=0.0, depth=0.0012, cavity=0.15)
+    return dict(color=color, h=h, rough=rough, metal=0.0, depth=0.0012, cavity=0.2)
 
 
 def fabric_linen(rng):
@@ -1139,8 +1141,8 @@ def glow_opal(rng):
 
 def glow_ember(rng):
     """Ember bed for the fireplaces: lumpy ceramic coals, pale ash on the cooler crowns,
-    glowing seams between the coals and fine glowing cracks across them; heat varies coal by
-    coal so no hot patch marks the repeat."""
+    glowing seams between the coals and fine glowing cracks across them; heat varies across
+    the bed in small zones so no hot patch marks the repeat."""
     px = T / N
     wu = (U + 0.004 * noise(rng, 3, 40, 1.2)) % 1.0
     wv = (V + 0.004 * noise(rng, 3, 40, 1.2)) % 1.0
@@ -1150,21 +1152,23 @@ def glow_ember(rng):
     hc = rng.uniform(0.55, 1.0, nc)
     dome = np.clip(1 - np.clip(f1 / 0.75, 0, 1) ** 2, 0, 1) ** 0.6 * hc[idc]
     dome = dome * (1 + 0.15 * nm(rng, 0.03, 0.008, 1.0))
-    seam = np.exp(-(edge / 0.055) ** 2)
+    sw = 0.055 * (0.6 + 0.8 * _s(nm(rng, 0.15, 0.02, 1.3), -1.5, 1.5))
+    seam = np.exp(-(edge / sw) ** 2)
     cv = Canvas(3)
-    for _ in range(420):
+    for _ in range(220):
         x, y = rng.random() * N, rng.random() * N
-        pts = vein_path(rng, x, y, rng.uniform(0, 2 * math.pi), rng.uniform(0.01, 0.045) / px, 2.0, 0.35, pull=0.0)
-        cv.stroke(pts, widths(rng, len(pts), rng.uniform(0.8, 1.8), 0.6, taper=0.3), value=int(rng.uniform(140, 255)))
+        pts = vein_path(rng, x, y, rng.uniform(0, 2 * math.pi), rng.uniform(0.02, 0.06) / px, 2.5, 0.12, pull=0.0)
+        cv.stroke(pts, widths(rng, len(pts), rng.uniform(0.9, 1.8), 0.6, taper=0.3), value=int(rng.uniform(140, 255)))
     cracks = cv.get() * _s(dome, 0.05, 0.3)
-    heat = np.clip(0.6 * rng.random(nc)[idc] + 0.5 * _s(nm(rng, 0.25, 0.05, 1.4), -1.2, 1.2), 0, 1)
+    heat_s = _s(nm(rng, 0.22, 0.04, 1.4), -1.3, 1.3)                    # smooth: same on both sides of a seam
+    heat_c = np.clip(0.55 * rng.random(nc)[idc] + 0.55 * heat_s, 0, 1)  # per coal: cracks and crowns
     under = 1 - _s(dome, 0.05, 0.45)
-    glow = np.clip(seam * (0.35 + 0.8 * heat) + cracks * heat * 0.9 + under * heat * 0.2, 0, 1.2)
-    ash = _s(dome + 0.18 * nm(rng, 0.05, 0.01, 1.0) - 0.45 * heat, 0.5, 0.8)
+    glow = np.clip(seam * (0.3 + 0.85 * heat_s) + cracks * heat_c * 0.9 + under * heat_s * 0.2, 0, 1.2)
+    ash = _s(dome + 0.15 * nm(rng, 0.06, 0.012, 1.1) - 0.45 * heat_c, 0.5, 0.82)
     color = _mix(_rgb((0.060, 0.055, 0.050)), (0.13, 0.12, 0.112), _s(nm(rng, 0.08, 0.01, 1.0), -1, 1.5) * 0.6)
-    color = _mix(color, (0.60, 0.58, 0.55), ash * 0.8)
+    color = _mix(color, (0.60, 0.58, 0.55), ash * 0.75)
     color = _mix(color, (0.50, 0.20, 0.06), np.clip(glow, 0, 1) * 0.6)
-    t_ = glow * (0.7 + 0.5 * heat)
+    t_ = glow * (0.75 + 0.45 * heat_s)
     em = _mix(_rgb((0.0, 0.0, 0.0)), (0.50, 0.07, 0.01), _s(t_, 0.02, 0.35))
     em = _mix(em, (1.0, 0.38, 0.06), _s(t_, 0.3, 0.75))
     em = _mix(em, (1.0, 0.76, 0.40), _s(t_, 0.8, 1.2))
