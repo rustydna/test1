@@ -1,0 +1,41 @@
+{
+ "configured": {
+  "The Yard": true,
+  "Hall west": true,
+  "Hall east": true,
+  "Throne dais": true,
+  "Lord's hall, west wing": true,
+  "Lord's hall, east wing": true,
+  "C01 The Press-Gang": true,
+  "C02 The Rack": true,
+  "C03 The Stocks": true,
+  "C04 The Cistern": true,
+  "C05 The Kennel": true,
+  "C06 The Kennel": true,
+  "C07 The Cages": true,
+  "C08 The Mast": true
+ },
+ "no_scripts": {
+  "The Yard": true,
+  "Hall west": true,
+  "Hall east": true,
+  "Throne dais": true,
+  "Lord's hall, west wing": true,
+  "Lord's hall, east wing": true,
+  "C01 The Press-Gang": true,
+  "C02 The Rack": true,
+  "C03 The Stocks": true,
+  "C04 The Cistern": true,
+  "C05 The Kennel": true,
+  "C06 The Kennel": true,
+  "C07 The Cages": true,
+  "C08 The Mast": true
+ },
+ "all_reachable_configured": true,
+ "all_reachable_no_scripts": true,
+ "parameters": {
+  "step_m": 0.2,
+  "avatar_radius_m": 0.25,
+  "doors": "open"
+ }
+}

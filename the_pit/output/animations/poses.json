@@ -1,0 +1,909 @@
+{
+ "pit_lord": {
+  "doc": "Pirate lord on his throne: back straight, knees apart, forearms on the armrests.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hand_pose": 1,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0033,
+   "bvh_vs_anim_max_err_deg": 0.0033
+  },
+  "target_miss_m": {},
+  "limbs_deg": {
+   "L upper arm roll": 3.8,
+   "L elbow bend": 92.0,
+   "L forearm roll": 69.3,
+   "L wrist bend": 12.0,
+   "L wrist roll": 0.0,
+   "L knee bend": 73.4,
+   "L thigh roll": -13.8,
+   "L shin roll": 4.2,
+   "L ankle": 15.5,
+   "R upper arm roll": -1.4,
+   "R elbow bend": 92.0,
+   "R forearm roll": -69.3,
+   "R wrist bend": 12.0,
+   "R wrist roll": 0.0,
+   "R knee bend": 73.4,
+   "R thigh roll": 13.5,
+   "R shin roll": -4.3,
+   "R ankle": 15.5
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    1.067
+   ],
+   "knees_z": [
+    0.99,
+    0.99
+   ],
+   "ankles_z": [
+    0.532,
+    0.532
+   ],
+   "toes_z": [
+    0.471,
+    0.471
+   ],
+   "wrists": [
+    [
+     0.108,
+     0.302,
+     1.294
+    ],
+    [
+     0.12,
+     -0.304,
+     1.295
+    ]
+   ],
+   "neck_z": 1.605,
+   "head_top_z": 1.819
+  },
+  "notes": [],
+  "blender_bvh_import_max_err_m": 3e-05
+ },
+ "pit_kneel": {
+  "doc": "Kneeling upright on the stone, hands behind the back, head bowed.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   -0.477
+  ],
+  "hand_pose": 1,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0022,
+   "bvh_vs_anim_max_err_deg": 0.0022
+  },
+  "target_miss_m": {
+   "L wrist": 0.0,
+   "R wrist": 0.0
+  },
+  "limbs_deg": {
+   "L upper arm roll": 87.9,
+   "L elbow bend": 59.6,
+   "L forearm roll": 63.2,
+   "L wrist bend": 13.5,
+   "L wrist roll": 0.0,
+   "L knee bend": 95.1,
+   "L thigh roll": 2.1,
+   "L shin roll": 6.0,
+   "L ankle": 75.3,
+   "R upper arm roll": -87.9,
+   "R elbow bend": 59.6,
+   "R forearm roll": -63.2,
+   "R wrist bend": 13.5,
+   "R wrist roll": 0.0,
+   "R knee bend": 95.1,
+   "R thigh roll": -2.1,
+   "R shin roll": -6.2,
+   "R ankle": 75.3
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    0.59
+   ],
+   "knees_z": [
+    0.055,
+    0.055
+   ],
+   "ankles_z": [
+    0.069,
+    0.069
+   ],
+   "toes_z": [
+    0.065,
+    0.064
+   ],
+   "wrists": [
+    [
+     -0.19,
+     0.055,
+     0.69
+    ],
+    [
+     -0.19,
+     -0.055,
+     0.69
+    ]
+   ],
+   "neck_z": 1.13,
+   "head_top_z": 1.322
+  },
+  "notes": [
+   "L arm pole turned -30 deg (shoulder roll 88, forearm roll 63)",
+   "R arm pole turned +30 deg (shoulder roll -88, forearm roll -63)"
+  ],
+  "blender_bvh_import_max_err_m": 6e-05
+ },
+ "pit_rack": {
+  "doc": "Lying on the back, arms stretched above the head, legs straight and slightly apart.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   -0.946
+  ],
+  "hand_pose": 1,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.002,
+   "bvh_vs_anim_max_err_deg": 0.002
+  },
+  "target_miss_m": {},
+  "limbs_deg": {
+   "L upper arm roll": -44.9,
+   "L elbow bend": 0.0,
+   "L forearm roll": -46.4,
+   "L wrist bend": 0.4,
+   "L wrist roll": 0.0,
+   "L knee bend": 1.1,
+   "L thigh roll": -0.3,
+   "L shin roll": 0.2,
+   "L ankle": 29.7,
+   "R upper arm roll": 44.9,
+   "R elbow bend": 0.0,
+   "R forearm roll": 46.4,
+   "R wrist bend": 0.4,
+   "R wrist roll": 0.0,
+   "R knee bend": 1.1,
+   "R thigh roll": 0.4,
+   "R shin roll": -0.2,
+   "R ankle": 29.7
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    0.121
+   ],
+   "knees_z": [
+    0.126,
+    0.126
+   ],
+   "ankles_z": [
+    0.089,
+    0.089
+   ],
+   "toes_z": [
+    0.248,
+    0.248
+   ],
+   "wrists": [
+    [
+     -0.936,
+     0.244,
+     0.096
+    ],
+    [
+     -0.936,
+     -0.244,
+     0.096
+    ]
+   ],
+   "neck_z": 0.109,
+   "head_top_z": 0.161
+  },
+  "notes": [
+   "L arm pole turned +120 deg (shoulder roll -45, forearm roll -46)",
+   "R arm pole turned -120 deg (shoulder roll 45, forearm roll 46)"
+  ],
+  "blender_bvh_import_max_err_m": 9e-05
+ },
+ "pit_pillory": {
+  "doc": "Standing, bent ~80 deg at the hips, neck and wrists in a yoke at ~1.15 m.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   -0.03
+  ],
+  "hand_pose": 1,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0023,
+   "bvh_vs_anim_max_err_deg": 0.0023
+  },
+  "target_miss_m": {
+   "L ankle": 0.0,
+   "R ankle": 0.0,
+   "L wrist": 0.0,
+   "R wrist": 0.0
+  },
+  "limbs_deg": {
+   "L upper arm roll": -34.9,
+   "L elbow bend": 119.9,
+   "L forearm roll": -63.7,
+   "L wrist bend": 35.3,
+   "L wrist roll": 0.0,
+   "L knee bend": 33.6,
+   "L thigh roll": -2.5,
+   "L shin roll": 1.8,
+   "L ankle": -12.5,
+   "R upper arm roll": 34.9,
+   "R elbow bend": 119.9,
+   "R forearm roll": 63.7,
+   "R wrist bend": 35.3,
+   "R wrist roll": 0.0,
+   "R knee bend": 33.7,
+   "R thigh roll": 2.1,
+   "R shin roll": -1.9,
+   "R ankle": -12.5
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    1.037
+   ],
+   "knees_z": [
+    0.518,
+    0.518
+   ],
+   "ankles_z": [
+    0.067,
+    0.067
+   ],
+   "toes_z": [
+    0.006,
+    0.006
+   ],
+   "wrists": [
+    [
+     0.618,
+     0.3,
+     1.178
+    ],
+    [
+     0.618,
+     -0.3,
+     1.178
+    ]
+   ],
+   "neck_z": 1.163,
+   "head_top_z": 1.314
+  },
+  "notes": [
+   "L arm pole turned +105 deg (shoulder roll -35, forearm roll -64)",
+   "R arm pole turned -105 deg (shoulder roll 35, forearm roll 64)",
+   "yoke (neck/wrists) at 1.18 m over the feet"
+  ],
+  "blender_bvh_import_max_err_m": 3e-05
+ },
+ "pit_stocks": {
+  "doc": "Sitting on the low bench, legs straight forward in the foot stocks, hands on the bench.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   -0.497
+  ],
+  "hand_pose": 1,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0019,
+   "bvh_vs_anim_max_err_deg": 0.0019
+  },
+  "target_miss_m": {
+   "L wrist": 0.015,
+   "R wrist": 0.015
+  },
+  "limbs_deg": {
+   "L upper arm roll": 33.5,
+   "L elbow bend": 3.6,
+   "L forearm roll": 32.5,
+   "L wrist bend": 12.5,
+   "L wrist roll": 0.0,
+   "L knee bend": 0.0,
+   "L thigh roll": 0.3,
+   "L shin roll": 0.2,
+   "L ankle": 12.0,
+   "R upper arm roll": -33.5,
+   "R elbow bend": 3.6,
+   "R forearm roll": -32.5,
+   "R wrist bend": 12.5,
+   "R wrist roll": 0.0,
+   "R knee bend": 0.0,
+   "R thigh roll": -0.5,
+   "R shin roll": -0.2,
+   "R ankle": 12.0
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    0.57
+   ],
+   "knees_z": [
+    0.454,
+    0.454
+   ],
+   "ankles_z": [
+    0.376,
+    0.376
+   ],
+   "toes_z": [
+    0.567,
+    0.567
+   ],
+   "wrists": [
+    [
+     0.095,
+     0.247,
+     0.593
+    ],
+    [
+     0.095,
+     -0.247,
+     0.593
+    ]
+   ],
+   "neck_z": 1.106,
+   "head_top_z": 1.316
+  },
+  "notes": [
+   "L arm pole turned +35 deg (shoulder roll 33, forearm roll 33)",
+   "R arm pole turned -35 deg (shoulder roll -33, forearm roll -33)",
+   "ankles at 0.38 m in the stocks, bench top at 0.46 m"
+  ],
+  "blender_bvh_import_max_err_m": 7e-05
+ },
+ "pit_chair": {
+  "doc": "Sitting upright in the ducking chair, forearms on the armrests, as if tied.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hand_pose": 3,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0034,
+   "bvh_vs_anim_max_err_deg": 0.0034
+  },
+  "target_miss_m": {},
+  "limbs_deg": {
+   "L upper arm roll": 9.7,
+   "L elbow bend": 102.3,
+   "L forearm roll": 71.9,
+   "L wrist bend": 0.4,
+   "L wrist roll": 0.0,
+   "L knee bend": 85.4,
+   "L thigh roll": 3.2,
+   "L shin roll": 5.1,
+   "L ankle": 5.7,
+   "R upper arm roll": -9.7,
+   "R elbow bend": 102.3,
+   "R forearm roll": -71.9,
+   "R wrist bend": 0.4,
+   "R wrist roll": 0.0,
+   "R knee bend": 85.4,
+   "R thigh roll": -3.5,
+   "R shin roll": -5.3,
+   "R ankle": 5.7
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    1.067
+   ],
+   "knees_z": [
+    1.008,
+    1.008
+   ],
+   "ankles_z": [
+    0.54,
+    0.54
+   ],
+   "toes_z": [
+    0.479,
+    0.479
+   ],
+   "wrists": [
+    [
+     0.104,
+     0.242,
+     1.292
+    ],
+    [
+     0.104,
+     -0.242,
+     1.292
+    ]
+   ],
+   "neck_z": 1.607,
+   "head_top_z": 1.818
+  },
+  "notes": [],
+  "blender_bvh_import_max_err_m": 3e-05
+ },
+ "pit_dog": {
+  "doc": "On all fours on hands and knees, head up.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   -0.519
+  ],
+  "hand_pose": 1,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.003,
+   "bvh_vs_anim_max_err_deg": 0.003
+  },
+  "target_miss_m": {
+   "L wrist": 0.003,
+   "R wrist": 0.003
+  },
+  "limbs_deg": {
+   "L upper arm roll": -18.6,
+   "L elbow bend": 3.6,
+   "L forearm roll": -12.2,
+   "L wrist bend": 83.7,
+   "L wrist roll": 0.0,
+   "L knee bend": 113.8,
+   "L thigh roll": 5.0,
+   "L shin roll": 8.2,
+   "L ankle": 73.3,
+   "R upper arm roll": 18.6,
+   "R elbow bend": 3.6,
+   "R forearm roll": 12.2,
+   "R wrist bend": 83.7,
+   "R wrist roll": 0.0,
+   "R knee bend": 113.8,
+   "R thigh roll": -5.5,
+   "R shin roll": -8.5,
+   "R ankle": 73.3
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    0.548
+   ],
+   "knees_z": [
+    0.055,
+    0.055
+   ],
+   "ankles_z": [
+    0.065,
+    0.064
+   ],
+   "toes_z": [
+    0.05,
+    0.05
+   ],
+   "wrists": [
+    [
+     0.487,
+     0.193,
+     0.052
+    ],
+    [
+     0.487,
+     -0.193,
+     0.052
+    ]
+   ],
+   "neck_z": 0.461,
+   "head_top_z": 0.646
+  },
+  "notes": [
+   "L arm pole turned +80 deg (shoulder roll -19, forearm roll -12)",
+   "R arm pole turned -80 deg (shoulder roll 19, forearm roll 12)"
+  ],
+  "blender_bvh_import_max_err_m": 6e-05
+ },
+ "pit_cage": {
+  "doc": "Crouched and hunched in the hanging cage, hands gripping the bars at shoulder height.",
+  "pelvis_offset_m": [
+   -0.12,
+   0.0,
+   -0.27
+  ],
+  "hand_pose": 3,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0028,
+   "bvh_vs_anim_max_err_deg": 0.0028
+  },
+  "target_miss_m": {
+   "L ankle": 0.0,
+   "R ankle": 0.0,
+   "L wrist": 0.0,
+   "R wrist": 0.0
+  },
+  "limbs_deg": {
+   "L upper arm roll": -63.0,
+   "L elbow bend": 127.3,
+   "L forearm roll": -31.5,
+   "L wrist bend": 86.6,
+   "L wrist roll": 0.0,
+   "L knee bend": 88.9,
+   "L thigh roll": -18.5,
+   "L shin roll": 5.4,
+   "L ankle": -35.7,
+   "R upper arm roll": 63.0,
+   "R elbow bend": 127.3,
+   "R forearm roll": 31.5,
+   "R wrist bend": 86.6,
+   "R wrist roll": 0.0,
+   "R knee bend": 89.0,
+   "R thigh roll": 18.4,
+   "R shin roll": -5.6,
+   "R ankle": -35.7
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    -0.12,
+    0.0,
+    0.797
+   ],
+   "knees_z": [
+    0.43,
+    0.43
+   ],
+   "ankles_z": [
+    0.067,
+    0.067
+   ],
+   "toes_z": [
+    0.006,
+    0.006
+   ],
+   "wrists": [
+    [
+     0.279,
+     0.187,
+     1.209
+    ],
+    [
+     0.279,
+     -0.187,
+     1.209
+    ]
+   ],
+   "neck_z": 1.271,
+   "head_top_z": 1.46
+  },
+  "notes": [
+   "L arm pole turned +10 deg (shoulder roll -63, forearm roll -32)",
+   "R arm pole turned -10 deg (shoulder roll 63, forearm roll 32)"
+  ],
+  "blender_bvh_import_max_err_m": 4e-05
+ },
+ "pit_mast": {
+  "doc": "Standing against the mast, arms raised above the head, wrists tied together.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hand_pose": 3,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0024,
+   "bvh_vs_anim_max_err_deg": 0.0024
+  },
+  "target_miss_m": {
+   "L ankle": 0.0,
+   "R ankle": 0.0,
+   "L wrist": 0.002,
+   "R wrist": 0.002
+  },
+  "limbs_deg": {
+   "L upper arm roll": -35.5,
+   "L elbow bend": 3.6,
+   "L forearm roll": -31.6,
+   "L wrist bend": 17.9,
+   "L wrist roll": 0.0,
+   "L knee bend": 11.4,
+   "L thigh roll": -6.5,
+   "L shin roll": 0.7,
+   "L ankle": -2.5,
+   "R upper arm roll": 35.5,
+   "R elbow bend": 3.6,
+   "R forearm roll": 31.6,
+   "R wrist bend": 17.9,
+   "R wrist roll": 0.0,
+   "R knee bend": 11.7,
+   "R thigh roll": 6.5,
+   "R shin roll": -0.8,
+   "R ankle": -2.8
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    1.067
+   ],
+   "knees_z": [
+    0.533,
+    0.533
+   ],
+   "ankles_z": [
+    0.067,
+    0.067
+   ],
+   "toes_z": [
+    0.006,
+    0.006
+   ],
+   "wrists": [
+    [
+     0.129,
+     0.035,
+     1.964
+    ],
+    [
+     0.129,
+     -0.035,
+     1.964
+    ]
+   ],
+   "neck_z": 1.607,
+   "head_top_z": 1.821
+  },
+  "notes": [
+   "L arm pole turned +90 deg (shoulder roll -36, forearm roll -32)",
+   "R arm pole turned -90 deg (shoulder roll 36, forearm roll 32)",
+   "tied wrists at 1.97 m over the feet"
+  ],
+  "blender_bvh_import_max_err_m": 5e-05
+ },
+ "pit_scribe": {
+  "doc": "Sitting at the desk writing: right hand on the page, left hand holding it.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hand_pose": 9,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0023,
+   "bvh_vs_anim_max_err_deg": 0.0023
+  },
+  "target_miss_m": {
+   "R wrist": 0.0,
+   "L wrist": 0.0
+  },
+  "limbs_deg": {
+   "L upper arm roll": 6.7,
+   "L elbow bend": 74.1,
+   "L forearm roll": 4.7,
+   "L wrist bend": 19.8,
+   "L wrist roll": 0.0,
+   "L knee bend": 80.6,
+   "L thigh roll": -1.1,
+   "L shin roll": 4.7,
+   "L ankle": 9.5,
+   "R upper arm roll": 6.9,
+   "R elbow bend": 81.7,
+   "R forearm roll": 1.0,
+   "R wrist bend": 27.1,
+   "R wrist roll": 0.0,
+   "R knee bend": 80.6,
+   "R thigh roll": 0.7,
+   "R shin roll": -4.9,
+   "R ankle": 9.5
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    1.067
+   ],
+   "knees_z": [
+    0.994,
+    0.994
+   ],
+   "ankles_z": [
+    0.528,
+    0.528
+   ],
+   "toes_z": [
+    0.468,
+    0.468
+   ],
+   "wrists": [
+    [
+     0.4,
+     0.21,
+     1.382
+    ],
+    [
+     0.4,
+     -0.1,
+     1.387
+    ]
+   ],
+   "neck_z": 1.594,
+   "head_top_z": 1.764
+  },
+  "notes": [
+   "R arm pole turned -20 deg (shoulder roll 7, forearm roll 1)",
+   "L arm pole turned +45 deg (shoulder roll 7, forearm roll 5)"
+  ],
+  "blender_bvh_import_max_err_m": 2e-05
+ },
+ "pit_guard": {
+  "doc": "Sitting relaxed at the table, leaning on the right elbow, legs apart.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "hand_pose": 9,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0028,
+   "bvh_vs_anim_max_err_deg": 0.0028
+  },
+  "target_miss_m": {
+   "L wrist": 0.036
+  },
+  "limbs_deg": {
+   "L upper arm roll": 12.0,
+   "L elbow bend": 3.6,
+   "L forearm roll": 9.9,
+   "L wrist bend": 46.7,
+   "L wrist roll": 0.0,
+   "L knee bend": 65.3,
+   "L thigh roll": -27.0,
+   "L shin roll": 3.6,
+   "L ankle": 21.2,
+   "R upper arm roll": 63.8,
+   "R elbow bend": 105.7,
+   "R forearm roll": 8.7,
+   "R wrist bend": 0.4,
+   "R wrist roll": 0.0,
+   "R knee bend": 83.8,
+   "R thigh roll": 10.9,
+   "R shin roll": -5.2,
+   "R ankle": 6.8
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    1.067
+   ],
+   "knees_z": [
+    0.973,
+    0.995
+   ],
+   "ankles_z": [
+    0.527,
+    0.528
+   ],
+   "toes_z": [
+    0.467,
+    0.468
+   ],
+   "wrists": [
+    [
+     0.29,
+     0.246,
+     1.127
+    ],
+    [
+     0.349,
+     -0.181,
+     1.535
+    ]
+   ],
+   "neck_z": 1.577,
+   "head_top_z": 1.784
+  },
+  "notes": [
+   "L arm pole turned +10 deg (shoulder roll 12, forearm roll 10)",
+   "table top 0.35 m over the seat (model: 0.34)"
+  ],
+  "blender_bvh_import_max_err_m": 2e-05
+ },
+ "pit_winch": {
+  "doc": "Standing, slightly crouched, both hands forward at waist height on the winch handle.",
+  "pelvis_offset_m": [
+   0.0,
+   0.0,
+   -0.07
+  ],
+  "hand_pose": 3,
+  "anim_bytes": 790,
+  "roundtrip": {
+   "anim_max_err_deg": 0.0027,
+   "bvh_vs_anim_max_err_deg": 0.0027
+  },
+  "target_miss_m": {
+   "L ankle": 0.0,
+   "R ankle": 0.0,
+   "L wrist": 0.0,
+   "R wrist": 0.0
+  },
+  "limbs_deg": {
+   "L upper arm roll": 18.3,
+   "L elbow bend": 7.3,
+   "L forearm roll": 15.9,
+   "L wrist bend": 18.4,
+   "L wrist roll": 0.0,
+   "L knee bend": 41.2,
+   "L thigh roll": -7.1,
+   "L shin roll": 2.2,
+   "L ankle": -6.5,
+   "R upper arm roll": -18.3,
+   "R elbow bend": 7.3,
+   "R forearm roll": -15.9,
+   "R wrist bend": 18.4,
+   "R wrist roll": 0.0,
+   "R knee bend": 35.1,
+   "R thigh roll": 8.2,
+   "R shin roll": -2.0,
+   "R ankle": -29.7
+  },
+  "contacts_ground_m": {
+   "pelvis": [
+    0.0,
+    0.0,
+    0.997
+   ],
+   "knees_z": [
+    0.529,
+    0.458
+   ],
+   "ankles_z": [
+    0.067,
+    0.067
+   ],
+   "toes_z": [
+    0.006,
+    0.006
+   ],
+   "wrists": [
+    [
+     0.34,
+     0.11,
+     1.05
+    ],
+    [
+     0.34,
+     -0.11,
+     1.05
+    ]
+   ],
+   "neck_z": 1.519,
+   "head_top_z": 1.731
+  },
+  "notes": [
+   "L arm pole turned +35 deg (shoulder roll 18, forearm roll 16)",
+   "R arm pole turned -35 deg (shoulder roll -18, forearm roll -16)"
+  ],
+  "blender_bvh_import_max_err_m": 5e-05
+ }
+}

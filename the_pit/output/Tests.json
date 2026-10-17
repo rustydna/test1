@@ -1,0 +1,19 @@
+{
+ "same_objects_in_every_level": true,
+ "no_images_or_textures": true,
+ "valid_indices": true,
+ "lod_materials_within_high": true,
+ "fixed_pbr_faces": true,
+ "same_bbox_every_level": true,
+ "no_degenerate_triangles": true,
+ "footprint_within_half_parcel": true,
+ "estimated_land_impact_under_target": true,
+ "prim_physics_pieces_not_below_half_metre": true,
+ "fire_pieces_centred_on_flame": true,
+ "circulation_with_and_without_scripts": true,
+ "lsl_scripts_consistent_with_model": true,
+ "every_feature_can_be_switched_off": true,
+ "lsl_scripts_compile_and_are_english": true,
+ "pose_animations_are_looping_sl_anims": true,
+ "story_details_keep_every_piece_bounds": true
+}

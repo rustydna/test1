@@ -1,0 +1,47 @@
+THE VILLA - INSTALL IN SECOND LIFE
+==================================
+Unzip Villa_SL_A_models_and_scripts.zip and Villa_SL_B_bulk_upload.zip into the same folder.
+You get: 1_models, 2_bulk_upload, 3_scripts.
+
+What you get: the Villa Core (36 x 36 m plinth, infinity pool with spa, sun loungers, round
+daybed, fire-pit lounge, olive trees, garden lights and the Core totem) plus three houses it
+turns into from a menu: NAUTILUS (white shell dome), DUNE (sand roof over an olive courtyard)
+and NOCTURNE (dark dome, glowing bar). All mesh, PBR. About 90 LI for the Core + 115-136 LI
+for the house that is out (one at a time): about 225 LI in total.
+
+1. MODELS - four uploads (Build > Upload > Model...)
+   Pick 1_models/Villa_Core.dae. The LOD and physics files (_LOD2, _LOD1, _LOD0, _PHYS) load by
+   themselves: keep them together. Scale 1.0. "Calculate weights & fee", then "Upload".
+   Do the same with Nautilus.dae, Dune.dae and Nocturne.dae. Keep those names (the Core uses
+   them to pick each house's default materials).
+
+2. MATERIALS, SOUNDS, POSES - one upload
+   Build > Upload > Bulk... > open 2_bulk_upload > Ctrl+A > Open > Upload.
+   Everything is called villa_...
+
+3. THE TWO SCRIPTS - make them once in your inventory
+   Inventory > + > New Script. Rename it  villa_house  , open it, Ctrl+A, paste
+   3_scripts/villa_house.lsl, Save. Again for  villa_core  with 3_scripts/villa_core.lsl.
+
+4. THE CORE
+   Rez "Villa_Core" where you want the villa (the whole plot comes with it; rotate it as you like).
+   Right-click > Edit > Contents tab. In your inventory type  villa_  in the search box, select
+   everything (click the first, Shift+click the last) and drag it all onto the Contents tab.
+
+5. EACH HOUSE (Nautilus, Dune, Nocturne)
+   Rez it anywhere, Edit > Contents, drag the same villa_ selection onto it, close, then
+   right-click > Take. (A stray villa_core inside a house deletes itself.)
+   Finally select the three houses in your inventory and drag them onto the Core's Contents.
+
+Done. Touch the Core totem (or any part of the villa): Houses > pick one. It appears in place
+with its own materials. The other menus change everything live, on the house and the plot:
+   Style     walls, floors, wood, stone, fabric, metal, glass, LED, pool water (35 PBR materials)
+   Fabric    upholstery colour (12 tints)
+   Lights    Day, Golden, Evening, Night, Party, Off; LED colour; brighter/dimmer
+   Pool      water (turquoise, lagoon, black mirror), pool light colours, spa bubbles
+   Ambience  garden, night, rain on glass, surf, chimes, lounge music, pool, fire; volume; fire on/off
+   Doors     open/close (or touch a door)
+   Settings  chat text on/off, sounds, particles, lights, access (owner/group/everyone),
+             move the house (fine/coarse), reset
+Sit on any sofa, chair, stool, lounger, bed or daybed; touch your seat to change pose.
+Chat: /88 menu   /88 help   /88 resend   /88 house dune

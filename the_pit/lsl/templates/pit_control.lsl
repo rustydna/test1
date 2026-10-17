@@ -1,0 +1,572 @@
+// =====================================================================
+//  THE PIT - CONTROL (root prim): settings, PBR materials, tide & voices
+//
+//  SETTINGS. Every feature of The Pit can be switched on or off by the
+//  owner. The switches live in the object's linkset data (key "opts"):
+//  they take effect at once in every script, survive resets and travel
+//  with copies of the build.
+//    /7 settings            menu with every switch, by category
+//    /7 off fog             switch one feature off  (/7 on fog = back on)
+//    /7 status              list what is switched off
+//    /7 all on | /7 all off presets: everything on / everything off
+//    /7 lowlag              switch off the heavy eye-candy, keep the RP
+//    /7 help                every chat command of The Pit
+//  The owner also gets a "Settings" button in the throne menu.
+//
+//  PBR MATERIALS. Every piece has the same 8 materials. SL sorts mesh faces
+//  alphabetically by material name, so the face numbers are:
+//    English upload:  0 Bone · 1 Cloth · 2 Flame · 3 Floor · 4 Iron · 5 Stone · 6 Straw · 7 Wood
+//    first release:   0 Iron · 1 Bone · 2 Flame · 3 Wood · 4 Straw · 5 Stone · 6 Floor · 7 Cloth
+//  (water: P_Water, C04_Water). The script tells the two apart by the
+//  uploaded face colours. Drop the PBR materials into the root's Contents:
+//  they are applied at once to every piece, each to the block whose name it
+//  contains (Stone/Piedra, Floor/Suelo, Wood/Madera, Iron/Hierro,
+//  Cloth/Tela, Bone/Hueso, Straw/Paja, Water/Agua). Other names: add a
+//  notecard "materials" with lines like  Stone = <material name or UUID>
+//  (ready-made: lsl/materials_notecard.txt). /7 materials applies again.
+//  Face 2 (flame) belongs to the fire script.
+//
+//  TIDE AND VOICES. The channel water rises and falls a few centimetres;
+//  while people are around, now and then something is heard in the dark
+//  (text; plus a sound if SOUNDS has UUIDs or the Contents hold sounds
+//  whose names start with "ambient").
+//
+//  Switches: everything listed in /7 settings; this script reads
+//  auto_materials, tide, voices and sounds.
+// =====================================================================
+
+string OPTS;
+integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
+
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
+
+// ------------------------------------------------------------- settings
+// name, category, short description (keep descriptions under ~34 characters)
+list FEATURES = [
+    "fire",        0, "everything fire (master switch)",
+    "flames",      0, "particle flames",
+    "lights",      0, "light from torches and braziers",
+    "flicker",     0, "breathing, flickering light",
+    "glow",        0, "glow on the mesh flames",
+    "flipbook",    0, "animated mesh flames",
+    "smoke",       0, "smoke from the braziers",
+    "sparks",      0, "crackles and sparks",
+    "projectors",  0, "bar shadows (projector lights)",
+    "gusts",       0, "draughts when doors move",
+    "fog",         1, "sea fog, kennel mist, steam",
+    "drips",       1, "drips falling from the vaults",
+    "bursts",      1, "splash, brand sparks, clothes",
+    "moods",       1, "the Lord can change the mood",
+    "tide",        1, "the channel rises and falls",
+    "voices",      1, "whispers in the dark (chat)",
+    "sounds",      1, "fire, sea, wind, drip sounds",
+    "light_wells", 1, "moonlight through vault grates",
+    "caustics",    1, "sea light under the yard beams",
+    "dust",        1, "dust drifting in the light",
+    "doors",       2, "door, gate and portcullis menus",
+    "locks",       2, "locking with a personal key",
+    "sentences",   2, "timed sentences",
+    "escape",      2, "pick the lock (d20)",
+    "pleas",       2, "beg for mercy, rattle the bars",
+    "door_sounds", 2, "door sounds (if you add any)",
+    "bell",        2, "the press-gang bell",
+    "board",       2, "sentence board text",
+    "furniture",   3, "every furniture menu (master)",
+    "rack",        3, "the rack",
+    "stocks",      3, "pillory and stocks",
+    "cistern",     3, "the ducking chair",
+    "cages",       3, "the hanging cages",
+    "mast",        3, "the whipping mast",
+    "kennel",      3, "kennels and bowls",
+    "guardroom",   3, "dice table, laundry basket",
+    "kneeling",    3, "the kneeling stone",
+    "seats",       3, "sit positions and animations",
+    "throne",      4, "throne menu and Lord title",
+    "lord_keys",   4, "the Lord holds every key",
+    "judgement",   4, "sentencing from the throne",
+    "muster_book", 4, "the press-gang muster book",
+    "branding",    4, "the branding brazier",
+    "chat",        5, "ALL text in local chat (master)",
+    "narration",   5, "RP lines in local chat",
+    "hovertext",   5, "floating text",
+    "rename",      5, "auto-name pieces after upload",
+    "physics",     5, "auto physics shapes",
+    "diagnose",    5, "doorway test at start",
+    "auto_materials", 5, "auto-apply PBR materials",
+    "examine",     6, "lore when you touch a surface",
+    "carvings",    6, "players carve words, old graffiti",
+    "notes",       6, "letters and logs you can read",
+    "inmates",     6, "inmate records (master)",
+    "cell_signs",  6, "text over occupied cells",
+    "cell_life",   6, "prisoner chores, guard actions",
+    "routines",    6, "dawn, rations, roll call, tide"];
+
+list CATEGORIES = ["Fire & light", "Atmosphere", "Doors", "Rooms", "Throne", "System", "Prison life"];
+list LOWLAG = ["flicker", "smoke", "sparks", "projectors", "gusts", "fog", "drips", "tide", "voices", "dust", "caustics"];
+
+integer CH; integer LH; integer PAGE = -1; integer MENU_UNTIL;
+
+
+save()
+{
+    if (OPTS == ",") OPTS = "";
+    llLinksetDataWrite("opts", OPTS);   // an empty value deletes the key: everything on
+}
+
+integer known(string f)
+{
+    integer i = llListFindList(FEATURES, [f]);
+    return i != -1 && i % 3 == 0;
+}
+
+set(string f, integer value)
+{
+    if (value == opt(f)) return;
+    if (!value)
+    {
+        if (OPTS == "") OPTS = ",";
+        OPTS += f + ",";
+    }
+    else
+    {
+        integer i = llSubStringIndex(OPTS, "," + f + ",");
+        OPTS = llDeleteSubString(OPTS, i, i + llStringLength(f));
+    }
+}
+
+string status()
+{
+    if (OPTS == "") return "The Pit: every feature is ON.";
+    list off = llParseString2List(OPTS, [","], []);
+    return "The Pit - switched OFF: " + llDumpList2String(off, ", ") + ".";
+}
+
+help()
+{
+    llOwnerSay("THE PIT - owner commands (channel 7):\n"
+        + "/7 settings - switch any feature on or off\n"
+        + "/7 off <name> | /7 on <name> - e.g. /7 off fog\n"
+        + "/7 report - what every script found (send this to support if something fails)\n"
+        + "/7 status - what is switched off\n"
+        + "/7 off chat - silence every RP line in local chat (/7 on chat to bring them back)\n"
+        + "/7 all on | /7 all off | /7 lowlag - presets\n"
+        + "/7 doors - find the doors again | /7 doors reset - forget stored door poses\n"
+        + "/7 materials - apply the PBR materials now\n"
+        + "/7 seat up | down | forward | back | reset - while you sit, move that seat 5 cm (saved)\n"
+        + "/7 inmates | /7 inmate release <n> - prison records | /7 carvings | /7 carvings clear | /7 lore\n"
+        + "/7 diagnose - check that every doorway is clear\n"
+        + "Feature names: " + llDumpList2String(llList2ListStrided(FEATURES, 0, -1, 3), ", "));
+}
+
+menu(integer page)
+{
+    PAGE = page;
+    key k = llGetOwner();
+    llListenRemove(LH);
+    LH = llListen(CH, "", k, "");
+    MENU_UNTIL = llGetUnixTime() + 120;
+    if (page < 0)
+    {
+        llDialog(k, "THE PIT - SETTINGS\nChoose a category. Every switch is saved in the build.\n\n" + status(),
+                 CATEGORIES + ["All ON", "All OFF", "Low lag", "Status", "Close"], CH);
+        return;
+    }
+    string txt = "THE PIT - " + llList2String(CATEGORIES, page) + "\n[+] on   [-] off   (tap to switch)\n";
+    list b = [];
+    integer i;
+    for (i = 0; i < llGetListLength(FEATURES); i += 3)
+        if (llList2Integer(FEATURES, i + 1) == page)
+        {
+            string f = llList2String(FEATURES, i);
+            string mark = "[+] ";
+            if (!opt(f)) mark = "[-] ";
+            b += mark + f;
+            txt += "\n" + mark + f + ": " + llList2String(FEATURES, i + 2);
+        }
+    llDialog(k, llGetSubString(txt, 0, 500), b + ["<< Back"], CH);
+}
+
+command(string m)
+{
+    m = llToLower(llStringTrim(m, STRING_TRIM));
+    list w = llParseString2List(m, [" "], []);
+    string a = llList2String(w, 0);
+    string f = llList2String(w, 1);
+    if (m == "settings" || m == "menu") { menu(-1); return; }
+    if (m == "help") { help(); return; }
+    if (m == "status") { llOwnerSay(status()); return; }
+    if (m == "all on") { OPTS = ""; save(); llOwnerSay("The Pit: every feature ON."); return; }
+    if (m == "all off")
+    {
+        integer i; OPTS = "";
+        for (i = 0; i < llGetListLength(FEATURES); i += 3) set(llList2String(FEATURES, i), FALSE);
+        save(); llOwnerSay("The Pit: every feature OFF (a still build). /7 all on to bring it back.");
+        return;
+    }
+    if (m == "lowlag")
+    {
+        integer i;
+        for (i = 0; i < llGetListLength(LOWLAG); ++i) set(llList2String(LOWLAG, i), FALSE);
+        save(); llOwnerSay(status());
+        return;
+    }
+    if ((a == "on" || a == "off") && f != "")
+    {
+        if (!known(f)) { llOwnerSay("Unknown feature \"" + f + "\". Type /7 help for the list."); return; }
+        set(f, a == "on");
+        save();
+        llOwnerSay("The Pit: " + f + " " + llToUpper(a) + ".");
+    }
+}
+
+// ------------------------------------------------------------- PBR materials
+list BLOCKS = ["Stone", "Floor", "Wood", "Iron", "Cloth", "Bone", "Straw", "Water"];
+// the same blocks under the names the first release used, so materials already uploaded
+// with those names are found without a notecard or a new upload
+list OLD_NAMES = ["piedra", "suelo", "madera", "hierro", "tela", "hueso", "paja", "agua"];
+list ASSIGN;   // [block, material]
+
+// SL sorts the faces of every uploaded mesh alphabetically by material name, so the face of
+// each block depends on the language of the upload:
+//   ThePit.dae (English):   0 Bone 1 Cloth 2 Flame 3 Floor 4 Iron 5 Stone 6 Straw 7 Wood
+//   first release (Spanish): 0 Iron 1 Bone 2 Flame 3 Wood 4 Straw 5 Stone 6 Floor 7 Cloth
+// Faces for Stone, Floor, Wood, Iron, Cloth, Bone, Straw:
+list FACES_EN = [5, 3, 7, 4, 1, 0, 6];
+list FACES_ES = [5, 6, 3, 0, 7, 1, 4];
+list FACES;
+
+// The upload keeps each material's colour: face 0 is light bone in the English upload and dark
+// iron in the Spanish one (face 4 the other way round). A few pieces vote.
+pick_faces()
+{
+    integer en = 0; integer es = 0; integer i;
+    integer n = llGetObjectPrimCount(llGetKey());
+    for (i = 2; i <= n && en + es < 9; i += 13)
+    {
+        if (llSubStringIndex(piece(i), "_Water") == -1)
+        {
+            list c = llGetLinkPrimitiveParams(i, [PRIM_COLOR, 0, PRIM_COLOR, 4]);
+            vector a = llList2Vector(c, 0); vector b = llList2Vector(c, 2);
+            if (a.x + a.y + a.z >= b.x + b.y + b.z) ++en; else ++es;
+        }
+    }
+    if (es > en) { FACES = FACES_ES; llLinksetDataWrite("faces", "es"); }
+    else { FACES = FACES_EN; llLinksetDataWrite("faces", "en"); }
+}
+key Q; integer LINE;
+
+// inventory types that are NOT materials (anything else is taken as a material)
+integer not_material(integer t)
+{
+    return t == INVENTORY_SCRIPT || t == INVENTORY_NOTECARD || t == INVENTORY_TEXTURE
+        || t == INVENTORY_ANIMATION || t == INVENTORY_SOUND || t == INVENTORY_OBJECT
+        || t == INVENTORY_LANDMARK || t == INVENTORY_CLOTHING || t == INVENTORY_BODYPART
+        || t == INVENTORY_GESTURE || t == INVENTORY_SETTING || t == INVENTORY_NONE;
+}
+
+by_name()
+{
+    // each block gets the first material whose name contains the block's name
+    ASSIGN = [];
+    integer n = llGetInventoryNumber(INVENTORY_ALL);
+    integer b;
+    for (b = 0; b < llGetListLength(BLOCKS); ++b)
+    {
+        string block = llList2String(BLOCKS, b);
+        integer i;
+        for (i = 0; i < n; ++i)
+        {
+            string it = llGetInventoryName(INVENTORY_ALL, i);
+            string low = llToLower(it);
+            if (!not_material(llGetInventoryType(it))
+                && (llSubStringIndex(low, llToLower(block)) != -1
+                    || llSubStringIndex(low, llList2String(OLD_NAMES, b)) != -1)
+                && llListFindList(ASSIGN, [block]) == -1)
+                ASSIGN += [block, it];
+        }
+    }
+    apply();
+}
+
+start()
+{
+    if (llGetInventoryType("materials") == INVENTORY_NOTECARD)
+    {
+        ASSIGN = []; LINE = 0;
+        Q = llGetNotecardLine("materials", LINE);
+    }
+    else by_name();
+}
+
+apply()
+{
+    if (ASSIGN == [])
+    {
+        llOwnerSay("pit_control: no PBR materials in the root's Contents yet. Drop the 8 uploaded materials "
+            + "(Stone, Floor, Wood, Iron, Cloth, Bone, Straw, Water) into the Contents tab of the ROOT prim.");
+        return;
+    }
+    pick_faces();
+    integer n = llGetObjectPrimCount(llGetKey());
+    integer link; integer done = 0;
+    for (link = 1; link <= n; ++link)
+    {
+        string nm = piece(link);
+        list rules = [];
+        if (llSubStringIndex(nm, "_Water") != -1)
+        {
+            integer j = llListFindList(ASSIGN, ["Water"]);
+            if (j != -1) rules = [PRIM_RENDER_MATERIAL, ALL_SIDES, llList2String(ASSIGN, j + 1)];
+        }
+        else
+        {
+            integer c;
+            for (c = 0; c < 7; ++c)
+            {
+                integer j = llListFindList(ASSIGN, [llList2String(BLOCKS, c)]);
+                if (j != -1) rules += [PRIM_RENDER_MATERIAL, llList2Integer(FACES, c), llList2String(ASSIGN, j + 1)];
+            }
+            rules += [PRIM_RENDER_MATERIAL, 2, NULL_KEY];   // face 2 is the flame: no PBR there
+        }
+        if (rules != []) { llSetLinkPrimitiveParamsFast(link, rules); ++done; }
+    }
+    string summary = "";
+    integer b;
+    for (b = 0; b < llGetListLength(BLOCKS); ++b)
+    {
+        string block = llList2String(BLOCKS, b);
+        integer j = llListFindList(ASSIGN, [block]);
+        if (j == -1) summary += block + ": MISSING  ";
+        else summary += block + " = " + llList2String(ASSIGN, j + 1) + "  ";
+    }
+    llOwnerSay("pit_control: materials applied to " + (string)done + " pieces (" + llLinksetDataRead("faces")
+        + " face order). " + summary);
+}
+
+// ------------------------------------------------------------- tide and voices
+float PERIOD = 600.0;        // seconds for one full tide
+float AMPLITUDE = 0.035;     // metres
+float VOICE_MIN = 150.0;     // seconds between voices (minimum and maximum)
+float VOICE_MAX = 420.0;
+list  SOUNDS = [];           // optional ambient sound UUIDs
+
+list VOICES = [
+    "Something drags a chain through the dark at the far end. Then silence.",
+    "From the Cistern comes the gurgle of water... and something like a cough.",
+    "An icy drop falls from the vault, right on the back of your neck.",
+    "In the Cages, the skeleton's cage turns by itself, squealing, though there is no wind.",
+    "Someone whispers a recruit number. Nobody said it.",
+    "The torches all lean at once, as if something had crossed the yard.",
+    "Far away, beyond the walls, a wave breaks on the rock. The whole Pit trembles for a moment.",
+    "The rats fall silent all at once.",
+    "A smell of salt, rot and iron rises from the channel.",
+    "A dull thud in the Kennel, then a stifled laugh.",
+    "A skull rolls on its own in the Cages and stops, staring at you.",
+    "The portcullis creaks in its groove, as if someone outside were testing it.",
+    "For a moment the fog over the channel draws the shape of a man on his knees.",
+    "The chains of the hanged man on the first beam jingle. There is no wind.",
+    "A dog barks in the Kennel. No real dog lives here.",
+    "Someone has carved into the stone beside a grille: DO NOT LOOK AT THE THRONE."];
+
+integer WATER;
+float T0;
+vector BASE;
+float NEXT;
+
+integer link_of(string name)
+{
+    integer n = llGetObjectPrimCount(llGetKey());
+    integer i;
+    for (i = 1; i <= n; ++i) if (piece(i) == name) return i;
+    return -1;
+}
+
+list sounds()
+{
+    list s = SOUNDS;
+    integer n = llGetInventoryNumber(INVENTORY_SOUND);
+    integer i;
+    for (i = 0; i < n; ++i)
+    {
+        string nm = llGetInventoryName(INVENTORY_SOUND, i);
+        if ((llSubStringIndex(nm, "ambient") == 0 || llSubStringIndex(nm, "pit_ambient") == 0)
+            && llSubStringIndex(nm, "wind") == -1) s += nm;      // the wind is a loop played at the gate
+    }
+    return s;
+}
+
+key VQ; key VQ2; integer VLINE; list VOICE_IDX;   // line numbers of the VOICE records of pit_lore
+
+scan_voices()
+{
+    VOICE_IDX = []; VLINE = 0;
+    if (llGetInventoryType("pit_lore") == INVENTORY_NOTECARD) VQ = llGetNotecardLine("pit_lore", 0);
+}
+
+whisper(string s)
+{
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
+    string before = llGetObjectName();
+    llSetObjectName("In the dark");
+    llSay(0, s);
+    llSetObjectName(before);
+}
+
+find_water()
+{
+    WATER = link_of("P_Water");
+    if (WATER > 1) BASE = llList2Vector(llGetLinkPrimitiveParams(WATER, [PRIM_POS_LOCAL]), 0);
+}
+
+// tide and voices, every 8 s
+ambience()
+{
+    float t = llGetTime() - T0;
+    if (WATER > 1 && opt("tide"))
+        llSetLinkPrimitiveParamsFast(WATER, [PRIM_POS_LOCAL,
+            BASE + <0.0, 0.0, AMPLITUDE * llSin(TWO_PI * t / PERIOD)>]);
+    if (t > NEXT)
+    {
+        NEXT = t + VOICE_MIN + llFrand(VOICE_MAX - VOICE_MIN);
+        if (opt("voices") && llGetListLength(llGetAgentList(AGENT_LIST_PARCEL, [])) > 0)
+        {
+            // the voices of the pit_lore notecard if there is one, the built-in ones otherwise
+            if (VOICE_IDX != [])
+                VQ2 = llGetNotecardLine("pit_lore", llList2Integer(VOICE_IDX, (integer)llFrand(llGetListLength(VOICE_IDX))));
+            else whisper(llList2String(VOICES, (integer)llFrand(llGetListLength(VOICES))));
+            list s = sounds();
+            if (opt("sounds") && s != []) llTriggerSound(llList2String(s, (integer)llFrand(llGetListLength(s))), 0.6);
+        }
+    }
+}
+
+default
+{
+    state_entry()
+    {
+        CH = -1 - (integer)llFrand(1000000.0);
+        OPTS = llLinksetDataRead("opts");
+        llListen(7, "", llGetOwner(), "");
+        find_water();
+        T0 = llGetTime();
+        NEXT = VOICE_MIN + llFrand(VOICE_MAX - VOICE_MIN);
+        llSetTimerEvent(8.0);
+        if (opt("auto_materials")) start();
+        scan_voices();
+    }
+    on_rez(integer p) { llResetScript(); }
+    changed(integer c)
+    {
+        if (c & CHANGED_OWNER) llResetScript();
+        if ((c & CHANGED_INVENTORY) && opt("auto_materials")) start();
+        if (c & CHANGED_INVENTORY) scan_voices();
+    }
+
+    linkset_data(integer action, string name, string value)
+    {
+        if (name == "opts" || action == LINKSETDATA_RESET)
+        {
+            OPTS = llLinksetDataRead("opts");
+            if (WATER > 1 && !opt("tide")) llSetLinkPrimitiveParamsFast(WATER, [PRIM_POS_LOCAL, BASE]);
+        }
+    }
+
+    link_message(integer s, integer n, string str, key id)
+    {
+        if (n == 9700 && id == llGetOwner()) menu(-1);
+        else if (n == 9001) { find_water(); if (opt("auto_materials")) start(); }   // pieces renamed: water needs its own material
+        else if (n == 9800)
+        {
+            llOwnerSay("pit_control: " + status() + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+            start();
+        }
+    }
+
+    listen(integer c, string n, key id, string m)
+    {
+        if (c == 7)
+        {
+            if (m == "materials") start();
+            else if (m == "report") llMessageLinked(LINK_SET, 9800, "report", NULL_KEY);
+            else command(m);
+            return;
+        }
+        if (m == "Close") { llListenRemove(LH); return; }
+        if (m == "<< Back") { menu(-1); return; }
+        if (m == "Status") { llOwnerSay(status()); menu(-1); return; }
+        if (m == "All ON") { command("all on"); menu(-1); return; }
+        if (m == "All OFF") { command("all off"); menu(-1); return; }
+        if (m == "Low lag") { command("lowlag"); menu(-1); return; }
+        integer cat = llListFindList(CATEGORIES, [m]);
+        if (cat != -1) { menu(cat); return; }
+        string f = llGetSubString(m, 4, -1);
+        if (known(f))
+        {
+            set(f, !opt(f));
+            save();
+            menu(PAGE);
+        }
+    }
+
+    dataserver(key id, string d)
+    {
+        if (id == VQ)
+        {
+            if (d == EOF) return;
+            if (llSubStringIndex(d, "VOICE|") == 0) VOICE_IDX += VLINE;
+            VQ = llGetNotecardLine("pit_lore", ++VLINE);
+            return;
+        }
+        if (id == VQ2)
+        {
+            if (llSubStringIndex(d, "VOICE|") == 0) whisper(llGetSubString(d, 6, -1));
+            return;
+        }
+        if (id != Q) return;
+        if (d == EOF)
+        {
+            if (ASSIGN == []) by_name(); else apply();
+            return;
+        }
+        list p = llParseString2List(d, ["="], []);
+        if (llGetListLength(p) == 2)
+        {
+            // block names in any case; material by exact name, UUID or part of its name
+            string blk = llToLower(llStringTrim(llList2String(p, 0), STRING_TRIM));
+            string want = llStringTrim(llList2String(p, 1), STRING_TRIM);
+            integer b; integer found = -1;
+            for (b = 0; b < llGetListLength(BLOCKS); ++b) if (llToLower(llList2String(BLOCKS, b)) == blk) found = b;
+            string mat = "";
+            integer is_uuid = FALSE;
+            if ((key)want) is_uuid = TRUE;
+            if (is_uuid || (llGetInventoryType(want) != INVENTORY_NONE && !not_material(llGetInventoryType(want)))) mat = want;
+            else
+            {
+                integer i;
+                for (i = 0; i < llGetInventoryNumber(INVENTORY_ALL) && mat == ""; ++i)
+                {
+                    string it = llGetInventoryName(INVENTORY_ALL, i);
+                    if (!not_material(llGetInventoryType(it)) && llSubStringIndex(llToLower(it), llToLower(want)) != -1) mat = it;
+                }
+            }
+            if (found != -1 && mat != "") ASSIGN += [llList2String(BLOCKS, found), mat];
+            else if (llStringTrim(d, STRING_TRIM) != "") llOwnerSay("pit_control: materials notecard line not usable: " + d);
+        }
+        Q = llGetNotecardLine("materials", ++LINE);
+    }
+
+    timer()
+    {
+        if (LH && llGetUnixTime() > MENU_UNTIL) { llListenRemove(LH); LH = 0; }
+        ambience();
+    }
+}

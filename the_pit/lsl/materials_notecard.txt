@@ -1,0 +1,8 @@
+Stone = Stone
+Floor = Floor
+Wood = Wood
+Iron = Iron
+Cloth = Cloth
+Bone = Bone
+Straw = Straw
+Water = Water
