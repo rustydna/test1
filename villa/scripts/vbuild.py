@@ -152,6 +152,8 @@ def phys_shape(pc, high, lowest, mn, mx):
                 bm.free()
         elif item[0] == "slab":
             g.join(M.extrude(item[1], item[2], item[3], "a_plaster"))
+        elif item[0] == "mesh":                 # any Shape (e.g. a decimated copy of a cave wall)
+            g.join(item[1])
     g.set_slot("a_plaster")
     return g
 
