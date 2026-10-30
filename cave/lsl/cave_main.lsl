@@ -11,15 +11,16 @@ list SEATS = [
     "Cave_Fur_1", <-0.034, -0.003, 0.020>, 355.0, "cave_sit_curl,cave_sit_crossed",
     "Cave_Fur_2", <-0.026, -0.018, 0.020>, 115.0, "cave_sit_curl,cave_sit_crossed",
     "Cave_Fur_3", <-0.027, -0.001, 0.020>, 235.0, "cave_sit_curl,cave_sit_crossed",
-    "Cave_Bed_1", <0.094, -0.292, 0.164>, 110.0, "cave_lounge,cave_sit_curl,cave_sit_relaxed",
-    "Cave_Bed_2", <-0.009, -0.296, 0.164>, 90.0, "cave_lounge,cave_sit_curl,cave_sit_relaxed",
-    "Cave_Bed_3", <-0.087, -0.279, 0.164>, 70.0, "cave_lounge,cave_sit_curl,cave_sit_relaxed",
+    "Cave_Bed_1", <0.095, -0.299, 0.148>, 110.0, "cave_lounge,cave_sit_curl,cave_sit_relaxed",
+    "Cave_Bed_2", <-0.011, -0.295, 0.148>, 90.0, "cave_lounge,cave_sit_curl,cave_sit_relaxed",
+    "Cave_Bed_3", <-0.093, -0.282, 0.148>, 70.0, "cave_lounge,cave_sit_curl,cave_sit_relaxed",
+    "Cave_Den_Rug", <-0.032, -0.006, 0.020>, 280.0, "cave_sit_curl,cave_sit_crossed,cave_lounge",
     "Cave_Spring_Seat_1", <0.005, -0.242, 0.097>, 90.0, "cave_sit_relaxed,cave_lounge",
     "Cave_Spring_Seat_2", <-0.005, 0.242, 0.097>, 270.0, "cave_sit_relaxed,cave_lounge",
     "Cave_Raft", <0.000, 0.000, 0.056>, 270.0, "cave_sit_crossed,cave_lounge",
-    "Cave_Altar", <0.000, -0.950, -0.560>, 270.0, "cave_kneel"];
+    "Cave_Altar", <0.000, -0.725, -0.590>, 270.0, "cave_kneel"];
 list POSE_FIT = ["cave_kneel", 0.0, 0.717, "cave_sit_relaxed", 0.104, -0.227, "cave_sit_upright", 0.125, -0.237, "cave_sit_crossed", 0.110, -0.225, "cave_sit_curl", 0.102, -0.211, "cave_lounge", 0.042, -0.225];
-list NO_PHYS = ["Cave_Lake", "Cave_Waterfall", "Cave_Fur_1", "Cave_Fur_2", "Cave_Fur_3", "Cave_Spring", "Cave_Spring_Water", "Cave_Spring_Seat_1", "Cave_Spring_Seat_2", "Cave_Torch_1", "Cave_Torch_2", "Cave_Torch_3", "Cave_Torch_4", "Cave_Torch_5", "Cave_Torch_7", "Cave_Torch_8", "Cave_Torch_9", "Cave_Torch_10", "Cave_Torch_11", "Cave_Torch_12"];
+list NO_PHYS = ["Cave_Lake", "Cave_Waterfall", "Cave_Fur_1", "Cave_Fur_2", "Cave_Fur_3", "Cave_Den_Fire", "Cave_Den_Rug", "Cave_Spring", "Cave_Spring_Water", "Cave_Spring_Seat_1", "Cave_Spring_Seat_2", "Cave_Torch_1", "Cave_Torch_2", "Cave_Torch_3", "Cave_Torch_4", "Cave_Torch_5", "Cave_Torch_7", "Cave_Torch_8", "Cave_Torch_9", "Cave_Torch_10", "Cave_Torch_11", "Cave_Torch_12"];
 list SLOTS = ["a_plaster", "b_floor", "c_wood", "d_stone", "e_fabric", "f_metal", "g_glass", "h_glow", "water"];
 list SLOT_LABELS = ["Rock", "Ground", "Wood", "Moss", "Fur", "Metal", "Crystal", "Glow", "Water"];
 list DEFAULT_MATS = ["limestone", "earth", "timber", "wet", "fur_brown", "iron", "amethyst", "embers", "teal"];
@@ -125,7 +126,8 @@ scan()
             ROCKS += l;
             phys += [PRIM_LINK_TARGET, l, PRIM_PHYSICS_SHAPE_TYPE, PRIM_PHYSICS_SHAPE_PRIM];
         }
-        else if (nm == "Cave_Hearth" || llSubStringIndex(nm, "Cave_Torch_") == 0 || nm == "Cave_Altar") FIRES += l;
+        else if (nm == "Cave_Hearth" || llSubStringIndex(nm, "Cave_Torch_") == 0 || nm == "Cave_Altar"
+                 || nm == "Cave_Den_Fire") FIRES += l;
         else if (llSubStringIndex(nm, "Cave_Crystals_") == 0) CRYSTALS += l;
         else if (nm == "Cave_Lake" || nm == "Cave_Waterfall" || nm == "Cave_Spring_Water") WATERS += l;
         if (llListFindList(NO_PHYS, [nm]) >= 0 || llListFindList(WATERS, [l]) >= 0)

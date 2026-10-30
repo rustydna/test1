@@ -610,9 +610,9 @@ def _norm(x):
 def planks(rng, width, spacing, butt_p=0.45, wob=0.0003):
     """Planking along U, planks exactly `width` m wide with their seams on V = (k + 1/2) * width / T
     (slots planked at the same width line up in world space: the 0.25 m strakes of hull and
-    trim, seams at 0.125 + 0.25 k m), frames or beams every `spacing` m on U = (j + 0.5) * spacing / T (world-aligned
-    too). A share butt_p of the planks butts on a frame line, never on the line of the plank
-    beside it; the others run the whole repeat. Returns a dict: Y (m below the plank's upper
+    trim, seams at 0.125 + 0.25 k m), frames or beams every `spacing` m on
+    U = (j + 0.5) * spacing / T (world-aligned too). A share butt_p of the planks butts on a
+    frame line, never on the line of the plank beside it; the others run the whole repeat. Returns a dict: Y (m below the plank's upper
     seam), pw (m), row, n, vloc, dside (m to the long seams), dbutt (m to the butt, 9 when
     none), xl, sl (m along the plank from its butt, length), loop (planks without a butt),
     fu (frame lines, repeats), butts {row: frame}."""
@@ -960,7 +960,7 @@ def gilt(leaf, wear=0.25, grime=0.3, tarnish=0.0, rough0=0.22):
         px = T / N
         hf, _ = broken_rock(rng, [(0.07, 0.03, 0.0002, 5.0), (0.025, 0.02, 0.0001, 2.5)], warp=0.25)
         h = 0.0012 * nm(rng, 0.5, 0.05, 1.8) + hf
-        hn = 0.5 * _norm(h) + 0.9 * nm(rng, 0.12, 0.01, 1.4)       # high spots: rubbed, low: grime
+        hn = 0.5 * _norm(h) + 0.9 * nm(rng, 0.2, 0.012, 1.7)       # high spots: rubbed, low: grime
         k = 12
         wu, wv = warp_uv(rng, 0.002, 0.3, 0.03)
         gv = wv * k
@@ -972,14 +972,14 @@ def gilt(leaf, wear=0.25, grime=0.3, tarnish=0.0, rough0=0.22):
         de = np.minimum(np.minimum(lu, 1 - lu), np.minimum(lv, 1 - lv)) * T / k
         lap = np.exp(-(de / 0.0009) ** 2)
         ltone = rng.random(k * k)[lid] - 0.5
-        skips = _s(nm(rng, 0.01, px, 0.5), 2.5, 3.1) * (0.4 + 0.6 * lap)
+        skips = _s(nm(rng, 0.01, px, 0.5), 3.0, 3.5) * (0.3 + 0.7 * lap)
         f1, edge, _, _, _ = voronoi(rng, 50, *warp_uv(rng, 0.005, 0.08, 0.01), 0.9)
         craq = (1 - _s(edge, 0.0, 0.03)) * _s(nm(rng, 0.5, 0.05, 1.4), 0.3, 1.6)
-        wn = nm(rng, 0.06, 0.003, 1.1)
+        wn = 0.6 * nm(rng, 0.06, 0.003, 1.1)
         thr = 3.0 - 2.4 * wear
         rub = _s(0.8 * hn + wn, thr, thr + 0.5)
         deep = _s(0.8 * hn + wn, thr + 1.0, thr + 1.3)
-        dirt = _s(-hn + 0.4 * nm(rng, 0.1, 0.01, 1.4), 1.0 - 0.8 * grime, 3.0 - 0.8 * grime) * (0.35 + 0.5 * grime)
+        dirt = _s(-hn, 0.3, 2.6) * (0.25 + 0.45 * grime)
         bare = np.clip(rub + skips, 0, 1)
         gold = _mul(_rgb(leaf), 1.0 + 0.04 * ltone + 0.03 * nm(rng, 0.3, 0.02, 1.3) + 0.03 * lap)
         if tarnish:
@@ -988,7 +988,7 @@ def gilt(leaf, wear=0.25, grime=0.3, tarnish=0.0, rough0=0.22):
         color = _mix(gold, bole, bare)
         color = _mix(color, (0.80, 0.76, 0.66), deep)
         dk = np.clip(dirt + craq * (0.12 + 0.3 * bare), 0, 1)
-        color = _mix(color, (0.20, 0.14, 0.08), dk)
+        color = _mix(color, (0.30, 0.21, 0.11), dk)
         metal = (1 - bare) * (1 - deep) * (1 - dk)
         burn = _s(hn, 0.0, 1.5)                                        # burnished high spots
         rough = _mix(rough0 + 0.08 * (1 - burn) - 0.05 * burn + 0.06 * lap, 0.6, bare)
@@ -1034,7 +1034,8 @@ def sailcloth(base, mottle=0.04, weather=0.0, mildew=0.0, fade=0.0, tar=5, stitc
         if weather:
             wb = _s(nm(rng, 0.8, 0.04, 1.5), -0.6, 2.2) * weather
             color = _mix(color, _mul(color, 0.82) * np.array([1.0, 0.97, 0.9]), wb)
-            runs = _s(nm(rng, 0.5, 0.006, 1.0, aniso=12, ang=math.pi / 2), 1.2, 2.6) * _s(nm(rng, 1.0, 0.1, 1.5), 0.0, 1.2)
+            runs = (_s(nm(rng, 0.5, 0.006, 1.0, aniso=12, ang=math.pi / 2), 1.2, 2.6)
+                    * _s(nm(rng, 1.0, 0.1, 1.5), 0.0, 1.2))
             color = _mix(color, (0.45, 0.33, 0.20), runs * 0.35 * weather)
         if mildew:
             md = _s(nm(rng, 0.006, px, 0.5), 2.0, 2.9) * _s(nm(rng, 0.5, 0.05, 1.4), 0.4, 1.6) * mildew
@@ -1337,7 +1338,8 @@ LIB = {
                                                       rough0=0.36)),
     ],
     "e_fabric": [
-        dict(id="canvas", label="Sailcloth", gen=sailcloth((0.86, 0.83, 0.75), mottle=0.025, weather=0.15, mildew=0.1, tar=3)),
+        dict(id="canvas", label="Sailcloth", gen=sailcloth((0.86, 0.83, 0.75), mottle=0.025, weather=0.15,
+                                                           mildew=0.1, tar=3)),
         dict(id="tan", label="Weathered canvas", gen=sailcloth((0.70, 0.62, 0.49), mottle=0.07, weather=0.8,
                                                               mildew=0.6, tar=8)),
         dict(id="black", label="Black sailcloth", gen=sailcloth((0.12, 0.115, 0.11), mottle=0.05, fade=0.6, tar=0,
@@ -1674,7 +1676,7 @@ def swatches(path, results):
     sheet = Image.new("RGB", (W, H), (27, 25, 23))
     d = ImageDraw.Draw(sheet)
     d.text((pad, pad - 6), "THE SECOND BRIDE  -  PBR material library", fill=(236, 226, 208), font=_font(26, True))
-    d.text((pad, pad + 28), "Swatch = one full repeat, softly lit. Glass and water shown over a checker at their alpha.",
+    d.text((pad, pad + 28), "Swatch = one full repeat, softly lit. Glass and water over a checker at their alpha.",
            fill=(150, 142, 130), font=_font(14))
     y = pad + 64
     by_slot = {}

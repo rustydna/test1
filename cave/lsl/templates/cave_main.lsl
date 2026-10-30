@@ -51,7 +51,8 @@ scan()
             ROCKS += l;
             phys += [PRIM_LINK_TARGET, l, PRIM_PHYSICS_SHAPE_TYPE, PRIM_PHYSICS_SHAPE_PRIM];
         }
-        else if (nm == "Cave_Hearth" || llSubStringIndex(nm, "Cave_Torch_") == 0 || nm == "Cave_Altar") FIRES += l;
+        else if (nm == "Cave_Hearth" || llSubStringIndex(nm, "Cave_Torch_") == 0 || nm == "Cave_Altar"
+                 || nm == "Cave_Den_Fire") FIRES += l;
         else if (llSubStringIndex(nm, "Cave_Crystals_") == 0) CRYSTALS += l;
         else if (nm == "Cave_Lake" || nm == "Cave_Waterfall" || nm == "Cave_Spring_Water") WATERS += l;
         if (llListFindList(NO_PHYS, [nm]) >= 0 || llListFindList(WATERS, [l]) >= 0)

@@ -235,25 +235,43 @@ def lake(lod):
 
 @B.piece(LS, "Cave_Waterfall", kind="water", phys="none", li=1.0)
 def waterfall(lod):
-    """A curved sheet of water spilling from a crack in the north wall into the lake."""
+    """Three strands of water spilling from a crack in the north wall, fanning out as they fall,
+    with a foaming skirt where they hit the lake."""
     if lod:
         return None
     top = 5.2
     p, n = wall(CHAMBERS["lake"][0], 100, top)
-    x, y = (p.x + n.x * 0.35, p.y + n.y * 0.35) if p else (-12.5, 14.6)
-    rows = []
-    for k in range(9):
-        t = k / 8
-        z = top + (WATER_Z - top) * t
-        out = 0.35 + 0.9 * t ** 1.6
-        w = 0.9 + 0.5 * t
-        rows.append([M.V(x + (u - 0.5) * 2 * w, y - out + 0.08 * math.sin(u * 7 + k), z) for u in [i / 6 for i in range(7)]])
+    x, y = (p.x + n.x * 0.3, p.y + n.y * 0.3) if p else (-12.5, 14.6)
     s = M.Shape()
-    vs = [[s.vert(p) for p in r] for r in rows]
-    for a, b in zip(vs[:-1], vs[1:]):
-        for i in range(6):
-            s.face([a[i], a[i + 1], b[i + 1], b[i]], "water")
-            s.face([a[i + 1], a[i], b[i], b[i + 1]], "water")
+    for strand, (dx, w0, ph) in enumerate(((-0.55, 0.35, 0.0), (0.1, 0.55, 1.3), (0.75, 0.25, 2.1))):
+        rows = []
+        for k in range(15):
+            t = k / 14
+            z = top + (WATER_Z - top) * t - 0.15 * strand * (1 - t)
+            out = 0.25 + 1.1 * t ** 1.7
+            w = w0 * (1 + 1.4 * t)
+            sway = 0.12 * math.sin(t * 5 + ph)
+            rows.append([M.V(x + dx + sway + (u - 0.5) * 2 * w,
+                             y - out - 0.06 * math.sin(u * math.pi) + 0.04 * math.sin(u * 9 + k + ph), z)
+                         for u in [i / 6 for i in range(7)]])
+        vs = [[s.vert(q) for q in r] for r in rows]
+        for a, b in zip(vs[:-1], vs[1:]):
+            for i in range(6):
+                s.face([a[i], a[i + 1], b[i + 1], b[i]], "water")
+                s.face([a[i + 1], a[i], b[i], b[i + 1]], "water")
+    # foam skirt: a low ruffled ring on the lake where the strands land
+    cx_, cy_ = x + 0.1, y - 1.45
+    ring = []
+    for j in range(2):
+        rr = 0.9 + 0.7 * j
+        ring.append([M.V(cx_ + rr * math.cos(a) * 1.4, cy_ + rr * math.sin(a) * 0.7,
+                         WATER_Z + 0.05 + (0.12 if j == 0 else 0.0) * (0.6 + 0.4 * math.sin(a * 7)))
+                     for a in [2 * math.pi * i / 24 for i in range(24)]])
+    vs = [[s.vert(q) for q in r] for r in ring]
+    for i in range(24):
+        k = (i + 1) % 24
+        s.face([vs[0][i], vs[0][k], vs[1][k], vs[1][i]], "water")
+        s.face([vs[0][k], vs[0][i], vs[1][i], vs[1][k]], "water")
     return s
 
 
@@ -321,12 +339,29 @@ def fur_rug(a=1.1, b=0.75, seed=1):
     return M.pillow(poly, 0.0, 0.06, FUR, r=0.025, crown=0.02, levels=1)
 
 
+def fur_pile(poly, z0, z1, seed=0.0):
+    """A heap of pelts: a soft pillow whose surface breaks into clumps and tufts of fur."""
+    p = M.pillow(poly, z0, z1, FUR, r=0.08, crown=0.04, levels=2)
+    p.bm.normal_update()
+    for v in p.bm.verts:
+        if v.normal.z > -0.3:
+            n = noise.noise(v.co * 9.0 + Vector((seed, 0, 0)))
+            v.co += v.normal * (0.018 * n + 0.012 * noise.noise(v.co * 23.0))
+    return p
+
+
 def fur_bed():
-    """Rock ledge with a fur nest and a rolled fur bolster at the head (+Y)."""
-    ledge = rock(0, 0, 0.18, 1.25, 0.75, 0.24, ROCK, seed=3.3, e=3.0)
-    nest = M.pillow(M.superellipse(0, -0.05, 1.05, 0.62, 28, 2.6), 0.36, 0.52, FUR, r=0.07, crown=0.03)
-    bol = M.sweep([(-0.9, 0.5, 0.62), (0, 0.55, 0.66), (0.9, 0.5, 0.62)], 0.13, FUR, n=12)
-    return M.join(ledge, nest, bol)
+    """A low rock ledge piled with pelts, a hide thrown over the foot and a rolled fur at the head (+Y)."""
+    ledge = rock(0, 0, 0.16, 1.3, 0.8, 0.22, MOSS, seed=3.3, e=3.2)
+    nest = fur_pile(M.superellipse(0, -0.05, 1.1, 0.66, 32, 2.6), 0.32, 0.52, seed=1.0)
+    hide = M.pillow(M.superellipse(0.05, -0.35, 0.95, 0.42, 28, 2.2), 0.5, 0.54, FUR, r=0.015, crown=0.0, levels=1)
+    hide.deform(lambda v: v.__class__((v.x, v.y - 0.02 * math.sin(v.x * 5), v.z + 0.03 * math.sin(v.x * 4 + v.y * 6)
+                                       - 0.25 * max(0.0, -v.y - 0.62))))
+    bol = M.sweep([(-0.95, 0.48, 0.64), (0, 0.53, 0.68), (0.95, 0.48, 0.64)], 0.14, FUR, n=12)
+    bol.bm.normal_update()
+    for v in bol.bm.verts:
+        v.co += v.normal * 0.015 * noise.noise(v.co * 11.0)
+    return M.join(ledge, nest, hide, bol)
 
 
 def torch():
@@ -361,13 +396,25 @@ def crystal_cluster(seed=1, scale=1.0):
 
 
 def altar():
+    """An altar block worn smooth, two bands of carved runes, a kneeling step, a bronze bowl with
+    an eternal flame and candles melted onto the corners."""
     slab = M.rounded_box((-0.9, -0.45, 0.0), (0.9, 0.45, 0.85), ROCK, r=0.06, seg=2)
     for v in slab.bm.verts:
         v.co += Vector((noise.noise(v.co * 4), noise.noise(v.co * 4 + Vector((5, 0, 0))), 0)) * 0.03
-    top = M.slab(M.rounded_rect(0, 0, 1.95, 1.0, 0.08, 3), 0.85, 0.97, MOSS, r=0.02, seg=1)
-    bowl = M.lathe([(0, 0.97), (0.2, 0.97), (0.24, 1.08), (0.22, 1.1), (0.18, 1.04), (0, 1.02)], METAL, n=24)
-    flame = M.lathe([(0, 1.03), (0.15, 1.03), (0.0, 1.12)], GLOW, n=12)
-    return M.join(slab, top, bowl, flame)
+    parts = [slab, M.slab(M.rounded_rect(0, 0, 1.95, 1.0, 0.08, 3), 0.85, 0.97, MOSS, r=0.02, seg=1)]
+    for z in (0.22, 0.62):                                  # rune bands: chiselled marks along the front
+        for k in range(14):
+            x = -0.8 + k * 0.123
+            h = 0.06 + 0.04 * ((k * 5) % 3)
+            parts.append(M.rounded_box((x - 0.012, -0.465, z), (x + 0.012, -0.44, z + h), GLOW if k % 5 == 0 else MOSS,
+                                       r=0.004, seg=1).rotate(((k * 37) % 40) - 20, "Y", (x, -0.45, z + h / 2)))
+    parts.append(M.rounded_box((-0.85, -0.95, 0.0), (0.85, -0.5, 0.12), ROCK, r=0.03, seg=1))   # kneeling step
+    parts.append(M.lathe([(0, 0.97), (0.2, 0.97), (0.24, 1.08), (0.22, 1.1), (0.18, 1.04), (0, 1.02)], METAL, n=24))
+    parts.append(M.lathe([(0, 1.03), (0.15, 1.03), (0.0, 1.12)], GLOW, n=12))
+    for cx_, cy_ in ((-0.8, -0.38), (0.8, -0.38), (-0.82, 0.36), (0.78, 0.35)):
+        parts.append(M.lathe([(0, 0.97), (0.07, 0.97), (0.045, 1.0), (0.04, 1.12), (0, 1.13)], FUR, n=8, center=(cx_, cy_, 0)))
+        parts.append(M.lathe([(0, 1.13), (0.012, 1.14), (0, 1.18)], GLOW, n=5, center=(cx_, cy_, 0)))
+    return M.join(*parts)
 
 
 def chest():
@@ -430,6 +477,11 @@ for k, (dx, dy, yaw) in enumerate(((-3.0, 2.0, 200), (0.0, 3.0, 180), (3.0, 1.5,
     cx, cy = CHAMBERS["den"][0][0], CHAMBERS["den"][0][1]
     placed(f"Cave_Bed_{k + 1}", fur_bed, cx + dx, cy + dy, yaw=yaw, kind="furniture",
            seat=(0, 0.3, 0.52, "cave_lounge", "cave_sit_curl", "cave_sit_relaxed"))
+
+_dcx, _dcy = CHAMBERS["den"][0][0], CHAMBERS["den"][0][1]
+placed("Cave_Den_Fire", lambda: hearth().scale(0.7, 0.7, 0.7), _dcx, _dcy - 0.6, kind="light", phys="none", li=0.8)
+placed("Cave_Den_Rug", lambda: fur_rug(1.4, 0.9, 7), _dcx + 0.2, _dcy + 1.2, yaw=10, kind="furniture", phys="none",
+       seat=(0, 0.0, 0.06, "cave_sit_curl", "cave_sit_crossed", "cave_lounge"))
 
 # --- the Hot Spring
 SPX, SPY = CHAMBERS["spring"][0][0], CHAMBERS["spring"][0][1]
@@ -529,25 +581,48 @@ for k, (ch, ang) in enumerate(TORCHES):
 
 
 # --- stalactites and stalagmites, one piece per chamber
+def dripstone(x, y, z, L, r, down=True, seed=0.0, slot=ROCK):
+    """A stalactite (down) or stalagmite: a curved, lumpy cone with growth rings and a wet tip."""
+    sgn = -1.0 if down else 1.0
+    prof = [(0.0, 0.08 * -sgn)]
+    for k in range(5):
+        t = k / 4
+        rr = r * (1 - t) ** 1.6 * (1 + 0.12 * math.sin(t * 17 + seed * 3))
+        prof.append((max(rr, 0.012), sgn * L * t))
+    prof.append((0.0, sgn * L * 1.04))
+    s = M.lathe(prof, slot, n=7, center=(x, y, z))
+    for v in s.bm.verts:
+        d = Vector((v.co.x - x, v.co.y - y, 0))
+        if d.length > 1e-4:
+            v.co += d.normalized() * noise.noise(v.co * 6.0 + Vector((seed, 0, 0))) * r * 0.25
+        v.co.x += 0.04 * L * ((v.co.z - z) / max(L, 0.1)) ** 2 * math.sin(seed)     # a slight drift
+    for f in s.bm.faces:                                                            # the last third is wet
+        if abs(f.calc_center_median().z - z) > 0.66 * L:
+            f.material_index = M.slot_index(MOSS)
+    return s
+
+
 def formations(name, seed):
     (cx, cy, _), rx, ry, _, _ = CHAMBERS[name]
     s = M.Shape()
-    for k in range(26):
+    for k in range(24):
         a = 2 * math.pi * ((k * 0.381966 + seed) % 1.0)
-        f = 0.35 + 0.6 * ((k * 0.618 + seed * 0.3) % 1.0)
+        f = 0.3 + 0.62 * ((k * 0.618 + seed * 0.3) % 1.0)
         x, y = cx + rx * f * math.cos(a), cy + ry * f * math.sin(a)
         if name == "hall" and math.hypot(x - HX, y - HY) < 4.0:
             continue
         top = ceiling(x, y)
         if top is not None and top > 2.8:
-            L = 0.4 + 1.3 * ((k * 7) % 5) / 4
-            s.join(M.lathe([(0.0, top + 0.1), (0.16 + 0.08 * (k % 3), top + 0.1), (0.08, top - L * 0.6), (0.0, top - L)],
-                           MOSS if k % 3 == 0 else ROCK, n=8, center=(x, y, 0)))
-        if f > 0.78 and name != "lake":
+            L = 0.35 + 1.4 * ((k * 7) % 5) / 4
+            s.join(dripstone(x, y, top + 0.1, L, 0.12 + 0.07 * (k % 3), True, k + seed))
+            if k % 6 == 0:                                            # a cluster of thin straws beside it
+                for j in range(3):
+                    s.join(dripstone(x + 0.25 * math.cos(j * 2.1), y + 0.25 * math.sin(j * 2.1), top + 0.05,
+                                     L * (0.3 + 0.2 * j), 0.035, True, k + j, MOSS))
+        if f > 0.76 and name != "lake":
             fl = drop(x, y)
-            H = 0.3 + 0.9 * ((k * 3) % 4) / 3
-            s.join(M.lathe([(0.0, fl - 0.05), (0.22, fl - 0.05), (0.1, fl + H * 0.6), (0.0, fl + H)], ROCK, n=8,
-                           center=(x, y, 0)))
+            H = 0.3 + 1.0 * ((k * 3) % 4) / 3
+            s.join(dripstone(x, y, fl - 0.08, H, 0.2 + 0.06 * (k % 2), False, k * 1.7 + seed))
     return s
 
 

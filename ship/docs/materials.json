@@ -158,9 +158,9 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     235,
-     192,
-     109
+     233,
+     191,
+     108
     ]
    },
    {
@@ -197,8 +197,8 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     169,
-     131,
+     170,
+     132,
      72
     ]
    }
@@ -279,7 +279,7 @@
     "alpha": "OPAQUE",
     "emissive": false,
     "swatch_rgb": [
-     74,
+     73,
      59,
      38
     ]
@@ -349,8 +349,8 @@
     "emissive": true,
     "swatch_rgb": [
      255,
-     182,
-     87
+     185,
+     90
     ]
    },
    {

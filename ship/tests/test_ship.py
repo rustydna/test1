@@ -141,7 +141,7 @@ def footprint_and_height():
     for name, ls in REPORT["linksets"].items():
         x, y, z = ls["size_m"]
         assert x <= 64 and y <= 64, (name, ls["size_m"])        # one region corner, plenty of room
-        assert z <= 20, (name, ls["size_m"])
+        assert z <= 45, (name, ls["size_m"])        # masts: 39 m from keel to truck
 
 
 @case
