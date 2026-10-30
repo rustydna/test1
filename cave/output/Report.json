@@ -4,20 +4,20 @@
    "pieces": 52,
    "root": "Cave_Hearth",
    "label": "The Cave",
-   "li_download_est": 188.1,
+   "li_download_est": 194.0,
    "li_server": 26.0,
-   "li_estimate": 188.1,
+   "li_estimate": 194.0,
    "size_m": [
-    46.03,
-    37.15,
-    13.85
+    45.89,
+    37.43,
+    14.53
    ],
    "min": [
-    -22.77,
-    -19.66,
+    -22.53,
+    -19.86,
     -2.97
    ],
-   "triangles_high": 67113,
+   "triangles_high": 66989,
    "files": [
     "Cave.dae",
     "Cave_LOD2.dae",
@@ -33,30 +33,30 @@
    "linkset": "Cave",
    "kind": "structure",
    "size_m": [
-    6.746,
-    10.418,
-    8.166
+    6.535,
+    10.577,
+    8.791
    ],
    "center": [
-    -14.373,
-    -11.709,
-    2.631
+    -14.268,
+    -11.788,
+    2.848
    ],
-   "radius_m": 7.43,
+   "radius_m": 7.61,
    "triangles": {
-    "HIGH": 1288,
-    "MEDIUM": 242,
-    "LOW": 62,
+    "HIGH": 1275,
+    "MEDIUM": 231,
+    "LOW": 59,
     "LOWEST": 18,
-    "PHYS": 161
+    "PHYS": 159
    },
    "lod_weight": [
-    0.029,
-    0.439,
-    0.532,
+    0.031,
+    0.461,
+    0.509,
     0.0
    ],
-   "li_est": 10.548,
+   "li_est": 11.453,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -71,35 +71,35 @@
    "linkset": "Cave",
    "kind": "structure",
    "size_m": [
-    11.751,
+    11.413,
     13.0,
-    11.383
+    12.091
    ],
    "center": [
-    -16.875,
+    -16.706,
     0.0,
-    2.729
+    3.099
    ],
-   "radius_m": 10.45,
+   "radius_m": 10.55,
    "triangles": {
-    "HIGH": 2027,
-    "MEDIUM": 67,
+    "HIGH": 2161,
+    "MEDIUM": 61,
     "LOW": 26,
     "LOWEST": 15,
-    "PHYS": 251
+    "PHYS": 271
    },
    "lod_weight": [
-    0.058,
-    0.868,
-    0.075,
+    0.059,
+    0.885,
+    0.056,
     0.0
    ],
-   "li_est": 11.006,
+   "li_est": 11.857,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
     "LOWEST": true,
-    "PHYS": false
+    "PHYS": true
    },
    "li": 7,
    "phys": "custom"
@@ -109,30 +109,30 @@
    "linkset": "Cave",
    "kind": "structure",
    "size_m": [
-    11.774,
-    10.907,
-    11.947
+    11.529,
+    10.821,
+    12.425
    ],
    "center": [
-    -16.887,
-    11.954,
-    3.003
+    -16.764,
+    11.91,
+    3.241
    ],
-   "radius_m": 10.0,
+   "radius_m": 10.05,
    "triangles": {
-    "HIGH": 2117,
-    "MEDIUM": 76,
-    "LOW": 24,
+    "HIGH": 2246,
+    "MEDIUM": 66,
+    "LOW": 26,
     "LOWEST": 16,
-    "PHYS": 266
+    "PHYS": 282
    },
    "lod_weight": [
-    0.053,
-    0.795,
-    0.152,
+    0.054,
+    0.803,
+    0.143,
     0.0
    ],
-   "li_est": 11.143,
+   "li_est": 10.723,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -148,29 +148,29 @@
    "kind": "structure",
    "size_m": [
     11.0,
-    10.46,
-    9.344
+    10.6,
+    9.72
    ],
    "center": [
     -5.5,
-    -11.73,
-    3.14
+    -11.8,
+    3.29
    ],
-   "radius_m": 8.91,
+   "radius_m": 9.05,
    "triangles": {
-    "HIGH": 2274,
-    "MEDIUM": 113,
+    "HIGH": 2158,
+    "MEDIUM": 114,
     "LOW": 29,
     "LOWEST": 18,
-    "PHYS": 284
+    "PHYS": 270
    },
    "lod_weight": [
-    0.042,
-    0.631,
-    0.327,
+    0.043,
+    0.651,
+    0.305,
     0.0
    ],
-   "li_est": 11.453,
+   "li_est": 11.608,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -187,33 +187,33 @@
    "size_m": [
     11.0,
     13.0,
-    13.155
+    13.316
    ],
    "center": [
     -5.5,
     0.0,
-    3.616
+    3.725
    ],
-   "radius_m": 10.76,
+   "radius_m": 10.81,
    "triangles": {
-    "HIGH": 3810,
+    "HIGH": 3831,
     "MEDIUM": 61,
-    "LOW": 37,
-    "LOWEST": 20,
-    "PHYS": 475
+    "LOW": 38,
+    "LOWEST": 18,
+    "PHYS": 480
    },
    "lod_weight": [
-    0.061,
-    0.92,
-    0.019,
+    0.062,
+    0.928,
+    0.01,
     0.0
    ],
-   "li_est": 18.738,
+   "li_est": 20.327,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
     "LOWEST": false,
-    "PHYS": false
+    "PHYS": true
    },
    "li": 7,
    "phys": "custom"
@@ -224,32 +224,32 @@
    "kind": "structure",
    "size_m": [
     11.0,
-    10.811,
-    11.972
+    10.992,
+    12.402
    ],
    "center": [
     -5.5,
-    11.906,
-    3.025
+    11.996,
+    3.24
    ],
-   "radius_m": 9.76,
+   "radius_m": 9.95,
    "triangles": {
-    "HIGH": 2139,
-    "MEDIUM": 83,
-    "LOW": 23,
+    "HIGH": 2343,
+    "MEDIUM": 64,
+    "LOW": 26,
     "LOWEST": 14,
-    "PHYS": 268
+    "PHYS": 294
    },
    "lod_weight": [
-    0.05,
-    0.757,
-    0.192,
+    0.052,
+    0.786,
+    0.162,
     0.0
    ],
-   "li_est": 11.403,
+   "li_est": 11.302,
    "markers": {
-    "MEDIUM": false,
-    "LOW": false,
+    "MEDIUM": true,
+    "LOW": true,
     "LOWEST": true,
     "PHYS": true
    },
@@ -262,29 +262,29 @@
    "kind": "structure",
    "size_m": [
     11.0,
-    12.638,
-    10.424
+    13.119,
+    11.285
    ],
    "center": [
     5.5,
-    -12.819,
-    3.726
+    -13.059,
+    4.033
    ],
-   "radius_m": 9.87,
+   "radius_m": 10.25,
    "triangles": {
-    "HIGH": 2136,
-    "MEDIUM": 81,
+    "HIGH": 2275,
+    "MEDIUM": 62,
     "LOW": 25,
     "LOWEST": 18,
-    "PHYS": 268
+    "PHYS": 284
    },
    "lod_weight": [
-    0.052,
-    0.774,
-    0.175,
+    0.056,
+    0.835,
+    0.109,
     0.0
    ],
-   "li_est": 11.362,
+   "li_est": 12.021,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -301,28 +301,28 @@
    "size_m": [
     11.0,
     13.0,
-    12.464
+    12.99
    ],
    "center": [
     5.5,
     0.0,
-    4.644
+    5.063
    ],
-   "radius_m": 10.55,
+   "radius_m": 10.71,
    "triangles": {
-    "HIGH": 2943,
+    "HIGH": 2480,
     "MEDIUM": 62,
     "LOW": 26,
     "LOWEST": 20,
-    "PHYS": 369
+    "PHYS": 311
    },
    "lod_weight": [
-    0.059,
-    0.885,
-    0.056,
+    0.061,
+    0.911,
+    0.028,
     0.0
    ],
-   "li_est": 11.758,
+   "li_est": 11.767,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -338,29 +338,29 @@
    "kind": "structure",
    "size_m": [
     11.0,
-    10.533,
+    10.55,
     10.422
    ],
    "center": [
     5.5,
-    11.766,
-    3.721
+    11.775,
+    3.687
    ],
    "radius_m": 9.23,
    "triangles": {
-    "HIGH": 2109,
-    "MEDIUM": 109,
-    "LOW": 28,
-    "LOWEST": 22,
-    "PHYS": 265
+    "HIGH": 2128,
+    "MEDIUM": 106,
+    "LOW": 31,
+    "LOWEST": 20,
+    "PHYS": 266
    },
    "lod_weight": [
     0.045,
     0.677,
-    0.278,
+    0.277,
     0.0
    ],
-   "li_est": 11.92,
+   "li_est": 11.993,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -375,30 +375,30 @@
    "linkset": "Cave",
    "kind": "structure",
    "size_m": [
-    10.113,
-    13.163,
-    9.84
+    10.368,
+    13.361,
+    10.183
    ],
    "center": [
-    16.057,
-    -13.082,
-    3.421
+    16.184,
+    -13.18,
+    3.547
    ],
-   "radius_m": 9.65,
+   "radius_m": 9.87,
    "triangles": {
-    "HIGH": 3077,
+    "HIGH": 2996,
     "MEDIUM": 61,
-    "LOW": 46,
+    "LOW": 52,
     "LOWEST": 22,
-    "PHYS": 386
+    "PHYS": 375
    },
    "lod_weight": [
-    0.049,
-    0.74,
-    0.211,
+    0.052,
+    0.774,
+    0.174,
     0.0
    ],
-   "li_est": 13.948,
+   "li_est": 14.848,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -413,30 +413,30 @@
    "linkset": "Cave",
    "kind": "structure",
    "size_m": [
-    12.255,
+    12.358,
     13.0,
-    10.297
+    10.529
    ],
    "center": [
-    17.127,
+    17.179,
     0.0,
-    3.609
+    3.176
    ],
-   "radius_m": 10.31,
+   "radius_m": 10.4,
    "triangles": {
-    "HIGH": 2907,
+    "HIGH": 2894,
     "MEDIUM": 62,
     "LOW": 26,
-    "LOWEST": 18,
-    "PHYS": 364
+    "LOWEST": 21,
+    "PHYS": 362
    },
    "lod_weight": [
-    0.056,
-    0.845,
-    0.099,
+    0.057,
+    0.859,
+    0.083,
     0.0
    ],
-   "li_est": 14.108,
+   "li_est": 14.414,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -451,30 +451,30 @@
    "linkset": "Cave",
    "kind": "structure",
    "size_m": [
-    10.142,
-    10.982,
-    8.194
+    10.355,
+    11.069,
+    8.484
    ],
    "center": [
-    16.071,
-    11.991,
-    2.579
+    16.177,
+    12.035,
+    2.581
    ],
-   "radius_m": 8.52,
+   "radius_m": 8.69,
    "triangles": {
-    "HIGH": 2415,
-    "MEDIUM": 124,
-    "LOW": 42,
-    "LOWEST": 20,
-    "PHYS": 303
+    "HIGH": 2331,
+    "MEDIUM": 120,
+    "LOW": 44,
+    "LOWEST": 22,
+    "PHYS": 292
    },
    "lod_weight": [
-    0.038,
-    0.577,
-    0.384,
+    0.04,
+    0.599,
+    0.361,
     0.0
    ],
-   "li_est": 11.99,
+   "li_est": 12.674,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -572,7 +572,7 @@
    "center": [
     4.005,
     -0.006,
-    0.555
+    0.72
    ],
    "radius_m": 1.5,
    "triangles": {
@@ -588,7 +588,7 @@
     0.058,
     0.923
    ],
-   "li_est": 1.054,
+   "li_est": 1.189,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -610,7 +610,7 @@
    "center": [
     6.449,
     1.145,
-    0.135
+    0.202
    ],
    "radius_m": 1.19,
    "triangles": {
@@ -660,7 +660,7 @@
    "center": [
     1.786,
     1.552,
-    0.085
+    0.191
    ],
    "radius_m": 1.22,
    "triangles": {
@@ -710,7 +710,7 @@
    "center": [
     3.761,
     -2.69,
-    0.219
+    0.203
    ],
    "radius_m": 1.08,
    "triangles": {
@@ -760,7 +760,7 @@
    "center": [
     4.243,
     2.394,
-    0.012
+    0.031
    ],
    "radius_m": 1.21,
    "triangles": {
@@ -776,7 +776,7 @@
     0.037,
     0.95
    ],
-   "li_est": 1.551,
+   "li_est": 1.687,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -809,7 +809,7 @@
    "center": [
     1.941,
     -0.954,
-    -0.073
+    0.025
    ],
    "radius_m": 1.22,
    "triangles": {
@@ -858,7 +858,7 @@
    "center": [
     5.993,
     -1.376,
-    -0.097
+    0.037
    ],
    "radius_m": 1.21,
    "triangles": {
@@ -907,7 +907,7 @@
    "center": [
     12.872,
     -3.995,
-    0.652
+    0.547
    ],
    "radius_m": 1.16,
    "triangles": {
@@ -923,7 +923,7 @@
     0.034,
     0.954
    ],
-   "li_est": 1.5,
+   "li_est": 1.501,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -944,7 +944,7 @@
    "center": [
     13.11,
     4.275,
-    0.501
+    0.35
    ],
    "radius_m": 0.9,
    "triangles": {
@@ -960,7 +960,7 @@
     0.02,
     0.973
    ],
-   "li_est": 1.133,
+   "li_est": 1.112,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -981,7 +981,7 @@
    "center": [
     -1.499,
     -4.503,
-    0.142
+    0.197
    ],
    "radius_m": 1.17,
    "triangles": {
@@ -1018,7 +1018,7 @@
    "center": [
     11.009,
     13.01,
-    0.375
+    0.34
    ],
    "radius_m": 1.61,
    "triangles": {
@@ -1034,7 +1034,7 @@
     0.066,
     0.912
    ],
-   "li_est": 1.697,
+   "li_est": 1.842,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -1068,7 +1068,7 @@
    "center": [
     14.009,
     13.996,
-    0.38
+    0.366
    ],
    "radius_m": 1.51,
    "triangles": {
@@ -1118,7 +1118,7 @@
    "center": [
     16.985,
     12.497,
-    0.442
+    0.362
    ],
    "radius_m": 1.6,
    "triangles": {
@@ -1134,7 +1134,7 @@
     0.065,
     0.914
    ],
-   "li_est": 1.71,
+   "li_est": 1.641,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -1168,7 +1168,7 @@
    "center": [
     -10.0,
     -10.0,
-    0.15
+    0.246
    ],
    "radius_m": 3.05,
    "triangles": {
@@ -1206,7 +1206,7 @@
    "center": [
     -10.0,
     -10.0,
-    0.28
+    0.376
    ],
    "radius_m": 2.47,
    "triangles": {
@@ -1244,7 +1244,7 @@
    "center": [
     -10.005,
     -8.758,
-    0.086
+    0.123
    ],
    "radius_m": 0.44,
    "triangles": {
@@ -1293,7 +1293,7 @@
    "center": [
     -9.995,
     -11.242,
-    0.038
+    0.115
    ],
    "radius_m": 0.44,
    "triangles": {
@@ -1342,7 +1342,7 @@
    "center": [
     -7.327,
     2.687,
-    -1.182
+    -1.185
    ],
    "radius_m": 2.59,
    "triangles": {
@@ -1429,7 +1429,7 @@
    "center": [
     15.5,
     -14.6,
-    0.577
+    0.562
    ],
    "radius_m": 1.23,
    "triangles": {
@@ -1437,7 +1437,7 @@
     "MEDIUM": 180,
     "LOW": 46,
     "LOWEST": 12,
-    "PHYS": 14
+    "PHYS": 16
    },
    "lod_weight": [
     0.001,
@@ -1445,7 +1445,7 @@
     0.039,
     0.949
    ],
-   "li_est": 0.872,
+   "li_est": 0.864,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -1477,7 +1477,7 @@
    "center": [
     11.105,
     -13.644,
-    0.238
+    0.181
    ],
    "radius_m": 0.95,
    "triangles": {
@@ -1514,7 +1514,7 @@
    "center": [
     17.185,
     -11.0,
-    0.374
+    0.298
    ],
    "radius_m": 0.92,
    "triangles": {
@@ -1530,7 +1530,7 @@
     0.022,
     0.971
    ],
-   "li_est": 1.205,
+   "li_est": 1.204,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -1551,7 +1551,7 @@
    "center": [
     11.381,
     -9.423,
-    0.505
+    0.589
    ],
    "radius_m": 1.38,
    "triangles": {
@@ -1567,7 +1567,7 @@
     0.048,
     0.936
    ],
-   "li_est": 0.998,
+   "li_est": 1.003,
    "markers": {
     "MEDIUM": true,
     "LOW": true,
@@ -1588,12 +1588,12 @@
    "center": [
     14.194,
     -8.351,
-    0.583
+    0.502
    ],
    "radius_m": 1.65,
    "triangles": {
     "HIGH": 537,
-    "MEDIUM": 204,
+    "MEDIUM": 202,
     "LOW": 52,
     "LOWEST": 20,
     "PHYS": 20
@@ -1606,7 +1606,7 @@
    ],
    "li_est": 1.244,
    "markers": {
-    "MEDIUM": true,
+    "MEDIUM": false,
     "LOW": true,
     "LOWEST": false,
     "PHYS": false
@@ -1625,7 +1625,7 @@
    "center": [
     10.215,
     -12.803,
-    0.369
+    0.308
    ],
    "radius_m": 0.8,
    "triangles": {
@@ -1641,7 +1641,7 @@
     0.016,
     0.978
    ],
-   "li_est": 0.874,
+   "li_est": 0.873,
    "markers": {
     "MEDIUM": false,
     "LOW": true,
@@ -1662,7 +1662,7 @@
    "center": [
     17.599,
     -13.806,
-    0.341
+    0.253
    ],
    "radius_m": 0.94,
    "triangles": {
@@ -1678,7 +1678,7 @@
     0.022,
     0.97
    ],
-   "li_est": 0.962,
+   "li_est": 0.966,
    "markers": {
     "MEDIUM": false,
     "LOW": true,
@@ -1699,7 +1699,7 @@
    "center": [
     19.0,
     0.0,
-    1.82
+    1.899
    ],
    "radius_m": 3.1,
    "triangles": {
@@ -2148,5 +2148,5 @@
  "roles": {
   "Cave": "house"
  },
- "seconds": 6.9
+ "seconds": 5.4
 }

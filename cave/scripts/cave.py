@@ -98,14 +98,24 @@ def build_shell():
     sm.factor = 0.8
     s._take(ob)
     s.bm.normal_update()
-    # sculpt: big lumps and fine fractures; the floor (normals pointing down) stays walkable
+    lc, lrx, lry = CHAMBERS["lake"][0], CHAMBERS["lake"][1], CHAMBERS["lake"][2]
+
+    def in_lake(co):
+        return ((co.x - lc[0]) / lrx) ** 2 + ((co.y - lc[1]) / lry) ** 2 < 0.9
+
+    # a level, walkable floor everywhere but the lake bowl (packed earth with gentle unevenness)
+    for v in s.bm.verts:
+        if v.normal.z < -0.5 and v.co.z < 0.9 and not in_lake(v.co):
+            v.co.z = 0.03 * noise.noise(v.co * 0.6)
+    s.bm.normal_update()
+    # sculpt: big lumps and fine fractures on walls and ceilings; floors stay smooth
     for v in s.bm.verts:
         n = v.normal
         d = noise.fractal(v.co * 0.22, 0.55, 2.1, 4) * 0.55 + noise.noise(v.co * 0.07) * 0.8
-        if n.z < -0.6:
-            d *= 0.12
+        if n.z < -0.5 and v.co.z < 0.3:
+            d *= 0.03
         elif v.co.z < 0.8:
-            d *= 0.5
+            d *= 0.45
         v.co += n * d
     # open the mouth and the sky chimney over the lake
     dele = []
@@ -115,7 +125,8 @@ def build_shell():
             dele.append(f)
     bmesh.ops.delete(s.bm, geom=dele, context="FACES")
     bvh = BVHTree.FromBMesh(s.bm)
-    # thickness outwards: the original surface becomes the inside (slot 0), the new one the outside (slot 3)
+    # thickness outwards. Blender keeps the original faces (slot 0) on the offset side: they become the
+    # OUTSIDE of the mound, and the new faces (slot 3) are the cave's inside surface
     ob = s._object()
     for sl in M.ALL:
         ob.data.materials.append(M._slot_material(sl))
@@ -133,9 +144,9 @@ def build_shell():
     for f in s.bm.faces:
         c = f.calc_center_median()
         n = f.normal
-        if f.material_index != 0:
-            outer.update(f.verts)
         if f.material_index == 0:
+            outer.update(f.verts)
+        if f.material_index != 0:
             near_lake = ((c.x - lake_c[0]) / lrx) ** 2 + ((c.y - lake_c[1]) / lry) ** 2 < 1.1
             if n.z > 0.55:
                 f.material_index = M.slot_index(MOSS if (near_lake and c.z < 0.1) else GROUND)
@@ -276,7 +287,7 @@ def hearth():
     parts = []
     for k in range(10):
         a = 2 * math.pi * k / 10
-        parts.append(rock(0.75 * math.cos(a), 0.75 * math.sin(a), 0.1, 0.2, 0.16, 0.14, ROCK, seed=k))
+        parts.append(rock(0.75 * math.cos(a), 0.75 * math.sin(a), 0.1, 0.2, 0.16, 0.14, MOSS, seed=k))   # sooty stones
     parts.append(M.lathe([(0, 0.0), (0.62, 0.0), (0.6, 0.05), (0.3, 0.09), (0, 0.1)], GLOW, n=24))
     for k in range(4):
         a = math.radians(45 * k + 10)
