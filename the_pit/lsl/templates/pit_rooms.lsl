@@ -1,0 +1,365 @@
+// =====================================================================
+//  THE PIT - PUNISHMENT ROOMS AND KENNEL (root prim)
+//  Touch each piece of furniture for its menu. Everything is narrated
+//  in local chat.
+//    The Rack ......... Tighten / Slacken (5 notches, floating text) / Release
+//    Pillory, Stocks .. Mock / Release
+//    The Cistern ...... Dunk / Raise (the chair tips and sinks the
+//                       sitter; counts the seconds under water) / Release
+//    The Cages ........ Hoist / Lower (the prisoner rides with the cage) / Release
+//    The Mast ......... Lash (counted) / Salt the wounds / Untie
+//    The Kennel ....... Kennels: Name dog / Bark / Remove name
+//                       Bowls: Slop / Water
+//    Guardroom ........ Table (Dice, Toast) · Basket (Throw clothes into the kennel)
+//    Kneeling stone ... Present
+//  Switches (/7 settings > Rooms): furniture (master), rack, stocks,
+//  cistern, cages, mast, kennel, guardroom, kneeling; plus narration and
+//  hovertext (System) and bursts (Atmosphere).
+// =====================================================================
+
+//@@CONSTANTS@@
+
+float CHAIR_ANGLE = -28.0;
+float CAGE_RISE = 1.4;
+integer CH; key USER; string PIECE; integer LINK;
+list SESS;      // open menus, one per avatar: [avatar, link, mode, expires]
+string OPTS;
+
+integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
+
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
+
+integer link_of(string name)
+{
+    integer n = llGetObjectPrimCount(llGetKey());
+    integer i;
+    for (i = 1; i <= n; ++i) if (piece(i) == name) return i;
+    return -1;
+}
+
+integer avatar_link(key av)
+{
+    integer i;
+    for (i = llGetObjectPrimCount(llGetKey()) + 1; i <= llGetNumberOfPrims(); ++i)
+        if (llGetLinkKey(i) == av) return i;
+    return -1;
+}
+
+// which switch governs each piece
+string feature(string nm)
+{
+    if (nm == "C02_Rack") return "rack";
+    if (nm == "C03_Pillory" || nm == "C03_Stocks") return "stocks";
+    if (nm == "C04_Chair") return "cistern";
+    if (llSubStringIndex(nm, "C07_Cage") == 0) return "cages";
+    if (nm == "C08_Mast") return "mast";
+    if (llSubStringIndex(nm, "C05_Kennel") == 0 || nm == "C05_Bowls") return "kennel";
+    if (nm == "V_Table" || nm == "V_Basket") return "guardroom";
+    if (nm == "N_Kneeling_Stone") return "kneeling";
+    return "";
+}
+
+integer active(string nm) { return opt("furniture") && opt(feature(nm)); }
+
+key occupant(string nm) { return (key)llLinksetDataRead("sit:" + nm); }
+string who(key k) { if (k == NULL_KEY || (string)k == "") return "nobody"; return llGetDisplayName(k); }
+
+// RP line for everyone within 20 m of the piece (the root can be 25 m away), or only USER
+narrate(string s)
+{
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
+    if (!opt("narration")) { llRegionSayTo(USER, 0, s); return; }
+    vector c = llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POSITION]), 0);
+    list ag = llGetAgentList(AGENT_LIST_REGION, []);
+    integer i;
+    for (i = 0; i < llGetListLength(ag); ++i)
+    {
+        key a = llList2Key(ag, i);
+        if (llVecDist(llList2Vector(llGetObjectDetails(a, [OBJECT_POS]), 0), c) <= 20.0) llRegionSayTo(a, 0, s);
+    }
+}
+
+session(key k, integer l, string mode)
+{
+    integer i = llListFindList(SESS, [k]);
+    if (i != -1) SESS = llDeleteSubList(SESS, i, i + 3);
+    SESS += [k, l, mode, llGetUnixTime() + 60];
+}
+// a sound from the Contents, played at the piece in use (switch "sounds")
+sound(string s, float vol)
+{
+    if (!opt("sounds")) return;
+    if (llGetInventoryType("pit_" + s) == INVENTORY_SOUND) s = "pit_" + s;      // delivered files carry "pit_"
+    if (llGetInventoryType(s) == INVENTORY_SOUND) llLinkPlaySound(LINK, s, vol, SOUND_PLAY);
+}
+
+string pick(list l) { return llList2String(l, (integer)llFrand(llGetListLength(l))); }
+
+text(integer l, string t)
+{
+    if (l < 1) return;
+    if (!opt("hovertext") || !active(piece(l))) t = "";
+    llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, t, <0.8, 0.55, 0.35>, 0.8]);
+}
+
+string tension_bar(integer n)
+{
+    string bar = ""; integer i;
+    for (i = 0; i < 5; ++i) { if (i < n) bar += "#"; else bar += "-"; }
+    return "TENSION [" + bar + "]";
+}
+
+// puts every floating text back as it should be (after a switch changes)
+texts()
+{
+    integer n = (integer)llLinksetDataRead("rack");
+    if (n > 0) text(link_of("C02_Rack"), tension_bar(n)); else text(link_of("C02_Rack"), "");
+    n = (integer)llLinksetDataRead("lashes");
+    if (n > 0) text(link_of("C08_Mast"), "LASHES: " + (string)n); else text(link_of("C08_Mast"), "");
+    integer i;
+    for (i = 1; i <= 3; ++i)
+    {
+        string k = "C05_Kennel_" + (string)i;
+        text(link_of(k), llLinksetDataRead("dog:" + k));
+    }
+}
+
+// turns (or slides) a piece and whoever sits on it, in several steps
+move_with_avatar(integer l, vector pivot, rotation turn, vector shift, integer steps)
+{
+    list d = llGetLinkPrimitiveParams(l, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL]);
+    vector p0 = llList2Vector(d, 0); rotation r0 = llList2Rot(d, 1);
+    key av = occupant(piece(l));
+    integer al = -1; vector ap0; rotation ar0;
+    if (av != NULL_KEY) al = avatar_link(av);
+    if (al > 0) { list a = llGetLinkPrimitiveParams(al, [PRIM_POS_LOCAL, PRIM_ROT_LOCAL]);
+                  ap0 = llList2Vector(a, 0); ar0 = llList2Rot(a, 1); }
+    integer k;
+    for (k = 1; k <= steps; ++k)
+    {
+        float t = (float)k / steps; t = t * t * (3.0 - 2.0 * t);
+        rotation g = llAxisAngle2Rot(llRot2Axis(turn), llRot2Angle(turn) * t);
+        vector dz = shift * t;
+        llSetLinkPrimitiveParamsFast(l, [PRIM_POS_LOCAL, pivot + (p0 - pivot) * g + dz, PRIM_ROT_LOCAL, r0 * g]);
+        if (al > 0) llSetLinkPrimitiveParamsFast(al, [PRIM_POS_LOCAL, pivot + (ap0 - pivot) * g + dz,
+                                                      PRIM_ROT_LOCAL, ar0 * g]);
+        llSleep(0.06);
+    }
+}
+
+menu(key k, integer l)
+{
+    string nm = piece(l);
+    if (feature(nm) == "") return;
+    if (!active(nm)) { llRegionSayTo(k, 0, "This is not in use right now."); return; }
+    USER = k; LINK = l; PIECE = nm;
+    string t = ""; list b = [];
+    key oc = occupant(PIECE);
+    if (PIECE == "C02_Rack") { t = "THE RACK\nBound: " + who(oc); b = ["Tighten", "Slacken", "Release"]; }
+    else if (PIECE == "C03_Pillory" || PIECE == "C03_Stocks") { t = "THE STOCKS\nPrisoner: " + who(oc); b = ["Mock", "Release"]; }
+    else if (PIECE == "C04_Chair")
+    {
+        t = "THE CISTERN\nIn the chair: " + who(oc);
+        if (llLinksetDataRead("chair") == "down") b = ["Raise"]; else b = ["Dunk"];
+        b += ["Release"];
+    }
+    else if (llSubStringIndex(PIECE, "C07_Cage") == 0)
+    {
+        t = "THE CAGES\nInside: " + who(oc);
+        if (llLinksetDataRead("cage:" + PIECE) == "up") b = ["Lower"]; else b = ["Hoist"];
+        b += ["Release"];
+    }
+    else if (PIECE == "C08_Mast") { t = "THE MAST\nBound: " + who(oc); b = ["Lash", "Salt", "Untie"]; }
+    else if (llSubStringIndex(PIECE, "C05_Kennel") == 0)
+    {
+        t = "THE KENNEL\n" + llLinksetDataRead("dog:" + PIECE);
+        b = ["Name dog", "Bark", "Remove name"];
+    }
+    else if (PIECE == "C05_Bowls") { t = "KENNEL BOWLS"; b = ["Slop", "Water", "Read"]; }
+    else if (PIECE == "V_Table") { t = "THE GUARD TABLE"; b = ["Dice", "Toast", "Read"]; }
+    else if (PIECE == "V_Basket") { t = "LAUNDRY BASKET\nThe dirty underwear of the guards and the slaves."; b = ["Throw clothes", "Read"]; }
+    else if (PIECE == "N_Kneeling_Stone") { t = "KNEELING STONE\nBefore the throne: " + who(oc); b = ["Present"]; }
+    session(k, l, "main");
+    llDialog(k, t, b, CH);
+}
+
+act(string b)
+{
+    string q = who(USER);
+    key oc = occupant(PIECE);
+    string v = who(oc);
+    if (b == "Release" || b == "Untie")
+    {
+        if (oc != NULL_KEY) llUnSit(oc);
+        if (PIECE == "C08_Mast") { llLinksetDataWrite("lashes", "0"); text(LINK, ""); }
+        if (PIECE == "C02_Rack") { llLinksetDataWrite("rack", "0"); text(LINK, ""); }
+        narrate(q + " sets " + v + " free.");
+    }
+    else if (b == "Tighten" || b == "Slacken")
+    {
+        integer n = (integer)llLinksetDataRead("rack");
+        if (b == "Tighten" && n < 5) ++n;
+        if (b == "Slacken" && n > 0) --n;
+        llLinksetDataWrite("rack", (string)n);
+        list lines = ["the ropes hang slack.", "the ropes tighten and creak.",
+                      v + "'s joints begin to complain.", "the roller groans; " + v + " arches.",
+                      "the timber cracks and " + v + " can no longer move.",
+                      "the rack is at its limit. One more turn would be cruel."];
+        sound("rack_creak", 1.0);
+        narrate(q + " turns the wheel: " + llList2String(lines, n));
+        text(LINK, tension_bar(n));
+    }
+    else if (b == "Mock")
+        narrate(pick([q + " spits at " + v + "'s feet.", q + " pelts " + v + " with rotten crusts.",
+                      q + " laughs at " + v + " in front of the guard.",
+                      q + " hangs a sign round " + v + "'s neck: COWARD."]));
+    else if (b == "Dunk")
+    {
+        move_with_avatar(LINK, llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POS_LOCAL]), 0)
+                         + CHAIR_PIVOT * llList2Rot(llGetLinkPrimitiveParams(LINK, [PRIM_ROT_LOCAL]), 0),
+                         llEuler2Rot(<0.0, CHAIR_ANGLE * DEG_TO_RAD, 0.0>), ZERO_VECTOR, 18);
+        llLinksetDataWrite("chair", "down");
+        llLinksetDataWrite("chair_t", (string)llGetUnixTime());
+        llMessageLinked(LINK_SET, 9300, "splash", USER);
+        narrate(q + " drops the counterweight. The chair tips and " + v + " vanishes under the salt water.");
+    }
+    else if (b == "Raise")
+    {
+        move_with_avatar(LINK, llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POS_LOCAL]), 0)
+                         + CHAIR_PIVOT * llList2Rot(llGetLinkPrimitiveParams(LINK, [PRIM_ROT_LOCAL]), 0),
+                         llEuler2Rot(<0.0, -CHAIR_ANGLE * DEG_TO_RAD, 0.0>), ZERO_VECTOR, 18);
+        integer secs = llGetUnixTime() - (integer)llLinksetDataRead("chair_t");
+        llMessageLinked(LINK_SET, 9510, "washed|" + (string)oc, USER);      // salt water: the inmate is clean
+        llLinksetDataWrite("chair", "up");
+        llMessageLinked(LINK_SET, 9300, "splash", USER);
+        narrate(v + " comes up coughing after " + (string)secs + " seconds under water.");
+    }
+    else if (b == "Hoist" || b == "Lower")
+    {
+        float dz = CAGE_RISE; if (b == "Lower") dz = -dz;
+        sound("chains_1", 1.0);
+        vector p = llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POS_LOCAL]), 0);
+        move_with_avatar(LINK, p, llEuler2Rot(<0.0, 0.0, 0.12>), <0.0, 0.0, dz>, 24);
+        move_with_avatar(LINK, llList2Vector(llGetLinkPrimitiveParams(LINK, [PRIM_POS_LOCAL]), 0),
+                         llEuler2Rot(<0.0, 0.0, -0.12>), ZERO_VECTOR, 10);
+        if (b == "Hoist")
+        {
+            llLinksetDataWrite("cage:" + PIECE, "up");
+            narrate(q + " turns the winch: " + v + "'s cage rises, swinging and squealing.");
+        }
+        else
+        {
+            llLinksetDataWrite("cage:" + PIECE, "down");
+            narrate("The cage drops with a jolt. " + v + "'s chains rattle.");
+        }
+    }
+    else if (b == "Lash")
+    {
+        integer n = (integer)llLinksetDataRead("lashes") + 1;
+        llLinksetDataWrite("lashes", (string)n);
+        text(LINK, "LASHES: " + (string)n);
+        llMessageLinked(LINK_SET, 9300, "lash", USER);
+        narrate(pick(["Crack! ", "Snap! ", "The cat-o'-nine-tails hisses. "]) + q + " lashes " + v + ". (" + (string)n + ")");
+    }
+    else if (b == "Salt") narrate(q + " rubs salt from the barrel into " + v + "'s back. An old ship's custom.");
+    else if (b == "Name dog")
+    {
+        session(USER, LINK, "name");
+        llTextBox(USER, "Dog name for whoever lives in this kennel:", CH);
+        return;
+    }
+    else if (b == "Bark") narrate(q + " barks from the kennel. The other dogs answer.");
+    else if (b == "Remove name")
+    {
+        llLinksetDataDelete("dog:" + PIECE); text(LINK, "");
+        narrate(q + " tears the name tag off the kennel.");
+    }
+    else if (b == "Slop")
+    {
+        llMessageLinked(LINK_SET, 9510, "fed|C05", USER);
+        narrate(q + " tips a bucket of cold slop into the bowls. Let them eat on their knees.");
+    }
+    else if (b == "Water") narrate(q + " fills the bowls with murky water.");
+    else if (b == "Read") llMessageLinked(LINK_SET, 9500, "read|" + PIECE, USER);
+    else if (b == "Dice")
+    {
+        integer a = 1 + (integer)llFrand(6.0); integer c = 1 + (integer)llFrand(6.0);
+        narrate(q + " rolls the dice on the table: " + (string)a + " and " + (string)c + " (" + (string)(a + c) + ").");
+    }
+    else if (b == "Toast") narrate(q + " raises a tankard: To the Lord of the Pit, and to fresh meat!");
+    else if (b == "Throw clothes")
+    {
+        llMessageLinked(LINK_SET, 9300, "clothes", USER);
+        narrate(q + " opens the hatch and empties the basket: the guards' filthy breeches and loincloths rain down on the kennel.");
+    }
+    else if (b == "Present")
+        narrate(q + " forces " + v + " to kneel on the stone. Let the Lord of the Pit decide " + v + "'s fate.");
+}
+
+report()
+{
+    list want = ["C02_Rack", "C03_Pillory", "C03_Stocks", "C04_Chair", "C07_Cage_1", "C07_Cage_2", "C08_Mast",
+                 "C05_Kennel_1", "C05_Kennel_2", "C05_Kennel_3", "C05_Bowls", "V_Table", "V_Basket", "N_Kneeling_Stone"];
+    integer found = 0; integer i;
+    for (i = 0; i < llGetListLength(want); ++i) if (link_of(llList2String(want, i)) > 0) ++found;
+    string s = "pit_rooms: " + (string)found + " of " + (string)llGetListLength(want) + " pieces of furniture found";
+    if (found == 0) s += ". NONE: the pieces still have their old names - is pit_core in the root?";
+    llOwnerSay(s + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+}
+
+default
+{
+    state_entry()
+    {
+        CH = -1 - (integer)llFrand(1000000.0);
+        llListen(CH, "", NULL_KEY, "");
+        llSetTimerEvent(30.0);
+        OPTS = llLinksetDataRead("opts");
+        texts();
+        report();
+    }
+    on_rez(integer p) { llResetScript(); }
+    link_message(integer s, integer n, string str, key id)
+    {
+        if (n == 9001) { texts(); report(); }
+        else if (n == 9800) report();
+    }
+    linkset_data(integer action, string name, string value)
+    {
+        if (name == "opts" || action == LINKSETDATA_RESET) { OPTS = llLinksetDataRead("opts"); texts(); }
+    }
+    touch_start(integer n) { menu(llDetectedKey(0), llDetectedLinkNumber(0)); }
+    listen(integer c, string n, key id, string m)
+    {
+        integer si = llListFindList(SESS, [id]);
+        if (si == -1 || llList2Integer(SESS, si + 3) < llGetUnixTime()) return;
+        USER = id; LINK = llList2Integer(SESS, si + 1); PIECE = piece(LINK);
+        string mode = llList2String(SESS, si + 2);
+        SESS = llDeleteSubList(SESS, si, si + 3);
+        if (mode == "name")
+        {
+            string txt = "DOG: " + llGetSubString(m, 0, 30) + "\nOwner: " + who(id);
+            llLinksetDataWrite("dog:" + PIECE, txt);
+            text(LINK, txt);
+            narrate(who(id) + " hangs a name tag on the kennel: \"" + m + "\". From today that is the dog's name.");
+            return;
+        }
+        act(m);
+    }
+    timer()
+    {
+        integer now = llGetUnixTime();
+        integer i;
+        for (i = llGetListLength(SESS) - 4; i >= 0; i -= 4)
+            if (llList2Integer(SESS, i + 3) < now) SESS = llDeleteSubList(SESS, i, i + 3);
+    }
+}

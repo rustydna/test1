@@ -1,0 +1,40 @@
+THE SECOND BRIDE - INSTALL IN SECOND LIFE
+=========================================
+Unzip Bride_SL_A_model_and_script.zip and Bride_SL_B_bulk_upload.zip into the same folder.
+You get: 1_model, 2_bulk_upload, 3_script.
+
+What she is: the Lord of the Pit's flagship, a 32-gun frigate (58 m from the jib-boom to the
+ensign, 39 m from the keel to the main truck, about 270 LI, 77 pieces, all mesh, PBR). Walkable
+main deck, quarterdeck and forecastle with stairs; the great cabin under the quarterdeck (the
+Lord's table and chart, captain's chair, box bed, chest, stern gallery windows); the brig on
+the lower deck (two barred cells that lock, chains, straw); fourteen guns that fire a broadside;
+set or furled sails; stern lanterns; the Lord's black flag; the Bride figurehead.
+
+1. MODEL - one upload
+   Build > Upload > Model... > pick 1_model/Second_Bride.dae. The LOD and physics files (_LOD2,
+   _LOD1, _LOD0, _PHYS) load by themselves: keep them together. Scale 1.0.
+   "Calculate weights & fee", then "Upload".
+
+2. MATERIALS, SOUNDS, POSES - one upload
+   Build > Upload > Bulk... > open 2_bulk_upload > Ctrl+A > Open > Upload. Everything is bride_...
+
+3. REZ AND FILL - one drag
+   Rez "Second_Bride" over water. Right-click > Edit > Contents tab. In your inventory type
+   bride_  in the search box, select everything and drag it all onto the Contents tab.
+
+4. THE SCRIPT
+   In the same Contents tab: "New Script", double-click it, Ctrl+A, paste 3_script/bride_main.lsl,
+   Save (name it bride_main). Then say  /90 float  to set her on the water at her waterline.
+
+Touch the ship for the menu:
+   Sails      set sail / furl; white, weathered, black or blood-red canvas
+   Broadside  port, starboard or both: the guns recoil, smoke and boom one after another
+   Bell       eight bells (or touch the bell)
+   Lights     Day, Dusk, Night, Dark; lantern colour (warm, pale, blood, ghost green)
+   Flags      the Lord's black, the Crown's blue, blood red, none
+   Doors      open/close the great cabin and the brig cells (cells: owner/access only)
+   Materials  hull paint, deck, wood, trim/gilt, canvas, metal, glass, glow
+   Sea        gentle rocking on/off, float at the waterline, sea/creak/wind sounds, volume
+   Settings   chat text on/off, lore, particles, lights, guns, access (owner/group/everyone), reset
+Sit at the helm, the Lord's table, the bed or in the brig (kneel, crouch, on all fours, curled);
+touch your seat to change pose. Owner chat: /90 menu   /90 float   /90 broadside   /90 help

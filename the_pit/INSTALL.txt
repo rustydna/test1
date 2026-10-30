@@ -1,0 +1,51 @@
+THE PIT - INSTALL IN SECOND LIFE (fewest clicks)
+================================================
+Unzip ThePit_SL_A_model_and_scripts.zip and ThePit_SL_B_bulk_upload.zip into the same
+folder. You get three folders: 1_model, 2_bulk_upload, 3_scripts.
+
+ALREADY HAVE THE PIT (OR "EL FOSO V3") REZZED? You may keep it: every script works
+with it, because the new model keeps every piece's size and position. The new
+model only adds the carved and modelled story details; upload it (step 1) when
+you want them. Your old materials (Piedra, Suelo...) are recognised too.
+
+1. MODEL - one upload (optional if you already have it)
+   Build > Upload > Model... > pick 1_model/ThePit.dae
+   The LOD and physics files (ThePit_LOD2/_LOD1/_LOD0/_PHYS.dae) load by
+   themselves: keep the five files together. Leave scale at 1.0.
+   Click "Calculate weights & fee", then "Upload".
+
+2. EVERYTHING ELSE - one upload
+   Build > Upload > Bulk... > open 2_bulk_upload > Ctrl+A > Open > Upload.
+   PBR materials, effect textures, pose animations and sounds, all named pit_...
+   The window shows the total price before you confirm.
+
+3. REZ AND FILL - one drag
+   Rez "The Pit". Right-click it > Edit > Contents tab.
+   In your inventory, type  pit_  in the search box, select everything that
+   appears (click the first item, Shift+click the last) and drag it all onto
+   the Contents tab in one go.
+
+4. THE LORE NOTECARD
+   In the Contents tab: "New Note", open it, paste 3_scripts/pit_lore.txt,
+   save, and rename the note  pit_lore
+
+5. SCRIPTS - eight of them, any order
+   In the same Contents tab, for each .lsl file in 3_scripts:
+   "New Script" > double-click it > Ctrl+A > paste the file > Save.
+       pit_core   pit_control   pit_doors   pit_fire
+       pit_rooms  pit_throne    pit_life    pit_examine
+   Old scripts named foso_... are removed automatically.
+
+Done. Everything starts by itself: pieces get their names and physics, the
+materials go on the right faces, doors, fire, sounds, moonlight, the roleplay
+menus, the inmate records and the daily bells work. Touch any wall, floor or
+object to read what it hides.
+
+Owner chat commands (channel 7):
+   /7 settings   switch any of the 50+ features on or off (also "Settings" on the throne)
+   /7 off chat   silence every roleplay line in local chat (/7 on chat to undo)
+   /7 lowlag     keep the roleplay, drop the heavy effects
+   /7 report     what every script found (send it if something fails)
+   /7 seat down  while sitting: lower that seat 5 cm (also up, forward, back, reset)
+   /7 inmates    prison records      /7 carvings clear   wipe player carvings
+   /7 help       every command

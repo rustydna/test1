@@ -1,0 +1,410 @@
+{
+ "slots": {
+  "a_plaster": [
+   {
+    "id": "tar",
+    "name": "bride_a_plaster_tar",
+    "label": "Black tar",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     35,
+     33,
+     30
+    ]
+   },
+   {
+    "id": "oxblood",
+    "name": "bride_a_plaster_oxblood",
+    "label": "Oxblood red",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     83,
+     26,
+     20
+    ]
+   },
+   {
+    "id": "navy",
+    "name": "bride_a_plaster_navy",
+    "label": "Navy blue",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     23,
+     30,
+     51
+    ]
+   },
+   {
+    "id": "weathered",
+    "name": "bride_a_plaster_weathered",
+    "label": "Weathered grey",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     123,
+     120,
+     112
+    ]
+   }
+  ],
+  "b_floor": [
+   {
+    "id": "pine",
+    "name": "bride_b_floor_pine",
+    "label": "Holystoned pine",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     192,
+     170,
+     137
+    ]
+   },
+   {
+    "id": "oak",
+    "name": "bride_b_floor_oak",
+    "label": "Oak deck",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     117,
+     92,
+     66
+    ]
+   },
+   {
+    "id": "teak",
+    "name": "bride_b_floor_teak",
+    "label": "Teak deck",
+    "tile_m": 2.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     147,
+     111,
+     74
+    ]
+   }
+  ],
+  "c_wood": [
+   {
+    "id": "oak",
+    "name": "bride_c_wood_oak",
+    "label": "Varnished oak",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     138,
+     94,
+     53
+    ]
+   },
+   {
+    "id": "pine",
+    "name": "bride_c_wood_pine",
+    "label": "Pine spar",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     188,
+     136,
+     74
+    ]
+   },
+   {
+    "id": "mahogany",
+    "name": "bride_c_wood_mahogany",
+    "label": "Mahogany",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     118,
+     53,
+     30
+    ]
+   },
+   {
+    "id": "driftwood",
+    "name": "bride_c_wood_driftwood",
+    "label": "Driftwood",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     162,
+     156,
+     145
+    ]
+   }
+  ],
+  "d_stone": [
+   {
+    "id": "gilt",
+    "name": "bride_d_stone_gilt",
+    "label": "Gilded carving",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     233,
+     191,
+     108
+    ]
+   },
+   {
+    "id": "ochre",
+    "name": "bride_d_stone_ochre",
+    "label": "Ochre paint",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     182,
+     135,
+     52
+    ]
+   },
+   {
+    "id": "red",
+    "name": "bride_d_stone_red",
+    "label": "Gun-port red",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     129,
+     28,
+     18
+    ]
+   },
+   {
+    "id": "faded",
+    "name": "bride_d_stone_faded",
+    "label": "Faded gilt",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     170,
+     132,
+     72
+    ]
+   }
+  ],
+  "e_fabric": [
+   {
+    "id": "canvas",
+    "name": "bride_e_fabric_canvas",
+    "label": "Sailcloth",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     206,
+     198,
+     179
+    ]
+   },
+   {
+    "id": "tan",
+    "name": "bride_e_fabric_tan",
+    "label": "Weathered canvas",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     162,
+     143,
+     112
+    ]
+   },
+   {
+    "id": "black",
+    "name": "bride_e_fabric_black",
+    "label": "Black sailcloth",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     35,
+     33,
+     32
+    ]
+   },
+   {
+    "id": "wool",
+    "name": "bride_e_fabric_wool",
+    "label": "Wool bunting (tint)",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     207,
+     204,
+     196
+    ]
+   }
+  ],
+  "f_metal": [
+   {
+    "id": "iron",
+    "name": "bride_f_metal_iron",
+    "label": "Cast iron",
+    "tile_m": 0.5,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     35,
+     32,
+     30
+    ]
+   },
+   {
+    "id": "bronze",
+    "name": "bride_f_metal_bronze",
+    "label": "Old bronze",
+    "tile_m": 0.5,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     73,
+     59,
+     38
+    ]
+   },
+   {
+    "id": "brass",
+    "name": "bride_f_metal_brass",
+    "label": "Polished brass",
+    "tile_m": 0.5,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     231,
+     196,
+     119
+    ]
+   }
+  ],
+  "g_glass": [
+   {
+    "id": "leaded",
+    "name": "bride_g_glass_leaded",
+    "label": "Leaded diamonds",
+    "tile_m": 0.6,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     170,
+     184,
+     166
+    ]
+   },
+   {
+    "id": "amber",
+    "name": "bride_g_glass_amber",
+    "label": "Amber leaded",
+    "tile_m": 0.6,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     196,
+     147,
+     77
+    ]
+   },
+   {
+    "id": "clear",
+    "name": "bride_g_glass_clear",
+    "label": "Crown glass",
+    "tile_m": 0.6,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     235,
+     242,
+     237
+    ]
+   }
+  ],
+  "h_glow": [
+   {
+    "id": "lantern",
+    "name": "bride_h_glow_lantern",
+    "label": "Lantern flame",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     255,
+     185,
+     90
+    ]
+   },
+   {
+    "id": "white",
+    "name": "bride_h_glow_white",
+    "label": "White light (tint)",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     255,
+     255,
+     255
+    ]
+   }
+  ],
+  "water": [
+   {
+    "id": "sea",
+    "name": "bride_water_sea",
+    "label": "Open sea",
+    "tile_m": 4.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     11,
+     33,
+     37
+    ]
+   },
+   {
+    "id": "harbour",
+    "name": "bride_water_harbour",
+    "label": "Harbour water",
+    "tile_m": 4.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     21,
+     31,
+     20
+    ]
+   }
+  ]
+ },
+ "default": {
+  "a_plaster": "tar",
+  "b_floor": "pine",
+  "c_wood": "oak",
+  "d_stone": "gilt",
+  "e_fabric": "canvas",
+  "f_metal": "iron",
+  "g_glass": "leaded",
+  "h_glow": "lantern",
+  "water": "sea"
+ }
+}

@@ -1,0 +1,3079 @@
+{
+ "linksets": {
+  "Second_Bride": {
+   "pieces": 77,
+   "root": "Bride_Deck_Main",
+   "label": "The Second Bride",
+   "li_download_est": 269.2,
+   "li_server": 38.5,
+   "li_estimate": 269.2,
+   "size_m": [
+    58.49,
+    18.8,
+    39.66
+   ],
+   "min": [
+    -22.95,
+    -9.4,
+    -4.21
+   ],
+   "triangles_high": 70349,
+   "files": [
+    "Second_Bride.dae",
+    "Second_Bride_LOD2.dae",
+    "Second_Bride_LOD1.dae",
+    "Second_Bride_LOD0.dae",
+    "Second_Bride_PHYS.dae"
+   ]
+  }
+ },
+ "pieces": [
+  {
+   "name": "Bride_Hull_Stern",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    11.2,
+    9.575,
+    11.784
+   ],
+   "center": [
+    -13.4,
+    0.0,
+    1.684
+   ],
+   "radius_m": 9.43,
+   "triangles": {
+    "HIGH": 4688,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 20,
+    "PHYS": 470
+   },
+   "lod_weight": [
+    0.047,
+    0.707,
+    0.246,
+    0.0
+   ],
+   "li_est": 12.136,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Hull_Aft",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    9.8,
+    10.585,
+    11.065
+   ],
+   "center": [
+    -2.9,
+    0.0,
+    1.333
+   ],
+   "radius_m": 9.09,
+   "triangles": {
+    "HIGH": 4384,
+    "MEDIUM": 96,
+    "LOW": 92,
+    "LOWEST": 24,
+    "PHYS": 438
+   },
+   "lod_weight": [
+    0.044,
+    0.657,
+    0.3,
+    0.0
+   ],
+   "li_est": 15.713,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Hull_Fore",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    9.0,
+    10.586,
+    10.66
+   ],
+   "center": [
+    6.5,
+    0.0,
+    1.13
+   ],
+   "radius_m": 8.76,
+   "triangles": {
+    "HIGH": 4064,
+    "MEDIUM": 101,
+    "LOW": 101,
+    "LOWEST": 24,
+    "PHYS": 408
+   },
+   "lod_weight": [
+    0.041,
+    0.609,
+    0.35,
+    0.0
+   ],
+   "li_est": 14.976,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Hull_Bow",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    8.2,
+    8.084,
+    11.306
+   ],
+   "center": [
+    15.1,
+    0.0,
+    1.455
+   ],
+   "radius_m": 8.07,
+   "triangles": {
+    "HIGH": 3064,
+    "MEDIUM": 112,
+    "LOW": 28,
+    "LOWEST": 10,
+    "PHYS": 308
+   },
+   "lod_weight": [
+    0.034,
+    0.517,
+    0.448,
+    0.0
+   ],
+   "li_est": 8.679,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Deck_Main",
+   "linkset": "Second_Bride",
+   "kind": "core",
+   "size_m": [
+    19.8,
+    9.65,
+    1.059
+   ],
+   "center": [
+    -8.4,
+    0.0,
+    3.07
+   ],
+   "radius_m": 11.03,
+   "triangles": {
+    "HIGH": 754,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 22,
+    "PHYS": 122
+   },
+   "lod_weight": [
+    0.064,
+    0.936,
+    0.0,
+    0.0
+   ],
+   "li_est": 5.769,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Deck_Main_Fore",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    16.1,
+    9.652,
+    0.846
+   ],
+   "center": [
+    9.55,
+    0.0,
+    2.963
+   ],
+   "radius_m": 9.4,
+   "triangles": {
+    "HIGH": 726,
+    "MEDIUM": 62,
+    "LOW": 32,
+    "LOWEST": 18,
+    "PHYS": 122
+   },
+   "lod_weight": [
+    0.047,
+    0.702,
+    0.252,
+    0.0
+   ],
+   "li_est": 4.611,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Deck_Quarter",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    12.65,
+    8.33,
+    1.485
+   ],
+   "center": [
+    -12.575,
+    0.0,
+    5.807
+   ],
+   "radius_m": 7.61,
+   "triangles": {
+    "HIGH": 2029,
+    "MEDIUM": 62,
+    "LOW": 44,
+    "LOWEST": 22,
+    "PHYS": 86
+   },
+   "lod_weight": [
+    0.031,
+    0.46,
+    0.509,
+    0.0
+   ],
+   "li_est": 8.647,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Deck_Fore",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    7.62,
+    7.285,
+    1.486
+   ],
+   "center": [
+    14.29,
+    0.0,
+    5.688
+   ],
+   "radius_m": 5.32,
+   "triangles": {
+    "HIGH": 1081,
+    "MEDIUM": 84,
+    "LOW": 62,
+    "LOWEST": 22,
+    "PHYS": 50
+   },
+   "lod_weight": [
+    0.015,
+    0.225,
+    0.721,
+    0.039
+   ],
+   "li_est": 7.551,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Deck_Lower",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    9.52,
+    8.4,
+    2.245
+   ],
+   "center": [
+    5.9,
+    0.0,
+    1.422
+   ],
+   "radius_m": 6.45,
+   "triangles": {
+    "HIGH": 66,
+    "MEDIUM": 60,
+    "LOW": 24,
+    "LOWEST": 12,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.022,
+    0.33,
+    0.648,
+    0.0
+   ],
+   "li_est": 1.935,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Stair_Quarter_1",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    2.179,
+    0.95,
+    3.725
+   ],
+   "center": [
+    -5.25,
+    2.391,
+    4.651
+   ],
+   "radius_m": 2.21,
+   "triangles": {
+    "HIGH": 231,
+    "MEDIUM": 88,
+    "LOW": 34,
+    "LOWEST": 18,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.003,
+    0.039,
+    0.124,
+    0.834
+   ],
+   "li_est": 0.815,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.6,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Stair_Quarter_2",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    2.179,
+    0.95,
+    3.725
+   ],
+   "center": [
+    -5.25,
+    -2.391,
+    4.651
+   ],
+   "radius_m": 2.21,
+   "triangles": {
+    "HIGH": 231,
+    "MEDIUM": 88,
+    "LOW": 34,
+    "LOWEST": 18,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.003,
+    0.039,
+    0.124,
+    0.834
+   ],
+   "li_est": 0.815,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.6,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Stair_Fore_1",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    1.832,
+    0.9,
+    3.527
+   ],
+   "center": [
+    9.675,
+    1.951,
+    4.632
+   ],
+   "radius_m": 2.04,
+   "triangles": {
+    "HIGH": 219,
+    "MEDIUM": 82,
+    "LOW": 32,
+    "LOWEST": 16,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.002,
+    0.033,
+    0.106,
+    0.859
+   ],
+   "li_est": 0.59,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Stair_Fore_2",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    1.832,
+    0.9,
+    3.527
+   ],
+   "center": [
+    9.675,
+    -1.951,
+    4.632
+   ],
+   "radius_m": 2.04,
+   "triangles": {
+    "HIGH": 219,
+    "MEDIUM": 82,
+    "LOW": 32,
+    "LOWEST": 16,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.002,
+    0.033,
+    0.106,
+    0.859
+   ],
+   "li_est": 0.59,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Stair_Brig",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    2.423,
+    1.1,
+    3.541
+   ],
+   "center": [
+    1.775,
+    0.0,
+    2.036
+   ],
+   "radius_m": 2.21,
+   "triangles": {
+    "HIGH": 219,
+    "MEDIUM": 76,
+    "LOW": 32,
+    "LOWEST": 18,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.003,
+    0.039,
+    0.125,
+    0.834
+   ],
+   "li_est": 0.761,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Bulkhead_Cabin",
+   "linkset": "Second_Bride",
+   "kind": "light",
+   "size_m": [
+    0.45,
+    8.776,
+    2.44
+   ],
+   "center": [
+    -6.085,
+    -0.03,
+    4.117
+   ],
+   "radius_m": 4.56,
+   "triangles": {
+    "HIGH": 431,
+    "MEDIUM": 82,
+    "LOW": 74,
+    "LOWEST": 16,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.011,
+    0.165,
+    0.529,
+    0.295
+   ],
+   "li_est": 4.789,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 1.2,
+   "phys": "box"
+  },
+  {
+   "name": "Bride_Door_Cabin",
+   "linkset": "Second_Bride",
+   "kind": "door",
+   "size_m": [
+    0.157,
+    1.08,
+    2.12
+   ],
+   "center": [
+    -6.211,
+    0.0,
+    3.957
+   ],
+   "radius_m": 1.19,
+   "triangles": {
+    "HIGH": 96,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 0.471,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.4,
+   "phys": "box"
+  },
+  {
+   "name": "Bride_Bulkhead_Fore",
+   "linkset": "Second_Bride",
+   "kind": "light",
+   "size_m": [
+    0.41,
+    7.683,
+    2.24
+   ],
+   "center": [
+    10.365,
+    -0.03,
+    4.099
+   ],
+   "radius_m": 4.01,
+   "triangles": {
+    "HIGH": 351,
+    "MEDIUM": 68,
+    "LOW": 32,
+    "LOWEST": 16,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.009,
+    0.128,
+    0.408,
+    0.456
+   ],
+   "li_est": 2.408,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.8,
+   "phys": "box"
+  },
+  {
+   "name": "Bride_Brig",
+   "linkset": "Second_Bride",
+   "kind": "light",
+   "size_m": [
+    9.52,
+    9.229,
+    2.325
+   ],
+   "center": [
+    5.9,
+    0.0,
+    1.382
+   ],
+   "radius_m": 6.73,
+   "triangles": {
+    "HIGH": 2748,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 18,
+    "PHYS": 74
+   },
+   "lod_weight": [
+    0.024,
+    0.36,
+    0.616,
+    0.0
+   ],
+   "li_est": 6.833,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 2.5,
+   "phys": "custom"
+  },
+  {
+   "name": "Bride_Brig_Door_1",
+   "linkset": "Second_Bride",
+   "kind": "door",
+   "size_m": [
+    0.95,
+    0.18,
+    2.175
+   ],
+   "center": [
+    7.675,
+    1.05,
+    1.407
+   ],
+   "radius_m": 1.19,
+   "triangles": {
+    "HIGH": 206,
+    "MEDIUM": 64,
+    "LOW": 26,
+    "LOWEST": 20,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 1.349,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.3,
+   "phys": "box"
+  },
+  {
+   "name": "Bride_Brig_Door_2",
+   "linkset": "Second_Bride",
+   "kind": "door",
+   "size_m": [
+    0.95,
+    0.18,
+    2.175
+   ],
+   "center": [
+    7.675,
+    -1.05,
+    1.407
+   ],
+   "radius_m": 1.19,
+   "triangles": {
+    "HIGH": 206,
+    "MEDIUM": 64,
+    "LOW": 26,
+    "LOWEST": 20,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 1.349,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.3,
+   "phys": "box"
+  },
+  {
+   "name": "Bride_Stern",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    4.32,
+    8.822,
+    5.85
+   ],
+   "center": [
+    -17.41,
+    0.005,
+    6.007
+   ],
+   "radius_m": 5.72,
+   "triangles": {
+    "HIGH": 4291,
+    "MEDIUM": 104,
+    "LOW": 16,
+    "LOWEST": 16,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.017,
+    0.26,
+    0.723,
+    0.0
+   ],
+   "li_est": 6.673,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Stern_Lanterns",
+   "linkset": "Second_Bride",
+   "kind": "light",
+   "size_m": [
+    0.76,
+    5.31,
+    2.778
+   ],
+   "center": [
+    -19.25,
+    0.0,
+    8.861
+   ],
+   "radius_m": 3.02,
+   "triangles": {
+    "HIGH": 556,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.005,
+    0.072,
+    0.232,
+    0.691
+   ],
+   "li_est": 2.053,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 1.0,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Figurehead",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    3.291,
+    1.299,
+    2.169
+   ],
+   "center": [
+    17.323,
+    0.0,
+    3.399
+   ],
+   "radius_m": 2.08,
+   "triangles": {
+    "HIGH": 2575,
+    "MEDIUM": 277,
+    "LOW": 70,
+    "LOWEST": 19,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.002,
+    0.034,
+    0.11,
+    0.854
+   ],
+   "li_est": 2.531,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Bowsprit",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    21.702,
+    8.52,
+    8.145
+   ],
+   "center": [
+    24.686,
+    0.0,
+    6.803
+   ],
+   "radius_m": 12.35,
+   "triangles": {
+    "HIGH": 885,
+    "MEDIUM": 62,
+    "LOW": 34,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.081,
+    0.919,
+    0.0,
+    0.0
+   ],
+   "li_est": 9.474,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Mast_Fore",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    1.8,
+    3.4,
+    17.15
+   ],
+   "center": [
+    11.4,
+    0.0,
+    8.875
+   ],
+   "radius_m": 8.79,
+   "triangles": {
+    "HIGH": 545,
+    "MEDIUM": 77,
+    "LOW": 25,
+    "LOWEST": 13,
+    "PHYS": 26
+   },
+   "lod_weight": [
+    0.041,
+    0.614,
+    0.345,
+    0.0
+   ],
+   "li_est": 6.151,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Topmast_Fore",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    1.23,
+    16.92,
+    18.05
+   ],
+   "center": [
+    11.915,
+    0.0,
+    24.425
+   ],
+   "radius_m": 12.39,
+   "triangles": {
+    "HIGH": 555,
+    "MEDIUM": 62,
+    "LOW": 30,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.081,
+    0.919,
+    0.0,
+    0.0
+   ],
+   "li_est": 8.59,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Sails_Fore",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.341,
+    16.92,
+    23.386
+   ],
+   "center": [
+    12.77,
+    0.0,
+    18.657
+   ],
+   "radius_m": 14.45,
+   "triangles": {
+    "HIGH": 647,
+    "MEDIUM": 61,
+    "LOW": 25,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.111,
+    0.889,
+    0.0,
+    0.0
+   ],
+   "li_est": 4.535,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Furled_Fore",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.045,
+    15.589,
+    15.505
+   ],
+   "center": [
+    12.163,
+    0.001,
+    23.078
+   ],
+   "radius_m": 11.01,
+   "triangles": {
+    "HIGH": 839,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.064,
+    0.936,
+    0.0,
+    0.0
+   ],
+   "li_est": 5.824,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Shrouds_Fore_P",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.621,
+    4.477,
+    22.647
+   ],
+   "center": [
+    10.389,
+    2.464,
+    15.08
+   ],
+   "radius_m": 11.77,
+   "triangles": {
+    "HIGH": 569,
+    "MEDIUM": 30,
+    "LOW": 24,
+    "LOWEST": 16,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.073,
+    0.927,
+    0.0,
+    0.0
+   ],
+   "li_est": 4.745,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Shrouds_Fore_S",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.621,
+    4.477,
+    22.649
+   ],
+   "center": [
+    10.389,
+    -2.475,
+    15.079
+   ],
+   "radius_m": 11.77,
+   "triangles": {
+    "HIGH": 569,
+    "MEDIUM": 30,
+    "LOW": 24,
+    "LOWEST": 16,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.073,
+    0.927,
+    0.0,
+    0.0
+   ],
+   "li_est": 4.745,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Mast_Main",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    1.8,
+    3.4,
+    19.15
+   ],
+   "center": [
+    -0.8,
+    0.0,
+    9.875
+   ],
+   "radius_m": 9.77,
+   "triangles": {
+    "HIGH": 545,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.051,
+    0.758,
+    0.191,
+    0.0
+   ],
+   "li_est": 6.188,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Topmast_Main",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    1.23,
+    18.8,
+    18.05
+   ],
+   "center": [
+    -0.285,
+    0.0,
+    26.425
+   ],
+   "radius_m": 13.05,
+   "triangles": {
+    "HIGH": 555,
+    "MEDIUM": 62,
+    "LOW": 30,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.09,
+    0.91,
+    0.0,
+    0.0
+   ],
+   "li_est": 8.721,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Sails_Main",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.341,
+    18.8,
+    26.247
+   ],
+   "center": [
+    0.57,
+    0.0,
+    19.227
+   ],
+   "radius_m": 16.16,
+   "triangles": {
+    "HIGH": 647,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.138,
+    0.862,
+    0.0,
+    0.0
+   ],
+   "li_est": 5.118,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Furled_Main",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.045,
+    17.316,
+    15.506
+   ],
+   "center": [
+    -0.037,
+    0.001,
+    25.078
+   ],
+   "radius_m": 11.63,
+   "triangles": {
+    "HIGH": 839,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.072,
+    0.928,
+    0.0,
+    0.0
+   ],
+   "li_est": 6.074,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Shrouds_Main_P",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.621,
+    5.058,
+    26.348
+   ],
+   "center": [
+    -1.811,
+    2.754,
+    15.23
+   ],
+   "radius_m": 13.61,
+   "triangles": {
+    "HIGH": 679,
+    "MEDIUM": 30,
+    "LOW": 24,
+    "LOWEST": 18,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.098,
+    0.902,
+    0.0,
+    0.0
+   ],
+   "li_est": 6.712,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Shrouds_Main_S",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.621,
+    5.046,
+    26.348
+   ],
+   "center": [
+    -1.811,
+    -2.76,
+    15.23
+   ],
+   "radius_m": 13.61,
+   "triangles": {
+    "HIGH": 679,
+    "MEDIUM": 30,
+    "LOW": 24,
+    "LOWEST": 18,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.098,
+    0.902,
+    0.0,
+    0.0
+   ],
+   "li_est": 6.711,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Mast_Mizzen",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    1.35,
+    2.55,
+    14.35
+   ],
+   "center": [
+    -12.4,
+    0.0,
+    7.475
+   ],
+   "radius_m": 7.32,
+   "triangles": {
+    "HIGH": 545,
+    "MEDIUM": 107,
+    "LOW": 27,
+    "LOWEST": 11,
+    "PHYS": 16
+   },
+   "lod_weight": [
+    0.028,
+    0.426,
+    0.546,
+    0.0
+   ],
+   "li_est": 6.041,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Topmast_Mizzen",
+   "linkset": "Second_Bride",
+   "kind": "structure",
+   "size_m": [
+    9.405,
+    9.2,
+    15.127
+   ],
+   "center": [
+    -16.002,
+    0.0,
+    14.687
+   ],
+   "radius_m": 10.02,
+   "triangles": {
+    "HIGH": 348,
+    "MEDIUM": 69,
+    "LOW": 25,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.053,
+    0.798,
+    0.148,
+    0.0
+   ],
+   "li_est": 6.555,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Sails_Mizzen",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    9.644,
+    8.74,
+    14.117
+   ],
+   "center": [
+    -15.678,
+    0.0,
+    14.492
+   ],
+   "radius_m": 9.6,
+   "triangles": {
+    "HIGH": 263,
+    "MEDIUM": 80,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.049,
+    0.732,
+    0.219,
+    0.0
+   ],
+   "li_est": 2.222,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 3,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Furled_Mizzen",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    8.841,
+    8.491,
+    14.739
+   ],
+   "center": [
+    -15.785,
+    0.001,
+    14.673
+   ],
+   "radius_m": 9.59,
+   "triangles": {
+    "HIGH": 455,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.049,
+    0.73,
+    0.221,
+    0.0
+   ],
+   "li_est": 3.812,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Shrouds_Mizzen_P",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.621,
+    3.948,
+    16.62
+   ],
+   "center": [
+    -13.41,
+    2.2,
+    13.293
+   ],
+   "radius_m": 8.85,
+   "triangles": {
+    "HIGH": 335,
+    "MEDIUM": 26,
+    "LOW": 22,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.041,
+    0.622,
+    0.336,
+    0.0
+   ],
+   "li_est": 2.19,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Shrouds_Mizzen_S",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.621,
+    3.937,
+    16.621
+   ],
+   "center": [
+    -13.41,
+    -2.205,
+    13.294
+   ],
+   "radius_m": 8.85,
+   "triangles": {
+    "HIGH": 335,
+    "MEDIUM": 26,
+    "LOW": 22,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.041,
+    0.622,
+    0.336,
+    0.0
+   ],
+   "li_est": 2.19,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Stays",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    43.881,
+    0.09,
+    32.034
+   ],
+   "center": [
+    9.716,
+    -0.015,
+    16.597
+   ],
+   "radius_m": 27.16,
+   "triangles": {
+    "HIGH": 55,
+    "MEDIUM": 18,
+    "LOW": 18,
+    "LOWEST": 18,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.391,
+    0.609,
+    0.0,
+    0.0
+   ],
+   "li_est": 2.13,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Sails_Head",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    19.29,
+    0.489,
+    25.946
+   ],
+   "center": [
+    21.995,
+    -0.245,
+    19.627
+   ],
+   "radius_m": 16.17,
+   "triangles": {
+    "HIGH": 157,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 9,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.138,
+    0.861,
+    0.0,
+    0.0
+   ],
+   "li_est": 2.286,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 2,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Furled_Head",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    11.18,
+    0.32,
+    6.349
+   ],
+   "center": [
+    26.154,
+    0.0,
+    10.8
+   ],
+   "radius_m": 6.43,
+   "triangles": {
+    "HIGH": 79,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.022,
+    0.329,
+    0.649,
+    0.0
+   ],
+   "li_est": 2.03,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.6,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Flag_Lord",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.27,
+    0.434,
+    2.8
+   ],
+   "center": [
+    -2.215,
+    0.001,
+    33.9
+   ],
+   "radius_m": 2.56,
+   "triangles": {
+    "HIGH": 461,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.003,
+    0.052,
+    0.167,
+    0.777
+   ],
+   "li_est": 1.36,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.8,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Ensign",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.019,
+    0.413,
+    4.822
+   ],
+   "center": [
+    -20.941,
+    0.012,
+    9.477
+   ],
+   "radius_m": 3.15,
+   "triangles": {
+    "HIGH": 461,
+    "MEDIUM": 98,
+    "LOW": 25,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.005,
+    0.079,
+    0.252,
+    0.665
+   ],
+   "li_est": 1.423,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.8,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Gun_P1",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.149,
+    1.561
+   ],
+   "center": [
+    -4.9,
+    3.89,
+    3.607
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.122,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_S1",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.149,
+    1.561
+   ],
+   "center": [
+    -4.9,
+    -3.89,
+    3.607
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.105,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_P2",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.148,
+    1.561
+   ],
+   "center": [
+    -2.5,
+    3.991,
+    3.558
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.125,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_S2",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.148,
+    1.561
+   ],
+   "center": [
+    -2.5,
+    -3.991,
+    3.558
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.115,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_P3",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.148,
+    1.561
+   ],
+   "center": [
+    -0.1,
+    4.054,
+    3.533
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.116,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_S3",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.148,
+    1.561
+   ],
+   "center": [
+    -0.1,
+    -4.054,
+    3.533
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.111,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_P4",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.147,
+    1.561
+   ],
+   "center": [
+    2.3,
+    4.074,
+    3.534
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.095,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_S4",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.147,
+    1.561
+   ],
+   "center": [
+    2.3,
+    -4.074,
+    3.534
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.107,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_P5",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.149,
+    1.561
+   ],
+   "center": [
+    4.7,
+    4.028,
+    3.561
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.128,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_S5",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.149,
+    1.561
+   ],
+   "center": [
+    4.7,
+    -4.028,
+    3.561
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.882
+   ],
+   "li_est": 1.093,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_P6",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.153,
+    1.561
+   ],
+   "center": [
+    7.1,
+    3.845,
+    3.613
+   ],
+   "radius_m": 1.87,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.089,
+    0.882
+   ],
+   "li_est": 1.117,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_S6",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.153,
+    1.561
+   ],
+   "center": [
+    7.1,
+    -3.845,
+    3.613
+   ],
+   "radius_m": 1.87,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.089,
+    0.882
+   ],
+   "li_est": 1.112,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_P7",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.161,
+    1.561
+   ],
+   "center": [
+    9.4,
+    3.484,
+    3.686
+   ],
+   "radius_m": 1.87,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.089,
+    0.881
+   ],
+   "li_est": 1.097,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Gun_S7",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.247,
+    3.161,
+    1.561
+   ],
+   "center": [
+    9.4,
+    -3.484,
+    3.686
+   ],
+   "radius_m": 1.87,
+   "triangles": {
+    "HIGH": 732,
+    "MEDIUM": 132,
+    "LOW": 34,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.089,
+    0.881
+   ],
+   "li_est": 1.106,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Helm",
+   "linkset": "Second_Bride",
+   "kind": "furniture",
+   "size_m": [
+    3.093,
+    1.6,
+    2.277
+   ],
+   "center": [
+    -13.567,
+    0.0,
+    7.014
+   ],
+   "radius_m": 2.08,
+   "triangles": {
+    "HIGH": 2976,
+    "MEDIUM": 202,
+    "LOW": 154,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.002,
+    0.034,
+    0.11,
+    0.853
+   ],
+   "li_est": 3.645,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 1.2,
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -1.383,
+     0.0,
+     -1.074
+    ],
+    "yaw": 0.0,
+    "poses": [
+     "bride_helm"
+    ]
+   }
+  },
+  {
+   "name": "Bride_Capstan",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.1,
+    1.1,
+    1.25
+   ],
+   "center": [
+    -3.6,
+    0.0,
+    3.452
+   ],
+   "radius_m": 1.0,
+   "triangles": {
+    "HIGH": 390,
+    "MEDIUM": 154,
+    "LOW": 40,
+    "LOWEST": 22,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.001,
+    0.008,
+    0.025,
+    0.966
+   ],
+   "li_est": 1.814,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.8,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Bell",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    0.4,
+    1.191,
+    1.714
+   ],
+   "center": [
+    10.3,
+    0.0,
+    6.247
+   ],
+   "radius_m": 1.06,
+   "triangles": {
+    "HIGH": 310,
+    "MEDIUM": 122,
+    "LOW": 32,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.009,
+    0.029,
+    0.962
+   ],
+   "li_est": 0.363,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Boat",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    6.425,
+    8.8,
+    2.739
+   ],
+   "center": [
+    4.6,
+    0.0,
+    4.075
+   ],
+   "radius_m": 5.62,
+   "triangles": {
+    "HIGH": 638,
+    "MEDIUM": 62,
+    "LOW": 28,
+    "LOWEST": 22,
+    "PHYS": 22
+   },
+   "lod_weight": [
+    0.017,
+    0.251,
+    0.732,
+    0.0
+   ],
+   "li_est": 3.33,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 1.2,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Cabin_Table",
+   "linkset": "Second_Bride",
+   "kind": "furniture",
+   "size_m": [
+    3.0,
+    1.3,
+    1.33
+   ],
+   "center": [
+    -15.4,
+    0.0,
+    4.037
+   ],
+   "radius_m": 1.76,
+   "triangles": {
+    "HIGH": 935,
+    "MEDIUM": 286,
+    "LOW": 72,
+    "LOWEST": 36,
+    "PHYS": 34
+   },
+   "lod_weight": [
+    0.002,
+    0.025,
+    0.079,
+    0.894
+   ],
+   "li_est": 4.649,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.2,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Cabin_Chair_1",
+   "linkset": "Second_Bride",
+   "kind": "furniture",
+   "size_m": [
+    0.47,
+    0.48,
+    1.35
+   ],
+   "center": [
+    -17.315,
+    0.0,
+    4.192
+   ],
+   "radius_m": 0.75,
+   "triangles": {
+    "HIGH": 1348,
+    "MEDIUM": 178,
+    "LOW": 46,
+    "LOWEST": 22,
+    "PHYS": 36
+   },
+   "lod_weight": [
+    0.0,
+    0.005,
+    0.014,
+    0.981
+   ],
+   "li_est": 1.929,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.185,
+     0.0,
+     -0.135
+    ],
+    "yaw": 0,
+    "poses": [
+     "bride_sit_upright",
+     "bride_scribe",
+     "bride_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Bride_Cabin_Chair_2",
+   "linkset": "Second_Bride",
+   "kind": "furniture",
+   "size_m": [
+    0.48,
+    0.47,
+    0.95
+   ],
+   "center": [
+    -15.9,
+    0.985,
+    3.878
+   ],
+   "radius_m": 0.58,
+   "triangles": {
+    "HIGH": 1349,
+    "MEDIUM": 186,
+    "LOW": 48,
+    "LOWEST": 22,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.009,
+    0.989
+   ],
+   "li_est": 1.743,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     -0.185,
+     0.065
+    ],
+    "yaw": 90,
+    "poses": [
+     "bride_sit_upright",
+     "bride_sit_relaxed",
+     "bride_guard"
+    ]
+   }
+  },
+  {
+   "name": "Bride_Cabin_Chair_3",
+   "linkset": "Second_Bride",
+   "kind": "furniture",
+   "size_m": [
+    0.48,
+    0.47,
+    0.95
+   ],
+   "center": [
+    -14.9,
+    0.985,
+    3.806
+   ],
+   "radius_m": 0.58,
+   "triangles": {
+    "HIGH": 1349,
+    "MEDIUM": 186,
+    "LOW": 48,
+    "LOWEST": 22,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.009,
+    0.989
+   ],
+   "li_est": 1.744,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     -0.185,
+     0.065
+    ],
+    "yaw": 90,
+    "poses": [
+     "bride_sit_upright",
+     "bride_sit_relaxed",
+     "bride_guard"
+    ]
+   }
+  },
+  {
+   "name": "Bride_Cabin_Chair_4",
+   "linkset": "Second_Bride",
+   "kind": "furniture",
+   "size_m": [
+    0.48,
+    0.47,
+    0.95
+   ],
+   "center": [
+    -15.9,
+    -0.985,
+    3.878
+   ],
+   "radius_m": 0.58,
+   "triangles": {
+    "HIGH": 1349,
+    "MEDIUM": 186,
+    "LOW": 48,
+    "LOWEST": 22,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.009,
+    0.989
+   ],
+   "li_est": 1.745,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     0.185,
+     0.065
+    ],
+    "yaw": 270,
+    "poses": [
+     "bride_sit_upright",
+     "bride_sit_relaxed",
+     "bride_guard"
+    ]
+   }
+  },
+  {
+   "name": "Bride_Cabin_Chair_5",
+   "linkset": "Second_Bride",
+   "kind": "furniture",
+   "size_m": [
+    0.48,
+    0.47,
+    0.95
+   ],
+   "center": [
+    -14.9,
+    -0.985,
+    3.806
+   ],
+   "radius_m": 0.58,
+   "triangles": {
+    "HIGH": 1349,
+    "MEDIUM": 186,
+    "LOW": 48,
+    "LOWEST": 22,
+    "PHYS": 32
+   },
+   "lod_weight": [
+    0.0,
+    0.003,
+    0.009,
+    0.989
+   ],
+   "li_est": 1.742,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.5,
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.0,
+     0.185,
+     0.065
+    ],
+    "yaw": 270,
+    "poses": [
+     "bride_sit_upright",
+     "bride_sit_relaxed",
+     "bride_guard"
+    ]
+   }
+  },
+  {
+   "name": "Bride_Cabin_Bed",
+   "linkset": "Second_Bride",
+   "kind": "furniture",
+   "size_m": [
+    2.7,
+    1.228,
+    2.25
+   ],
+   "center": [
+    -10.6,
+    3.596,
+    4.14
+   ],
+   "radius_m": 1.86,
+   "triangles": {
+    "HIGH": 2132,
+    "MEDIUM": 202,
+    "LOW": 52,
+    "LOWEST": 14,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.002,
+    0.028,
+    0.088,
+    0.883
+   ],
+   "li_est": 1.619,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.0,
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.7,
+     0.064,
+     -0.424
+    ],
+    "yaw": 0.0,
+    "poses": [
+     "bride_lounge",
+     "bride_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Bride_Cabin_Chest",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    1.0,
+    0.64,
+    0.68
+   ],
+   "center": [
+    -12.6,
+    -2.91,
+    3.487
+   ],
+   "radius_m": 0.68,
+   "triangles": {
+    "HIGH": 112,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 12,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.0,
+    0.004,
+    0.012,
+    0.984
+   ],
+   "li_est": 0.645,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.6,
+   "phys": "hull"
+  },
+  {
+   "name": "Bride_Cabin_Lamp",
+   "linkset": "Second_Bride",
+   "kind": "light",
+   "size_m": [
+    0.36,
+    0.36,
+    0.95
+   ],
+   "center": [
+    -15.4,
+    0.0,
+    5.317
+   ],
+   "radius_m": 0.54,
+   "triangles": {
+    "HIGH": 149,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.007,
+    0.99
+   ],
+   "li_est": 0.398,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Cabin_Rug",
+   "linkset": "Second_Bride",
+   "kind": "deco",
+   "size_m": [
+    4.4,
+    3.0,
+    0.021
+   ],
+   "center": [
+    -15.2,
+    0.0,
+    3.364
+   ],
+   "radius_m": 2.66,
+   "triangles": {
+    "HIGH": 99,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.004,
+    0.056,
+    0.18,
+    0.76
+   ],
+   "li_est": 0.302,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Bride_Brig_Floor_1",
+   "linkset": "Second_Bride",
+   "kind": "seat",
+   "size_m": [
+    0.9,
+    0.666,
+    0.06
+   ],
+   "center": [
+    8.2,
+    2.3,
+    0.31
+   ],
+   "radius_m": 0.56,
+   "triangles": {
+    "HIGH": 67,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.989
+   ],
+   "li_est": 0.064,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.2,
+   "phys": "none",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     -0.01
+    ],
+    "yaw": 0.0,
+    "poses": [
+     "bride_kneel",
+     "bride_cage",
+     "bride_dog",
+     "bride_sit_curl"
+    ]
+   }
+  },
+  {
+   "name": "Bride_Brig_Floor_2",
+   "linkset": "Second_Bride",
+   "kind": "seat",
+   "size_m": [
+    0.9,
+    0.666,
+    0.06
+   ],
+   "center": [
+    8.2,
+    -2.3,
+    0.31
+   ],
+   "radius_m": 0.56,
+   "triangles": {
+    "HIGH": 67,
+    "MEDIUM": 60,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.008,
+    0.989
+   ],
+   "li_est": 0.064,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 0.2,
+   "phys": "none",
+   "seat": {
+    "offset": [
+     0.0,
+     -0.0,
+     -0.01
+    ],
+    "yaw": 180.0,
+    "poses": [
+     "bride_kneel",
+     "bride_cage",
+     "bride_dog",
+     "bride_sit_curl"
+    ]
+   }
+  }
+ ],
+ "warnings": [],
+ "roles": {
+  "Second_Bride": "house"
+ },
+ "seconds": 7.3
+}

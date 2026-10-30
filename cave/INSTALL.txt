@@ -1,0 +1,39 @@
+THE CAVE - INSTALL IN SECOND LIFE
+=================================
+Unzip Cave_SL_A_model_and_script.zip and Cave_SL_B_bulk_upload.zip into the same folder.
+You get: 1_model, 2_bulk_upload, 3_script.
+
+What it is: a large natural cave (46 x 37 m, 14 m high, about 190 LI, 52 pieces, all mesh, PBR)
+for roleplay: the Great Hall with its hearth, log benches and furs; the Lake Grotto with a
+waterfall, a sky chimney, glow-worms, stepping stones and a raft; a steaming Hot Spring; the
+Crystal Grotto with an old altar and a treasure chest; the Den with three fur beds; a hide
+curtain at the mouth and torches along the walls. Floors and walls are solid, the water is not.
+
+1. MODEL - one upload
+   Build > Upload > Model... > pick 1_model/Cave.dae. The LOD and physics files (_LOD2, _LOD1,
+   _LOD0, _PHYS) load by themselves: keep them together. Scale 1.0.
+   "Calculate weights & fee", then "Upload".
+
+2. MATERIALS, SOUNDS, POSES - one upload
+   Build > Upload > Bulk... > open 2_bulk_upload > Ctrl+A > Open > Upload. Everything is cave_...
+
+3. REZ AND FILL - one drag
+   Rez "Cave" (sink it into a hill if you like: the outside is a rock mound).
+   Right-click it > Edit > Contents tab. In your inventory type  cave_  in the search box, select
+   everything and drag it all onto the Contents tab.
+
+4. THE SCRIPT
+   In the same Contents tab: "New Script", double-click it, Ctrl+A, paste 3_script/cave_main.lsl,
+   Save. (Name it cave_main.)
+
+Done. Touch the cave for the menu:
+   Mood       Torchlight, Bioluminescent, Crystal, Daylight, Darkness, Ritual
+   Materials  rock, ground, wood, moss, fur, metal, crystal, glow, water (+ fur colour)
+   Fire       on/off, colour (natural, blue magic, green, red, violet)
+   Water      waterfall on/off, steam on/off
+   Sounds     fire, waterfall, spring, drips, wind, crystals, lake; on/off, volume
+   Curtain    open/close (or touch it)
+   Settings   chat text on/off, lore on/off, particles, lights, access (owner/group/everyone), reset
+Sit on logs, furs, beds, the raft or the spring stones, kneel at the altar; touch your seat to
+change pose. Touch the altar, crystals, waterfall, chest, spring, barrels, crates or table to
+read their lore. Owner chat: /89 menu   /89 reset   /89 help

@@ -1,0 +1,475 @@
+{
+ "slots": {
+  "a_plaster": [
+   {
+    "id": "limestone",
+    "name": "cave_a_plaster_limestone",
+    "label": "Limestone",
+    "tile_m": 4.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     154,
+     146,
+     133
+    ]
+   },
+   {
+    "id": "basalt",
+    "name": "cave_a_plaster_basalt",
+    "label": "Basalt",
+    "tile_m": 4.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     52,
+     51,
+     50
+    ]
+   },
+   {
+    "id": "sandstone",
+    "name": "cave_a_plaster_sandstone",
+    "label": "Red sandstone",
+    "tile_m": 4.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     184,
+     130,
+     88
+    ]
+   },
+   {
+    "id": "slate",
+    "name": "cave_a_plaster_slate",
+    "label": "Slate",
+    "tile_m": 4.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     69,
+     67,
+     72
+    ]
+   }
+  ],
+  "b_floor": [
+   {
+    "id": "earth",
+    "name": "cave_b_floor_earth",
+    "label": "Packed earth",
+    "tile_m": 3.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     100,
+     81,
+     63
+    ]
+   },
+   {
+    "id": "sand",
+    "name": "cave_b_floor_sand",
+    "label": "Cave sand",
+    "tile_m": 3.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     168,
+     154,
+     132
+    ]
+   },
+   {
+    "id": "gravel",
+    "name": "cave_b_floor_gravel",
+    "label": "Scree gravel",
+    "tile_m": 3.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     122,
+     117,
+     108
+    ]
+   },
+   {
+    "id": "mud",
+    "name": "cave_b_floor_mud",
+    "label": "Wet mud",
+    "tile_m": 3.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     50,
+     39,
+     30
+    ]
+   }
+  ],
+  "c_wood": [
+   {
+    "id": "driftwood",
+    "name": "cave_c_wood_driftwood",
+    "label": "Driftwood",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     162,
+     155,
+     145
+    ]
+   },
+   {
+    "id": "timber",
+    "name": "cave_c_wood_timber",
+    "label": "Old timber",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     67,
+     47,
+     31
+    ]
+   },
+   {
+    "id": "charred",
+    "name": "cave_c_wood_charred",
+    "label": "Charred wood",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     19,
+     17,
+     16
+    ]
+   },
+   {
+    "id": "bark",
+    "name": "cave_c_wood_bark",
+    "label": "Log bark",
+    "tile_m": 1.2,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     67,
+     52,
+     40
+    ]
+   }
+  ],
+  "d_stone": [
+   {
+    "id": "moss",
+    "name": "cave_d_stone_moss",
+    "label": "Mossy stone",
+    "tile_m": 3.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     67,
+     79,
+     44
+    ]
+   },
+   {
+    "id": "wet",
+    "name": "cave_d_stone_wet",
+    "label": "Wet stone",
+    "tile_m": 3.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     44,
+     43,
+     40
+    ]
+   },
+   {
+    "id": "lichen",
+    "name": "cave_d_stone_lichen",
+    "label": "Lichen stone",
+    "tile_m": 3.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     144,
+     137,
+     117
+    ]
+   },
+   {
+    "id": "flowstone",
+    "name": "cave_d_stone_flowstone",
+    "label": "Flowstone",
+    "tile_m": 3.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     216,
+     188,
+     144
+    ]
+   }
+  ],
+  "e_fabric": [
+   {
+    "id": "fur_grey",
+    "name": "cave_e_fabric_fur_grey",
+    "label": "Wolf fur",
+    "tile_m": 0.8,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     133,
+     125,
+     113
+    ]
+   },
+   {
+    "id": "fur_brown",
+    "name": "cave_e_fabric_fur_brown",
+    "label": "Bear fur",
+    "tile_m": 0.8,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     49,
+     32,
+     19
+    ]
+   },
+   {
+    "id": "leather",
+    "name": "cave_e_fabric_leather",
+    "label": "Leather hide",
+    "tile_m": 0.8,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     126,
+     87,
+     53
+    ]
+   },
+   {
+    "id": "wool",
+    "name": "cave_e_fabric_wool",
+    "label": "Rough wool (tint)",
+    "tile_m": 0.8,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     206,
+     202,
+     194
+    ]
+   }
+  ],
+  "f_metal": [
+   {
+    "id": "iron",
+    "name": "cave_f_metal_iron",
+    "label": "Rusty iron",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     75,
+     57,
+     46
+    ]
+   },
+   {
+    "id": "bronze",
+    "name": "cave_f_metal_bronze",
+    "label": "Aged bronze",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     85,
+     76,
+     53
+    ]
+   },
+   {
+    "id": "gold",
+    "name": "cave_f_metal_gold",
+    "label": "Polished gold",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": false,
+    "swatch_rgb": [
+     247,
+     204,
+     120
+    ]
+   }
+  ],
+  "g_glass": [
+   {
+    "id": "amethyst",
+    "name": "cave_g_glass_amethyst",
+    "label": "Amethyst",
+    "tile_m": 1.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     167,
+     122,
+     205
+    ]
+   },
+   {
+    "id": "quartz",
+    "name": "cave_g_glass_quartz",
+    "label": "Quartz",
+    "tile_m": 1.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     229,
+     232,
+     234
+    ]
+   },
+   {
+    "id": "emerald",
+    "name": "cave_g_glass_emerald",
+    "label": "Emerald",
+    "tile_m": 1.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     63,
+     168,
+     116
+    ]
+   },
+   {
+    "id": "ice",
+    "name": "cave_g_glass_ice",
+    "label": "Ice",
+    "tile_m": 1.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     204,
+     230,
+     244
+    ]
+   }
+  ],
+  "h_glow": [
+   {
+    "id": "embers",
+    "name": "cave_h_glow_embers",
+    "label": "Embers",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     45,
+     17,
+     5
+    ]
+   },
+   {
+    "id": "glowworm",
+    "name": "cave_h_glow_glowworm",
+    "label": "Glowworms",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     3,
+     9,
+     13
+    ]
+   },
+   {
+    "id": "crystal",
+    "name": "cave_h_glow_crystal",
+    "label": "Violet crystal glow",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     76,
+     28,
+     150
+    ]
+   },
+   {
+    "id": "white",
+    "name": "cave_h_glow_white",
+    "label": "White light (tint)",
+    "tile_m": 1.0,
+    "alpha": "OPAQUE",
+    "emissive": true,
+    "swatch_rgb": [
+     255,
+     255,
+     255
+    ]
+   }
+  ],
+  "water": [
+   {
+    "id": "teal",
+    "name": "cave_water_teal",
+    "label": "Teal cave lake",
+    "tile_m": 4.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     36,
+     113,
+     115
+    ]
+   },
+   {
+    "id": "dark",
+    "name": "cave_water_dark",
+    "label": "Black still water",
+    "tile_m": 4.0,
+    "alpha": "BLEND",
+    "emissive": false,
+    "swatch_rgb": [
+     7,
+     9,
+     10
+    ]
+   },
+   {
+    "id": "glow",
+    "name": "cave_water_glow",
+    "label": "Glowing blue water",
+    "tile_m": 4.0,
+    "alpha": "BLEND",
+    "emissive": true,
+    "swatch_rgb": [
+     6,
+     46,
+     89
+    ]
+   }
+  ]
+ },
+ "default": {
+  "a_plaster": "limestone",
+  "b_floor": "earth",
+  "c_wood": "timber",
+  "d_stone": "wet",
+  "e_fabric": "fur_brown",
+  "f_metal": "iron",
+  "g_glass": "amethyst",
+  "h_glow": "embers",
+  "water": "teal"
+ }
+}

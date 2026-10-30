@@ -1,0 +1,3971 @@
+[
+ {
+  "piece": "M0W_Pier",
+  "items": [
+   {
+    "what": "Red rag tied to an iron staple",
+    "story": "The press-gang's mark: fresh meat lines up here, under the first torch.",
+    "where": "on the yard face of the pier, between the jamb stones and the corner. World centre (-2.950, -11.300, 1.900) m = piece centre (-3.38, -10.557, 3.7) + (+0.430, -0.743, -1.800) m; inside M0W_Pier's bounding box.",
+    "size_m": [
+     0.04,
+     0.12,
+     0.3
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     -2.95,
+     -11.3,
+     1.9
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "M1W_Pier",
+  "items": [
+   {
+    "what": "Notice: PRISONERS ANSWER WITH THEIR NUMBER, NOT THEIR NAME",
+    "story": "Nailed over three older orders.",
+    "where": "nailed on the yard face of the pier's solid stretch, below the torch. World centre (-2.955, -5.750, 1.700) m = piece centre (-3.38, -5.745, 3.7) + (+0.425, -0.005, -2.000) m; inside M1W_Pier's bounding box.",
+    "size_m": [
+     0.02,
+     0.4,
+     0.5
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     -2.955,
+     -5.75,
+     1.7
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C01_Arch",
+  "items": [
+   {
+    "what": "Room board over the grille: REGISTRY chiselled out, THE PRESS-GANG in tar",
+    "story": "The Crown called this room the Registry. The Lord kept the clerk and the purpose and only changed the word.",
+    "where": "a 1.1 x 0.3 m board (or the stone itself) on the yard face of the arch head, above the hood mould. World centre (-2.960, -8.625, 6.750) m = piece centre (-3.38, -8.625, 5.41) + (+0.420, +0.000, +1.340) m; inside C01_Arch's bounding box.",
+    "size_m": [
+     0.04,
+     1.1,
+     0.3
+    ],
+    "materials": [
+     "Wood",
+     "Stone"
+    ],
+    "center_m": [
+     -2.96,
+     -8.625,
+     6.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C02_Arch",
+  "items": [
+   {
+    "what": "Room board: QUESTION ROOM chiselled out, THE RACK in tar",
+    "story": "The Crown asked sixty years of questions in here. The Lord only ever asks one: hook or pit?",
+    "where": "board on the yard face of the arch head, above the hood mould. World centre (-2.960, -2.875, 6.750) m = piece centre (-3.38, -2.875, 5.41) + (+0.420, +0.000, +1.340) m; inside C02_Arch's bounding box.",
+    "size_m": [
+     0.04,
+     1.1,
+     0.3
+    ],
+    "materials": [
+     "Wood",
+     "Stone"
+    ],
+    "center_m": [
+     -2.96,
+     -2.875,
+     6.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C03_Arch",
+  "items": [
+   {
+    "what": "Room board: CHAPEL OF chiselled away, CLEMENT left, THE STOCKS in tar",
+    "story": "Of the chapel's carved name only CLEMENT (merciful) was left, over the stocks. The guards think it is funny.",
+    "where": "stone lintel lettering / board on the yard face of the arch head, above the hood mould. World centre (-2.960, 2.875, 6.750) m = piece centre (-3.38, 2.875, 5.41) + (+0.420, +0.000, +1.340) m; inside C03_Arch's bounding box.",
+    "size_m": [
+     0.04,
+     1.1,
+     0.3
+    ],
+    "materials": [
+     "Stone",
+     "Wood"
+    ],
+    "center_m": [
+     -2.96,
+     2.875,
+     6.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C04_Arch",
+  "items": [
+   {
+    "what": "Room board: CISTERN (the Crown's word, kept)",
+    "story": "The one room name the Lord did not change.",
+    "where": "carved stone lettering on the yard face of the arch head, above the hood mould. World centre (-2.960, 8.625, 6.750) m = piece centre (-3.38, 8.625, 5.41) + (+0.420, +0.000, +1.340) m; inside C04_Arch's bounding box.",
+    "size_m": [
+     0.04,
+     1.1,
+     0.3
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -2.96,
+     8.625,
+     6.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "M1E_Pier",
+  "items": [
+   {
+    "what": "Carving: DO NOT LOOK AT THE THRONE",
+    "story": "Cut low, by a man on his knees: Old Fetch, on his first night as a dog.",
+    "where": "incised into the yard face of the pier beside the Kennel grilles, below hip height. World centre (3.006, -5.750, 1.100) m = piece centre (3.38, -5.745, 3.7) + (-0.374, -0.005, -2.600) m; inside M1E_Pier's bounding box.",
+    "size_m": [
+     0.012,
+     0.6,
+     0.12
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     3.006,
+     -5.75,
+     1.1
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "M2E_Pier",
+  "items": [
+   {
+    "what": "Chalked headcounts",
+    "story": "Morning and evening counts in columns. They seldom match.",
+    "where": "chalk on the yard face of the pier, between the jamb stones, below the torch. World centre (2.995, 0.000, 1.500) m = piece centre (3.38, 0.005, 3.7) + (-0.385, -0.005, -2.200) m; inside M2E_Pier's bounding box.",
+    "size_m": [
+     0.01,
+     0.6,
+     0.5
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     2.995,
+     0.0,
+     1.5
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "M4E_Pier",
+  "items": [
+   {
+    "what": "The waiting ring",
+    "story": "Men are tied here to wait their turn to kneel.",
+    "where": "an iron ring and staple on the yard face of the last pier before the throne hall. World centre (2.950, 11.400, 1.000) m = piece centre (3.38, 10.562, 3.7) + (-0.430, +0.838, -2.700) m; inside M4E_Pier's bounding box.",
+    "size_m": [
+     0.1,
+     0.16,
+     0.16
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     2.95,
+     11.4,
+     1.0
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Arch",
+  "items": [
+   {
+    "what": "Room board: KENNEL (the Crown's word, kept)",
+    "story": "The only sign in the Pit that has always told the truth.",
+    "where": "carved lettering on the yard face of the arch head, above the hood mould. World centre (2.960, -8.625, 6.750) m = piece centre (3.38, -8.625, 5.41) + (-0.420, +0.000, +1.340) m; inside C05_Arch's bounding box.",
+    "size_m": [
+     0.04,
+     1.1,
+     0.3
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     2.96,
+     -8.625,
+     6.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C06_Arch",
+  "items": [
+   {
+    "what": "Crown board: GOVERNOR'S HOUNDS - DO NOT FEED, with DO NOT scratched out",
+    "story": "Left over the second kennel grille since the Crown. A guard scratched out two words in Year I.",
+    "where": "board on the yard face of the arch head, above the hood mould. World centre (2.960, -2.875, 6.750) m = piece centre (3.38, -2.875, 5.41) + (-0.420, +0.000, +1.340) m; inside C06_Arch's bounding box.",
+    "size_m": [
+     0.04,
+     1.1,
+     0.3
+    ],
+    "materials": [
+     "Wood",
+     "Iron"
+    ],
+    "center_m": [
+     2.96,
+     -2.875,
+     6.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C07_Arch",
+  "items": [
+   {
+    "what": "Room board: GIBBET STORE chiselled out, THE CAGES in tar",
+    "story": "Where the Crown kept its spare cages for Gallows Point.",
+    "where": "board on the yard face of the arch head, above the hood mould. World centre (2.960, 2.875, 6.750) m = piece centre (3.38, 2.875, 5.41) + (-0.420, +0.000, +1.340) m; inside C07_Arch's bounding box.",
+    "size_m": [
+     0.04,
+     1.1,
+     0.3
+    ],
+    "materials": [
+     "Wood",
+     "Stone"
+    ],
+    "center_m": [
+     2.96,
+     2.875,
+     6.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C08_Arch",
+  "items": [
+   {
+    "what": "Room board: ARMOURY chiselled out, THE MAST in tar",
+    "story": "The Crown's armoury and sail loft before the Steadfast's mast was stepped here.",
+    "where": "board on the yard face of the arch head, above the hood mould. World centre (2.960, 8.625, 6.750) m = piece centre (3.38, 8.625, 5.41) + (-0.420, +0.000, +1.340) m; inside C08_Arch's bounding box.",
+    "size_m": [
+     0.04,
+     1.1,
+     0.3
+    ],
+    "materials": [
+     "Wood",
+     "Stone"
+    ],
+    "center_m": [
+     2.96,
+     8.625,
+     6.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C01_Floor",
+  "items": [
+   {
+    "what": "Burnt ring round the brazier, and a tooth",
+    "story": "Men are made to stand inside the black ring to be branded. In the dust at its edge lies a molar: someone bit down too hard.",
+    "where": "flat char stain on the earth floor round the brazier's footprint (south-west corner), the tooth at its east edge. World centre (-9.600, -10.300, 0.403) m = piece centre (-7.3, -8.625, 0.028) + (-2.300, -1.675, +0.375) m; inside C01_Floor's bounding box.",
+    "size_m": [
+     1.4,
+     1.2,
+     0.006
+    ],
+    "materials": [
+     "Iron",
+     "Bone"
+    ],
+    "center_m": [
+     -9.6,
+     -10.3,
+     0.403
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C01_Partition",
+  "items": [
+   {
+    "what": "Height scale notched into the wall",
+    "story": "The Wren measures every man in hands against this wall before he writes him down; notches every hand from five feet to seven, with numerals.",
+    "where": "incised 1.2 cm into the north wall (south face of the partition), east of the desk, away from the door. World centre (-6.400, -6.044, 2.200) m = piece centre (-7.7, -5.75, 2.1) + (+1.300, -0.294, +0.100) m; inside C01_Partition's bounding box.",
+    "size_m": [
+     0.25,
+     0.012,
+     0.75
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -6.4,
+     -6.044,
+     2.2
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Carving: I TOLD THE TRUTH (and later: THE FIFTH TIME)",
+    "story": "Oswin Tull, a purser's mate, carved his protest; another hand added the second line after Tull was taken back to the wheel.",
+    "where": "incised 1.2 cm into the NORTH face of this partition (the south wall of C02, inside the Rack), west half. World centre (-9.500, -5.456, 1.300) m = piece centre (-7.7, -5.75, 2.1) + (-1.800, +0.294, -0.800) m; inside C01_Partition's bounding box.",
+    "size_m": [
+     0.8,
+     0.012,
+     0.3
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -9.5,
+     -5.456,
+     1.3
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C01_Wall",
+  "items": [
+   {
+    "what": "77 scratched beside a shackle ring, with a hook cut later",
+    "story": "Young Drave's Crown number, scratched while he waited chained for the Crown's clerk. When he came back as Lord he cut the hook beside it himself.",
+    "where": "raised/incised carving 1.5 cm deep on the inner face of the outer wall, between the second and third shackle rings, below them. World centre (-11.585, -7.030, 1.950) m = piece centre (-12.275, -8.4, 3.69) + (+0.690, +1.370, -1.740) m; inside C01_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.2,
+     0.1
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -11.585,
+     -7.03,
+     1.95
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Names scratched under the shackles",
+    "story": "Men waiting for the quill start their names and stop after the first letter when they hear their number called. A ragged band of half-names.",
+    "where": "a band of shallow scratches on the outer wall's inner face under the shackle rings, chest height of a chained man. World centre (-11.585, -8.000, 1.550) m = piece centre (-12.275, -8.4, 3.69) + (+0.690, +0.400, -2.140) m; inside C01_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     1.4,
+     0.4
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -11.585,
+     -8.0,
+     1.55
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C01_Vault",
+  "items": [
+   {
+    "what": "Confiscated hats hung on pegs",
+    "story": "A Crown marine's hat, a fisherman's knitted cap, a merchant's beaver: every one belonged to a number in the Book. The Wren hangs them where nobody can reach them back.",
+    "where": "a row of 5-6 iron pegs driven into the springer course of the south side of the vault, hats hanging from them. World centre (-8.000, -10.950, 4.400) m = piece centre (-7.7, -8.625, 5.847) + (-0.300, -2.325, -1.447) m; inside C01_Vault's bounding box.",
+    "size_m": [
+     3.0,
+     0.3,
+     0.3
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     -8.0,
+     -10.95,
+     4.4
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Iron grate of the light well in the vault crown",
+    "story": "A shaft cut by the Crown up through the rock to the fort's courtyard, barred, for air and a little moon. The Wren works by it in the day and curses it at night.",
+    "where": "a square iron grate set into the crown of the vault, centred on the vault in plan; moonlight is projected down from here. World centre (-7.700, -8.625, 7.300) m = piece centre (-7.7, -8.625, 5.847) + (+0.000, +0.000, +1.453) m; inside C01_Vault's bounding box.",
+    "size_m": [
+     0.6,
+     0.6,
+     0.25
+    ],
+    "materials": [
+     "Iron",
+     "Stone"
+    ],
+    "center_m": [
+     -7.7,
+     -8.625,
+     7.3
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C02_Floor",
+  "items": [
+   {
+    "what": "Gnawed knuckle bones at the rat hole",
+    "story": "Laid out at the hole's mouth like coins at a toll.",
+    "where": "on the floor in front of the rat hole, against the outer wall, 3 cm high at most. World centre (-11.350, -1.900, 0.415) m = piece centre (-7.3, -2.875, 0.027) + (-4.050, +0.975, +0.388) m; inside C02_Floor's bounding box.",
+    "size_m": [
+     0.3,
+     0.2,
+     0.03
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -11.35,
+     -1.9,
+     0.415
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Long dark stain under the rack",
+    "story": "Brine thrown over the fainted, every day since the Crown, has drawn the shape of a stretched man on the earth.",
+    "where": "flat stain on the floor under the rack's frame. World centre (-7.300, -2.800, 0.403) m = piece centre (-7.3, -2.875, 0.027) + (+0.000, +0.075, +0.376) m; inside C02_Floor's bounding box.",
+    "size_m": [
+     2.0,
+     0.7,
+     0.006
+    ],
+    "materials": [
+     "Floor"
+    ],
+    "center_m": [
+     -7.3,
+     -2.8,
+     0.403
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C02_Partition",
+  "items": [
+   {
+    "what": "Bent nail hidden flush in a mortar joint",
+    "story": "One of Garrett Vole's picks. He opened the Stocks with it before he was caught in the yard.",
+    "where": "incised into a mortar joint of the NORTH face of this partition (the south wall of C03), near the floor by the front. World centre (-5.400, 0.294, 0.620) m = piece centre (-7.7, 0.0, 2.1) + (+2.300, +0.294, -1.480) m; inside C02_Partition's bounding box.",
+    "size_m": [
+     0.08,
+     0.012,
+     0.01
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -5.4,
+     0.294,
+     0.62
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C02_Wall",
+  "items": [
+   {
+    "what": "Carving: THE SEA GIVES BACK WHAT THE ROPE TAKES. A.R.",
+    "story": "Absalom Reed, ropemaker of Gullhaven, cut it in a ropemaker's careful capitals the week before the Rack.",
+    "where": "carving 1.5 cm on the outer wall's inner face, south of the arrow slit, at hip height. World centre (-11.585, -4.100, 1.250) m = piece centre (-12.275, -2.65, 3.69) + (+0.690, -1.450, -2.440) m; inside C02_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     1.0,
+     0.25
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -11.585,
+     -4.1,
+     1.25
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Rat hole in the mortar",
+    "story": "Vole named the rats of the Pit after the officers. This hole is Hask's.",
+    "where": "a hole cut 6 cm into the foot of the outer wall (inside the wall's volume), with a crumbled mortar rim. World centre (-11.630, -1.900, 0.480) m = piece centre (-12.275, -2.65, 3.69) + (+0.645, +0.750, -3.210) m; inside C02_Wall's bounding box.",
+    "size_m": [
+     0.06,
+     0.14,
+     0.1
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -11.63,
+     -1.9,
+     0.48
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C02_Vault",
+  "items": [
+   {
+    "what": "White eye painted on the vault",
+    "story": "Men on the rack look straight up for hours. The Crown's questioner painted them something to look at.",
+    "where": "lime-white decal on the inner vault surface above the wheel end of the rack, just east of the light well. World centre (-6.700, -2.875, 7.150) m = piece centre (-7.7, -2.875, 5.847) + (+1.000, +0.000, +1.303) m; inside C02_Vault's bounding box.",
+    "size_m": [
+     0.5,
+     0.5,
+     0.02
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -6.7,
+     -2.875,
+     7.15
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Strappado ring and pulley",
+    "story": "The Crown asked its questions higher. The pulley is seized with rust; a frayed rope-end still hangs in it.",
+    "where": "an iron ring and pulley bolted to the west transverse rib, near the crown. World centre (-9.000, -2.875, 6.950) m = piece centre (-7.7, -2.875, 5.847) + (-1.300, +0.000, +1.103) m; inside C02_Vault's bounding box.",
+    "size_m": [
+     0.2,
+     0.2,
+     0.4
+    ],
+    "materials": [
+     "Iron",
+     "Straw"
+    ],
+    "center_m": [
+     -9.0,
+     -2.875,
+     6.95
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Iron grate of the light well in the vault crown",
+    "story": "A shaft cut by the Crown up through the rock to the fort's courtyard, barred, for air and a little moon. The only thing a racked man sees besides the painted eye.",
+    "where": "a square iron grate set into the crown of the vault, centred on the vault in plan; moonlight is projected down from here. World centre (-7.700, -2.875, 7.300) m = piece centre (-7.7, -2.875, 5.847) + (+0.000, +0.000, +1.453) m; inside C02_Vault's bounding box.",
+    "size_m": [
+     0.6,
+     0.6,
+     0.25
+    ],
+    "materials": [
+     "Iron",
+     "Stone"
+    ],
+    "center_m": [
+     -7.7,
+     -2.875,
+     7.3
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C03_Partition",
+  "items": [
+   {
+    "what": "Tam Wicken's verse",
+    "story": "OH THE TOOTH BITES DEEP AND THE TOOTH BITES SLOW... the first verse of the song the Pit sings after lights out.",
+    "where": "incised 1.2 cm into the north wall (south face of this partition), east half. World centre (-6.000, 5.456, 1.550) m = piece centre (-7.7, 5.75, 2.1) + (+1.700, -0.294, -0.550) m; inside C03_Partition's bounding box.",
+    "size_m": [
+     1.4,
+     0.012,
+     0.3
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -6.0,
+     5.456,
+     1.55
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Old holy-water niche with a candle stub",
+    "story": "The chapel's stoup, now a candle ledge: prisoners light stubs from the torch and the guards let them. Grey wax has run down to the floor.",
+    "where": "a niche recessed 14 cm into the north wall (inside the partition's volume), stub and wax runs inside. World centre (-9.800, 5.520, 1.550) m = piece centre (-7.7, 5.75, 2.1) + (-2.100, -0.230, -0.550) m; inside C03_Partition's bounding box.",
+    "size_m": [
+     0.25,
+     0.14,
+     0.3
+    ],
+    "materials": [
+     "Stone",
+     "Bone"
+    ],
+    "center_m": [
+     -9.8,
+     5.52,
+     1.55
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Ducking record list",
+    "story": "JORY 300 / HAL 140 / NED 90 / KIT 61 (CHEATED). The Watch bets on it from the guardroom slate.",
+    "where": "incised 1.2 cm into the NORTH face of this partition (the south wall of C04, inside the Cistern). World centre (-8.000, 6.044, 1.900) m = piece centre (-7.7, 5.75, 2.1) + (-0.300, +0.294, -0.200) m; inside C03_Partition's bounding box.",
+    "size_m": [
+     0.9,
+     0.012,
+     0.5
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -8.0,
+     6.044,
+     1.9
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C03_Wall",
+  "items": [
+   {
+    "what": "Fresco of Saint Clement under the soot, eyes scratched out",
+    "story": "The chapel's patron, drowned bound to an anchor, painted when the Crown built Fort Clemency. The Lord had a torch hung so its smoke would blacken the face first.",
+    "where": "lime-plaster patch 1 cm proud on the outer wall, north of the torch, chest to head height. World centre (-11.595, 4.550, 2.250) m = piece centre (-12.275, 3.1, 3.69) + (+0.680, +1.450, -1.440) m; inside C03_Wall's bounding box.",
+    "size_m": [
+     0.01,
+     1.1,
+     1.3
+    ],
+    "materials": [
+     "Bone",
+     "Stone"
+    ],
+    "center_m": [
+     -11.595,
+     4.55,
+     2.25
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Sliver of mirror wedged in a crack",
+    "story": "Matthias Kemble's, the merchant's son held for ransom. He angled it to see his face from the foot stocks: 'still Matthias'.",
+    "where": "pushed into a mortar crack of the outer wall at knee height, near the foot stocks. World centre (-11.590, 4.900, 1.100) m = piece centre (-12.275, 3.1, 3.69) + (+0.685, +1.800, -2.590) m; inside C03_Wall's bounding box.",
+    "size_m": [
+     0.02,
+     0.08,
+     0.12
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -11.59,
+     4.9,
+     1.1
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C03_Vault",
+  "items": [
+   {
+    "what": "Bell-rope hole with a cut rope-end",
+    "story": "The chapel bell of Saint Clement hung above here. It now rings three strokes for fresh meat at the gate.",
+    "where": "an iron ring in a hole in the vault near the outer wall, a short frayed rope hanging from it. World centre (-10.000, 2.875, 7.000) m = piece centre (-7.7, 2.875, 5.847) + (-2.300, +0.000, +1.153) m; inside C03_Vault's bounding box.",
+    "size_m": [
+     0.15,
+     0.15,
+     0.35
+    ],
+    "materials": [
+     "Iron",
+     "Straw"
+    ],
+    "center_m": [
+     -10.0,
+     2.875,
+     7.0
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Flaking painted stars",
+    "story": "The chapel's sky: 6-10 lime-white stars, 8 cm each, flaking. This was a chapel before it was a joke.",
+    "where": "small flat star decals scattered on the inner vault surface between the two transverse ribs. World centre (-7.700, 2.875, 6.900) m = piece centre (-7.7, 2.875, 5.847) + (+0.000, +0.000, +1.053) m; inside C03_Vault's bounding box.",
+    "size_m": [
+     2.4,
+     2.2,
+     0.55
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -7.7,
+     2.875,
+     6.9
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Iron grate of the light well in the vault crown",
+    "story": "A shaft cut by the Crown up through the rock to the fort's courtyard, barred, for air and a little moon. The chapel's oculus; the Crown called the moonbeam the saint's finger.",
+    "where": "a square iron grate set into the crown of the vault, centred on the vault in plan; moonlight is projected down from here. World centre (-7.700, 2.875, 7.300) m = piece centre (-7.7, 2.875, 5.847) + (+0.000, +0.000, +1.453) m; inside C03_Vault's bounding box.",
+    "size_m": [
+     0.6,
+     0.6,
+     0.25
+    ],
+    "materials": [
+     "Iron",
+     "Stone"
+    ],
+    "center_m": [
+     -7.7,
+     2.875,
+     7.3
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C04_Floor",
+  "items": [
+   {
+    "what": "Empty bowl one hand beyond reach",
+    "story": "Put there by order: the Lord chained him where he could see the grate. The bowl was a guard's idea.",
+    "where": "on the floor just beyond the end of the skeleton's chain, toward the room, out of the door path. World centre (-5.200, 6.900, 0.428) m = piece centre (-7.3, 8.625, 0.029) + (+2.100, -1.725, +0.399) m; inside C04_Floor's bounding box.",
+    "size_m": [
+     0.18,
+     0.18,
+     0.055
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     -5.2,
+     6.9,
+     0.428
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Salt rime along the tank's foot",
+    "story": "Every dunk slops over; the floor has grown a white crust that cracks underfoot.",
+    "where": "flat crust on the floor along the tank's east face. World centre (-8.000, 8.625, 0.404) m = piece centre (-7.3, 8.625, 0.029) + (-0.700, +0.000, +0.375) m; inside C04_Floor's bounding box.",
+    "size_m": [
+     0.4,
+     3.0,
+     0.008
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -8.0,
+     8.625,
+     0.404
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Crab shells and fish bones in the corner",
+    "story": "Brought in through the culvert by the high tide's breath.",
+    "where": "low heap in the north-west corner between tank and outer wall. World centre (-11.000, 10.600, 0.420) m = piece centre (-7.3, 8.625, 0.029) + (-3.700, +1.975, +0.391) m; inside C04_Floor's bounding box.",
+    "size_m": [
+     0.3,
+     0.3,
+     0.04
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -11.0,
+     10.6,
+     0.42
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C04_Partition",
+  "items": [
+   {
+    "what": "The Mute's tide slate",
+    "story": "Ambrose the Tidewarden cannot speak, so he chalks: high waters, springs, and the Dead Ebb circled twice.",
+    "where": "a slate in a wooden frame hung on the north wall (south face of this partition, 4 cm proud). World centre (-9.500, 11.180, 1.900) m = piece centre (-7.7, 11.5, 3.69) + (-1.800, -0.320, -1.790) m; inside C04_Partition's bounding box.",
+    "size_m": [
+     0.9,
+     0.04,
+     0.6
+    ],
+    "materials": [
+     "Stone",
+     "Wood",
+     "Bone"
+    ],
+    "center_m": [
+     -9.5,
+     11.18,
+     1.9
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "High-water lines cut with years",
+    "story": "Y1 THE EBB (lowest, at the floor), the springs of each year, and FLOOD Y7 at the knee, when the sea came in through the gate.",
+    "where": "short horizontal grooves with lettering on the north wall (south face), near the front. World centre (-7.000, 11.185, 1.100) m = piece centre (-7.7, 11.5, 3.69) + (+0.700, -0.315, -2.590) m; inside C04_Partition's bounding box.",
+    "size_m": [
+     0.5,
+     0.03,
+     1.0
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -7.0,
+     11.185,
+     1.1
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Prize board: thirty-one ships in gilt",
+    "story": "Names and dates in gilt paint on black boards. The last line is left blank.",
+    "where": "boards on the NORTH face of this partition (the throne hall's west front wall), 5 cm proud. World centre (-8.500, 11.830, 3.000) m = piece centre (-7.7, 11.5, 3.69) + (-0.800, +0.330, -0.690) m; inside C04_Partition's bounding box.",
+    "size_m": [
+     2.6,
+     0.05,
+     1.6
+    ],
+    "materials": [
+     "Wood",
+     "Bone"
+    ],
+    "center_m": [
+     -8.5,
+     11.83,
+     3.0
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C04_Wall",
+  "items": [
+   {
+    "what": "Forty-one strokes, L.D., I WILL COME BACK FOR THE KEY, and a later hook",
+    "story": "The young Drave's forty-one days standing in salt water. The hook was cut beside it years later by a surer hand.",
+    "where": "carving 1.5 cm on the outer wall above the tank rim, north of the arrow slit, under a soot film. World centre (-11.585, 9.750, 1.900) m = piece centre (-12.275, 8.85, 3.69) + (+0.690, +0.900, -1.790) m; inside C04_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.6,
+     0.5
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -11.585,
+     9.75,
+     1.9
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Groups of ten strokes, 300 ringed, a little seal",
+    "story": "Jory Penhallow's breath counts: the Seal held out under the chair for a count of three hundred.",
+    "where": "carving 1.5 cm on the outer wall above the tank rim, south of the arrow slit. World centre (-11.585, 7.400, 1.800) m = piece centre (-12.275, 8.85, 3.69) + (+0.690, -1.450, -1.890) m; inside C04_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.5,
+     0.4
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -11.585,
+     7.4,
+     1.8
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C04_Vault",
+  "items": [
+   {
+    "what": "Salt crust and salt drips",
+    "story": "Steam off the tank has salted the vault white, like frost that never melts.",
+    "where": "white crust on the inner vault surface above the tank. World centre (-9.800, 8.625, 6.950) m = piece centre (-7.7, 8.625, 5.847) + (-2.100, +0.000, +1.103) m; inside C04_Vault's bounding box.",
+    "size_m": [
+     1.6,
+     1.4,
+     0.2
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -9.8,
+     8.625,
+     6.95
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Iron grate of the light well in the vault crown",
+    "story": "A shaft cut by the Crown up through the rock to the fort's courtyard, barred, for air and a little moon. Moonlight lands on the tank; the Mute reads the tide by its angle.",
+    "where": "a square iron grate set into the crown of the vault, centred on the vault in plan; moonlight is projected down from here. World centre (-7.700, 8.625, 7.300) m = piece centre (-7.7, 8.625, 5.847) + (+0.000, +0.000, +1.453) m; inside C04_Vault's bounding box.",
+    "size_m": [
+     0.6,
+     0.6,
+     0.25
+    ],
+    "materials": [
+     "Iron",
+     "Stone"
+    ],
+    "center_m": [
+     -7.7,
+     8.625,
+     7.3
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Floor",
+  "items": [
+   {
+    "what": "Bone cards face up near the middle kennel",
+    "story": "The Three of Keys and the Queen of Crowns from Fennick's deck. Nobody picks them up; it is bad luck.",
+    "where": "flat on the floor just in front of the second kennel. World centre (9.700, -5.100, 0.405) m = piece centre (7.3, -5.75, 0.03) + (+2.400, +0.650, +0.375) m; inside C05_Floor's bounding box.",
+    "size_m": [
+     0.2,
+     0.15,
+     0.01
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     9.7,
+     -5.1,
+     0.405
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Partition",
+  "items": [
+   {
+    "what": "Bent nail in the mortar",
+    "story": "Vole's second pick: he opened Cage 1's padlock with it, while hoisted, and fell.",
+    "where": "incised into a mortar joint of the NORTH face of this partition (the south wall of C07), near the outer wall. World centre (10.800, 0.294, 0.550) m = piece centre (7.7, 0.0, 2.1) + (+3.100, +0.294, -1.550) m; inside C05_Partition's bounding box.",
+    "size_m": [
+     0.08,
+     0.012,
+     0.01
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     10.8,
+     0.294,
+     0.55
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Wall",
+  "items": [
+   {
+    "what": "Loose stone with the Ace of Hooks",
+    "story": "Kit Fennick hid his best card where a dog can reach and a guard cannot. The white corner shows in the gap.",
+    "where": "a stone 3 cm proud on the outer wall behind the second kennel, at floor level. World centre (11.585, -5.400, 0.620) m = piece centre (12.275, -5.525, 3.69) + (-0.690, +0.125, -3.070) m; inside C05_Wall's bounding box.",
+    "size_m": [
+     0.03,
+     0.3,
+     0.2
+    ],
+    "materials": [
+     "Stone",
+     "Bone"
+    ],
+    "center_m": [
+     11.585,
+     -5.4,
+     0.62
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Old Fetch's rules",
+    "story": "EAT LAST. SLEEP FIRST. NEVER LOOK AT THE THRONE.",
+    "where": "carving 1.5 cm on the outer wall between the first and second kennels, above kennel height. World centre (11.585, -7.400, 1.900) m = piece centre (12.275, -5.525, 3.69) + (-0.690, -1.875, -1.790) m; inside C05_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.9,
+     0.7
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     11.585,
+     -7.4,
+     1.9
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "A whole stone grey with strokes",
+    "story": "Old Fetch's eight winters, two thousand nine hundred and some strokes, signed with a scratched paw.",
+    "where": "carving on the outer wall between the first and second kennels, near the floor. World centre (11.585, -8.500, 0.850) m = piece centre (12.275, -5.525, 3.69) + (-0.690, -2.975, -2.840) m; inside C05_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.8,
+     0.7
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     11.585,
+     -8.5,
+     0.85
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Scratched seal",
+    "story": "Jory's mark, the same as in the Cistern and at the Mast.",
+    "where": "small carving on the outer wall beside the third kennel, below the arrow slit. World centre (11.585, -3.500, 1.700) m = piece centre (12.275, -5.525, 3.69) + (-0.690, +2.025, -1.990) m; inside C05_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.3,
+     0.2
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     11.585,
+     -3.5,
+     1.7
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Roof",
+  "items": [
+   {
+    "what": "The rag hatch",
+    "story": "Bolted from above. On rest-days it opens and the Watch's dirty breeches rain down.",
+    "where": "a framed 0.8 m trapdoor with iron strap hinges in the roof deck, near the C06 grille. World centre (5.600, -3.900, 6.020) m = piece centre (7.7, -5.75, 5.75) + (-2.100, +1.850, +0.270) m; inside C05_Roof's bounding box.",
+    "size_m": [
+     0.8,
+     0.8,
+     0.12
+    ],
+    "materials": [
+     "Wood",
+     "Iron"
+    ],
+    "center_m": [
+     5.6,
+     -3.9,
+     6.02
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Rags snagged on the hatch hinge",
+    "story": "A shirt that never made it down, hanging there for a year.",
+    "where": "hanging from the hatch's hinge between two joists, high above the floor. World centre (5.600, -3.450, 5.780) m = piece centre (7.7, -5.75, 5.75) + (-2.100, +2.300, +0.030) m; inside C05_Roof's bounding box.",
+    "size_m": [
+     0.3,
+     0.05,
+     0.35
+    ],
+    "materials": [
+     "Cloth"
+    ],
+    "center_m": [
+     5.6,
+     -3.45,
+     5.78
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C07_Floor",
+  "items": [
+   {
+    "what": "Spoon and crust under Cage 1",
+    "story": "Things that slipped through the bars and could not be reached.",
+    "where": "flat on the floor directly under the near cage. World centre (7.000, 1.775, 0.412) m = piece centre (7.3, 2.875, 0.03) + (-0.300, -1.100, +0.382) m; inside C07_Floor's bounding box.",
+    "size_m": [
+     0.3,
+     0.2,
+     0.024
+    ],
+    "materials": [
+     "Wood",
+     "Floor"
+    ],
+    "center_m": [
+     7.0,
+     1.775,
+     0.412
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Dark stain under Cage 2",
+    "story": "Older than the Lord.",
+    "where": "flat stain on the floor under the far cage. World centre (9.000, 3.875, 0.402) m = piece centre (7.3, 2.875, 0.03) + (+1.700, +1.000, +0.372) m; inside C07_Floor's bounding box.",
+    "size_m": [
+     0.7,
+     0.7,
+     0.004
+    ],
+    "materials": [
+     "Floor"
+    ],
+    "center_m": [
+     9.0,
+     3.875,
+     0.402
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C07_Partition",
+  "items": [
+   {
+    "what": "The Steadfast, carved in full",
+    "story": "Three masts, thirty-two gun ports, every one counted, and STEADFAST under her stern. Ormond's best work.",
+    "where": "incised 1.2 cm into the north wall (south face of this partition), facing the cages. World centre (8.500, 5.456, 1.700) m = piece centre (7.7, 5.75, 2.1) + (+0.800, -0.294, -0.400) m; inside C07_Partition's bounding box.",
+    "size_m": [
+     1.2,
+     0.012,
+     0.9
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     8.5,
+     5.456,
+     1.7
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "The Steadfast's men and their lashes",
+    "story": "Fourteen names with numbers, in the order they took them.",
+    "where": "incised 1.2 cm into the NORTH face of this partition (the south wall of C08, inside the Mast). World centre (8.000, 6.044, 1.600) m = piece centre (7.7, 5.75, 2.1) + (+0.300, +0.294, -0.500) m; inside C07_Partition's bounding box.",
+    "size_m": [
+     1.6,
+     0.012,
+     0.8
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     8.0,
+     6.044,
+     1.6
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C07_Wall",
+  "items": [
+   {
+    "what": "Loose stone with Ormond's secret log",
+    "story": "Scraps rolled tight, written in a small officer's hand: winds, tides, ships seen through the slit, for three years.",
+    "where": "a stone 3 cm proud on the outer wall north of the slit, knee height. World centre (11.585, 4.600, 1.100) m = piece centre (12.275, 3.1, 3.69) + (-0.690, +1.500, -2.590) m; inside C07_Wall's bounding box.",
+    "size_m": [
+     0.03,
+     0.3,
+     0.2
+    ],
+    "materials": [
+     "Stone",
+     "Cloth"
+    ],
+    "center_m": [
+     11.585,
+     4.6,
+     1.1
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Carving: THREE DAYS UP. THE TENANT TALKS AT NIGHT. R.C.",
+    "story": "Rafe Corbin, a Gullhaven smuggler, after his first hoisting.",
+    "where": "carving 1.5 cm on the outer wall south of the slit. World centre (11.585, 1.500, 1.200) m = piece centre (12.275, 3.1, 3.69) + (-0.690, -1.600, -2.490) m; inside C07_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.5,
+     0.35
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     11.585,
+     1.5,
+     1.2
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C07_Vault",
+  "items": [
+   {
+    "what": "Gulls' nest on the vault springing",
+    "story": "Woven of prison straw and fish bones from the messes. The gulls come in by the slit.",
+    "where": "on a ledge of the springer course in the north-east corner of the vault. World centre (11.200, 5.050, 4.450) m = piece centre (7.7, 2.875, 5.847) + (+3.500, +2.175, -1.397) m; inside C07_Vault's bounding box.",
+    "size_m": [
+     0.4,
+     0.4,
+     0.15
+    ],
+    "materials": [
+     "Straw",
+     "Bone"
+    ],
+    "center_m": [
+     11.2,
+     5.05,
+     4.45
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Iron grate of the light well in the vault crown",
+    "story": "A shaft cut by the Crown up through the rock to the fort's courtyard, barred, for air and a little moon. The cages swing through the moonbeam and out again.",
+    "where": "a square iron grate set into the crown of the vault, centred on the vault in plan; moonlight is projected down from here. World centre (7.700, 2.875, 7.300) m = piece centre (7.7, 2.875, 5.847) + (+0.000, +0.000, +1.453) m; inside C07_Vault's bounding box.",
+    "size_m": [
+     0.6,
+     0.6,
+     0.25
+    ],
+    "materials": [
+     "Iron",
+     "Stone"
+    ],
+    "center_m": [
+     7.7,
+     2.875,
+     7.3
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C08_Floor",
+  "items": [
+   {
+    "what": "Dark, salt-crusted stain at the mast's foot",
+    "story": "Blood first, then the salt.",
+    "where": "flat stain on the floor on the south side of the mast, where the bound man stands. World centre (7.400, 8.200, 0.403) m = piece centre (7.3, 8.625, 0.03) + (+0.100, -0.425, +0.373) m; inside C08_Floor's bounding box.",
+    "size_m": [
+     1.0,
+     0.8,
+     0.006
+    ],
+    "materials": [
+     "Floor",
+     "Bone"
+    ],
+    "center_m": [
+     7.4,
+     8.2,
+     0.403
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C08_Partition",
+  "items": [
+   {
+    "what": "A frigate without her mainmast: HER MAST IS HERE",
+    "story": "Ormond's second carving, done the year he took the hook.",
+    "where": "carving 3 cm proud on the north wall (south face), above the cat board. World centre (8.500, 11.185, 3.100) m = piece centre (7.7, 11.5, 3.69) + (+0.800, -0.315, -0.590) m; inside C08_Partition's bounding box.",
+    "size_m": [
+     1.0,
+     0.03,
+     0.6
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     8.5,
+     11.185,
+     3.1
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Three Crown officers' swords, gilt hilts",
+    "story": "Each with a name tag: the captains who came to take the Tooth back.",
+    "where": "on iron pegs on the NORTH face of this partition (the throne hall's east front wall), 5 cm proud. World centre (8.500, 11.830, 2.600) m = piece centre (7.7, 11.5, 3.69) + (+0.800, +0.330, -1.090) m; inside C08_Partition's bounding box.",
+    "size_m": [
+     1.6,
+     0.05,
+     0.8
+    ],
+    "materials": [
+     "Iron",
+     "Bone"
+    ],
+    "center_m": [
+     8.5,
+     11.83,
+     2.6
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C08_Wall",
+  "items": [
+   {
+    "what": "Tam Wicken's chorus",
+    "story": "HAUL AWAY FOR THE WIDOW, BOYS, HAUL AWAY FOR THE TOOTH... cut after sixty lashes.",
+    "where": "carving 1.5 cm on the outer wall north of the arrow slit. World centre (11.585, 9.900, 1.700) m = piece centre (12.275, 8.85, 3.69) + (-0.690, +1.050, -1.990) m; inside C08_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.9,
+     0.6
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     11.585,
+     9.9,
+     1.7
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Seal and J.P. 40",
+    "story": "Forty for the culvert, the first time. Jory called it cheap.",
+    "where": "small carving on the outer wall south of the arrow slit. World centre (11.585, 7.600, 1.300) m = piece centre (12.275, 8.85, 3.69) + (-0.690, -1.250, -2.390) m; inside C08_Wall's bounding box.",
+    "size_m": [
+     0.015,
+     0.25,
+     0.2
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     11.585,
+     7.6,
+     1.3
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C08_Vault",
+  "items": [
+   {
+    "what": "The Steadfast's block and tackle",
+    "story": "Once raised her topsails; now raises hands.",
+    "where": "hanging from the vault crown right above the mast. World centre (7.400, 8.625, 6.900) m = piece centre (7.7, 8.625, 5.847) + (-0.300, +0.000, +1.053) m; inside C08_Vault's bounding box.",
+    "size_m": [
+     0.25,
+     0.2,
+     0.4
+    ],
+    "materials": [
+     "Wood",
+     "Iron",
+     "Straw"
+    ],
+    "center_m": [
+     7.4,
+     8.625,
+     6.9
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Iron grate of the light well in the vault crown",
+    "story": "A shaft cut by the Crown up through the rock to the fort's courtyard, barred, for air and a little moon. Crake times the lashes so the moon is on the bound man's back.",
+    "where": "a square iron grate set into the crown of the vault, centred on the vault in plan; moonlight is projected down from here. World centre (7.700, 8.625, 7.300) m = piece centre (7.7, 8.625, 5.847) + (+0.000, +0.000, +1.453) m; inside C08_Vault's bounding box.",
+    "size_m": [
+     0.6,
+     0.6,
+     0.25
+    ],
+    "materials": [
+     "Iron",
+     "Stone"
+    ],
+    "center_m": [
+     7.7,
+     8.625,
+     7.3
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C01_Desk",
+  "items": [
+   {
+    "what": "Sand shaker and a stick of sealing wax",
+    "story": "Tobias Wren dries every entry with sand; the wax seals the page whenever a Book reaches number 77, which is written in red and reported to the Lord.",
+    "where": "standing on the back ledge of the writing desk, left of the inkwell. World centre (-7.400, -7.675, 1.560) m = piece centre (-7.6, -8.298, 1.147) + (+0.200, +0.623, +0.413) m; inside C01_Desk's bounding box.",
+    "size_m": [
+     0.14,
+     0.05,
+     0.08
+    ],
+    "materials": [
+     "Wood",
+     "Bone"
+    ],
+    "center_m": [
+     -7.4,
+     -7.675,
+     1.56
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Wire spectacles with one starred lens",
+    "story": "The Wren dropped them the night Lucan Drave walked back into the Pit, alive, twelve years after the Wren had written him down as drowned. He never had the lens replaced.",
+    "where": "lying folded on the back ledge of the desk, between the candle and the sand shaker. World centre (-7.850, -7.675, 1.530) m = piece centre (-7.6, -8.298, 1.147) + (-0.250, +0.623, +0.383) m; inside C01_Desk's bounding box.",
+    "size_m": [
+     0.12,
+     0.04,
+     0.02
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -7.85,
+     -7.675,
+     1.53
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Horn cup of spare quills",
+    "story": "Gull feathers cut sharp: the Wren cuts a fresh quill every hundred names. Gulls are the only free thing that comes into the Pit.",
+    "where": "on the right end of the desk ledge, just right of the iron inkwell. World centre (-6.970, -7.670, 1.620) m = piece centre (-7.6, -8.298, 1.147) + (+0.630, +0.628, +0.473) m; inside C01_Desk's bounding box.",
+    "size_m": [
+     0.06,
+     0.06,
+     0.2
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -6.97,
+     -7.67,
+     1.62
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Low shelf with the two closed Books and the Crown register",
+    "story": "Book the First and Book the Second of the Keeping, and under them the Crown's register of Fort Clemency, closed since the Ebb. In it, in the Wren's younger hand: No. 77, L. Drave, drowned in the culvert, body not found.",
+    "where": "a board between the desk legs at shin height, against the far (north) side so the scribe's knees stay free; three thick leather-bound ledgers stacked on it. World centre (-7.600, -7.885, 0.535) m = piece centre (-7.6, -8.298, 1.147) + (+0.000, +0.413, -0.612) m; inside C01_Desk's bounding box.",
+    "size_m": [
+     1.1,
+     0.33,
+     0.17
+    ],
+    "materials": [
+     "Wood",
+     "Cloth"
+    ],
+    "center_m": [
+     -7.6,
+     -7.885,
+     0.535
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C01_Branding_Brazier",
+  "items": [
+   {
+    "what": "Three brand heads half-buried in the coals",
+    "story": "Merrick Sallow's irons: the Hook (crew), the Bar (one under the hook for every escape tried) and the Ring (a man bought free). Only the tops show above the embers.",
+    "where": "at the inner ends of the three existing iron rods, in the middle of the ember bowl. World centre (-9.620, -10.330, 0.900) m = piece centre (-9.618, -10.336, 0.985) + (-0.002, +0.006, -0.085) m; inside C01_Branding_Brazier's bounding box.",
+    "size_m": [
+     0.12,
+     0.12,
+     0.04
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -9.62,
+     -10.33,
+     0.9
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Quench bucket of brine",
+    "story": "Every brand is hissed out in salt water: the Smith says the sea should be the first thing a hooked man's shoulder feels.",
+    "where": "on the floor on the west (wall) side of the brazier, away from the iron handles, clear of the three legs. World centre (-10.320, -9.930, 0.550) m = piece centre (-9.618, -10.336, 0.985) + (-0.702, +0.406, -0.435) m; inside C01_Branding_Brazier's bounding box.",
+    "size_m": [
+     0.3,
+     0.3,
+     0.3
+    ],
+    "materials": [
+     "Wood",
+     "Iron"
+    ],
+    "center_m": [
+     -10.32,
+     -9.93,
+     0.55
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Scorched leather apron",
+    "story": "Sallow tests the heat of each iron on his own apron before a shoulder; the leather is covered in little hooks.",
+    "where": "draped over the south leg of the brazier, hanging toward the floor. World centre (-9.700, -10.780, 0.750) m = piece centre (-9.618, -10.336, 0.985) + (-0.082, -0.444, -0.235) m; inside C01_Branding_Brazier's bounding box.",
+    "size_m": [
+     0.35,
+     0.06,
+     0.5
+    ],
+    "materials": [
+     "Cloth"
+    ],
+    "center_m": [
+     -9.7,
+     -10.78,
+     0.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C01_Props",
+  "items": [
+   {
+    "what": "Sack of confiscated belongings",
+    "story": "Tied at the neck, a wooden chit with a number and no name. The Quartermaster sorts what is worth selling in Gullhaven; the rest goes to the sea.",
+    "where": "on the floor against the outer wall, between the recruits' chest and the clothes pile. World centre (-11.200, -9.350, 0.600) m = piece centre (-11.2, -8.72, 1.65) + (+0.000, -0.630, -1.050) m; inside C01_Props's bounding box.",
+    "size_m": [
+     0.4,
+     0.35,
+     0.4
+    ],
+    "materials": [
+     "Cloth",
+     "Straw"
+    ],
+    "center_m": [
+     -11.2,
+     -9.35,
+     0.6
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C02_Rack",
+  "items": [
+   {
+    "what": "Five notches by the wheel, the fifth signed A.R.",
+    "story": "The Crown's questioner cut a notch for each turn the wheel may take; the fifth is deeper, and beside it the initials of the only man who died there.",
+    "where": "incised into the outer face of the north rail near the wheel end. World centre (-6.700, -2.401, 1.160) m = piece centre (-7.315, -2.795, 1.182) + (+0.615, +0.394, -0.022) m; inside C02_Rack's bounding box.",
+    "size_m": [
+     0.4,
+     0.012,
+     0.15
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     -6.7,
+     -2.401,
+     1.16
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Wooden bit on a thong, bitten to many shapes",
+    "story": "Given to men to bite on. Nobody has ever carved a new one.",
+    "where": "hanging from the south end of the head roller, outside the bed of the rack. World centre (-8.750, -3.350, 1.100) m = piece centre (-7.315, -2.795, 1.182) + (-1.435, -0.555, -0.082) m; inside C02_Rack's bounding box.",
+    "size_m": [
+     0.08,
+     0.06,
+     0.25
+    ],
+    "materials": [
+     "Wood",
+     "Cloth"
+    ],
+    "center_m": [
+     -8.75,
+     -3.35,
+     1.1
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C02_Props",
+  "items": [
+   {
+    "what": "Absalom Reed's knot board",
+    "story": "Reed's last work, tied with lengths of the ropes they stretched him with: reef, bowline, sheepshank, and a hangman's knot left unfinished.",
+    "where": "a plank pegged to the north wall at chest height, west of the tool rack. World centre (-9.900, -0.330, 1.800) m = piece centre (-8.047, -0.888, 1.531) + (-1.853, +0.558, +0.269) m; inside C02_Props's bounding box.",
+    "size_m": [
+     0.8,
+     0.06,
+     0.6
+    ],
+    "materials": [
+     "Wood",
+     "Straw"
+    ],
+    "center_m": [
+     -9.9,
+     -0.33,
+     1.8
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Loose stone with Reed's little prayer book behind it",
+    "story": "The stone sits a finger proud of the wall. In the gap: the corner of a swollen leather book; its flyleaf prays for 'Lucan, who learned his knots on my walk'.",
+    "where": "at the foot of the north wall, just beyond the long skeleton's head. World centre (-10.400, -0.330, 0.620) m = piece centre (-8.047, -0.888, 1.531) + (-2.353, +0.558, -0.911) m; inside C02_Props's bounding box.",
+    "size_m": [
+     0.4,
+     0.06,
+     0.22
+    ],
+    "materials": [
+     "Stone",
+     "Cloth"
+    ],
+    "center_m": [
+     -10.4,
+     -0.33,
+     0.62
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Wooden chamber pot",
+    "story": "One pot per room, counted by the Quartermaster like everything else. This one is cracked and bound with wire.",
+    "where": "on the floor in the north-west corner, by the outer wall. World centre (-10.950, -1.300, 0.510) m = piece centre (-8.047, -0.888, 1.531) + (-2.903, -0.412, -1.021) m; inside C02_Props's bounding box.",
+    "size_m": [
+     0.24,
+     0.24,
+     0.22
+    ],
+    "materials": [
+     "Wood",
+     "Iron"
+    ],
+    "center_m": [
+     -10.95,
+     -1.3,
+     0.51
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Rust shadow of a missing hook on the tool rack",
+    "story": "A seventh peg holds only the outline of the hook that hung there for sixty years. Garrett Vole stole it and made lock-picks of it.",
+    "where": "a flat rust-dark outline 4 mm proud on the tool board, at its west end beside the last peg. World centre (-7.320, -0.364, 2.000) m = piece centre (-8.047, -0.888, 1.531) + (+0.727, +0.524, +0.469) m; inside C02_Props's bounding box.",
+    "size_m": [
+     0.06,
+     0.004,
+     0.5
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -7.32,
+     -0.364,
+     2.0
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Dented tin dipper on the bucket rim",
+    "story": "Thrown at a guard once. It missed. The thrower was racked for his aim, not his temper.",
+    "where": "hooked over the rim of the existing water bucket. World centre (-10.750, -0.600, 0.780) m = piece centre (-8.047, -0.888, 1.531) + (-2.703, +0.288, -0.751) m; inside C02_Props's bounding box.",
+    "size_m": [
+     0.25,
+     0.06,
+     0.06
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -10.75,
+     -0.6,
+     0.78
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C03_Pillory",
+  "items": [
+   {
+    "what": "Initials crowding the yoke's top edge",
+    "story": "Cut by pilloried men with their noses to the board: the only thing they could see.",
+    "where": "incised 1 cm into the top edge of the pillory yoke. World centre (-7.400, 3.175, 2.320) m = piece centre (-7.4, 2.575, 1.567) + (+0.000, +0.600, +0.753) m; inside C03_Pillory's bounding box.",
+    "size_m": [
+     1.2,
+     0.1,
+     0.01
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     -7.4,
+     3.175,
+     2.32
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Crust and egg-shell stains on the platform",
+    "story": "The leavings of the guards' Mock: rotten crusts and egg, trodden in.",
+    "where": "flat stains on the platform boards on the face side (north) of the pillory. World centre (-7.400, 3.650, 0.737) m = piece centre (-7.4, 2.575, 1.567) + (+0.000, +1.075, -0.830) m; inside C03_Pillory's bounding box.",
+    "size_m": [
+     1.0,
+     0.5,
+     0.004
+    ],
+    "materials": [
+     "Floor",
+     "Bone"
+    ],
+    "center_m": [
+     -7.4,
+     3.65,
+     0.737
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Altar stone showing through a broken board",
+    "story": "The platform was built over the chapel's altar. A carved anchor shows at the corner.",
+    "where": "incised in the east side face of the platform, at its north-east corner. World centre (-6.306, 3.750, 0.550) m = piece centre (-7.4, 2.575, 1.567) + (+1.094, +1.175, -1.017) m; inside C03_Pillory's bounding box.",
+    "size_m": [
+     0.012,
+     0.3,
+     0.25
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -6.306,
+     3.75,
+     0.55
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C03_Stocks",
+  "items": [
+   {
+    "what": "The Four of Bones, wedging the bench",
+    "story": "A card from Kit Fennick's bone deck, used to stop the bench rocking.",
+    "where": "flat under the west leg of the bench. World centre (-10.700, 4.375, 0.403) m = piece centre (-9.9, 4.04, 0.63) + (-0.800, +0.335, -0.227) m; inside C03_Stocks's bounding box.",
+    "size_m": [
+     0.06,
+     0.09,
+     0.006
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -10.7,
+     4.375,
+     0.403
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Shanty line knifed into the bench",
+    "story": "Tam Wicken sang the whole of The Widow's Tooth from these stocks and cut the first line here.",
+    "where": "incised along the front (south) face of the bench seat. World centre (-9.900, 4.231, 0.820) m = piece centre (-9.9, 4.04, 0.63) + (+0.000, +0.191, +0.190) m; inside C03_Stocks's bounding box.",
+    "size_m": [
+     1.2,
+     0.012,
+     0.06
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     -9.9,
+     4.231,
+     0.82
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C03_Props",
+  "items": [
+   {
+    "what": "Scrap of red coat and three marine buttons",
+    "story": "The three skulls at the wheel are the Crown marines who held the chapel door on the Night of the Ebb: the Saint's Three.",
+    "where": "on the floor beside the three skulls, against the outer wall. World centre (-10.900, 2.300, 0.450) m = piece centre (-10.958, 1.359, 2.007) + (+0.058, +0.941, -1.557) m; inside C03_Props's bounding box.",
+    "size_m": [
+     0.3,
+     0.2,
+     0.05
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     -10.9,
+     2.3,
+     0.45
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Straw figure of a man with an anchor",
+    "story": "A prisoner's saint, plaited from bedding and tucked behind the wheel where the guards don't look.",
+    "where": "wedged between the torture wheel and the outer wall. World centre (-11.520, 1.675, 2.200) m = piece centre (-10.958, 1.359, 2.007) + (-0.562, +0.316, +0.193) m; inside C03_Props's bounding box.",
+    "size_m": [
+     0.06,
+     0.08,
+     0.2
+    ],
+    "materials": [
+     "Straw"
+    ],
+    "center_m": [
+     -11.52,
+     1.675,
+     2.2
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C04_Cistern",
+  "items": [
+   {
+    "what": "Culvert grate under the water, bars bent outward",
+    "story": "The sea comes in here at the flood. At the Dead Ebb the grate shows dry. Lucan Drave squeezed out through it as Crown prisoner 77 and came back in through it twelve years later.",
+    "where": "on the inner face of the tank's west wall, below the water line. World centre (-11.200, 8.625, 0.350) m = piece centre (-9.072, 8.625, 1.106) + (-2.128, +0.000, -0.756) m; inside C04_Cistern's bounding box.",
+    "size_m": [
+     0.04,
+     0.5,
+     0.4
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -11.2,
+     8.625,
+     0.35
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C04_Chair",
+  "items": [
+   {
+    "what": "Knotted counting cord",
+    "story": "One knot for every ten counted under water. The Mute keeps it because he cannot say the numbers.",
+    "where": "tied to the chair's arm on the counterweight side, hanging down (moves with the chair). World centre (-6.400, 8.625, 1.860) m = piece centre (-7.825, 8.625, 2.05) + (+1.425, +0.000, -0.190) m; inside C04_Chair's bounding box.",
+    "size_m": [
+     0.03,
+     0.03,
+     0.42
+    ],
+    "materials": [
+     "Straw"
+    ],
+    "center_m": [
+     -6.4,
+     8.625,
+     1.86
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Names and counts cut into the chair back",
+    "story": "J.P. 300, H.S. 140, N.P. 90, and under them: BEAT IT.",
+    "where": "incised into the inner face of the chair's back board. World centre (-10.146, 8.625, 2.200) m = piece centre (-7.825, 8.625, 2.05) + (-2.321, +0.000, +0.150) m; inside C04_Chair's bounding box.",
+    "size_m": [
+     0.012,
+     0.4,
+     0.15
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     -10.146,
+     8.625,
+     2.2
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C04_Props",
+  "items": [
+   {
+    "what": "Slate on the dead man's knees",
+    "story": "THREE HUNDRED. COUNT IT. THE GRATE IS LOOSE AT THE DEAD EBB. I WAS TOO SLOW. J.P.",
+    "where": "leaning against the sitting skeleton's right shin. World centre (-5.800, 6.550, 0.600) m = piece centre (-5.37, 6.578, 0.94) + (-0.430, -0.028, -0.340) m; inside C04_Props's bounding box.",
+    "size_m": [
+     0.2,
+     0.03,
+     0.15
+    ],
+    "materials": [
+     "Stone",
+     "Bone"
+    ],
+    "center_m": [
+     -5.8,
+     6.55,
+     0.6
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "A single grey pearl in the skeleton's left hand",
+    "story": "Jory hid one pearl from the Saint's Finger. The other sixty are in the Lord's loot chest.",
+    "where": "inside the curled bones of the skeleton's left hand. World centre (-6.220, 6.520, 0.600) m = piece centre (-5.37, 6.578, 0.94) + (-0.850, -0.058, -0.340) m; inside C04_Props's bounding box.",
+    "size_m": [
+     0.015,
+     0.015,
+     0.015
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -6.22,
+     6.52,
+     0.6
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Kennel_1",
+  "items": [
+   {
+    "what": "Old Crown plate under the name tag: GRIP",
+    "story": "The Governor's mastiffs slept here first. GRIP was eaten in the Hungry Winter of Year I; the kennelman asked for new dogs and was given men.",
+    "where": "a brass-coloured plate on the kennel's front face, partly hidden below the wooden name plate. World centre (10.050, -9.800, 1.230) m = piece centre (10.595, -9.885, 0.95) + (-0.545, +0.085, +0.280) m; inside C05_Kennel_1's bounding box.",
+    "size_m": [
+     0.015,
+     0.36,
+     0.07
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     10.05,
+     -9.8,
+     1.23
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Kennel post cut all over with strokes",
+    "story": "Old Fetch's tally: eight winters, until the wood went soft with it.",
+    "where": "incised all round the front south post of the first kennel. World centre (10.100, -10.550, 0.950) m = piece centre (10.595, -9.885, 0.95) + (-0.495, -0.665, +0.000) m; inside C05_Kennel_1's bounding box.",
+    "size_m": [
+     0.08,
+     0.08,
+     0.9
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     10.1,
+     -10.55,
+     0.95
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Kennel_2",
+  "items": [
+   {
+    "what": "Old Crown plate under the name tag: HOLDFAST",
+    "story": "The Governor's mastiffs slept here first. HOLDFAST was eaten in the Hungry Winter of Year I; the kennelman asked for new dogs and was given men.",
+    "where": "a brass-coloured plate on the kennel's front face, partly hidden below the wooden name plate. World centre (10.050, -5.750, 1.230) m = piece centre (10.595, -5.835, 0.95) + (-0.545, +0.085, +0.280) m; inside C05_Kennel_2's bounding box.",
+    "size_m": [
+     0.015,
+     0.36,
+     0.07
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     10.05,
+     -5.75,
+     1.23
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Kennel_3",
+  "items": [
+   {
+    "what": "Old Crown plate under the name tag: SORROW",
+    "story": "The Governor's mastiffs slept here first. SORROW was eaten in the Hungry Winter of Year I; the kennelman asked for new dogs and was given men.",
+    "where": "a brass-coloured plate on the kennel's front face, partly hidden below the wooden name plate. World centre (10.050, -1.700, 1.230) m = piece centre (10.595, -1.785, 0.95) + (-0.545, +0.085, +0.280) m; inside C05_Kennel_3's bounding box.",
+    "size_m": [
+     0.015,
+     0.36,
+     0.07
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     10.05,
+     -1.7,
+     1.23
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Rusted tag SEAL wired to the bars",
+    "story": "Jory Penhallow's kennel name. He swam better than he barked.",
+    "where": "wired to the end (north) bars of the third kennel. World centre (10.600, -0.940, 1.050) m = piece centre (10.595, -1.785, 0.95) + (+0.005, +0.845, +0.100) m; inside C05_Kennel_3's bounding box.",
+    "size_m": [
+     0.08,
+     0.01,
+     0.05
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     10.6,
+     -0.94,
+     1.05
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Bowls",
+  "items": [
+   {
+    "what": "Names scratched inside the bowl rims",
+    "story": "FETCH, SEAL, LIEUTENANT, DICER, and one blank, waiting.",
+    "where": "incised inside the rims of the five iron bowls. World centre (8.240, -0.750, 0.470) m = piece centre (6.97, -0.908, 0.921) + (+1.270, +0.158, -0.451) m; inside C05_Bowls's bounding box.",
+    "size_m": [
+     2.65,
+     0.3,
+     0.02
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     8.24,
+     -0.75,
+     0.47
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Two wooden spoons on twine",
+    "story": "A dog eats from the bowl; a man earns the spoon. The kennelman hands them out and takes them back.",
+    "where": "hanging from the tether bar on twine, between two collar chains. World centre (8.400, -0.420, 1.280) m = piece centre (6.97, -0.908, 0.921) + (+1.430, +0.488, +0.359) m; inside C05_Bowls's bounding box.",
+    "size_m": [
+     0.1,
+     0.03,
+     0.22
+    ],
+    "materials": [
+     "Wood",
+     "Straw"
+    ],
+    "center_m": [
+     8.4,
+     -0.42,
+     1.28
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Crown marine's helmet used as the chamber pot",
+    "story": "Old Fetch's own helmet from the Crown's garrison, turned upside down.",
+    "where": "on the floor at the west end of the trough, by the north wall. World centre (4.500, -1.250, 0.520) m = piece centre (6.97, -0.908, 0.921) + (-2.470, -0.342, -0.401) m; inside C05_Bowls's bounding box.",
+    "size_m": [
+     0.3,
+     0.26,
+     0.24
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     4.5,
+     -1.25,
+     0.52
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C05_Clothes",
+  "items": [
+   {
+    "what": "A rag with a tarnished gold thread",
+    "story": "A strip of the Crown banner from the Court Hall, cut up for the dogs. The gilt is gone; the thread is brown.",
+    "where": "lying on top of the middle rag pile. World centre (6.400, -10.300, 0.450) m = piece centre (7.119, -10.578, 0.519) + (-0.719, +0.278, -0.069) m; inside C05_Clothes's bounding box.",
+    "size_m": [
+     0.5,
+     0.15,
+     0.03
+    ],
+    "materials": [
+     "Cloth",
+     "Straw"
+    ],
+    "center_m": [
+     6.4,
+     -10.3,
+     0.45
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Collar with tag FETCH on the skeleton's neck",
+    "story": "The kennelman will not let him be moved: he is still on watch.",
+    "where": "round the neck bones of the lying skeleton (neck at about this point). World centre (9.260, -10.450, 0.500) m = piece centre (7.119, -10.578, 0.519) + (+2.141, +0.128, -0.019) m; inside C05_Clothes's bounding box.",
+    "size_m": [
+     0.16,
+     0.16,
+     0.06
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     9.26,
+     -10.45,
+     0.5
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C07_Cage_1",
+  "items": [
+   {
+    "what": "A ship scratched into the cage floor",
+    "story": "Hugh Ormond's first drawing of the Steadfast, done during his season in this cage.",
+    "where": "incised into the top of the cage's floor plate. World centre (7.000, 1.775, 1.325) m = piece centre (7.0, 1.775, 4.213) + (+0.000, +0.000, -2.888) m; inside C07_Cage_1's bounding box.",
+    "size_m": [
+     0.5,
+     0.3,
+     0.01
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     7.0,
+     1.775,
+     1.325
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "The Jack of Keys between the bars",
+    "story": "Another card of Kit Fennick's bone deck, wedged there by someone hoisted with nothing else to do.",
+    "where": "wedged between two bars on the east side of the cage at chest height. World centre (7.415, 1.775, 2.200) m = piece centre (7.0, 1.775, 4.213) + (+0.415, +0.000, -2.013) m; inside C07_Cage_1's bounding box.",
+    "size_m": [
+     0.005,
+     0.09,
+     0.12
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     7.415,
+     1.775,
+     2.2
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Rags knotted on the bars like reef points",
+    "story": "An officer kept his hands busy: every knot is a perfect reef knot.",
+    "where": "tied along the bars on the west side of the cage. World centre (6.600, 1.775, 2.400) m = piece centre (7.0, 1.775, 4.213) + (-0.400, +0.000, -1.813) m; inside C07_Cage_1's bounding box.",
+    "size_m": [
+     0.03,
+     0.3,
+     0.3
+    ],
+    "materials": [
+     "Cloth"
+    ],
+    "center_m": [
+     6.6,
+     1.775,
+     2.4
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C07_Cage_2",
+  "items": [
+   {
+    "what": "The hangman's black hood",
+    "story": "Hob Lacey wore it for thirty years on Gallows Point. It lies at the Tenant's feet.",
+    "where": "crumpled on the floor of the cage beside the skeleton's feet. World centre (9.150, 3.950, 1.360) m = piece centre (9.0, 3.875, 4.213) + (+0.150, +0.075, -2.853) m; inside C07_Cage_2's bounding box.",
+    "size_m": [
+     0.25,
+     0.2,
+     0.06
+    ],
+    "materials": [
+     "Cloth"
+    ],
+    "center_m": [
+     9.15,
+     3.95,
+     1.36
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "211 notches on the bottom hoop, 9 on the middle hoop",
+    "story": "Lacey counted the men he hanged, then filed one notch a day in his own cage until he stopped.",
+    "where": "fine notches filed into the cage's bottom hoop and nine deep ones in the middle hoop. World centre (9.000, 3.875, 1.755) m = piece centre (9.0, 3.875, 4.213) + (+0.000, +0.000, -2.458) m; inside C07_Cage_2's bounding box.",
+    "size_m": [
+     0.86,
+     0.86,
+     0.93
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     9.0,
+     3.875,
+     1.755
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C07_Winch",
+  "items": [
+   {
+    "what": "Crown plate: PROPERTY OF THE CROWN - GALLOWS POINT",
+    "story": "The cages hung on the headland for the gulls. Scratched below: NOW PROPERTY OF THE PIT.",
+    "where": "small iron plate nailed to the north face of the winch's west post. World centre (4.750, 0.805, 1.250) m = piece centre (6.267, 0.65, 1.181) + (-1.517, +0.155, +0.069) m; inside C07_Winch's bounding box.",
+    "size_m": [
+     0.12,
+     0.01,
+     0.2
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     4.75,
+     0.805,
+     1.25
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Water pole with a hook and a small bucket",
+    "story": "The only way to give a caged man a drink. The Watch makes him beg first.",
+    "where": "leaning against the east end of the winch frame, against the south wall. World centre (7.500, 0.500, 1.200) m = piece centre (6.267, 0.65, 1.181) + (+1.233, -0.150, +0.019) m; inside C07_Winch's bounding box.",
+    "size_m": [
+     0.15,
+     0.15,
+     1.4
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     7.5,
+     0.5,
+     1.2
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C08_Mast",
+  "items": [
+   {
+    "what": "The King's Arrow burnt at the foot, the Lord's hook burnt over it",
+    "story": "The Crown's property mark on the Steadfast's mainmast, overburnt the day she was taken in fog in Year III.",
+    "where": "incised/burnt into the yard-facing (south) side of the mast just above the rope coils. World centre (7.400, 8.438, 0.700) m = piece centre (7.25, 8.613, 2.123) + (+0.150, -0.175, -1.423) m; inside C08_Mast's bounding box.",
+    "size_m": [
+     0.25,
+     0.012,
+     0.1
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     7.4,
+     8.438,
+     0.7
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Rows of notches on the back of the mast",
+    "story": "Bosun Crake cuts one notch for every hundred lashes. The rows climb higher than a man can reach.",
+    "where": "incised on the north face of the mast between the middle and upper iron bands. World centre (7.400, 8.800, 1.800) m = piece centre (7.25, 8.613, 2.123) + (+0.150, +0.187, -0.323) m; inside C08_Mast's bounding box.",
+    "size_m": [
+     0.2,
+     0.012,
+     0.8
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     7.4,
+     8.8,
+     1.8
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "A single L at the height of bound hands",
+    "story": "Cut by the young Lucan Drave when he was flogged at this same mast aboard the Steadfast, twenty years ago. The oldest mark on it.",
+    "where": "incised on the south face just below the shackle ring. World centre (7.400, 8.457, 2.450) m = piece centre (7.25, 8.613, 2.123) + (+0.150, -0.156, +0.327) m; inside C08_Mast's bounding box.",
+    "size_m": [
+     0.04,
+     0.012,
+     0.06
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     7.4,
+     8.457,
+     2.45
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Crown coin nailed to the mast, the King's face pierced",
+    "story": "Sailors put a coin under a mast for luck. The Lord's men nailed this one on top.",
+    "where": "nailed on the south face just above the lowest iron band. World centre (7.400, 8.431, 0.950) m = piece centre (7.25, 8.613, 2.123) + (+0.150, -0.182, -1.173) m; inside C08_Mast's bounding box.",
+    "size_m": [
+     0.03,
+     0.006,
+     0.03
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     7.4,
+     8.431,
+     0.95
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "C08_Props",
+  "items": [
+   {
+    "what": "Names burnt above the cat pegs: MERCY, MARGERY, WIDOW",
+    "story": "Crake's three cats: Mercy for the first dozen, Margery for the second, the Widow for the rest.",
+    "where": "burnt into the cat board above the three pegs. World centre (5.800, 11.145, 2.450) m = piece centre (7.965, 10.625, 1.5) + (-2.165, +0.520, +0.950) m; inside C08_Props's bounding box.",
+    "size_m": [
+     1.4,
+     0.01,
+     0.08
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     5.8,
+     11.145,
+     2.45
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Wooden scoop on the salt",
+    "story": "Its handle carved with a tally of the backs it has served.",
+    "where": "resting on top of the salt barrel. World centre (10.600, 10.600, 1.330) m = piece centre (7.965, 10.625, 1.5) + (+2.635, -0.025, -0.170) m; inside C08_Props's bounding box.",
+    "size_m": [
+     0.3,
+     0.1,
+     0.06
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     10.6,
+     10.6,
+     1.33
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Crake's lash book on a nail",
+    "story": "Salt-stiff pages: name, year, count, remarks. 'Sang throughout, flat.'",
+    "where": "hung on a nail on the north wall east of the cat board. World centre (7.200, 11.170, 2.000) m = piece centre (7.965, 10.625, 1.5) + (-0.765, +0.545, +0.500) m; inside C08_Props's bounding box.",
+    "size_m": [
+     0.3,
+     0.05,
+     0.4
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     7.2,
+     11.17,
+     2.0
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Bitten leather strap",
+    "story": "Bitten through in a dozen places by a dozen different jaws.",
+    "where": "hanging from a peg on the north wall just east of the cat board. World centre (6.800, 11.150, 1.750) m = piece centre (7.965, 10.625, 1.5) + (-1.165, +0.525, +0.250) m; inside C08_Props's bounding box.",
+    "size_m": [
+     0.06,
+     0.06,
+     0.3
+    ],
+    "materials": [
+     "Cloth"
+    ],
+    "center_m": [
+     6.8,
+     11.15,
+     1.75
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "P1_Floor",
+  "items": [
+   {
+    "what": "The roll-call line",
+    "story": "A groove chiselled across the yard near the gate, numbers cut beside it, worn shallow by toes.",
+    "where": "incised 1 cm into the flagstones across the yard, both halves either side of the channel. World centre (0.000, -9.600, 0.395) m = piece centre (0.0, -8.625, 0.02) + (+0.000, -0.975, +0.375) m; inside P1_Floor's bounding box.",
+    "size_m": [
+     5.2,
+     0.05,
+     0.01
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     0.0,
+     -9.6,
+     0.395
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "P3_Floor",
+  "items": [
+   {
+    "what": "Salt rime on the channel's lip",
+    "story": "The tide leaves it twice a day.",
+    "where": "a 2 cm white crust along the east lip of the channel. World centre (0.240, 2.875, 0.400) m = piece centre (0.0, 2.875, 0.018) + (+0.240, +0.000, +0.382) m; inside P3_Floor's bounding box.",
+    "size_m": [
+     0.06,
+     5.6,
+     0.02
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     0.24,
+     2.875,
+     0.4
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "P4_Floor",
+  "items": [
+   {
+    "what": "Two knee hollows before the dais",
+    "story": "Worn by men waiting to be presented at high tide.",
+    "where": "incised hollows in the flagstones just south of the dais steps. World centre (0.000, 11.000, 0.392) m = piece centre (0.0, 8.625, 0.02) + (+0.000, +2.375, +0.372) m; inside P4_Floor's bounding box.",
+    "size_m": [
+     1.2,
+     0.4,
+     0.016
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     0.0,
+     11.0,
+     0.392
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "T0_Beam",
+  "items": [
+   {
+    "what": "Swallows' mud nests under the first beam",
+    "story": "The birds come and go through the gate as they please.",
+    "where": "two mud cups stuck under the beam beside the east corbel. World centre (2.200, -11.500, 6.200) m = piece centre (0.0, -11.5, 6.225) + (+2.200, +0.000, -0.025) m; inside T0_Beam's bounding box.",
+    "size_m": [
+     0.2,
+     0.2,
+     0.18
+    ],
+    "materials": [
+     "Floor",
+     "Straw"
+    ],
+    "center_m": [
+     2.2,
+     -11.5,
+     6.2
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "T1_Beam",
+  "items": [
+   {
+    "what": "Twenty-three notches under the Governor's beam",
+    "story": "One for every man hanged from it since the Ebb. The Governor was the first.",
+    "where": "incised into the underside of the beam. World centre (0.000, -5.750, 6.305) m = piece centre (0.0, -5.75, 6.225) + (+0.000, +0.000, +0.080) m; inside T1_Beam's bounding box.",
+    "size_m": [
+     3.0,
+     0.2,
+     0.01
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     0.0,
+     -5.75,
+     6.305
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "T2_Beam",
+  "items": [
+   {
+    "what": "A noose coiled up tight against the beam",
+    "story": "Kept ready. The guards say it is for the Crown's next Governor.",
+    "where": "tied up in a coil against the beam's underside, west of the channel. World centre (-1.000, 0.000, 6.000) m = piece centre (0.0, 0.0, 6.225) + (-1.000, +0.000, -0.225) m; inside T2_Beam's bounding box.",
+    "size_m": [
+     0.3,
+     0.3,
+     0.6
+    ],
+    "materials": [
+     "Straw"
+    ],
+    "center_m": [
+     -1.0,
+     0.0,
+     6.0
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "T3_Beam",
+  "items": [
+   {
+    "what": "Fourteen sets of initials in a row",
+    "story": "The Steadfast's men who took the hook cut them the night they were branded. A crew custom.",
+    "where": "incised into the south face of the beam. World centre (0.000, 5.586, 6.520) m = piece centre (0.0, 5.75, 6.225) + (+0.000, -0.164, +0.295) m; inside T3_Beam's bounding box.",
+    "size_m": [
+     3.0,
+     0.012,
+     0.15
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     0.0,
+     5.586,
+     6.52
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "T4_Beam",
+  "items": [
+   {
+    "what": "The Lord's pennant",
+    "story": "A white hook through a broken crown on black, singed at one corner on the Night of the Ebb. Past it, a man kneels.",
+    "where": "a short swallow-tailed pennant on an iron rod under the last beam. World centre (0.000, 11.500, 6.020) m = piece centre (0.0, 11.5, 6.225) + (+0.000, +0.000, -0.205) m; inside T4_Beam's bounding box.",
+    "size_m": [
+     1.2,
+     0.02,
+     0.56
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     0.0,
+     11.5,
+     6.02
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "P_Gibbet",
+  "items": [
+   {
+    "what": "Placard on the Governor's chest: THE CROWN KEEPS THE YARD",
+    "story": "Governor Aldous Prynne, hanged at dawn after the Ebb. The Watch greets him every morning.",
+    "where": "a small board hung on a cord round the hanged skeleton's neck, resting on its chest. World centre (0.850, -5.630, 4.620) m = piece centre (0.836, -5.674, 4.903) + (+0.014, +0.044, -0.283) m; inside P_Gibbet's bounding box.",
+    "size_m": [
+     0.35,
+     0.03,
+     0.22
+    ],
+    "materials": [
+     "Wood",
+     "Straw"
+    ],
+    "center_m": [
+     0.85,
+     -5.63,
+     4.62
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Rags of the Governor's coat, buttonholes torn",
+    "story": "The gilt buttons were cut off for the throne's skull crowns. One tarnished button was missed.",
+    "where": "strips of coat hanging from the skeleton's shoulders and ribs. World centre (0.900, -5.720, 4.300) m = piece centre (0.836, -5.674, 4.903) + (+0.064, -0.046, -0.603) m; inside P_Gibbet's bounding box.",
+    "size_m": [
+     0.45,
+     0.2,
+     0.7
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     0.9,
+     -5.72,
+     4.3
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Salt fish drying on a butcher's hook",
+    "story": "The Quartermaster wastes nothing, not even the air beside a hanged man.",
+    "where": "hanging from the east butcher's hook. World centre (2.000, -5.750, 4.900) m = piece centre (0.836, -5.674, 4.903) + (+1.164, -0.076, -0.003) m; inside P_Gibbet's bounding box.",
+    "size_m": [
+     0.1,
+     0.05,
+     0.4
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     2.0,
+     -5.75,
+     4.9
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "G_Wall_W",
+  "items": [
+   {
+    "what": "The Crown's arms painted on the guardroom wall, a black hook daubed across",
+    "story": "Flaking lime and red; the hook is tar.",
+    "where": "flat paint high on the inner (north) face of the wall, above the key board. World centre (-9.000, -15.195, 4.000) m = piece centre (-9.5, -15.85, 3.69) + (+0.500, +0.655, +0.310) m; inside G_Wall_W's bounding box.",
+    "size_m": [
+     1.4,
+     0.01,
+     1.0
+    ],
+    "materials": [
+     "Bone",
+     "Iron"
+    ],
+    "center_m": [
+     -9.0,
+     -15.195,
+     4.0
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "V_Partition_W",
+  "items": [
+   {
+    "what": "Soot plume above the branding brazier",
+    "story": "Ten years of branding smoke have drawn a black flame up the south wall of the Press-Gang.",
+    "where": "flat dark stain 5 mm proud on the NORTH face of this partition (the south wall of C01, inside the room), centred over the brazier. World centre (-9.600, -11.195, 2.600) m = piece centre (-7.675, -11.5, 3.69) + (-1.925, +0.305, -1.090) m; inside V_Partition_W's bounding box.",
+    "size_m": [
+     1.0,
+     0.01,
+     2.0
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -9.6,
+     -11.195,
+     2.6
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Iron pegs with Sergeant Rook's belt",
+    "story": "Its sword-frog is empty: Rook lost the sword at dice.",
+    "where": "a row of pegs on the SOUTH face of this partition (the guardroom's north wall), west of the hall torch. World centre (-9.750, -11.830, 1.700) m = piece centre (-7.675, -11.5, 3.69) + (-2.075, -0.330, -1.990) m; inside V_Partition_W's bounding box.",
+    "size_m": [
+     1.5,
+     0.06,
+     0.6
+    ],
+    "materials": [
+     "Iron",
+     "Cloth"
+    ],
+    "center_m": [
+     -9.75,
+     -11.83,
+     1.7
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "G_Tower_W",
+  "items": [
+   {
+    "what": "Carving: W.A. KEPT THIS GATE NINE YEARS",
+    "story": "Will Ashby, before he sold it.",
+    "where": "incised into the west wall of the gate passage at chest height. World centre (-2.006, -16.300, 1.500) m = piece centre (-4.025, -16.315, 5.1) + (+2.019, +0.015, -3.600) m; inside G_Tower_W's bounding box.",
+    "size_m": [
+     0.012,
+     0.8,
+     0.2
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -2.006,
+     -16.3,
+     1.5
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "G_Wall_E",
+  "items": [
+   {
+    "what": "Three wanted posters for Lucan Drave",
+    "story": "200 crowns, 500 crowns, 1,000 crowns: the Crown's price over the years. The Watch drew moustaches on all three.",
+    "where": "nailed on the inner (north) face of the wall behind the guards' table. World centre (8.700, -15.180, 1.900) m = piece centre (9.5, -15.85, 3.69) + (-0.800, +0.670, -1.790) m; inside G_Wall_E's bounding box.",
+    "size_m": [
+     1.6,
+     0.02,
+     0.7
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     8.7,
+     -15.18,
+     1.9
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "V_Wall_E",
+  "items": [
+   {
+    "what": "Names of the Watch",
+    "story": "DACE, MULL, ROOK, HOLLIS, TOLLEY, ORRIN, KETCH, and the newest, FENNICK.",
+    "where": "incised into the east wall of the guardroom at head height. World centre (11.606, -13.000, 1.800) m = piece centre (12.3, -13.125, 3.69) + (-0.694, +0.125, -1.890) m; inside V_Wall_E's bounding box.",
+    "size_m": [
+     0.012,
+     1.2,
+     0.5
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     11.606,
+     -13.0,
+     1.8
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "V_Partition_E",
+  "items": [
+   {
+    "what": "Compass rose scratched on the wall",
+    "story": "Hugh Ormond kept his bearings through two winters in the Kennel. North points at the throne; a line is cut through north.",
+    "where": "carving 3 cm proud on the NORTH face of this partition (the south wall of the Kennel, inside it), above the rag piles. World centre (8.000, -11.185, 1.600) m = piece centre (7.675, -11.5, 3.69) + (+0.325, +0.315, -2.090) m; inside V_Partition_E's bounding box.",
+    "size_m": [
+     0.5,
+     0.03,
+     0.5
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     8.0,
+     -11.185,
+     1.6
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Wager slate: HOW LONG UNDER?",
+    "story": "Names and bets on the Cistern, the Watch's favourite sport.",
+    "where": "a framed slate on the SOUTH face of this partition (the guardroom's north wall), east of the hall torch. World centre (8.500, -11.820, 1.800) m = piece centre (7.675, -11.5, 3.69) + (+0.825, -0.320, -1.890) m; inside V_Partition_E's bounding box.",
+    "size_m": [
+     0.6,
+     0.04,
+     0.45
+    ],
+    "materials": [
+     "Stone",
+     "Wood",
+     "Bone"
+    ],
+    "center_m": [
+     8.5,
+     -11.82,
+     1.8
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "G_Tower_E",
+  "items": [
+   {
+    "what": "Tide lines with years",
+    "story": "Y1 THE EBB at the foot; FLOOD Y7 at the knee.",
+    "where": "incised into the east wall of the gate passage. World centre (2.006, -16.600, 0.900) m = piece centre (4.025, -16.315, 5.1) + (-2.019, -0.285, -4.200) m; inside G_Tower_E's bounding box.",
+    "size_m": [
+     0.012,
+     0.3,
+     1.0
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     2.006,
+     -16.6,
+     0.9
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Mooring ring in the jamb",
+    "story": "At the high springs, boats tie up inside the gate.",
+    "where": "an iron ring in a recess cut into the east jamb at the stair head (does not project into the passage). World centre (1.760, -17.600, 0.700) m = piece centre (4.025, -16.315, 5.1) + (-2.265, -1.285, -4.400) m; inside G_Tower_E's bounding box.",
+    "size_m": [
+     0.12,
+     0.2,
+     0.2
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     1.76,
+     -17.6,
+     0.7
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "V_Floor_2",
+  "items": [
+   {
+    "what": "STRIP HERE, cut into the floor",
+    "story": "Every man's clothes leave him on this square and go to the basket, and from there to the dogs.",
+    "where": "a square incised 1 cm into the flagstones west of the passage, north of the portcullis winch. World centre (-3.200, -12.600, 0.395) m = piece centre (0.0, -13.35, -0.0) + (-3.200, +0.750, +0.395) m; inside V_Floor_2's bounding box.",
+    "size_m": [
+     0.9,
+     0.9,
+     0.01
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -3.2,
+     -12.6,
+     0.395
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "G_Stairs",
+  "items": [
+   {
+    "what": "Chain groove up the steps",
+    "story": "Bright where the iron bites the stone: a century of men dragged up, very few walked down.",
+    "where": "a groove incised up the noses of the two outer steps, west of centre. World centre (-0.400, -18.600, 0.300) m = piece centre (0.0, -17.2, 0.0) + (-0.400, -1.400, +0.300) m; inside G_Stairs's bounding box.",
+    "size_m": [
+     0.08,
+     1.2,
+     0.2
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -0.4,
+     -18.6,
+     0.3
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Salt and bladder-wrack on the lowest step",
+    "story": "At high tide the sea climbs two steps and waits.",
+    "where": "a thin crust on the lowest step in front of the east tower, off the walking line. World centre (2.400, -19.050, 0.205) m = piece centre (0.0, -17.2, 0.0) + (+2.400, -1.850, +0.205) m; inside G_Stairs's bounding box.",
+    "size_m": [
+     1.0,
+     0.25,
+     0.01
+    ],
+    "materials": [
+     "Bone",
+     "Straw"
+    ],
+    "center_m": [
+     2.4,
+     -19.05,
+     0.205
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "G_Arch",
+  "items": [
+   {
+    "what": "A Crown coin in each Ashby skull's jaw",
+    "story": "Ned and Will Ashby raised the portcullis for the Lord and came back for double pay. Paid in full.",
+    "where": "one coin wedged in the jaw of each of the two nailed skulls, x = -0.75 and +0.75. World centre (0.000, -18.240, 6.700) m = piece centre (0.0, -16.3, 6.845) + (+0.000, -1.940, -0.145) m; inside G_Arch's bounding box.",
+    "size_m": [
+     1.55,
+     0.02,
+     0.04
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     0.0,
+     -18.24,
+     6.7
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "The Lord's hook cut over the chiselled Crown gull",
+    "story": "The arms over the gate were the Crown's; the gull was chiselled off and the hook cut in its place.",
+    "where": "incised into the coat-of-arms shield on the outer (south) face. World centre (0.000, -18.085, 7.450) m = piece centre (0.0, -16.3, 6.845) + (+0.000, -1.785, +0.605) m; inside G_Arch's bounding box.",
+    "size_m": [
+     0.4,
+     0.01,
+     0.6
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     0.0,
+     -18.085,
+     7.45
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Motto: WHAT THE SEA GIVES, THE PIT KEEPS",
+    "story": "Cut deep enough to hold rain.",
+    "where": "incised along the outer face of the arch, between the hood mould and the skulls. World centre (0.000, -18.005, 6.350) m = piece centre (0.0, -16.3, 6.845) + (+0.000, -1.705, -0.495) m; inside G_Arch's bounding box.",
+    "size_m": [
+     2.2,
+     0.01,
+     0.15
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     0.0,
+     -18.005,
+     6.35
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "G_Winch",
+  "items": [
+   {
+    "what": "The bell's inscription, SAINT filed away",
+    "story": "SAINT CLEMENT KEEP THE SAILORS - FORT CLEMENCY. The chapel bell, now the press-gang bell.",
+    "where": "a band of cast letters round the waist of the bell. World centre (-5.050, -13.850, 2.620) m = piece centre (-3.425, -13.909, 2.315) + (-1.625, +0.059, +0.305) m; inside G_Winch's bounding box.",
+    "size_m": [
+     0.42,
+     0.42,
+     0.08
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -5.05,
+     -13.85,
+     2.62
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Chalk strokes on the bell post",
+    "story": "One for every man rung in this year. The column has reached the ground.",
+    "where": "chalk on the north face of the bell post. World centre (-5.600, -13.765, 1.600) m = piece centre (-3.425, -13.909, 2.315) + (-2.175, +0.144, -0.715) m; inside G_Winch's bounding box.",
+    "size_m": [
+     0.14,
+     0.01,
+     0.6
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -5.6,
+     -13.765,
+     1.6
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Chalk on the winch frame: 37 TURNS UP",
+    "story": "LET IT DROP AND YOU PAY FOR THE TOES.",
+    "where": "chalk on the north face of the east winch post. World centre (-3.650, -13.645, 1.400) m = piece centre (-3.425, -13.909, 2.315) + (-0.225, +0.264, -0.915) m; inside G_Winch's bounding box.",
+    "size_m": [
+     0.15,
+     0.01,
+     0.2
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -3.65,
+     -13.645,
+     1.4
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "V_Table",
+  "items": [
+   {
+    "what": "A third bone die, cracked to show lead",
+    "story": "Kit Fennick's loaded die. He won his release with its brother.",
+    "where": "on the table top beside the two dice. World centre (6.950, -13.300, 1.235) m = piece centre (6.6, -13.4, 0.97) + (+0.350, +0.100, +0.265) m; inside V_Table's bounding box.",
+    "size_m": [
+     0.03,
+     0.03,
+     0.03
+    ],
+    "materials": [
+     "Bone",
+     "Iron"
+    ],
+    "center_m": [
+     6.95,
+     -13.3,
+     1.235
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Debts knifed into the table",
+    "story": "DACE OWES MULL 4. MULL OWES ROOK 9. ROOK OWES THE LORD EVERYTHING.",
+    "where": "incised into the table top, west half. World centre (6.200, -13.600, 1.218) m = piece centre (6.6, -13.4, 0.97) + (-0.400, -0.200, +0.248) m; inside V_Table's bounding box.",
+    "size_m": [
+     0.9,
+     0.3,
+     0.004
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     6.2,
+     -13.6,
+     1.218
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Pewter plate with fish bones and a crust",
+    "story": "The Watch eats before the prisoners and leaves the bones for them.",
+    "where": "on the table top, north-west quarter. World centre (6.000, -13.150, 1.230) m = piece centre (6.6, -13.4, 0.97) + (-0.600, +0.250, +0.260) m; inside V_Table's bounding box.",
+    "size_m": [
+     0.24,
+     0.24,
+     0.03
+    ],
+    "materials": [
+     "Iron",
+     "Bone"
+    ],
+    "center_m": [
+     6.0,
+     -13.15,
+     1.23
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Coins at the dagger's foot: the Lord's Due",
+    "story": "Whoever loses the last throw of the night pays. Nobody touches it, not even Rook.",
+    "where": "a small stack at the base of the stuck dagger. World centre (7.250, -13.450, 1.232) m = piece centre (6.6, -13.4, 0.97) + (+0.650, -0.050, +0.262) m; inside V_Table's bounding box.",
+    "size_m": [
+     0.08,
+     0.08,
+     0.025
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     7.25,
+     -13.45,
+     1.232
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "The Two of Bones under a tankard",
+    "story": "On its back: K.F. DEALT IN THE KENNEL, WON AT THIS TABLE.",
+    "where": "flat on the table top, west end. World centre (5.850, -13.600, 1.223) m = piece centre (6.6, -13.4, 0.97) + (-0.750, -0.200, +0.253) m; inside V_Table's bounding box.",
+    "size_m": [
+     0.18,
+     0.12,
+     0.006
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     5.85,
+     -13.6,
+     1.223
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "V_Props_W",
+  "items": [
+   {
+    "what": "The Sentence Board",
+    "story": "A slate in a wooden frame, chalked in Hask's square hand: room, number, days, key-holder's mark. Lines are struck, never wiped.",
+    "where": "hung on the wall right above the key board. World centre (-9.200, -15.175, 2.750) m = piece centre (-8.537, -15.167, 1.8) + (-0.663, -0.008, +0.950) m; inside V_Props_W's bounding box.",
+    "size_m": [
+     1.4,
+     0.05,
+     0.8
+    ],
+    "materials": [
+     "Wood",
+     "Stone",
+     "Bone"
+    ],
+    "center_m": [
+     -9.2,
+     -15.175,
+     2.75
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Standing Orders of the Watch",
+    "story": "Nine orders in the Wren's round hand, nailed between the key board and the anchor.",
+    "where": "a nailed parchment on the wall between the key board and the anchor. World centre (-8.000, -15.190, 1.900) m = piece centre (-8.537, -15.167, 1.8) + (+0.537, -0.023, +0.100) m; inside V_Props_W's bounding box.",
+    "size_m": [
+     0.5,
+     0.02,
+     0.7
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     -8.0,
+     -15.19,
+     1.9
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Shank of the anchor worn bright",
+    "story": "Every guard touches the anchor of the Good Intent before he goes on watch.",
+    "where": "a polished band on the anchor shank at hand height. World centre (-6.900, -15.150, 1.400) m = piece centre (-8.537, -15.167, 1.8) + (+1.637, +0.017, -0.400) m; inside V_Props_W's bounding box.",
+    "size_m": [
+     0.14,
+     0.1,
+     0.2
+    ],
+    "materials": [
+     "Iron"
+    ],
+    "center_m": [
+     -6.9,
+     -15.15,
+     1.4
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Eight bone key tags",
+    "story": "PRESS, RACK, STOCKS, CISTERN, KENNEL, KENNEL, CAGES, MAST. The Cistern's tag is stained green.",
+    "where": "one small tag on the bow of each key on the key board. World centre (-9.190, -15.100, 2.200) m = piece centre (-8.537, -15.167, 1.8) + (-0.653, +0.067, +0.400) m; inside V_Props_W's bounding box.",
+    "size_m": [
+     1.25,
+     0.02,
+     0.06
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     -9.19,
+     -15.1,
+     2.2
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "V_Basket",
+  "items": [
+   {
+    "what": "Forked stick for lifting rags",
+    "story": "Nobody touches the Watch's breeches by hand.",
+    "where": "leaning against the basket's north side. World centre (9.200, -12.500, 0.750) m = piece centre (9.699, -13.178, 0.75) + (-0.499, +0.678, +0.000) m; inside V_Basket's bounding box.",
+    "size_m": [
+     0.06,
+     0.06,
+     0.7
+    ],
+    "materials": [
+     "Wood"
+    ],
+    "center_m": [
+     9.2,
+     -12.5,
+     0.75
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Knife tally on the basket rim",
+    "story": "Forty-seven baskets down the Kennel hatch this year.",
+    "where": "notches cut round the woven rim. World centre (9.600, -13.000, 1.000) m = piece centre (9.699, -13.178, 0.75) + (-0.099, +0.178, +0.250) m; inside V_Basket's bounding box.",
+    "size_m": [
+     0.8,
+     0.8,
+     0.04
+    ],
+    "materials": [
+     "Straw"
+    ],
+    "center_m": [
+     9.6,
+     -13.0,
+     1.0
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Wall_W",
+  "items": [
+   {
+    "what": "Flood line of Year VII",
+    "story": "The sea came into the court hall to the second step of the dais. The Lord held court with his boots in it.",
+    "where": "a level line incised along the west wall at knee height with FLOOD Y7. World centre (-11.606, 13.500, 0.850) m = piece centre (-12.3, 13.75, 3.69) + (+0.694, -0.250, -2.840) m; inside N_Wall_W's bounding box.",
+    "size_m": [
+     0.012,
+     3.0,
+     0.05
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     -11.606,
+     13.5,
+     0.85
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Back_W",
+  "items": [
+   {
+    "what": "The Lord's chart of the Narrows in a gilt frame",
+    "story": "Black rock, red Crown patrol lines, hooks for his ships, crosses for wrecks, and a circle drawn many times round the Widow's Tooth.",
+    "where": "hung on the back wall above the hay bales, west of the banner. World centre (-9.000, 15.170, 2.900) m = piece centre (-8.05, 15.54, 3.69) + (-0.950, -0.370, -0.790) m; inside N_Back_W's bounding box.",
+    "size_m": [
+     2.4,
+     0.06,
+     1.5
+    ],
+    "materials": [
+     "Cloth",
+     "Wood",
+     "Bone"
+    ],
+    "center_m": [
+     -9.0,
+     15.17,
+     2.9
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Back_E",
+  "items": [
+   {
+    "what": "A Crown banner hung upside down",
+    "story": "Its red gull dives into nothing. The rest of it went to the Kennel as rags.",
+    "where": "hung from an iron bar on the back wall above the rum barrels, east of the Lord's banner. World centre (9.600, 15.120, 4.600) m = piece centre (8.05, 15.54, 3.69) + (+1.550, -0.420, +0.910) m; inside N_Back_E's bounding box.",
+    "size_m": [
+     1.1,
+     0.06,
+     2.6
+    ],
+    "materials": [
+     "Cloth",
+     "Iron"
+    ],
+    "center_m": [
+     9.6,
+     15.12,
+     4.6
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Back_C",
+  "items": [
+   {
+    "what": "Ghost of the Crown's arms chiselled out of the niche",
+    "story": "The King's arms looked out from here over the court. The wheel of the Gallows Bride hangs in front of the scar.",
+    "where": "incised outline on the back face of the niche, behind the ship's wheel. World centre (0.000, 15.706, 4.100) m = piece centre (0.0, 15.575, 3.69) + (+0.000, +0.131, +0.410) m; inside N_Back_C's bounding box.",
+    "size_m": [
+     1.0,
+     0.012,
+     1.0
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     0.0,
+     15.706,
+     4.1
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Gilt letters STEADFAST nailed upside down",
+    "story": "Taken off the frigate's stern in Year III.",
+    "where": "a row of gilt wooden letters on the back wall above the niche's hood mould. World centre (0.000, 15.170, 6.620) m = piece centre (0.0, 15.575, 3.69) + (+0.000, -0.405, +2.930) m; inside N_Back_C's bounding box.",
+    "size_m": [
+     3.6,
+     0.04,
+     0.25
+    ],
+    "materials": [
+     "Bone",
+     "Iron"
+    ],
+    "center_m": [
+     0.0,
+     15.17,
+     6.62
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Dais",
+  "items": [
+   {
+    "what": "A line of gilt nail heads along the top step",
+    "story": "None but the Lord crosses it standing.",
+    "where": "flush nail heads set along the front edge of the top step. World centre (0.000, 12.620, 1.297) m = piece centre (0.0, 13.255, 0.8) + (+0.000, -0.635, +0.497) m; inside N_Dais's bounding box.",
+    "size_m": [
+     6.0,
+     0.04,
+     0.006
+    ],
+    "materials": [
+     "Bone",
+     "Iron"
+    ],
+    "center_m": [
+     0.0,
+     12.62,
+     1.297
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "KNEEL cut into the lowest riser",
+    "story": "Worn to the shape of knees.",
+    "where": "incised letters in the centre of the lowest step's riser. World centre (0.000, 11.316, 0.525) m = piece centre (0.0, 13.255, 0.8) + (+0.000, -1.939, -0.275) m; inside N_Dais's bounding box.",
+    "size_m": [
+     0.8,
+     0.012,
+     0.15
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     0.0,
+     11.316,
+     0.525
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Throne",
+  "items": [
+   {
+    "what": "Gilt circlets on the two post skulls",
+    "story": "Beaten from the hanged Governor's gilt buttons. Gilt: the only clean metal in the Pit.",
+    "where": "a thin crown ring on top of each skull on the throne's back posts (x = -0.75 and +0.75). World centre (0.000, 14.940, 4.645) m = piece centre (0.0, 14.406, 2.993) + (+0.000, +0.534, +1.652) m; inside N_Throne's bounding box.",
+    "size_m": [
+     1.7,
+     0.2,
+     0.09
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     0.0,
+     14.94,
+     4.645
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Gilt studs along the arms",
+    "story": "Thirty-one, one for every ship taken since the Ebb.",
+    "where": "a row of flush stud heads along the top board of each arm. World centre (0.000, 14.475, 2.325) m = piece centre (0.0, 14.406, 2.993) + (+0.000, +0.069, -0.668) m; inside N_Throne's bounding box.",
+    "size_m": [
+     1.48,
+     0.9,
+     0.01
+    ],
+    "materials": [
+     "Bone",
+     "Iron"
+    ],
+    "center_m": [
+     0.0,
+     14.475,
+     2.325
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "The Lord's spyglass",
+    "story": "From the throne he counts the bars of every grille, and does.",
+    "where": "hooked on the outer side of the right (east) arm, behind the chain ring. World centre (0.800, 14.650, 2.150) m = piece centre (0.0, 14.406, 2.993) + (+0.800, +0.244, -0.843) m; inside N_Throne's bounding box.",
+    "size_m": [
+     0.06,
+     0.4,
+     0.06
+    ],
+    "materials": [
+     "Iron",
+     "Bone"
+    ],
+    "center_m": [
+     0.8,
+     14.65,
+     2.15
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Gilt hook through a broken crown on the high back",
+    "story": "The Lord's sign, the only gilded carving in the fortress.",
+    "where": "a 1 cm relief on the front of the back board, above the hide and below the iron crown. World centre (0.000, 14.845, 3.800) m = piece centre (0.0, 14.406, 2.993) + (+0.000, +0.439, +0.807) m; inside N_Throne's bounding box.",
+    "size_m": [
+     0.5,
+     0.01,
+     0.5
+    ],
+    "materials": [
+     "Wood",
+     "Bone"
+    ],
+    "center_m": [
+     0.0,
+     14.845,
+     3.8
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "77 scratched into the plinth",
+    "story": "The Lord's Crown number. He sits on it.",
+    "where": "incised small in the centre of the plinth's front face. World centre (0.000, 13.956, 1.400) m = piece centre (0.0, 14.406, 2.993) + (+0.000, -0.450, -1.593) m; inside N_Throne's bounding box.",
+    "size_m": [
+     0.2,
+     0.012,
+     0.1
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     0.0,
+     13.956,
+     1.4
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Kneeling_Stone",
+  "items": [
+   {
+    "what": "Two knee hollows and a fringe of initials",
+    "story": "Polished by every presentation since the Crown used it as the dock stone of its court.",
+    "where": "incised into the top of the stone; initials along its upper edges. World centre (0.000, 13.100, 1.575) m = piece centre (0.063, 12.8, 1.437) + (-0.063, +0.300, +0.138) m; inside N_Kneeling_Stone's bounding box.",
+    "size_m": [
+     0.6,
+     0.25,
+     0.01
+    ],
+    "materials": [
+     "Stone"
+    ],
+    "center_m": [
+     0.0,
+     13.1,
+     1.575
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Brazier_W",
+  "items": [
+   {
+    "what": "The Governor's coronet beaten into the brazier rim",
+    "story": "The Crown's gilt coronet of office, cut into spikes and nailed round the bowl: the Crown burns at the Lord's feet.",
+    "where": "a ring of short gilt spikes on the rim of the bowl. World centre (-2.300, 14.000, 2.310) m = piece centre (-2.332, 13.981, 2.33) + (+0.032, +0.019, -0.020) m; inside N_Brazier_W's bounding box.",
+    "size_m": [
+     1.3,
+     1.3,
+     0.12
+    ],
+    "materials": [
+     "Bone",
+     "Iron"
+    ],
+    "center_m": [
+     -2.3,
+     14.0,
+     2.31
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Brazier_E",
+  "items": [
+   {
+    "what": "The Governor's chain of office round the bowl",
+    "story": "Gilt links, blackened on the fire side, bright on the hall side.",
+    "where": "hung round the outside of the bowl just below the rim. World centre (2.300, 14.000, 2.050) m = piece centre (2.268, 13.981, 2.33) + (+0.032, +0.019, -0.280) m; inside N_Brazier_E's bounding box.",
+    "size_m": [
+     1.2,
+     1.2,
+     0.1
+    ],
+    "materials": [
+     "Bone",
+     "Iron"
+    ],
+    "center_m": [
+     2.3,
+     14.0,
+     2.05
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Props_W",
+  "items": [
+   {
+    "what": "Working chart and dividers on the top bale",
+    "story": "The chart he actually uses, weighted with brass dividers and a candle stub; the Dead Ebb is marked for this year.",
+    "where": "spread flat over the top hay bale. World centre (-8.000, 14.450, 1.330) m = piece centre (-8.971, 13.814, 1.6) + (+0.971, +0.636, -0.270) m; inside N_Props_W's bounding box.",
+    "size_m": [
+     0.9,
+     0.45,
+     0.06
+    ],
+    "materials": [
+     "Cloth",
+     "Iron",
+     "Bone"
+    ],
+    "center_m": [
+     -8.0,
+     14.45,
+     1.33
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ },
+ {
+  "piece": "N_Props_E",
+  "items": [
+   {
+    "what": "Grey pearls spilling from the chest",
+    "story": "From the Saint's Finger: sixty, and a gap where one is missing. Ask the Cistern.",
+    "where": "a short string hanging over the front edge of the loot chest. World centre (8.250, 14.320, 0.800) m = piece centre (9.283, 14.337, 1.6) + (-1.033, -0.017, -0.800) m; inside N_Props_E's bounding box.",
+    "size_m": [
+     0.25,
+     0.08,
+     0.1
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     8.25,
+     14.32,
+     0.8
+    ],
+    "lod": "HIGH"
+   },
+   {
+    "what": "Gilt reliquary of Saint Clement",
+    "story": "Taken from the chapel. The Quartermaster opened it: it holds a fishbone.",
+    "where": "standing on the coins inside the open chest. World centre (7.750, 14.600, 0.930) m = piece centre (9.283, 14.337, 1.6) + (-1.533, +0.263, -0.670) m; inside N_Props_E's bounding box.",
+    "size_m": [
+     0.18,
+     0.12,
+     0.14
+    ],
+    "materials": [
+     "Bone"
+    ],
+    "center_m": [
+     7.75,
+     14.6,
+     0.93
+    ],
+    "lod": "HIGH"
+   }
+  ]
+ }
+]

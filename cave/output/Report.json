@@ -1,0 +1,2240 @@
+{
+ "linksets": {
+  "Cave": {
+   "pieces": 54,
+   "root": "Cave_Hearth",
+   "label": "The Cave",
+   "li_download_est": 220.2,
+   "li_server": 27.0,
+   "li_estimate": 220.2,
+   "size_m": [
+    45.89,
+    37.43,
+    14.53
+   ],
+   "min": [
+    -22.53,
+    -19.86,
+    -2.97
+   ],
+   "triangles_high": 88031,
+   "files": [
+    "Cave.dae",
+    "Cave_LOD2.dae",
+    "Cave_LOD1.dae",
+    "Cave_LOD0.dae",
+    "Cave_PHYS.dae"
+   ]
+  }
+ },
+ "pieces": [
+  {
+   "name": "Cave_Rock_00",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    6.535,
+    10.577,
+    8.791
+   ],
+   "center": [
+    -14.268,
+    -11.788,
+    2.848
+   ],
+   "radius_m": 7.61,
+   "triangles": {
+    "HIGH": 1979,
+    "MEDIUM": 195,
+    "LOW": 49,
+    "LOWEST": 22,
+    "PHYS": 247
+   },
+   "lod_weight": [
+    0.031,
+    0.461,
+    0.509,
+    0.0
+   ],
+   "li_est": 12.033,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_01",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    11.413,
+    13.0,
+    12.091
+   ],
+   "center": [
+    -16.706,
+    0.0,
+    3.099
+   ],
+   "radius_m": 10.55,
+   "triangles": {
+    "HIGH": 2583,
+    "MEDIUM": 61,
+    "LOW": 26,
+    "LOWEST": 21,
+    "PHYS": 323
+   },
+   "lod_weight": [
+    0.059,
+    0.885,
+    0.056,
+    0.0
+   ],
+   "li_est": 13.225,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_02",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    11.529,
+    10.821,
+    12.425
+   ],
+   "center": [
+    -16.764,
+    11.91,
+    3.241
+   ],
+   "radius_m": 10.05,
+   "triangles": {
+    "HIGH": 3002,
+    "MEDIUM": 61,
+    "LOW": 30,
+    "LOWEST": 24,
+    "PHYS": 376
+   },
+   "lod_weight": [
+    0.054,
+    0.803,
+    0.143,
+    0.0
+   ],
+   "li_est": 14.267,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_10",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    11.0,
+    10.6,
+    9.72
+   ],
+   "center": [
+    -5.5,
+    -11.8,
+    3.29
+   ],
+   "radius_m": 9.05,
+   "triangles": {
+    "HIGH": 2932,
+    "MEDIUM": 67,
+    "LOW": 34,
+    "LOWEST": 18,
+    "PHYS": 366
+   },
+   "lod_weight": [
+    0.043,
+    0.651,
+    0.305,
+    0.0
+   ],
+   "li_est": 12.483,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_11",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    11.0,
+    13.0,
+    13.316
+   ],
+   "center": [
+    -5.5,
+    0.0,
+    3.725
+   ],
+   "radius_m": 10.81,
+   "triangles": {
+    "HIGH": 4465,
+    "MEDIUM": 61,
+    "LOW": 38,
+    "LOWEST": 20,
+    "PHYS": 559
+   },
+   "lod_weight": [
+    0.062,
+    0.928,
+    0.01,
+    0.0
+   ],
+   "li_est": 22.591,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_12",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    11.0,
+    10.992,
+    12.402
+   ],
+   "center": [
+    -5.5,
+    11.996,
+    3.24
+   ],
+   "radius_m": 9.95,
+   "triangles": {
+    "HIGH": 2765,
+    "MEDIUM": 61,
+    "LOW": 26,
+    "LOWEST": 18,
+    "PHYS": 347
+   },
+   "lod_weight": [
+    0.052,
+    0.786,
+    0.162,
+    0.0
+   ],
+   "li_est": 12.697,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_20",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    11.0,
+    13.119,
+    11.285
+   ],
+   "center": [
+    5.5,
+    -13.059,
+    4.033
+   ],
+   "radius_m": 10.25,
+   "triangles": {
+    "HIGH": 2691,
+    "MEDIUM": 62,
+    "LOW": 25,
+    "LOWEST": 18,
+    "PHYS": 336
+   },
+   "lod_weight": [
+    0.056,
+    0.835,
+    0.109,
+    0.0
+   ],
+   "li_est": 13.438,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_21",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    11.0,
+    13.0,
+    12.99
+   ],
+   "center": [
+    5.5,
+    0.0,
+    5.063
+   ],
+   "radius_m": 10.71,
+   "triangles": {
+    "HIGH": 2966,
+    "MEDIUM": 61,
+    "LOW": 26,
+    "LOWEST": 22,
+    "PHYS": 371
+   },
+   "lod_weight": [
+    0.061,
+    0.911,
+    0.028,
+    0.0
+   ],
+   "li_est": 13.695,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_22",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    11.0,
+    10.55,
+    10.422
+   ],
+   "center": [
+    5.5,
+    11.775,
+    3.687
+   ],
+   "radius_m": 9.23,
+   "triangles": {
+    "HIGH": 2892,
+    "MEDIUM": 61,
+    "LOW": 32,
+    "LOWEST": 20,
+    "PHYS": 361
+   },
+   "lod_weight": [
+    0.045,
+    0.677,
+    0.277,
+    0.0
+   ],
+   "li_est": 12.616,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_30",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    10.368,
+    13.361,
+    10.183
+   ],
+   "center": [
+    16.184,
+    -13.18,
+    3.547
+   ],
+   "radius_m": 9.87,
+   "triangles": {
+    "HIGH": 4486,
+    "MEDIUM": 69,
+    "LOW": 69,
+    "LOWEST": 22,
+    "PHYS": 562
+   },
+   "lod_weight": [
+    0.052,
+    0.774,
+    0.174,
+    0.0
+   ],
+   "li_est": 20.915,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_31",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    12.358,
+    13.0,
+    10.529
+   ],
+   "center": [
+    17.179,
+    0.0,
+    3.176
+   ],
+   "radius_m": 10.4,
+   "triangles": {
+    "HIGH": 3122,
+    "MEDIUM": 62,
+    "LOW": 26,
+    "LOWEST": 21,
+    "PHYS": 390
+   },
+   "lod_weight": [
+    0.057,
+    0.859,
+    0.083,
+    0.0
+   ],
+   "li_est": 15.324,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Rock_32",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    10.355,
+    11.069,
+    8.484
+   ],
+   "center": [
+    16.177,
+    12.035,
+    2.581
+   ],
+   "radius_m": 8.69,
+   "triangles": {
+    "HIGH": 3471,
+    "MEDIUM": 65,
+    "LOW": 55,
+    "LOWEST": 22,
+    "PHYS": 434
+   },
+   "lod_weight": [
+    0.04,
+    0.599,
+    0.361,
+    0.0
+   ],
+   "li_est": 14.583,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 7,
+   "phys": "custom"
+  },
+  {
+   "name": "Cave_Lake",
+   "linkset": "Cave",
+   "kind": "water",
+   "size_m": [
+    17.1,
+    15.2,
+    0.0
+   ],
+   "center": [
+    -12.0,
+    8.0,
+    -0.3
+   ],
+   "radius_m": 11.44,
+   "triangles": {
+    "HIGH": 54,
+    "MEDIUM": 54,
+    "LOW": 54,
+    "LOWEST": 11,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.069,
+    0.931,
+    0.0,
+    0.0
+   ],
+   "li_est": 1.455,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 1.5,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Waterfall",
+   "linkset": "Cave",
+   "kind": "water",
+   "size_m": [
+    4.48,
+    2.359,
+    5.5
+   ],
+   "center": [
+    -12.969,
+    12.391,
+    2.45
+   ],
+   "radius_m": 3.74,
+   "triangles": {
+    "HIGH": 552,
+    "MEDIUM": 90,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.007,
+    0.111,
+    0.355,
+    0.526
+   ],
+   "li_est": 0.644,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.0,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Hearth",
+   "linkset": "Cave",
+   "kind": "core",
+   "size_m": [
+    1.903,
+    1.734,
+    1.557
+   ],
+   "center": [
+    4.005,
+    -0.006,
+    0.72
+   ],
+   "radius_m": 1.5,
+   "triangles": {
+    "HIGH": 2516,
+    "MEDIUM": 246,
+    "LOW": 62,
+    "LOWEST": 22,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.001,
+    0.018,
+    0.058,
+    0.923
+   ],
+   "li_est": 1.189,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "li": 1.0,
+   "phys": "box"
+  },
+  {
+   "name": "Cave_Log_1",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    1.208,
+    1.982,
+    0.494
+   ],
+   "center": [
+    6.449,
+    1.145,
+    0.202
+   ],
+   "radius_m": 1.19,
+   "triangles": {
+    "HIGH": 470,
+    "MEDIUM": 186,
+    "LOW": 48,
+    "LOWEST": 12,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.036,
+    0.952
+   ],
+   "li_est": 0.528,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.002,
+     -0.004,
+     0.252
+    ],
+    "yaw": 205.0,
+    "poses": [
+     "cave_sit_relaxed",
+     "cave_sit_upright",
+     "cave_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Log_2",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    1.475,
+    1.868,
+    0.494
+   ],
+   "center": [
+    1.786,
+    1.552,
+    0.191
+   ],
+   "radius_m": 1.22,
+   "triangles": {
+    "HIGH": 470,
+    "MEDIUM": 186,
+    "LOW": 48,
+    "LOWEST": 12,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.001,
+    0.012,
+    0.038,
+    0.95
+   ],
+   "li_est": 0.533,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.002,
+     -0.003,
+     0.252
+    ],
+    "yaw": 325.0,
+    "poses": [
+     "cave_sit_relaxed",
+     "cave_sit_upright",
+     "cave_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Log_3",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    2.027,
+    0.573,
+    0.494
+   ],
+   "center": [
+    3.761,
+    -2.69,
+    0.203
+   ],
+   "radius_m": 1.08,
+   "triangles": {
+    "HIGH": 470,
+    "MEDIUM": 186,
+    "LOW": 48,
+    "LOWEST": 12,
+    "PHYS": 14
+   },
+   "lod_weight": [
+    0.001,
+    0.009,
+    0.03,
+    0.96
+   ],
+   "li_est": 0.491,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.004,
+     0.0,
+     0.252
+    ],
+    "yaw": 85.0,
+    "poses": [
+     "cave_sit_relaxed",
+     "cave_sit_upright",
+     "cave_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Fur_1",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    1.381,
+    1.984,
+    0.08
+   ],
+   "center": [
+    4.243,
+    2.394,
+    0.031
+   ],
+   "radius_m": 1.21,
+   "triangles": {
+    "HIGH": 1463,
+    "MEDIUM": 488,
+    "LOW": 122,
+    "LOWEST": 32,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.012,
+    0.037,
+    0.95
+   ],
+   "li_est": 1.687,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none",
+   "seat": {
+    "offset": [
+     -0.034,
+     -0.003,
+     0.02
+    ],
+    "yaw": 355.0,
+    "poses": [
+     "cave_sit_curl",
+     "cave_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Fur_2",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    1.91,
+    1.524,
+    0.08
+   ],
+   "center": [
+    1.941,
+    -0.954,
+    0.025
+   ],
+   "radius_m": 1.22,
+   "triangles": {
+    "HIGH": 1463,
+    "MEDIUM": 486,
+    "LOW": 122,
+    "LOWEST": 32,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.012,
+    0.038,
+    0.949
+   ],
+   "li_est": 1.624,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none",
+   "seat": {
+    "offset": [
+     -0.026,
+     -0.018,
+     0.02
+    ],
+    "yaw": 115.0,
+    "poses": [
+     "cave_sit_curl",
+     "cave_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Fur_3",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    1.831,
+    1.571,
+    0.08
+   ],
+   "center": [
+    5.993,
+    -1.376,
+    0.037
+   ],
+   "radius_m": 1.21,
+   "triangles": {
+    "HIGH": 1463,
+    "MEDIUM": 490,
+    "LOW": 122,
+    "LOWEST": 32,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.012,
+    0.037,
+    0.951
+   ],
+   "li_est": 1.348,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none",
+   "seat": {
+    "offset": [
+     -0.027,
+     -0.001,
+     0.02
+    ],
+    "yaw": 235.0,
+    "poses": [
+     "cave_sit_curl",
+     "cave_sit_crossed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Crates",
+   "linkset": "Cave",
+   "kind": "deco",
+   "size_m": [
+    1.629,
+    1.236,
+    1.1
+   ],
+   "center": [
+    12.872,
+    -3.995,
+    0.547
+   ],
+   "radius_m": 1.16,
+   "triangles": {
+    "HIGH": 402,
+    "MEDIUM": 160,
+    "LOW": 40,
+    "LOWEST": 20,
+    "PHYS": 30
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.034,
+    0.954
+   ],
+   "li_est": 1.501,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Barrels",
+   "linkset": "Cave",
+   "kind": "deco",
+   "size_m": [
+    1.2,
+    1.13,
+    0.7
+   ],
+   "center": [
+    13.11,
+    4.275,
+    0.35
+   ],
+   "radius_m": 0.9,
+   "triangles": {
+    "HIGH": 1326,
+    "MEDIUM": 270,
+    "LOW": 190,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.0,
+    0.006,
+    0.02,
+    0.973
+   ],
+   "li_est": 1.112,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Table",
+   "linkset": "Cave",
+   "kind": "deco",
+   "size_m": [
+    1.869,
+    1.291,
+    0.555
+   ],
+   "center": [
+    -1.499,
+    -4.503,
+    0.197
+   ],
+   "radius_m": 1.17,
+   "triangles": {
+    "HIGH": 595,
+    "MEDIUM": 236,
+    "LOW": 60,
+    "LOWEST": 16,
+    "PHYS": 16
+   },
+   "lod_weight": [
+    0.001,
+    0.011,
+    0.035,
+    0.954
+   ],
+   "li_est": 0.624,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Bed_1",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    2.64,
+    1.952,
+    0.896
+   ],
+   "center": [
+    11.007,
+    13.017,
+    0.356
+   ],
+   "radius_m": 1.7,
+   "triangles": {
+    "HIGH": 8386,
+    "MEDIUM": 278,
+    "LOW": 70,
+    "LOWEST": 18,
+    "PHYS": 22
+   },
+   "lod_weight": [
+    0.002,
+    0.023,
+    0.074,
+    0.902
+   ],
+   "li_est": 1.659,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.095,
+     -0.299,
+     0.148
+    ],
+    "yaw": 110.0,
+    "poses": [
+     "cave_lounge",
+     "cave_sit_curl",
+     "cave_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Bed_2",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    2.586,
+    1.589,
+    0.896
+   ],
+   "center": [
+    14.011,
+    13.995,
+    0.382
+   ],
+   "radius_m": 1.58,
+   "triangles": {
+    "HIGH": 8386,
+    "MEDIUM": 312,
+    "LOW": 78,
+    "LOWEST": 20,
+    "PHYS": 22
+   },
+   "lod_weight": [
+    0.001,
+    0.02,
+    0.064,
+    0.915
+   ],
+   "li_est": 1.91,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.011,
+     -0.295,
+     0.148
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "cave_lounge",
+     "cave_sit_curl",
+     "cave_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Bed_3",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    2.603,
+    1.942,
+    0.896
+   ],
+   "center": [
+    16.99,
+    12.5,
+    0.377
+   ],
+   "radius_m": 1.68,
+   "triangles": {
+    "HIGH": 8386,
+    "MEDIUM": 284,
+    "LOW": 72,
+    "LOWEST": 18,
+    "PHYS": 22
+   },
+   "lod_weight": [
+    0.002,
+    0.023,
+    0.072,
+    0.904
+   ],
+   "li_est": 1.753,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     -0.093,
+     -0.282,
+     0.148
+    ],
+    "yaw": 70.0,
+    "poses": [
+     "cave_lounge",
+     "cave_sit_curl",
+     "cave_sit_relaxed"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Den_Fire",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    1.332,
+    1.214,
+    1.09
+   ],
+   "center": [
+    14.003,
+    10.396,
+    0.511
+   ],
+   "radius_m": 1.05,
+   "triangles": {
+    "HIGH": 2516,
+    "MEDIUM": 248,
+    "LOW": 62,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.009,
+    0.028,
+    0.962
+   ],
+   "li_est": 0.739,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.8,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Den_Rug",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    2.8,
+    1.822,
+    0.08
+   ],
+   "center": [
+    14.232,
+    12.206,
+    0.048
+   ],
+   "radius_m": 1.67,
+   "triangles": {
+    "HIGH": 1463,
+    "MEDIUM": 396,
+    "LOW": 100,
+    "LOWEST": 26,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.001,
+    0.022,
+    0.071,
+    0.905
+   ],
+   "li_est": 1.238,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none",
+   "seat": {
+    "offset": [
+     -0.032,
+     -0.006,
+     0.02
+    ],
+    "yaw": 280.0,
+    "poses": [
+     "cave_sit_curl",
+     "cave_sit_crossed",
+     "cave_lounge"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Spring",
+   "linkset": "Cave",
+   "kind": "structure",
+   "size_m": [
+    4.3,
+    4.3,
+    0.57
+   ],
+   "center": [
+    -10.0,
+    -10.0,
+    0.246
+   ],
+   "radius_m": 3.05,
+   "triangles": {
+    "HIGH": 473,
+    "MEDIUM": 161,
+    "LOW": 41,
+    "LOWEST": 11,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.005,
+    0.074,
+    0.237,
+    0.684
+   ],
+   "li_est": 1.57,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "li": 1.2,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Spring_Water",
+   "linkset": "Cave",
+   "kind": "water",
+   "size_m": [
+    3.5,
+    3.5,
+    0.0
+   ],
+   "center": [
+    -10.0,
+    -10.0,
+    0.376
+   ],
+   "radius_m": 2.47,
+   "triangles": {
+    "HIGH": 34,
+    "MEDIUM": 34,
+    "LOW": 34,
+    "LOWEST": 11,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.003,
+    0.049,
+    0.156,
+    0.792
+   ],
+   "li_est": 0.144,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": false,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.6,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Spring_Seat_1",
+   "linkset": "Cave",
+   "kind": "seat",
+   "size_m": [
+    0.604,
+    0.575,
+    0.259
+   ],
+   "center": [
+    -10.005,
+    -8.758,
+    0.123
+   ],
+   "radius_m": 0.44,
+   "triangles": {
+    "HIGH": 203,
+    "MEDIUM": 80,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.005,
+    0.994
+   ],
+   "li_est": 0.071,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none",
+   "seat": {
+    "offset": [
+     0.005,
+     -0.242,
+     0.097
+    ],
+    "yaw": 90.0,
+    "poses": [
+     "cave_sit_relaxed",
+     "cave_lounge"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Spring_Seat_2",
+   "linkset": "Cave",
+   "kind": "seat",
+   "size_m": [
+    0.604,
+    0.575,
+    0.259
+   ],
+   "center": [
+    -9.995,
+    -11.242,
+    0.115
+   ],
+   "radius_m": 0.44,
+   "triangles": {
+    "HIGH": 203,
+    "MEDIUM": 80,
+    "LOW": 26,
+    "LOWEST": 10,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.002,
+    0.005,
+    0.994
+   ],
+   "li_est": 0.071,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "none",
+   "seat": {
+    "offset": [
+     -0.005,
+     0.242,
+     0.097
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "cave_sit_relaxed",
+     "cave_lounge"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Stepping_Stones",
+   "linkset": "Cave",
+   "kind": "deco",
+   "size_m": [
+    4.134,
+    3.005,
+    0.887
+   ],
+   "center": [
+    -7.327,
+    2.687,
+    -1.185
+   ],
+   "radius_m": 2.59,
+   "triangles": {
+    "HIGH": 987,
+    "MEDIUM": 116,
+    "LOW": 30,
+    "LOWEST": 12,
+    "PHYS": 18
+   },
+   "lod_weight": [
+    0.004,
+    0.053,
+    0.171,
+    0.772
+   ],
+   "li_est": 1.284,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Raft",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    2.154,
+    1.44,
+    0.167
+   ],
+   "center": [
+    -14.0,
+    8.5,
+    -0.196
+   ],
+   "radius_m": 1.3,
+   "triangles": {
+    "HIGH": 273,
+    "MEDIUM": 108,
+    "LOW": 28,
+    "LOWEST": 16,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.001,
+    0.013,
+    0.043,
+    0.943
+   ],
+   "li_est": 1.123,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 0.8,
+   "phys": "box",
+   "seat": {
+    "offset": [
+     0.0,
+     0.0,
+     0.056
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "cave_sit_crossed",
+     "cave_lounge"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Altar",
+   "linkset": "Cave",
+   "kind": "furniture",
+   "size_m": [
+    1.95,
+    1.45,
+    1.18
+   ],
+   "center": [
+    15.5,
+    -14.825,
+    0.592
+   ],
+   "radius_m": 1.35,
+   "triangles": {
+    "HIGH": 1959,
+    "MEDIUM": 456,
+    "LOW": 114,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.001,
+    0.014,
+    0.046,
+    0.938
+   ],
+   "li_est": 1.497,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull",
+   "seat": {
+    "offset": [
+     0.0,
+     -0.725,
+     -0.59
+    ],
+    "yaw": 270.0,
+    "poses": [
+     "cave_kneel"
+    ]
+   }
+  },
+  {
+   "name": "Cave_Chest",
+   "linkset": "Cave",
+   "kind": "deco",
+   "size_m": [
+    1.259,
+    1.296,
+    0.559
+   ],
+   "center": [
+    11.105,
+    -13.644,
+    0.181
+   ],
+   "radius_m": 0.95,
+   "triangles": {
+    "HIGH": 365,
+    "MEDIUM": 146,
+    "LOW": 38,
+    "LOWEST": 20,
+    "PHYS": 22
+   },
+   "lod_weight": [
+    0.0,
+    0.007,
+    0.023,
+    0.97
+   ],
+   "li_est": 0.888,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": true
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Crystals_1",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.997,
+    1.196,
+    0.997
+   ],
+   "center": [
+    17.185,
+    -11.0,
+    0.298
+   ],
+   "radius_m": 0.92,
+   "triangles": {
+    "HIGH": 537,
+    "MEDIUM": 214,
+    "LOW": 54,
+    "LOWEST": 24,
+    "PHYS": 24
+   },
+   "lod_weight": [
+    0.0,
+    0.007,
+    0.022,
+    0.971
+   ],
+   "li_est": 1.204,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Crystals_2",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    1.66,
+    1.655,
+    1.454
+   ],
+   "center": [
+    11.381,
+    -9.423,
+    0.589
+   ],
+   "radius_m": 1.38,
+   "triangles": {
+    "HIGH": 537,
+    "MEDIUM": 214,
+    "LOW": 54,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.001,
+    0.015,
+    0.048,
+    0.936
+   ],
+   "li_est": 1.003,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Crystals_3",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    2.144,
+    2.102,
+    1.383
+   ],
+   "center": [
+    14.194,
+    -8.351,
+    0.502
+   ],
+   "radius_m": 1.65,
+   "triangles": {
+    "HIGH": 537,
+    "MEDIUM": 202,
+    "LOW": 52,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.001,
+    0.022,
+    0.069,
+    0.907
+   ],
+   "li_est": 1.244,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Crystals_4",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.908,
+    0.99,
+    0.876
+   ],
+   "center": [
+    10.215,
+    -12.803,
+    0.308
+   ],
+   "radius_m": 0.8,
+   "triangles": {
+    "HIGH": 537,
+    "MEDIUM": 212,
+    "LOW": 54,
+    "LOWEST": 20,
+    "PHYS": 20
+   },
+   "lod_weight": [
+    0.0,
+    0.005,
+    0.016,
+    0.978
+   ],
+   "li_est": 0.873,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Crystals_5",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    1.202,
+    1.174,
+    0.821
+   ],
+   "center": [
+    17.599,
+    -13.806,
+    0.253
+   ],
+   "radius_m": 0.94,
+   "triangles": {
+    "HIGH": 537,
+    "MEDIUM": 212,
+    "LOW": 54,
+    "LOWEST": 22,
+    "PHYS": 22
+   },
+   "lod_weight": [
+    0.0,
+    0.007,
+    0.022,
+    0.97
+   ],
+   "li_est": 0.966,
+   "markers": {
+    "MEDIUM": false,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": false
+   },
+   "phys": "hull"
+  },
+  {
+   "name": "Cave_Curtain",
+   "linkset": "Cave",
+   "kind": "door",
+   "size_m": [
+    0.14,
+    5.0,
+    3.65
+   ],
+   "center": [
+    19.0,
+    0.0,
+    1.899
+   ],
+   "radius_m": 3.1,
+   "triangles": {
+    "HIGH": 518,
+    "MEDIUM": 128,
+    "LOW": 33,
+    "LOWEST": 10,
+    "PHYS": 12
+   },
+   "lod_weight": [
+    0.005,
+    0.076,
+    0.244,
+    0.675
+   ],
+   "li_est": 0.773,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": true,
+    "PHYS": false
+   },
+   "li": 1.0,
+   "phys": "box"
+  },
+  {
+   "name": "Cave_Torch_1",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.202,
+    0.288,
+    0.643
+   ],
+   "center": [
+    16.474,
+    14.812,
+    2.269
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.995
+   ],
+   "li_est": 0.816,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_2",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.129,
+    0.292,
+    0.643
+   ],
+   "center": [
+    -2.668,
+    7.828,
+    2.269
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.592,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_3",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.171,
+    0.294,
+    0.643
+   ],
+   "center": [
+    -2.833,
+    -7.997,
+    2.269
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.986,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_4",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.258,
+    0.251,
+    0.643
+   ],
+   "center": [
+    17.475,
+    -16.08,
+    2.269
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.995
+   ],
+   "li_est": 0.959,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_5",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.29,
+    0.195,
+    0.643
+   ],
+   "center": [
+    -19.345,
+    3.736,
+    2.269
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.995
+   ],
+   "li_est": 0.816,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_7",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.295,
+    0.168,
+    0.643
+   ],
+   "center": [
+    -15.455,
+    -12.004,
+    2.269
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.986,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_8",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.202,
+    0.288,
+    0.643
+   ],
+   "center": [
+    16.269,
+    14.901,
+    2.269
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.995
+   ],
+   "li_est": 0.816,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_9",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.243,
+    0.265,
+    0.643
+   ],
+   "center": [
+    11.463,
+    15.429,
+    2.269
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.995
+   ],
+   "li_est": 0.959,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_10",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.254,
+    0.255,
+    0.643
+   ],
+   "center": [
+    16.752,
+    -16.823,
+    2.269
+   ],
+   "radius_m": 0.37,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 22,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.995
+   ],
+   "li_est": 0.959,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_11",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.145,
+    0.294,
+    0.643
+   ],
+   "center": [
+    16.988,
+    1.599,
+    2.269
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.699,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  },
+  {
+   "name": "Cave_Torch_12",
+   "linkset": "Cave",
+   "kind": "light",
+   "size_m": [
+    0.169,
+    0.294,
+    0.643
+   ],
+   "center": [
+    16.976,
+    -1.752,
+    2.269
+   ],
+   "radius_m": 0.36,
+   "triangles": {
+    "HIGH": 236,
+    "MEDIUM": 94,
+    "LOW": 42,
+    "LOWEST": 24,
+    "PHYS": 2
+   },
+   "lod_weight": [
+    0.0,
+    0.001,
+    0.003,
+    0.996
+   ],
+   "li_est": 0.986,
+   "markers": {
+    "MEDIUM": true,
+    "LOW": true,
+    "LOWEST": false,
+    "PHYS": true
+   },
+   "li": 0.4,
+   "phys": "none"
+  }
+ ],
+ "warnings": [],
+ "roles": {
+  "Cave": "house"
+ },
+ "seconds": 7.3
+}

@@ -1,0 +1,476 @@
+// =====================================================================
+//  THE PIT - THE LORD'S THRONE, THE MUSTER BOOK AND THE SEATS (root prim)
+//
+//  Whoever sits on the throne is the LORD OF THE PIT (text over the throne).
+//  Touching the throne (the Lord or the owner):
+//    Open all · Close all · Mood (WATCH / GLOOM / JUDGEMENT / DARKNESS)
+//    Judgement (pick someone nearby and a room: they are locked in for
+//    30 min with the Lord's key) · Bell · Book
+//    Settings (owner only): every on/off switch of The Pit
+//  The scribe's desk (Press-Gang room): Enlist (writes whoever you pick
+//  into the book with a recruit number and date), Read book, Oath.
+//  Branding brazier: Brand (counts each recruit's brands).
+//  While on the throne the Lord holds the key to every gate.
+//
+//  SEATS: places the sit point of every piece of furniture (throne, rack,
+//  pillory, stocks, ducking chair, kennels, cages, mast, table, winch,
+//  kneeling stone) and animates whoever sits. If the root holds an
+//  animation with the listed name (pit_rack, pit_dog...) it is used;
+//  otherwise a built-in SL one. No extra pose scripts are needed.
+//
+//  Switches (/7 settings): throne, lord_keys, judgement, muster_book,
+//  branding, seats; plus moods, bell, doors, narration, hovertext.
+// =====================================================================
+
+//@@CONSTANTS@@
+
+list SITTERS;   // [link, avatar, animation]
+
+// SL puts a seated avatar about 0.35 m above its sit target; the poses then need their own
+// height over the seat (floor poses are lowered like SL's sit_ground, sleep and dead).
+// Any seat can be nudged in-world by the owner with /7 seat up|down|forward|back|reset.
+list SEAT_DZ = ["N_Throne", -0.65, "C04_Chair", -0.65, "C01_Desk", -0.65, "V_Table", -0.65,
+                "N_Kneeling_Stone", 0.55, "C05_Kennel_1", 0.32, "C05_Kennel_2", 0.32, "C05_Kennel_3", 0.32,
+                "C02_Rack", 0.41, "C03_Stocks", -0.18];
+
+vector seat_offset(integer i)
+{
+    string nm = llList2String(SEATS, i);
+    float dz = -0.35;
+    integer j = llListFindList(SEAT_DZ, [nm]);
+    if (j != -1) dz = llList2Float(SEAT_DZ, j + 1);
+    return llList2Vector(SEATS, i + 1) + <0.0, 0.0, dz> + (vector)llLinksetDataRead("seatfix:" + nm);
+}
+
+place()
+{
+    integer on = opt("seats");
+    integer i;
+    for (i = 0; i < llGetListLength(SEATS); i += 5)
+    {
+        integer l = link_of(llList2String(SEATS, i));
+        if (l > 0)
+        {
+            if (on)
+                llLinkSitTarget(l, seat_offset(i),
+                                llEuler2Rot(<0.0, 0.0, llList2Float(SEATS, i + 2) * DEG_TO_RAD>));
+            else llLinkSitTarget(l, ZERO_VECTOR, ZERO_ROTATION);
+        }
+    }
+}
+
+// owner sitting on a seat: /7 seat up|down|forward|back|reset moves it 5 cm and keeps it
+nudge(string how)
+{
+    key me = llGetOwner();
+    integer s = llListFindList(SITTERS, [me]);
+    if (s == -1) { llOwnerSay("Sit on the seat you want to adjust first."); return; }
+    integer l = llList2Integer(SITTERS, s - 1);
+    string nm = piece(l);
+    integer i = llListFindList(SEATS, [nm]);
+    if (i == -1) return;
+    rotation yaw = llEuler2Rot(<0.0, 0.0, llList2Float(SEATS, i + 2) * DEG_TO_RAD>);
+    vector d = ZERO_VECTOR;
+    if (how == "up") d = <0.0, 0.0, 0.05>;
+    else if (how == "down") d = <0.0, 0.0, -0.05>;
+    else if (how == "forward") d = <0.05, 0.0, 0.0> * yaw;
+    else if (how == "back") d = <-0.05, 0.0, 0.0> * yaw;
+    vector fix = (vector)llLinksetDataRead("seatfix:" + nm);
+    if (how == "reset") { d = -fix; llLinksetDataDelete("seatfix:" + nm); }
+    else llLinksetDataWrite("seatfix:" + nm, (string)(fix + d));
+    llLinkSitTarget(l, seat_offset(i), yaw);
+    // move the seated avatar now (the avatar is a link after the prims)
+    integer a;
+    for (a = llGetObjectPrimCount(llGetKey()) + 1; a <= llGetNumberOfPrims(); ++a)
+        if (llGetLinkKey(a) == me)
+        {
+            vector p = llList2Vector(llGetLinkPrimitiveParams(a, [PRIM_POS_LOCAL]), 0);
+            llSetLinkPrimitiveParamsFast(a, [PRIM_POS_LOCAL, p + d * llList2Rot(llGetLinkPrimitiveParams(l, [PRIM_ROT_LOCAL]), 0)]);
+        }
+    llOwnerSay(nm + " seat adjusted: " + (string)((vector)llLinksetDataRead("seatfix:" + nm)) + " (saved).");
+}
+
+// one avatar at a time gets the animation permission (granted at once to
+// a seated avatar); the queue covers several people sitting together
+list QUEUE;     // [avatar, animation]
+animate_next()
+{
+    if (QUEUE != []) llRequestPermissions(llList2Key(QUEUE, 0), PERMISSION_TRIGGER_ANIMATION);
+}
+
+check()
+{
+    // who stood up
+    integer i;
+    for (i = llGetListLength(SITTERS) - 3; i >= 0; i -= 3)
+    {
+        integer l = llList2Integer(SITTERS, i);
+        key av = llList2Key(SITTERS, i + 1);
+        if (llAvatarOnLinkSitTarget(l) != av)
+        {
+            // stop the pose if this script still holds that avatar's permission
+            if (llGetPermissionsKey() == av && (llGetPermissions() & PERMISSION_TRIGGER_ANIMATION)
+                && llGetAgentSize(av) != ZERO_VECTOR)
+                llStopAnimation(llList2String(SITTERS, i + 2));
+            integer q = llListFindList(QUEUE, [av]);
+            if (q != -1)
+            {
+                QUEUE = llDeleteSubList(QUEUE, q, q + 1);
+                if (q == 0) animate_next();
+            }
+            llLinksetDataDelete("sit:" + piece(l));
+            llMessageLinked(LINK_SET, 9600, "out|" + piece(l), av);
+            SITTERS = llDeleteSubList(SITTERS, i, i + 2);
+        }
+    }
+    // who sat down
+    for (i = 0; i < llGetListLength(SEATS); i += 5)
+    {
+        string nm = llList2String(SEATS, i);
+        integer l = link_of(nm);
+        if (l > 0)
+        {
+            key av = llAvatarOnLinkSitTarget(l);
+            if (av != NULL_KEY && llListFindList(SITTERS, [l]) == -1)
+            {
+                string anim = llList2String(SEATS, i + 3);
+                if (llGetInventoryType(anim) != INVENTORY_ANIMATION) anim = llList2String(SEATS, i + 4);
+                QUEUE += [av, anim];
+                if (llGetListLength(QUEUE) == 2) animate_next();
+                SITTERS += [l, av, anim];
+                llLinksetDataWrite("sit:" + nm, (string)av);
+                llMessageLinked(LINK_SET, 9600, "in|" + nm, av);
+            }
+        }
+    }
+}
+
+integer CH; key USER; integer LINK; key CHOSEN;
+list SESS;      // open menus, one per avatar: [avatar, link, mode, expires, chosen]
+string OPTS;
+
+integer opt(string f) { return llSubStringIndex(OPTS, "," + f + ",") == -1; }
+
+// The root prim carries the object's name, not its piece name: pit_core stores which piece it is.
+string piece(integer l)
+{
+    if (l == 1)
+    {
+        string r = llLinksetDataRead("root_piece");
+        if (r != "") return r;
+    }
+    return llGetLinkName(l);
+}
+
+integer link_of(string name)
+{
+    integer n = llGetObjectPrimCount(llGetKey());
+    integer i;
+    for (i = 1; i <= n; ++i) if (piece(i) == name) return i;
+    return -1;
+}
+string who(key k) { return llGetDisplayName(k); }
+integer utf8(string s) { return (llStringLength(llStringToBase64(s)) * 3) >> 2; }   // byte length
+// avatars within r metres of the touched piece (not of the root, which can be 25 m away)
+list near(integer link, float r)
+{
+    vector c = llList2Vector(llGetLinkPrimitiveParams(link, [PRIM_POSITION]), 0);
+    list ag = llGetAgentList(AGENT_LIST_REGION, []);
+    list out = [];
+    integer i;
+    for (i = 0; i < llGetListLength(ag) && llGetListLength(out) < 24; ++i)
+    {
+        key a = llList2Key(ag, i);
+        if (llVecDist(llList2Vector(llGetObjectDetails(a, [OBJECT_POS]), 0), c) <= r)
+            out += [llGetSubString(llKey2Name(a), 0, 23), a];
+    }
+    return out;
+}
+// RP line for everyone within 20 m of the piece in use (or only k with narration off)
+narrate(key k, string s)
+{
+    if (!opt("chat")) return;      // chat switched off: no RP text at all
+    if (!opt("narration")) { llRegionSayTo(k, 0, s); return; }
+    list n = near(LINK, 20.0);
+    integer i;
+    for (i = 1; i < llGetListLength(n); i += 2) llRegionSayTo(llList2Key(n, i), 0, s);
+}
+dialog(key k, string mode, string t, list b)
+{
+    integer i = llListFindList(SESS, [k]);
+    if (i != -1) SESS = llDeleteSubList(SESS, i, i + 4);
+    SESS += [k, LINK, mode, llGetUnixTime() + 60, CHOSEN];
+    llDialog(k, t, b, CH);
+}
+choose(key k, string mode, float r)
+{
+    list n = near(LINK, r);
+    if (n == []) llRegionSayTo(k, 0, "Nobody is near.");
+    else dialog(k, mode, "Choose who:", llList2ListStrided(n, 0, -1, 2));
+}
+float radius(string mode)
+{
+    if (mode == "choose") return 30.0;
+    return 8.0;
+}
+
+signs()
+{
+    key lord = (key)llLinksetDataRead("lord");
+    integer l = link_of("N_Throne");
+    if (l > 0)
+    {
+        if (!opt("throne") || !opt("hovertext")) llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "", ZERO_VECTOR, 0.0]);
+        else if (lord == NULL_KEY || (string)lord == "") llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "THE EMPTY THRONE", <0.6, 0.35, 0.2>, 0.6]);
+        else llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "LORD OF THE PIT\n" + who(lord), <0.95, 0.6, 0.25>, 0.9]);
+    }
+    l = link_of("C01_Desk");
+    if (l > 0)
+    {
+        if (!opt("muster_book") || !opt("hovertext")) llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "", ZERO_VECTOR, 0.0]);
+        else llSetLinkPrimitiveParamsFast(l, [PRIM_TEXT, "THE MUSTER BOOK\n" + (string)((integer)llLinksetDataRead("recruits"))
+                                                + " souls enlisted", <0.8, 0.6, 0.35>, 0.7]);
+    }
+}
+
+string book()
+{
+    integer n = (integer)llLinksetDataRead("recruits");
+    string t = "THE MUSTER BOOK (" + (string)n + ")\n";
+    integer i;
+    for (i = n; i > 0 && i > n - 9; --i)
+    {
+        list e = llParseString2List(llLinksetDataRead("muster:" + (string)i), ["|"], []);
+        key k = (key)llList2String(e, 0);
+        string line = "No. " + (string)i + " " + llGetSubString(llList2String(e, 1), 0, 15) + " - " + llList2String(e, 2)
+             + " - brands: " + (string)((integer)llLinksetDataRead("brands:" + (string)k)) + "\n";
+        if (utf8(t + line) > 500) i = 0;      // a dialog message must stay under 512 bytes
+        else t += line;
+    }
+    return t;
+}
+
+enlist(key k)
+{
+    if (llLinksetDataRead("recruit:" + (string)k) != "")
+    {
+        narrate(USER, who(k) + " is already in the Muster Book as number " + llLinksetDataRead("recruit:" + (string)k) + ".");
+        return;
+    }
+    integer n = (integer)llLinksetDataRead("recruits") + 1;
+    string date = llGetSubString(llGetTimestamp(), 0, 9);
+    llLinksetDataWrite("recruits", (string)n);
+    llLinksetDataWrite("muster:" + (string)n, (string)k + "|" + llGetSubString(who(k), 0, 20) + "|" + date);
+    llLinksetDataWrite("recruit:" + (string)k, (string)n);
+    narrate(USER, "The scribe dips the quill: \"" + who(k) + ", recruit number " + (string)n
+          + ". From this day your life belongs to the Lord of the Pit.\"");
+    signs();
+}
+
+brand(key k)
+{
+    integer m = (integer)llLinksetDataRead("brands:" + (string)k) + 1;
+    llLinksetDataWrite("brands:" + (string)k, (string)m);
+    llMessageLinked(LINK_SET, 9300, "brand", USER);
+    narrate(USER, "The smell of burnt flesh: " + who(USER) + " presses the red-hot iron to " + who(k)
+          + ". Brand number " + (string)m + ".");
+    signs();
+}
+
+lord_menu(key k)
+{
+    list b = [];
+    if (opt("throne"))
+    {
+        if (opt("doors")) b += ["Open all", "Close all"];
+        if (opt("moods")) b += ["Mood"];
+        if (opt("judgement") && opt("doors")) b += ["Judgement"];
+        if (opt("bell")) b += ["Bell"];
+        if (opt("muster_book")) b += ["Book"];
+    }
+    if (k == llGetOwner()) b += ["Settings", "Report"];
+    if (b == []) return;
+    dialog(k, "throne", "LORD OF THE PIT", b);
+}
+
+report()
+{
+    integer seats = 0; integer i;
+    for (i = 0; i < llGetListLength(SEATS); i += 5) if (link_of(llList2String(SEATS, i)) > 0) ++seats;
+    integer anims = 0;
+    for (i = 0; i < llGetListLength(SEATS); i += 5)
+        if (llGetInventoryType(llList2String(SEATS, i + 3)) == INVENTORY_ANIMATION) ++anims;
+    string s = "pit_throne: throne ";
+    if (link_of("N_Throne") > 0) s += "found"; else s += "NOT found";
+    s += ", " + (string)seats + " of " + (string)(llGetListLength(SEATS) / 5) + " seats, "
+        + (string)anims + " pose animations in the Contents (missing ones use built-in SL poses)";
+    if (seats == 0) s += ". NO SEATS: the pieces still have their old names - is pit_core in the root?";
+    llOwnerSay(s + " - memory " + (string)(llGetUsedMemory() / 1024) + " of 64 KB.");
+}
+
+list ROOM_BUTTONS = ["Press-Gang", "Rack", "Stocks", "Cistern", "Kennel", "Cages", "Mast"];
+list ROOM_TAGS = ["C01", "C02", "C03", "C04", "C05", "C07", "C08"];
+
+default
+{
+    state_entry()
+    {
+        CH = -1 - (integer)llFrand(1000000.0);
+        llListen(CH, "", NULL_KEY, "");
+        llListen(7, "", llGetOwner(), "");
+        llSetTimerEvent(30.0);
+        OPTS = llLinksetDataRead("opts");
+        // nobody is seated as far as this fresh script knows: forget the old Lord and sitters
+        llLinksetDataDelete("lord");
+        list ks = llLinksetDataFindKeys("^sit:", 0, 0);
+        integer i;
+        for (i = 0; i < llGetListLength(ks); ++i) llLinksetDataDelete(llList2String(ks, i));
+        place(); check();
+        signs();
+        report();
+    }
+    on_rez(integer p) { llResetScript(); }
+    linkset_data(integer action, string name, string value)
+    {
+        if (name == "opts" || action == LINKSETDATA_RESET) { OPTS = llLinksetDataRead("opts"); place(); signs(); }
+    }
+    changed(integer c) { if (c & CHANGED_LINK) check(); }
+    run_time_permissions(integer p)
+    {
+        key av = llGetPermissionsKey();
+        integer i = llListFindList(QUEUE, [av]);
+        if (i != -1)
+        {
+            if ((p & PERMISSION_TRIGGER_ANIMATION) && llListFindList(SITTERS, [av]) != -1)
+            {
+                llStopAnimation("sit");
+                llStartAnimation(llList2String(QUEUE, i + 1));
+            }
+            QUEUE = llDeleteSubList(QUEUE, i, i + 1);
+        }
+        animate_next();
+    }
+
+    link_message(integer s, integer n, string str, key id)
+    {
+        if (n == 9600 && str == "in|N_Throne")
+        {
+            LINK = link_of("N_Throne");
+            llLinksetDataWrite("lord", (string)id);
+            if (opt("throne")) narrate(id, who(id) + " takes the throne. Every gate in the Pit obeys.");
+            signs();
+        }
+        else if (n == 9600 && str == "out|N_Throne")
+        {
+            llLinksetDataDelete("lord");
+            signs();
+        }
+        else if (n == 9001) { place(); signs(); report(); }
+        else if (n == 9800) report();
+    }
+
+    touch_start(integer t)
+    {
+        key k = llDetectedKey(0);
+        integer l = llDetectedLinkNumber(0);
+        string p = piece(l);
+        if (p == "N_Throne")
+        {
+            if (k != llGetOwner() && (!opt("throne") || k != (key)llLinksetDataRead("lord")))
+            {
+                llRegionSayTo(k, 0, "Only whoever sits on the throne can give orders.");
+                return;
+            }
+            LINK = l; CHOSEN = NULL_KEY;
+            lord_menu(k);
+        }
+        else if (p == "C01_Desk" && opt("muster_book"))
+        {
+            LINK = l; CHOSEN = NULL_KEY;
+            dialog(k, "book", "THE MUSTER BOOK", ["Enlist", "Read book", "Oath", "Rules"]);
+        }
+        else if (p == "C01_Branding_Brazier" && opt("branding")) { LINK = l; CHOSEN = NULL_KEY; choose(k, "brand", 8.0); }
+    }
+
+    listen(integer c, string n, key id, string m)
+    {
+        if (c == 7)
+        {
+            if (llSubStringIndex(m, "seat ") == 0) nudge(llGetSubString(m, 5, -1));
+            return;
+        }
+        integer si = llListFindList(SESS, [id]);
+        if (si == -1 || llList2Integer(SESS, si + 3) < llGetUnixTime()) return;
+        USER = id;
+        LINK = llList2Integer(SESS, si + 1);
+        string mode = llList2String(SESS, si + 2);
+        CHOSEN = llList2Key(SESS, si + 4);
+        SESS = llDeleteSubList(SESS, si, si + 4);
+        if (mode == "choose" || mode == "enlist" || mode == "brand")
+        {
+            list near_list = near(LINK, radius(mode));
+            integer i = llListFindList(near_list, [m]);
+            if (i == -1) return;
+            CHOSEN = llList2Key(near_list, i + 1);
+            if (mode == "enlist") enlist(CHOSEN);
+            else if (mode == "brand") brand(CHOSEN);
+            else dialog(id, "room", "To which room do you sentence " + who(CHOSEN) + "?", ROOM_BUTTONS);
+            return;
+        }
+        if (mode == "room")
+        {
+            integer i = llListFindList(ROOM_BUTTONS, [m]);
+            if (i == -1) return;
+            llMessageLinked(LINK_SET, 9400, "judge|" + llList2String(ROOM_TAGS, i) + "|" + (string)id + "|" + who(id), id);
+            if (opt("moods")) llMessageLinked(LINK_SET, 9200, "JUDGEMENT", id);
+            narrate(id, "By order of the Lord of the Pit, " + who(CHOSEN) + " is sentenced to THE " + llToUpper(m)
+                  + ". The guard drags the prisoner away and turns the key.");
+            return;
+        }
+        if (mode == "mood")
+        {
+            if (llListFindList(["WATCH", "GLOOM", "JUDGEMENT", "DARKNESS"], [m]) == -1) return;
+            llMessageLinked(LINK_SET, 9200, m, id);
+            if (m == "DARKNESS") narrate(id, "The torches die one by one. Only the braziers by the throne still burn.");
+            else if (m == "JUDGEMENT") narrate(id, "The braziers roar and the whole Pit turns red.");
+            else if (m == "GLOOM") narrate(id, "The flames sink low. Shadows creep along the walls.");
+            else narrate(id, "The torches burn steady again. The watch goes on.");
+            return;
+        }
+        if (mode == "book")
+        {
+            if (m == "Read book") llDialog(id, book(), ["Close"], CH);
+            else if (m == "Enlist") choose(id, "enlist", 8.0);
+            else if (m == "Rules") llMessageLinked(LINK_SET, 9500, "read|C01_Desk", id);
+            else if (m == "Oath")
+                narrate(id, who(id) + " lays a hand on the book and swears: \"My back to the lash, my blood to the sea, my life to the Lord of the Pit.\"");
+            return;
+        }
+        // mode "throne"
+        if (m == "Settings" && id == llGetOwner()) llMessageLinked(LINK_SET, 9700, "menu", id);
+        else if (m == "Report" && id == llGetOwner()) llMessageLinked(LINK_SET, 9800, "report", id);
+        else if (m == "Open all") { llMessageLinked(LINK_SET, 9400, "all|open", id); narrate(id, who(id) + " orders every gate of the Pit opened."); }
+        else if (m == "Close all") { llMessageLinked(LINK_SET, 9400, "all|close", id); narrate(id, who(id) + " orders every gate shut."); }
+        else if (m == "Mood") dialog(id, "mood", "The mood of the Pit", ["WATCH", "GLOOM", "JUDGEMENT", "DARKNESS"]);
+        else if (m == "Judgement") choose(id, "choose", 30.0);
+        else if (m == "Bell")
+        {
+            llMessageLinked(LINK_SET, 9300, "bell", id);
+            integer w = link_of("G_Winch");
+            string bell = "pit_press_gang_bell";
+            if (llGetInventoryType(bell) != INVENTORY_SOUND) bell = "press_gang_bell";
+            if (w > 0 && opt("door_sounds") && llGetInventoryType(bell) == INVENTORY_SOUND)
+                llLinkPlaySound(w, bell, 1.0, SOUND_PLAY);
+            narrate(id, "DONG... The Lord orders the press-gang bell rung.");
+        }
+        else if (m == "Book") llDialog(id, book(), ["Close"], CH);
+    }
+
+    timer()
+    {
+        integer now = llGetUnixTime();
+        integer i;
+        for (i = llGetListLength(SESS) - 5; i >= 0; i -= 5)
+            if (llList2Integer(SESS, i + 3) < now) SESS = llDeleteSubList(SESS, i, i + 4);
+    }
+}
